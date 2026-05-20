@@ -4,7 +4,22 @@ const openCurrent = document.querySelector("#openCurrent");
 const currentUrl = document.querySelector("#currentUrl");
 const copyCurrentUrl = document.querySelector("#copyCurrentUrl");
 const langToggle = document.querySelector("[data-lang-toggle]");
-const themeToggle = document.querySelector("[data-theme-toggle]");
+const themeSelect = document.querySelector("#themeSelect");
+
+const themes = new Set([
+  "github",
+  "atom-one",
+  "atom-one-light",
+  "catppuccin-mocha",
+  "catppuccin-latte",
+  "rose-pine",
+  "rose-pine-moon",
+  "everforest-dark",
+  "everforest-light",
+  "kanagawa-wave",
+  "night-owl",
+  "tokyo-night",
+]);
 
 const copy = {
   zh: {
@@ -12,8 +27,8 @@ const copy = {
     title: "前端 CSS 效果导览",
     searchLabel: "搜索",
     searchPlaceholder: "输入名字或关键词",
-    themeToggle: "暗色",
-    themeToggleDark: "亮色",
+    themeLabel: "主题",
+    langLabel: "语言",
     langToggle: "EN",
     viewer: "预览",
     openCurrent: "打开当前页",
@@ -29,8 +44,8 @@ const copy = {
     title: "Front-End CSS Gallery",
     searchLabel: "Search",
     searchPlaceholder: "Name or keyword",
-    themeToggle: "Dark",
-    themeToggleDark: "Light",
+    themeLabel: "Theme",
+    langLabel: "Language",
     langToggle: "中文",
     viewer: "Preview",
     openCurrent: "Open page",
@@ -44,7 +59,7 @@ const copy = {
 };
 
 const savedLang = localStorage.getItem("gallery-lang") || "zh";
-const savedTheme = localStorage.getItem("gallery-theme") || "light";
+const savedTheme = localStorage.getItem("gallery-theme") || "github";
 
 function applyLanguage(lang) {
   document.documentElement.dataset.lang = lang;
@@ -60,22 +75,15 @@ function applyLanguage(lang) {
     node.placeholder = copy[lang][key] || node.placeholder;
   }
 
-  updateThemeButton();
   langToggle.setAttribute("aria-pressed", String(lang === "en"));
   localStorage.setItem("gallery-lang", lang);
 }
 
 function applyTheme(theme) {
-  document.documentElement.dataset.theme = theme;
-  themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
-  localStorage.setItem("gallery-theme", theme);
-  updateThemeButton();
-}
-
-function updateThemeButton() {
-  const lang = document.documentElement.dataset.lang || "zh";
-  const theme = document.documentElement.dataset.theme || "light";
-  themeToggle.textContent = theme === "dark" ? copy[lang].themeToggleDark : copy[lang].themeToggle;
+  const nextTheme = themes.has(theme) ? theme : "github";
+  document.documentElement.dataset.theme = nextTheme;
+  themeSelect.value = nextTheme;
+  localStorage.setItem("gallery-theme", nextTheme);
 }
 
 function absoluteUrl(path) {
@@ -108,9 +116,8 @@ langToggle.addEventListener("click", () => {
   applyLanguage(current === "zh" ? "en" : "zh");
 });
 
-themeToggle.addEventListener("click", () => {
-  const current = document.documentElement.dataset.theme || "light";
-  applyTheme(current === "light" ? "dark" : "light");
+themeSelect.addEventListener("change", () => {
+  applyTheme(themeSelect.value);
 });
 
 copyCurrentUrl.addEventListener("click", async () => {
