@@ -7,6 +7,9 @@
 - 收录 `fecoder.cn` 的 `code-fun` 前端效果，共 220 个。
 - 每个效果独立保存到 `examples/`。
 - 首页支持搜索、预览、新窗口打开和查看来源。
+- 首页支持中文/英文切换。
+- 首页支持明亮/暗黑模式切换。
+- 预览区显示当前效果的完整访问 URL，并支持一键复制。
 
 ## 技术架构
 
@@ -23,6 +26,12 @@
 ## 部署命令
 
 推到 GitHub 后，在仓库 Settings 里开启 GitHub Pages，选择当前分支和根目录即可。
+
+每个效果都可以通过 GitHub Pages 域名加路径访问，例如：
+
+```text
+https://用户名.github.io/仓库名/examples/001-一个可交互的火箭-loading-动画-interactive-rocket-through-space-css-animation.html
+```
 
 ## 测试方法
 
@@ -43,6 +52,8 @@ node scripts/fetch-fecoder.js
 - 抓取 220 个前端效果。
 - 生成 220 个独立预览 HTML。
 - 生成 GitHub Pages 首页导览。
+- 增加中英文切换和明亮/暗黑模式切换。
+- 增加当前效果 URL 展示和复制按钮。
 - 生成可复跑抓取脚本。
 
 ## 待办

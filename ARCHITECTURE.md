@@ -4,7 +4,7 @@
 
 - `index.html`：GitHub Pages 首页，展示全部效果卡片和右侧预览窗口。
 - `style.css`：首页外观样式。
-- `main.js`：首页搜索和预览链接同步。
+- `main.js`：首页搜索、预览链接同步、语言切换、主题切换、当前效果 URL 生成和复制。
 - `examples/`：每个前端效果的独立 HTML 文件。
 - `data/examples.json`：效果元数据，包含标题、摘要、来源地址和本地文件路径。
 - `scripts/fetch-fecoder.js`：抓取 fecoder `code-fun` 内容并重新生成静态文件。
@@ -16,7 +16,7 @@
 
 `scripts/fetch-fecoder.js` 抓取远端接口和详情页，生成 `examples/`、`data/examples.json`、`index.html`、`style.css`、`main.js`。
 
-`index.html` 加载 `style.css` 和 `main.js`，通过 iframe 预览 `examples/` 下的独立页面。
+`index.html` 加载 `style.css` 和 `main.js`，通过 iframe 预览 `examples/` 下的独立页面，并通过按钮切换语言和主题。当前效果 URL 由浏览器当前地址和示例相对路径拼出。
 
 ## 关键设计决定
 
