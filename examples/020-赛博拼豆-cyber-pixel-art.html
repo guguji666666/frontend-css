@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>赛博拼豆</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <link
+      href="https://unpkg.com/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      @keyframes reticle {
+        0% {
+          box-shadow: inset 0px 0px 2px 2px #f00c0c;
+          outline: 2px solid yellow;
+        }
+        50% {
+          box-shadow: inset 0px 0px 2px 3px lime;
+          outline: 3px solid blue;
+        }
+        100% {
+          box-shadow: inset 0px 0px 2px 2px yellow;
+          outline: 2px solid #f00c0c;
+        }
+      }
+      td:hover {
+        animation: 3s infinite alternate reticle;
+      }
+
+      .pam-label,
+      #pam-color-picker,
+      td {
+        cursor: pointer;
+      }
+
+      #pam-color-picker {
+        padding: 0;
+      }
+
+      body {
+        padding-top: 90px;
+      }
+
+      table,
+      tr,
+      td {
+        margin: auto;
+        border-collapse: collapse;
+        border: 1px solid #4db6ac;
+      }
+
+      tr {
+        height: 20px;
+      }
+
+      td {
+        width: 20px;
+        height: 20px;
+        background-color: #fff;
+      }
+
+      #pam-color-picker {
+        width: 40px;
+        height: 35px;
+      }
+
+      .pam-main {
+        margin: 1em auto;
+      }
+      .pam-main--size-picker {
+        margin-bottom: 1em;
+      }
+    </style>
+    <script
+      defer=""
+      src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"
+    ></script>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/cyber-pixel-art">
+</head>
+  <body>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="navbar-brand"></div>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdown"
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >文件</a
+            >
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a
+                class="dropdown-item"
+                href="#"
+                data-toggle="modal"
+                data-target="#pam-delete--confirmation"
+                ><i class="fas fa-trash-alt"></i> 删除</a
+              >
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdown"
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >示例</a
+            >
+            <div
+              class="dropdown-menu"
+              id="pam-pixel-art"
+              aria-labelledby="navbarDropdown"
+            >
+              <a class="dropdown-item" href="#" id="pam-pixel-art--pikachu">
+                <svg width="20" height="20">
+                  <path
+                    fill="yellow"
+                    stroke="black"
+                    d="M3 8 C5 8, -5 19, 10 19 C10 19, 25 20, 16 8 L20 0 L13 6 L7 6 L0 0 Z"
+                  ></path>
+                  <circle cx="7" cy="11" r="1" fill="black"></circle>
+                  <circle cx="13" cy="11" r="1" fill="black"></circle>
+                  <line x1="9" y1="13" x2="11" y2="13" stroke="black"></line>
+                  <path
+                    fill="none"
+                    stroke="black"
+                    d="M7 15 C7 15, 10 17, 13 15"
+                  ></path>
+                  <circle cx="4" cy="16" r="2" fill="red"></circle>
+                  <circle cx="16" cy="16" r="2" fill="red"></circle>
+                </svg>
+                皮卡丘</a
+              ><a class="dropdown-item" href="#" id="pam-pixel-art--pokeball">
+                <svg width="20" height="20">
+                  <defs>
+                    <linearGradient id="pokeball" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="red"></stop>
+                      <stop offset="45%" stop-color="red"></stop>
+                      <stop offset="45%" stop-color="black"></stop>
+                      <stop offset="55%" stop-color="black"></stop>
+                      <stop offset="55%" stop-color="white"></stop>
+                      <stop offset="100" stop-color="white"></stop>
+                    </linearGradient>
+                  </defs>
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="black"
+                    fill="url(#pokeball)"
+                  ></circle>
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="2"
+                    stroke="black"
+                    fill="white"
+                  ></circle>
+                </svg>
+                精灵球</a
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Bootstrap container fluid-->
+    <div class="container-fluid">
+      <!-- Bootstrap nav tab-->
+      <nav>
+        <ul class="nav nav-tabs justify-content-center">
+          <li class="nav-item" data-toggle="tooltip" title="画笔颜色">
+            <div class="nav-link">
+              <input
+                class="form-control mr-sm-2"
+                id="pam-color-picker"
+                type="color"
+              />
+            </div>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" title="画笔">
+            <a class="nav-link active" id="pam-tool--paint" href="#"
+              ><i class="fas fa-paint-brush fa-2x"></i
+            ></a>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" title="滴管">
+            <a class="nav-link" id="pam-tool--dipper" href="#"
+              ><i class="fas fa-eye-dropper fa-2x"></i
+            ></a>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" title="橡皮擦">
+            <a class="nav-link" id="pam-tool--eraser" href="#"
+              ><i class="fas fa-eraser fa-2x"></i
+            ></a>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" title="大小选择器">
+            <a
+              class="nav-link"
+              data-toggle="collapse"
+              href="#pam-main--size-picker"
+              role="button"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+              ><i class="fas fa-table fa-2x"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+      <main class="text-center pam-main">
+        <!-- Bootstrap collapse for the size picker -->
+        <div class="collapse pam-main--size-picker" id="pam-main--size-picker">
+          <div class="card card-body">
+            <form
+              class="form-inline justify-content-center"
+              id="pam-size-picker"
+            >
+              <label class="mb-2 mr-sm-2 pam-label" for="pam-size-picker--width"
+                >宽度:</label
+              >
+              <input
+                class="form-control mb-2 mr-sm-2"
+                id="pam-size-picker--width"
+                type="number"
+                min="1"
+                max="40"
+                value="20"
+                required="required"
+              />
+              <label
+                class="mb-2 mr-sm-2 pam-label"
+                for="pam-size-picker--height"
+                >高度:</label
+              >
+              <input
+                class="form-control mb-2 mr-sm-2"
+                id="pam-size-picker--height"
+                type="number"
+                min="1"
+                max="48"
+                value="20"
+                required="required"
+              />
+              <div class="form-check mb-2 mr-sm-2">
+                <a
+                  class="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#pam-size-picker--modal"
+                  ><i class="fas fa-table"></i> 保存</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+        <table id="pam-table"></table>
+      </main>
+    </div>
+    <!-- Modal Submit -->
+    <div
+      class="modal fade"
+      id="pam-size-picker--modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-warning">
+            <h5 class="modal-title">
+              <i class="fas fa-exclamation-circle"></i> 保存?
+            </h5>
+            <button
+              class="close"
+              type="button"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">是否要重新创建表格元素?</div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button
+              class="btn btn-warning"
+              id="pam-size-picker--submit"
+              type="button"
+              data-dismiss="modal"
+            >
+              <i class="fas fa-exclamation-circle"></i> 保存
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Delete -->
+    <div
+      class="modal fade"
+      id="pam-delete--confirmation"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-danger">
+            <h5 class="modal-title">
+              <i class="fas fa-exclamation-triangle"></i> 删除?
+            </h5>
+            <button
+              class="close"
+              type="button"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">是否要删除表格元素?</div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button
+              class="btn btn-danger"
+              id="pam-delete--button"
+              type="button"
+              data-dismiss="modal"
+            >
+              <i class="fas fa-exclamation-triangle"></i> 删除
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Script -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let namespace = "pam";
+
+      const $body = $("body");
+
+      const $deleteButton = $(`#${namespace}-delete--button`);
+
+      const $pixelArtPikachu = $(`#${namespace}-pixel-art--pikachu`);
+      const $pixelArtPokeball = $(`#${namespace}-pixel-art--pokeball`);
+
+      const $colorPicker = $(`#${namespace}-color-picker`);
+
+      const $sizePicker = $(`#${namespace}-size-picker`);
+      const $sizePickerWidth = $(`#${namespace}-size-picker--width`);
+      const $sizePickerHeight = $(`#${namespace}-size-picker--height`);
+      const $sizePickerSubmit = $(`#${namespace}-size-picker--submit`);
+
+      const $toolPaint = $(`#${namespace}-tool--paint`);
+      const $toolDipper = $(`#${namespace}-tool--dipper`);
+      const $toolEraser = $(`#${namespace}-tool--eraser`);
+
+      const $table = $(`#${namespace}-table`);
+
+      const $tooltip = $("[data-toggle='tooltip']");
+
+      const pixel = [
+        {
+          name: "ピカチュー",
+          modal: {
+            id: `${namespace}-pixel-art--modal--pikachu`,
+          },
+          width: 28,
+          height: 24,
+          color: {
+            picker: "#FFEA00",
+            background: "#FFEA00",
+          },
+          art: [
+            {
+              // Black
+              color: "#000000",
+              pixel: [
+                { tr: 1, td: 1 },
+                { tr: 1, td: 2 },
+                { tr: 1, td: 27 },
+                { tr: 1, td: 28 },
+                { tr: 2, td: 1 },
+                { tr: 2, td: 2 },
+                { tr: 2, td: 3 },
+                { tr: 2, td: 4 },
+                { tr: 2, td: 25 },
+                { tr: 2, td: 26 },
+                { tr: 2, td: 27 },
+                { tr: 2, td: 28 },
+                { tr: 3, td: 1 },
+                { tr: 3, td: 2 },
+                { tr: 3, td: 3 },
+                { tr: 3, td: 5 },
+                { tr: 3, td: 24 },
+                { tr: 3, td: 26 },
+                { tr: 3, td: 27 },
+                { tr: 3, td: 28 },
+                { tr: 4, td: 1 },
+                { tr: 4, td: 2 },
+                { tr: 4, td: 3 },
+                { tr: 4, td: 6 },
+                { tr: 4, td: 7 },
+                { tr: 4, td: 22 },
+                { tr: 4, td: 23 },
+                { tr: 4, td: 26 },
+                { tr: 4, td: 27 },
+                { tr: 4, td: 28 },
+                { tr: 5, td: 2 },
+                { tr: 5, td: 3 },
+                { tr: 5, td: 8 },
+                { tr: 5, td: 21 },
+                { tr: 5, td: 26 },
+                { tr: 5, td: 27 },
+                { tr: 6, td: 2 },
+                { tr: 6, td: 3 },
+                { tr: 6, td: 9 },
+                { tr: 6, td: 10 },
+                { tr: 6, td: 13 },
+                { tr: 6, td: 14 },
+                { tr: 6, td: 15 },
+                { tr: 6, td: 16 },
+                { tr: 6, td: 19 },
+                { tr: 6, td: 20 },
+                { tr: 6, td: 26 },
+                { tr: 6, td: 27 },
+                { tr: 7, td: 3 },
+                { tr: 7, td: 11 },
+                { tr: 7, td: 12 },
+                { tr: 7, td: 17 },
+                { tr: 7, td: 18 },
+                { tr: 7, td: 26 },
+                { tr: 8, td: 4 },
+                { tr: 8, td: 25 },
+                { tr: 9, td: 4 },
+                { tr: 9, td: 25 },
+                { tr: 10, td: 5 },
+                { tr: 10, td: 7 },
+                { tr: 10, td: 22 },
+                { tr: 10, td: 24 },
+                { tr: 11, td: 6 },
+                { tr: 11, td: 23 },
+                { tr: 12, td: 6 },
+                { tr: 12, td: 23 },
+                { tr: 12, td: 7 },
+                { tr: 13, td: 5 },
+                { tr: 13, td: 8 },
+                { tr: 13, td: 9 },
+                { tr: 13, td: 20 },
+                { tr: 13, td: 21 },
+                { tr: 13, td: 24 },
+                { tr: 13, td: 6 },
+                { tr: 14, td: 5 },
+                { tr: 14, td: 7 },
+                { tr: 14, td: 9 },
+                { tr: 14, td: 10 },
+                { tr: 14, td: 19 },
+                { tr: 14, td: 20 },
+                { tr: 14, td: 22 },
+                { tr: 14, td: 24 },
+                { tr: 14, td: 23 },
+                { tr: 15, td: 5 },
+                { tr: 15, td: 7 },
+                { tr: 15, td: 8 },
+                { tr: 15, td: 9 },
+                { tr: 15, td: 10 },
+                { tr: 15, td: 19 },
+                { tr: 15, td: 20 },
+                { tr: 15, td: 21 },
+                { tr: 15, td: 22 },
+                { tr: 15, td: 24 },
+                { tr: 15, td: 6 },
+                { tr: 16, td: 5 },
+                { tr: 16, td: 8 },
+                { tr: 16, td: 9 },
+                { tr: 16, td: 14 },
+                { tr: 16, td: 15 },
+                { tr: 16, td: 20 },
+                { tr: 16, td: 21 },
+                { tr: 16, td: 24 },
+                { tr: 17, td: 4 },
+                { tr: 17, td: 25 },
+                { tr: 18, td: 4 },
+                { tr: 18, td: 12 },
+                { tr: 18, td: 14 },
+                { tr: 18, td: 15 },
+                { tr: 18, td: 17 },
+                { tr: 18, td: 25 },
+                { tr: 19, td: 4 },
+                { tr: 19, td: 13 },
+                { tr: 19, td: 14 },
+                { tr: 19, td: 15 },
+                { tr: 19, td: 16 },
+                { tr: 19, td: 25 },
+                { tr: 20, td: 5 },
+                { tr: 20, td: 13 },
+                { tr: 20, td: 16 },
+                { tr: 20, td: 24 },
+                { tr: 21, td: 6 },
+                { tr: 21, td: 13 },
+                { tr: 21, td: 16 },
+                { tr: 21, td: 23 },
+                { tr: 22, td: 7 },
+                { tr: 22, td: 8 },
+                { tr: 22, td: 14 },
+                { tr: 22, td: 15 },
+                { tr: 22, td: 21 },
+                { tr: 22, td: 22 },
+                { tr: 23, td: 9 },
+                { tr: 23, td: 10 },
+                { tr: 23, td: 11 },
+                { tr: 23, td: 18 },
+                { tr: 23, td: 19 },
+                { tr: 23, td: 20 },
+                { tr: 24, td: 12 },
+                { tr: 24, td: 13 },
+                { tr: 24, td: 14 },
+                { tr: 24, td: 15 },
+                { tr: 24, td: 16 },
+                { tr: 24, td: 17 },
+              ],
+            },
+            // Yellow
+            {
+              color: "#FFEA00",
+              pixel: [
+                { tr: 3, td: 4 },
+                { tr: 3, td: 25 },
+                { tr: 4, td: 4 },
+                { tr: 4, td: 5 },
+                { tr: 4, td: 24 },
+                { tr: 4, td: 25 },
+                { tr: 5, td: 4 },
+                { tr: 5, td: 5 },
+                { tr: 5, td: 6 },
+                { tr: 5, td: 7 },
+                { tr: 5, td: 22 },
+                { tr: 5, td: 23 },
+                { tr: 5, td: 24 },
+                { tr: 5, td: 25 },
+                { tr: 6, td: 4 },
+                { tr: 6, td: 5 },
+                { tr: 6, td: 6 },
+                { tr: 6, td: 7 },
+                { tr: 6, td: 8 },
+                { tr: 6, td: 21 },
+                { tr: 6, td: 22 },
+                { tr: 6, td: 23 },
+                { tr: 6, td: 24 },
+                { tr: 6, td: 25 },
+                { tr: 7, td: 4 },
+                { tr: 7, td: 5 },
+                { tr: 7, td: 6 },
+                { tr: 7, td: 7 },
+                { tr: 7, td: 8 },
+                { tr: 7, td: 9 },
+                { tr: 7, td: 10 },
+                { tr: 7, td: 13 },
+                { tr: 7, td: 14 },
+                { tr: 7, td: 15 },
+                { tr: 7, td: 16 },
+                { tr: 7, td: 19 },
+                { tr: 7, td: 20 },
+                { tr: 7, td: 21 },
+                { tr: 7, td: 22 },
+                { tr: 7, td: 23 },
+                { tr: 7, td: 24 },
+                { tr: 7, td: 25 },
+                { tr: 8, td: 5 },
+                { tr: 8, td: 6 },
+                { tr: 8, td: 7 },
+                { tr: 8, td: 8 },
+                { tr: 8, td: 9 },
+                { tr: 8, td: 10 },
+                { tr: 8, td: 11 },
+                { tr: 8, td: 12 },
+                { tr: 8, td: 13 },
+                { tr: 8, td: 14 },
+                { tr: 8, td: 15 },
+                { tr: 8, td: 16 },
+                { tr: 8, td: 17 },
+                { tr: 8, td: 18 },
+                { tr: 8, td: 19 },
+                { tr: 8, td: 20 },
+                { tr: 8, td: 21 },
+                { tr: 8, td: 22 },
+                { tr: 8, td: 23 },
+                { tr: 8, td: 24 },
+                { tr: 9, td: 5 },
+                { tr: 9, td: 6 },
+                { tr: 9, td: 7 },
+                { tr: 9, td: 8 },
+                { tr: 9, td: 9 },
+                { tr: 9, td: 10 },
+                { tr: 9, td: 11 },
+                { tr: 9, td: 12 },
+                { tr: 9, td: 13 },
+                { tr: 9, td: 14 },
+                { tr: 9, td: 15 },
+                { tr: 9, td: 16 },
+                { tr: 9, td: 17 },
+                { tr: 9, td: 18 },
+                { tr: 9, td: 19 },
+                { tr: 9, td: 20 },
+                { tr: 9, td: 21 },
+                { tr: 9, td: 22 },
+                { tr: 9, td: 23 },
+                { tr: 9, td: 24 },
+                { tr: 10, td: 6 },
+                { tr: 10, td: 8 },
+                { tr: 10, td: 9 },
+                { tr: 10, td: 10 },
+                { tr: 10, td: 11 },
+                { tr: 10, td: 12 },
+                { tr: 10, td: 13 },
+                { tr: 10, td: 14 },
+                { tr: 10, td: 15 },
+                { tr: 10, td: 16 },
+                { tr: 10, td: 17 },
+                { tr: 10, td: 18 },
+                { tr: 10, td: 19 },
+                { tr: 10, td: 20 },
+                { tr: 10, td: 21 },
+                { tr: 10, td: 23 },
+                { tr: 11, td: 7 },
+                { tr: 11, td: 8 },
+                { tr: 11, td: 9 },
+                { tr: 11, td: 10 },
+                { tr: 11, td: 11 },
+                { tr: 11, td: 12 },
+                { tr: 11, td: 13 },
+                { tr: 11, td: 14 },
+                { tr: 11, td: 15 },
+                { tr: 11, td: 16 },
+                { tr: 11, td: 17 },
+                { tr: 11, td: 18 },
+                { tr: 11, td: 19 },
+                { tr: 11, td: 20 },
+                { tr: 11, td: 21 },
+                { tr: 11, td: 22 },
+                { tr: 12, td: 7 },
+                { tr: 12, td: 8 },
+                { tr: 12, td: 9 },
+                { tr: 12, td: 10 },
+                { tr: 12, td: 11 },
+                { tr: 12, td: 12 },
+                { tr: 12, td: 13 },
+                { tr: 12, td: 14 },
+                { tr: 12, td: 15 },
+                { tr: 12, td: 16 },
+                { tr: 12, td: 17 },
+                { tr: 12, td: 18 },
+                { tr: 12, td: 19 },
+                { tr: 12, td: 20 },
+                { tr: 12, td: 21 },
+                { tr: 12, td: 22 },
+                { tr: 13, td: 6 },
+                { tr: 13, td: 7 },
+                { tr: 13, td: 10 },
+                { tr: 13, td: 11 },
+                { tr: 13, td: 12 },
+                { tr: 13, td: 13 },
+                { tr: 13, td: 14 },
+                { tr: 13, td: 15 },
+                { tr: 13, td: 16 },
+                { tr: 13, td: 17 },
+                { tr: 13, td: 18 },
+                { tr: 13, td: 19 },
+                { tr: 13, td: 22 },
+                { tr: 13, td: 23 },
+                { tr: 14, td: 6 },
+                { tr: 14, td: 11 },
+                { tr: 14, td: 12 },
+                { tr: 14, td: 13 },
+                { tr: 14, td: 14 },
+                { tr: 14, td: 15 },
+                { tr: 14, td: 16 },
+                { tr: 14, td: 17 },
+                { tr: 14, td: 18 },
+                { tr: 14, td: 23 },
+                { tr: 15, td: 6 },
+                { tr: 15, td: 11 },
+                { tr: 15, td: 12 },
+                { tr: 15, td: 13 },
+                { tr: 15, td: 14 },
+                { tr: 15, td: 15 },
+                { tr: 15, td: 16 },
+                { tr: 15, td: 17 },
+                { tr: 15, td: 18 },
+                { tr: 15, td: 23 },
+                { tr: 16, td: 6 },
+                { tr: 16, td: 7 },
+                { tr: 16, td: 10 },
+                { tr: 16, td: 11 },
+                { tr: 16, td: 12 },
+                { tr: 16, td: 13 },
+                { tr: 16, td: 16 },
+                { tr: 16, td: 17 },
+                { tr: 16, td: 18 },
+                { tr: 16, td: 19 },
+                { tr: 16, td: 22 },
+                { tr: 16, td: 23 },
+                { tr: 17, td: 5 },
+                { tr: 17, td: 6 },
+                { tr: 17, td: 9 },
+                { tr: 17, td: 10 },
+                { tr: 17, td: 11 },
+                { tr: 17, td: 12 },
+                { tr: 17, td: 13 },
+                { tr: 17, td: 14 },
+                { tr: 17, td: 15 },
+                { tr: 17, td: 16 },
+                { tr: 17, td: 17 },
+                { tr: 17, td: 18 },
+                { tr: 17, td: 19 },
+                { tr: 17, td: 20 },
+                { tr: 17, td: 23 },
+                { tr: 17, td: 24 },
+                { tr: 18, td: 5 },
+                { tr: 18, td: 10 },
+                { tr: 18, td: 11 },
+                { tr: 18, td: 13 },
+                { tr: 18, td: 16 },
+                { tr: 18, td: 18 },
+                { tr: 18, td: 19 },
+                { tr: 18, td: 24 },
+                { tr: 19, td: 5 },
+                { tr: 19, td: 10 },
+                { tr: 19, td: 11 },
+                { tr: 19, td: 12 },
+                { tr: 19, td: 17 },
+                { tr: 19, td: 18 },
+                { tr: 19, td: 19 },
+                { tr: 19, td: 24 },
+                { tr: 20, td: 6 },
+                { tr: 20, td: 9 },
+                { tr: 20, td: 10 },
+                { tr: 20, td: 11 },
+                { tr: 20, td: 12 },
+                { tr: 20, td: 17 },
+                { tr: 20, td: 18 },
+                { tr: 20, td: 19 },
+                { tr: 20, td: 20 },
+                { tr: 20, td: 23 },
+                { tr: 21, td: 7 },
+                { tr: 21, td: 8 },
+                { tr: 21, td: 9 },
+                { tr: 21, td: 10 },
+                { tr: 21, td: 11 },
+                { tr: 21, td: 12 },
+                { tr: 21, td: 17 },
+                { tr: 21, td: 18 },
+                { tr: 21, td: 19 },
+                { tr: 21, td: 20 },
+                { tr: 21, td: 21 },
+                { tr: 21, td: 22 },
+                { tr: 22, td: 9 },
+                { tr: 22, td: 10 },
+                { tr: 22, td: 11 },
+                { tr: 22, td: 12 },
+                { tr: 22, td: 13 },
+                { tr: 22, td: 16 },
+                { tr: 22, td: 17 },
+                { tr: 22, td: 18 },
+                { tr: 22, td: 19 },
+                { tr: 22, td: 20 },
+                { tr: 23, td: 12 },
+                { tr: 23, td: 13 },
+                { tr: 23, td: 14 },
+                { tr: 23, td: 15 },
+                { tr: 23, td: 16 },
+                { tr: 23, td: 17 },
+              ],
+            },
+            // Red
+            {
+              color: "#FF0000",
+              pixel: [
+                { tr: 17, td: 7 },
+                { tr: 17, td: 8 },
+                { tr: 17, td: 21 },
+                { tr: 17, td: 22 },
+                { tr: 18, td: 6 },
+                { tr: 18, td: 7 },
+                { tr: 18, td: 8 },
+                { tr: 18, td: 9 },
+                { tr: 18, td: 20 },
+                { tr: 18, td: 21 },
+                { tr: 18, td: 22 },
+                { tr: 18, td: 23 },
+                { tr: 19, td: 6 },
+                { tr: 19, td: 7 },
+                { tr: 19, td: 8 },
+                { tr: 19, td: 9 },
+                { tr: 19, td: 20 },
+                { tr: 19, td: 21 },
+                { tr: 19, td: 22 },
+                { tr: 19, td: 23 },
+                { tr: 20, td: 7 },
+                { tr: 20, td: 8 },
+                { tr: 20, td: 14 },
+                { tr: 20, td: 15 },
+                { tr: 20, td: 21 },
+                { tr: 20, td: 22 },
+                { tr: 21, td: 14 },
+                { tr: 21, td: 15 },
+              ],
+            },
+            // White
+            {
+              color: "#FFFFFF",
+              pixel: [
+                { tr: 14, td: 8 },
+                { tr: 14, td: 21 },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Pokeball",
+          modal: {
+            id: `${namespace}-pixel-art--modal--pokeball`,
+          },
+          width: 14,
+          height: 14,
+          color: {
+            picker: "#FF0000",
+            background: "#FF0000",
+          },
+          art: [
+            {
+              color: "#000000",
+              pixel: [
+                { tr: 1, td: 6 },
+                { tr: 1, td: 7 },
+                { tr: 1, td: 8 },
+                { tr: 1, td: 9 },
+                { tr: 2, td: 4 },
+                { tr: 2, td: 5 },
+                { tr: 2, td: 10 },
+                { tr: 2, td: 11 },
+                { tr: 3, td: 3 },
+                { tr: 3, td: 12 },
+                { tr: 4, td: 2 },
+                { tr: 4, td: 13 },
+                { tr: 5, td: 2 },
+                { tr: 5, td: 13 },
+                { tr: 6, td: 1 },
+                { tr: 6, td: 7 },
+                { tr: 6, td: 8 },
+                { tr: 6, td: 14 },
+                { tr: 7, td: 1 },
+                { tr: 7, td: 6 },
+                { tr: 7, td: 9 },
+                { tr: 7, td: 14 },
+                { tr: 8, td: 1 },
+                { tr: 8, td: 2 },
+                { tr: 8, td: 3 },
+                { tr: 8, td: 4 },
+                { tr: 8, td: 5 },
+                { tr: 8, td: 6 },
+                { tr: 8, td: 9 },
+                { tr: 8, td: 10 },
+                { tr: 8, td: 11 },
+                { tr: 8, td: 12 },
+                { tr: 8, td: 13 },
+                { tr: 8, td: 14 },
+                { tr: 9, td: 1 },
+                { tr: 9, td: 7 },
+                { tr: 9, td: 8 },
+                { tr: 9, td: 14 },
+                { tr: 10, td: 2 },
+                { tr: 10, td: 13 },
+                { tr: 11, td: 2 },
+                { tr: 11, td: 13 },
+                { tr: 12, td: 3 },
+                { tr: 12, td: 12 },
+                { tr: 13, td: 4 },
+                { tr: 13, td: 5 },
+                { tr: 13, td: 10 },
+                { tr: 13, td: 11 },
+                { tr: 14, td: 6 },
+                { tr: 14, td: 7 },
+                { tr: 14, td: 8 },
+                { tr: 14, td: 9 },
+              ],
+            },
+            {
+              color: "#FF0000",
+              pixel: [
+                { tr: 2, td: 6 },
+                { tr: 2, td: 7 },
+                { tr: 2, td: 8 },
+                { tr: 2, td: 9 },
+                { tr: 3, td: 4 },
+                { tr: 3, td: 5 },
+                { tr: 3, td: 6 },
+                { tr: 3, td: 7 },
+                { tr: 3, td: 8 },
+                { tr: 3, td: 9 },
+                { tr: 3, td: 10 },
+                { tr: 3, td: 11 },
+                { tr: 4, td: 3 },
+                { tr: 4, td: 4 },
+                { tr: 4, td: 5 },
+                { tr: 4, td: 6 },
+                { tr: 4, td: 7 },
+                { tr: 4, td: 8 },
+                { tr: 4, td: 9 },
+                { tr: 4, td: 10 },
+                { tr: 4, td: 11 },
+                { tr: 4, td: 12 },
+                { tr: 5, td: 3 },
+                { tr: 5, td: 4 },
+                { tr: 5, td: 5 },
+                { tr: 5, td: 6 },
+                { tr: 5, td: 7 },
+                { tr: 5, td: 8 },
+                { tr: 5, td: 9 },
+                { tr: 5, td: 10 },
+                { tr: 5, td: 11 },
+                { tr: 5, td: 12 },
+                { tr: 6, td: 2 },
+                { tr: 6, td: 3 },
+                { tr: 6, td: 4 },
+                { tr: 6, td: 5 },
+                { tr: 6, td: 6 },
+                { tr: 6, td: 9 },
+                { tr: 6, td: 10 },
+                { tr: 6, td: 11 },
+                { tr: 6, td: 12 },
+                { tr: 6, td: 13 },
+                { tr: 7, td: 2 },
+                { tr: 7, td: 3 },
+                { tr: 7, td: 4 },
+                { tr: 7, td: 5 },
+                { tr: 7, td: 10 },
+                { tr: 7, td: 11 },
+                { tr: 7, td: 12 },
+                { tr: 7, td: 13 },
+              ],
+            },
+          ],
+        },
+      ];
+
+      const tool = {
+        paint: true,
+        dipper: false,
+        eraser: false,
+        painting: function () {
+          (this.paint = true), (this.dipper = false), (this.eraser = false);
+        },
+        dipping: function () {
+          this.paint = false;
+          this.dipper = true;
+          this.eraser = false;
+        },
+        erasing: function () {
+          this.paint = false;
+          this.dipper = false;
+          this.eraser = true;
+        },
+      };
+
+      function rgba2hex(color_value) {
+        if (!color_value) return false;
+        let parts = color_value
+            .toLowerCase()
+            .match(
+              /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/
+            ),
+          length = color_value.indexOf("rgba") ? 3 : 2; // Fix for alpha values
+        delete parts[0];
+        for (var i = 1; i <= length; i++) {
+          parts[i] = parseInt(parts[i]).toString(16);
+          if (parts[i].length == 1) parts[i] = "0" + parts[i];
+        }
+        return "#" + parts.join("").toUpperCase(); // #F7F7F7
+      }
+
+      $((_) => {
+        drawPixel(pixel[0]);
+        $tooltip.tooltip();
+      });
+
+      $deleteButton.click((_) => clearTableChildren());
+
+      $pixelArtPikachu.click((event) => {
+        event.preventDefault();
+        drawPixel(pixel[0]);
+      });
+
+      $pixelArtPokeball.click((event) => {
+        event.preventDefault();
+        drawPixel(pixel[1]);
+      });
+
+      $sizePickerSubmit.click((_) => $sizePicker.submit());
+
+      $sizePicker.on("submit", (event) => {
+        event.preventDefault();
+        setTable($sizePickerWidth.val(), $sizePickerHeight.val());
+      });
+
+      $toolPaint.on("click", (_) => {
+        tool.painting();
+        toolSetClass(tool);
+      });
+
+      $toolDipper.on("click", (_) => {
+        tool.dipping();
+        toolSetClass(tool);
+      });
+
+      $toolEraser.on("click", (_) => {
+        tool.erasing();
+        toolSetClass(tool);
+      });
+
+      ((_) => {
+        let down = false;
+        $table
+          .on("mousedown", "td", (event) => {
+            down = true;
+            toolBar(event, down, tool);
+          })
+          .on("mouseover", "td", (event) => toolBar(event, down, tool))
+          .on("mouseup", (_) => (down = false))
+          .on("mouseleave", (_) => (down = false));
+      })();
+
+      $table.on("dblclick", "td", (event) => {
+        $(event.target).css("background-color", "");
+      });
+
+      function toolSetClass(ele) {
+        if (ele.paint === true) {
+          $toolPaint.addClass("active");
+        } else if (ele.paint === false) {
+          $toolPaint.removeClass("active");
+        }
+
+        if (ele.dipper === true) {
+          $toolDipper.addClass("active");
+        } else if (ele.dipper === false) {
+          $toolDipper.removeClass("active");
+        }
+
+        if (ele.eraser === true) {
+          $toolEraser.addClass("active");
+        } else if (ele.eraser === false) {
+          $toolEraser.removeClass("active");
+        }
+      }
+
+      function toolBar(event, down, tool) {
+        if (down) {
+          if (tool.paint === true) {
+            $(event.target).css("background-color", $colorPicker.val());
+          } else if (tool.dipper === true) {
+            const hex = rgba2hex($(event.target).css("background-color"));
+            $colorPicker.val(hex);
+          } else if (tool.eraser === true) {
+            $(event.target).css("background-color", "");
+          }
+        }
+      }
+
+      function clearTableChildren() {
+        $table.empty();
+      }
+
+      function setTable(width, height) {
+        const tbody = document.createElement("tbody");
+        clearTableChildren();
+        for (let i = 0; i < height; i++) {
+          const row = tbody.insertRow(i);
+          for (let j = 0; j < width; j++) {
+            const cell = row.insertCell(j);
+          }
+        }
+        $table.append(tbody);
+      }
+
+      function drawPixel(ele) {
+        $sizePickerWidth.val(ele.width);
+        $sizePickerHeight.val(ele.height);
+        $colorPicker.val(ele.color.picker);
+        setTable(ele.width, ele.height);
+        ele.art.forEach((ele1) => {
+          ele1.pixel.forEach((ele2) => {
+            $(`tr:nth-child(${ele2.tr}) td:nth-child(${ele2.td})`).css(
+              "background",
+              ele1.color
+            );
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

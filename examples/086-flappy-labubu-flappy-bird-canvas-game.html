@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flappy Labubu</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #70c5ce;
+        text-align: center;
+        margin: 0;
+        overflow: hidden;
+      }
+      canvas {
+        background-color: #70c5ce;
+        display: block;
+        margin: 0 auto;
+        border: 1px solid #000;
+      }
+      .controls {
+        margin: 20px;
+      }
+      .controls button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/flappy-bird-canvas-game">
+</head>
+  <body>
+    <div class="controls">
+      <button onclick="resetGame()">重置</button>
+    </div>
+    <canvas id="gameCanvas" width="800" height="500"></canvas>
+    <script>
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const birdImg = new Image();
+      birdImg.src =
+        'https://cdn.shopify.com/s/files/1/0594/3210/8209/files/LABUBU_240x240.png?v=1647421990'; // Replace with your own image URL
+
+      const bird = {
+        x: 50,
+        y: canvas.height / 2,
+        width: 68, // Increased width
+        height: 68, // Increased height
+        gravity: 0.2,
+        lift: -4,
+        velocity: 0,
+      };
+
+      let pipes = [];
+      const pipeWidth = 50;
+      const pipeGap = 300;
+      const pipeSpeed = 1.8;
+      let frame = 0;
+      let score = 0;
+
+      function drawBird() {
+        ctx.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+      }
+
+      function drawPipes() {
+        ctx.fillStyle = '#008000';
+        pipes.forEach((pipe) => {
+          ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
+          ctx.fillRect(
+            pipe.x,
+            canvas.height - pipe.bottom,
+            pipeWidth,
+            pipe.bottom
+          );
+        });
+      }
+
+      function moveBird() {
+        bird.velocity += bird.gravity;
+        bird.y += bird.velocity;
+
+        if (bird.y + bird.height > canvas.height) {
+          bird.y = canvas.height - bird.height;
+          bird.velocity = 0;
+        }
+
+        if (bird.y < 0) {
+          bird.y = 0;
+          bird.velocity = 0;
+        }
+      }
+
+      function movePipes() {
+        pipes.forEach((pipe) => {
+          pipe.x -= pipeSpeed;
+        });
+
+        if (frame % 90 === 0) {
+          let pipeHeight = Math.random() * (canvas.height - pipeGap);
+          pipes.push({
+            x: canvas.width,
+            top: pipeHeight,
+            bottom: canvas.height - (pipeHeight + pipeGap),
+          });
+        }
+
+        pipes = pipes.filter((pipe) => pipe.x + pipeWidth > 0);
+      }
+
+      function checkCollision() {
+        pipes.forEach((pipe) => {
+          if (
+            bird.x < pipe.x + pipeWidth &&
+            bird.x + bird.width > pipe.x &&
+            (bird.y < pipe.top ||
+              bird.y + bird.height > canvas.height - pipe.bottom)
+          ) {
+            resetGame();
+          }
+        });
+      }
+
+      function drawScore() {
+        ctx.fillStyle = '#000';
+        ctx.font = '24px Arial';
+        ctx.fillText('得分: ' + score, 10, 30);
+      }
+
+      function updateScore() {
+        pipes.forEach((pipe) => {
+          if (pipe.x + pipeWidth < bird.x && !pipe.passed) {
+            score++;
+            pipe.passed = true;
+          }
+        });
+      }
+
+      function resetGame() {
+        bird.y = canvas.height / 2;
+        bird.velocity = 0;
+        pipes = [];
+        score = 0;
+        frame = 0;
+      }
+
+      function update() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBird();
+        drawPipes();
+        moveBird();
+        movePipes();
+        checkCollision();
+        updateScore();
+        drawScore();
+
+        frame++;
+        requestAnimationFrame(update);
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === ' ' || event.key === 'ArrowUp') {
+          bird.velocity = bird.lift;
+        }
+      });
+
+      birdImg.onload = function () {
+        update();
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>海贼王我当定了！</title>
+    <style>
+      :root {
+        --hat-primary: #d6c460;
+        --hat-shadow: #c5b055;
+        --hat-red: #e68069;
+        --skin: #f6ded2;
+        --pink: #f6b5af;
+        --black: #585856;
+        --mouth: #d1bbae;
+      }
+
+      body {
+        margin: 0;
+        background: gray;
+        font-family: "Press Start 2P", cursive;
+        font-size: 12px;
+      }
+
+      .container {
+        height: 100vh;
+        background-image: radial-gradient(
+          circle at 32.02% 28.57%,
+          #f9ffa0 0,
+          #e7ffa5 7.14%,
+          #d3ffab 14.29%,
+          #bfffb0 21.43%,
+          #a9ffb4 28.57%,
+          #94f5b7 35.71%,
+          #7fe8b7 42.86%,
+          #6cd8b4 50%,
+          #5cc8b0 57.14%,
+          #51baac 64.29%,
+          #48aea8 71.43%,
+          #43a4a6 78.57%,
+          #419ca4 85.71%,
+          #4197a4 92.86%,
+          #4293a5 100%
+        );
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .main {
+        position: relative;
+        width: 200px;
+        height: 180px;
+        background: var(--hat-primary);
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .hat-red {
+        position: absolute;
+        top: 55px;
+        left: 1px;
+        width: 201px;
+        height: 60px;
+        background: var(--hat-red);
+        border-radius: 50%;
+        z-index: 2;
+      }
+
+      .hat-bottom {
+        position: absolute;
+        top: 70px;
+        left: -55px;
+        width: 320px;
+        height: 110px;
+        background: var(--hat-primary);
+        border-radius: 50%;
+        z-index: 4;
+      }
+
+      .hat-bottom::after {
+        content: "";
+        position: absolute;
+        top: 13px;
+        left: 6px;
+        width: 310px;
+        height: 90px;
+        background: var(--hat-shadow);
+        border-radius: 50%;
+      }
+
+      .face {
+        position: absolute;
+        top: 110px;
+        left: 12px;
+        width: 180px;
+        height: 120px;
+        background: var(--skin);
+        border-top-left-radius: 350px 400px;
+        border-top-right-radius: 350px 400px;
+        border-bottom-left-radius: 70px;
+        border-bottom-right-radius: 70px;
+        overflow: hidden;
+        border: 0;
+        z-index: 6;
+      }
+
+      .eye {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        width: 17px;
+        height: 30px;
+        background: var(--black);
+        border-radius: 50%;
+        box-shadow: 65px 0px var(--black);
+      }
+
+      .cheek {
+        position: absolute;
+        top: 95px;
+        left: 10px;
+        width: 35px;
+        height: 15px;
+        background: var(--pink);
+        border-radius: 80%;
+        box-shadow: 125px 0px var(--pink);
+      }
+
+      .mouth {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: transparent;
+        border-radius: 50%;
+        border-bottom: 5px solid var(--mouth);
+      }
+
+      .mouth-left {
+        top: 85px;
+        left: 70px;
+        transform: rotate(-20deg);
+      }
+
+      .mouth-right {
+        top: 85px;
+        right: 70px;
+        transform: rotate(20deg);
+      }
+
+      .scar {
+        position: absolute;
+        top: 78px;
+        right: 20px;
+        background: transparent;
+        width: 30px;
+        height: 10px;
+        border-radius: 30%;
+        border-bottom: 2px solid var(--black);
+        transform: rotate(-15deg);
+      }
+
+      .scar::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        background: transparent;
+        width: 10px;
+        height: 8px;
+        border-radius: 20%;
+        border-left: 2px solid var(--black);
+        transform: rotate(17deg);
+      }
+
+      .scar::before {
+        content: "";
+        position: absolute;
+        top: 7px;
+        left: 10px;
+        background: transparent;
+        width: 10px;
+        height: 10px;
+        border-radius: 20%;
+        border-right: 2px solid var(--black);
+        transform: rotate(-15deg);
+      }
+
+      .hair {
+        position: absolute;
+        top: -20px;
+        left: 5px;
+        width: 85px;
+        height: 100px;
+        background: transparent;
+        border-radius: 50%;
+        border-right: 20px solid var(--black);
+        transform: rotate(-40deg);
+      }
+
+      .hair::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 25px;
+        width: 80px;
+        height: 100px;
+        background: transparent;
+        border-radius: 50%;
+        border-right: 30px solid var(--black);
+        transform: rotate(-15deg);
+      }
+
+      .hair::before {
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: 40px;
+        width: 80px;
+        height: 100px;
+        background: transparent;
+        border-radius: 50%;
+        border-left: 30px solid var(--black);
+        transform: rotate(70deg);
+      }
+
+      .ear-left {
+        position: absolute;
+        top: 155px;
+        left: -7px;
+        width: 25px;
+        height: 50px;
+        background: var(--skin);
+        border-radius: 100% 0% 0% 100% / 45% 0% 100% 55%;
+        transform: rotate(-1deg);
+        z-index: 4;
+      }
+
+      .ear-left::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        right: 5px;
+        background: transparent;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border-top: 5px solid var(--mouth);
+        transform: rotate(10deg);
+      }
+
+      .ear-left::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 5px;
+        background: var(--mouth);
+        width: 5px;
+        height: 10px;
+        border-radius: 50%;
+        transform: rotate(-17deg);
+      }
+
+      .ear-right {
+        position: absolute;
+        top: 155px;
+        right: -11px;
+        width: 25px;
+        height: 50px;
+        background: var(--skin);
+        border-radius: 100% 0% 0% 100% / 45% 0% 100% 55%;
+        transform: rotate(181deg);
+        z-index: 4;
+      }
+
+      .ear-right::after {
+        content: "";
+        position: absolute;
+        top: 27px;
+        left: 10px;
+        background: transparent;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border-bottom: 5px solid var(--mouth);
+        transform: rotate(-10deg);
+      }
+
+      .ear-right::before {
+        content: "";
+        position: absolute;
+        top: 30px;
+        right: 5px;
+        background: var(--mouth);
+        width: 5px;
+        height: 10px;
+        border-radius: 50%;
+        transform: rotate(12deg);
+      }
+
+      .hair-side {
+        position: absolute;
+        width: 100px;
+        height: 55px;
+        background: var(--black);
+      }
+
+      .hair-left {
+        top: 124px;
+        left: -7px;
+        border-radius: 100% 0% 100% 0% / 100% 100% 0% 0%;
+        z-index: 4;
+      }
+
+      .hair-right {
+        top: 124px;
+        right: -9px;
+        border-radius: 0% 100% 100% 0% / 0% 100% 0% 100%;
+        z-index: 4;
+      }
+
+      .hair-small-left {
+        position: absolute;
+        top: 80px;
+        left: 15px;
+        width: 85px;
+        height: 50px;
+        background: transparent;
+        border-radius: 50%;
+        border-bottom: 30px solid var(--black);
+        z-index: 4;
+      }
+
+      .hair-small-right {
+        position: absolute;
+        top: 70px;
+        right: 9px;
+        width: 85px;
+        height: 70px;
+        background: transparent;
+        border-radius: 50%;
+        border-bottom: 30px solid var(--black);
+        z-index: 4;
+      }
+
+      .by {
+        position: absolute;
+        bottom: -125px;
+        right: -45px;
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/luffy-head-css-drawing">
+</head>
+  <body>
+    <div class="container">
+      <div class="main">
+        <div class="hat-red"></div>
+        <div class="hat-bottom"></div>
+        <div class="face">
+          <div class="hair"></div>
+          <div class="eye"></div>
+          <div class="cheek"></div>
+          <div class="mouth mouth-left"></div>
+          <div class="mouth mouth-right"></div>
+          <div class="scar"></div>
+        </div>
+        <div class="hair-side hair-left"></div>
+        <div class="hair-small-left"></div>
+        <div class="hair-side hair-right"></div>
+        <div class="hair-small-right"></div>
+        <div class="ear-left"></div>
+        <div class="ear-right"></div>
+      </div>
+    </div>
+  </body>
+</html>

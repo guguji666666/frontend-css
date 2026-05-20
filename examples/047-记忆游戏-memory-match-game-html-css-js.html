@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>记忆游戏</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #2d2d2d;
+        --accent: #4caf50;
+        --matched: #2196f3;
+        --bg: #e0e0e0;
+        --shadow-light: #ffffff;
+        --shadow-dark: #bebebe;
+        --font: "Fredoka", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--bg);
+        font-family: var(--font);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 600px;
+        width: 100%;
+        background-color: var(--bg);
+        border-radius: 30px;
+        box-shadow: 10px 10px 30px var(--shadow-dark),
+          -10px -10px 30px var(--shadow-light);
+        padding: 40px 30px;
+        text-align: center;
+      }
+
+      .title {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .score {
+        font-size: 1.3rem;
+        margin-bottom: 25px;
+        color: var(--primary);
+      }
+
+      .game-board {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .card {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        background-color: var(--primary);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        font-size: 2rem;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .card.revealed {
+        background-color: var(--accent);
+      }
+
+      .card.matched {
+        background-color: var(--matched);
+        cursor: default;
+      }
+
+      .win-message {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--accent);
+        margin-top: 15px;
+        display: none;
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/memory-match-game-html-css-js">
+</head>
+  <body>
+    <div class="container">
+      <div class="title">🧠 记忆游戏</div>
+      <div class="score">得分: <span id="score">0</span></div>
+      <div class="game-board" id="gameBoard"></div>
+      <div class="win-message" id="winMessage">
+        🎉 全部匹配成功！你赢了！ 🎉
+      </div>
+    </div>
+
+    <script>
+      const emojis = ["🍎", "🍌", "🍇", "🍒", "🍉", "🍍"];
+      const doubledEmojis = [...emojis, ...emojis].sort(
+        () => 0.5 - Math.random()
+      );
+      const gameBoard = document.getElementById("gameBoard");
+      const scoreDisplay = document.getElementById("score");
+      const winMessage = document.getElementById("winMessage");
+
+      let score = 0;
+      let firstCard = null;
+      let lockBoard = false;
+      let matchesFound = 0;
+      const totalPairs = emojis.length;
+
+      doubledEmojis.forEach((emoji) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.dataset.emoji = emoji;
+        card.textContent = "";
+        card.onclick = () => revealCard(card);
+        gameBoard.appendChild(card);
+      });
+
+      function revealCard(card) {
+        if (
+          lockBoard ||
+          card.classList.contains("revealed") ||
+          card.classList.contains("matched")
+        )
+          return;
+
+        card.classList.add("revealed");
+        card.textContent = card.dataset.emoji;
+
+        if (!firstCard) {
+          firstCard = card;
+        } else {
+          lockBoard = true;
+          if (firstCard.dataset.emoji === card.dataset.emoji) {
+            firstCard.classList.add("matched");
+            card.classList.add("matched");
+            score++;
+            matchesFound++;
+            scoreDisplay.textContent = score;
+            if (matchesFound === totalPairs) {
+              winMessage.style.display = "block";
+            }
+            resetTurn();
+          } else {
+            setTimeout(() => {
+              firstCard.classList.remove("revealed");
+              card.classList.remove("revealed");
+              firstCard.textContent = "";
+              card.textContent = "";
+              resetTurn();
+            }, 800);
+          }
+        }
+      }
+
+      function resetTurn() {
+        [firstCard, lockBoard] = [null, false];
+      }
+    </script>
+  </body>
+</html>

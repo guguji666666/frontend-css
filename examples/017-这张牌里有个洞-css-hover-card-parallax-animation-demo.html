@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>css :hover card parallax 🧑‍🍳</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1.0"
+    />
+    <style>
+      @import url("https://unpkg.com/normalize.css") layer(normalize);
+
+      @layer normalize, base, demo, parallax, debug;
+
+      @layer debug {
+        [data-debug="true"] section::before,
+        [data-debug="true"] .debug {
+          opacity: 0.7;
+        }
+        .debug {
+          position: absolute;
+          bottom: calc(100% + 2rem);
+          left: 75%;
+          white-space: nowrap;
+          font-family: "Gloria Hallelujah", cursive;
+          font-size: 0.75rem;
+          opacity: 0;
+          transition: opacity 0.26s ease-out;
+
+          svg {
+            display: inline-block;
+            position: absolute;
+            left: 0%;
+            top: 50%;
+            translate: -180% -30%;
+            rotate: -90deg;
+            width: 20px;
+            scale: 1 -1;
+          }
+        }
+      }
+
+      @layer parallax {
+        section {
+          /* transform-style: preserve-3d; */
+          perspective: 1200px;
+        }
+        [data-device="false"] {
+          section:hover article {
+            transition: transform 0s;
+            -webkit-animation: set backwards 0.2s;
+            animation: set backwards 0.2s;
+            transform: rotate(calc(var(--x, 0) * (var(--rotation) * 1deg)))
+              rotateY(calc(var(--x, 0) * (var(--rotation-y) * 1deg)))
+              rotateX(calc(var(--y, 0) * (var(--rotation-x) * 1deg)));
+          }
+          section:hover .rings .ring {
+            transition: transform 0s;
+            -webkit-animation: set-translate backwards 0.2s;
+            animation: set-translate backwards 0.2s;
+            translate: calc(
+                var(--x, 0) * (var(--index) * (var(--distance, 2) * -1rem))
+              )
+              calc(var(--y, 0) * (var(--index) * (var(--distance, 2) * 1rem)));
+          }
+        }
+
+        [data-device="true"] {
+          &[data-rings="false"] {
+            section article {
+              transform: rotate(calc(var(--x, 0) * (var(--rotation) * 1deg)))
+                rotateY(calc(var(--x, 0) * (var(--rotation-y) * 1deg)))
+                rotateX(calc(var(--y, 0) * (var(--rotation-x) * 1deg)));
+            }
+            section .rings .ring {
+              translate: calc(
+                  var(--x, 0) * (var(--index) * (var(--distance, 2) * -1rem))
+                )
+                calc(var(--y, 0) * (var(--index) * (var(--distance, 2) * 1rem)));
+            }
+          }
+          &[data-rings="true"] {
+            section article {
+              transform: rotate(calc(var(--x, 0) * (var(--rotation) * 0.1deg)))
+                rotateY(calc(var(--x, 0) * (var(--rotation-y) * 0.1deg)))
+                rotateX(calc(var(--y, 0) * (var(--rotation-x) * 0.1deg)));
+            }
+            section .rings .ring {
+              translate: calc(
+                  var(--x, 0) * (var(--index) * (var(--distance, 2) * -0.5rem))
+                )
+                calc(
+                  var(--y, 0) * (var(--index) * (var(--distance, 2) * 0.5rem))
+                );
+            }
+          }
+        }
+
+        article {
+          transform-style: preserve-3d;
+          transition: transform 0.2s;
+        }
+        @-webkit-keyframes set {
+          0% {
+            transform: rotate(0deg) rotateY(0deg) rotateX(0deg);
+          }
+        }
+        @keyframes set {
+          0% {
+            transform: rotate(0deg) rotateY(0deg) rotateX(0deg);
+          }
+        }
+
+        .rings .ring {
+          translate: 0 0;
+          transition: translate 0.2s;
+        }
+
+        @-webkit-keyframes set-translate {
+          0% {
+            translate: 0 0;
+          }
+        }
+
+        @keyframes set-translate {
+          0% {
+            translate: 0 0;
+          }
+        }
+      }
+
+      @layer demo {
+        :root {
+          --rotation: -20;
+          --rotation-y: 37.5;
+          --rotation-x: 75;
+          --distance: 2;
+          --bg: light-dark(#fff, #000);
+          --border: light-dark(hsl(0 0% 25%), hsl(0 0% 45%));
+          --ring-bg: light-dark(#000, hsl(0 0% 60%));
+          --ring-dot: light-dark(hsl(0 0% 80%), hsl(0 0% 40%));
+          --ring-border: light-dark(hsl(0 0% 25%), hsl(0 0% 25%));
+        }
+        section label {
+          font-family: "Share Tech Mono", monospace;
+          padding: 1rem;
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          translate: -50% 0;
+          font-size: 1rem;
+          white-space: nowrap;
+        }
+        section {
+          height: calc(200px * (88 / 63) + 4rem);
+          display: grid;
+          position: relative;
+          place-items: center;
+          aspect-ratio: 1;
+          border-radius: 12px;
+          touch-action: none;
+
+          &::before {
+            content: "";
+            position: absolute;
+            outline: 2px dashed hotpink;
+            border-radius: 12px;
+            inset: 0;
+            transform: translate3d(0, 0, 0vmin);
+            background: repeating-linear-gradient(
+              45deg,
+              hotpink 0 1px,
+              transparent 1px 8px
+            );
+            opacity: 0;
+            transition: opacity 0.26s ease-out;
+          }
+
+          article {
+            background: var(--bg);
+            width: 200px;
+            border-radius: 12px;
+            aspect-ratio: 63 / 88;
+            border: 2px solid var(--border);
+          }
+        }
+        .value {
+          position: absolute;
+          display: flex;
+          font-size: 0.875rem;
+          font-family: "Share Tech Mono", monospace;
+          align-items: center;
+          line-height: 1;
+          gap: 0.25rem;
+
+          &.value--north {
+            top: 0.5rem;
+            left: 0.5rem;
+          }
+          &.value--south {
+            bottom: 0.5rem;
+            right: 0.5rem;
+            rotate: 180deg;
+          }
+
+          svg {
+            width: 11px;
+            translate: 0 -0.5px;
+          }
+        }
+        .rings {
+          position: absolute;
+          border: 2px solid var(--border);
+          border-radius: 50%;
+          right: 0;
+          top: 1rem;
+          width: 115%;
+          aspect-ratio: 1;
+          translate: 50% 0;
+          -webkit-clip-path: inset(0 50% 0 0);
+          clip-path: inset(0 50% 0 0);
+          overflow: hidden;
+
+          .ring {
+            position: absolute;
+            inset: -2px;
+            border: 2px solid var(--ring-border);
+            border-radius: 50%;
+          }
+        }
+        .rings,
+        .rings .ring {
+          background: radial-gradient(
+              var(--ring-bg) 0 1px,
+              var(--ring-dot) 1px 100%
+            )
+            0 0 / 4px 4px;
+        }
+        .ring:last-of-type {
+          background: radial-gradient(
+              var(--ring-dot) 0 1px,
+              var(--ring-bg) 1px 100%
+            )
+            0 0 / 4px 4px;
+        }
+      }
+
+      @layer base {
+        :root {
+          --font-size-min: 16;
+          --font-size-max: 20;
+          --font-ratio-min: 1.2;
+          --font-ratio-max: 1.33;
+          --font-width-min: 375;
+          --font-width-max: 1500;
+        }
+
+        html {
+          color-scheme: light dark;
+        }
+
+        [data-theme="light"] {
+          color-scheme: light only;
+        }
+
+        [data-theme="dark"] {
+          color-scheme: dark only;
+        }
+
+        :where(.fluid) {
+          --fluid-min: calc(
+            var(--font-size-min) *
+              pow(var(--font-ratio-min), var(--font-level, 0))
+          );
+          --fluid-max: calc(
+            var(--font-size-max) *
+              pow(var(--font-ratio-max), var(--font-level, 0))
+          );
+          --fluid-preferred: calc(
+            (var(--fluid-max) - var(--fluid-min)) /
+              (var(--font-width-max) - var(--font-width-min))
+          );
+          --fluid-type: clamp(
+            (var(--fluid-min) / 16) * 1rem,
+            ((var(--fluid-min) / 16) * 1rem) -
+              (((var(--fluid-preferred) * var(--font-width-min)) / 16) * 1rem) +
+              (var(--fluid-preferred) * var(--variable-unit, 100vi)),
+            (var(--fluid-max) / 16) * 1rem
+          );
+          font-size: var(--fluid-type);
+        }
+
+        *,
+        *:after,
+        *:before {
+          box-sizing: border-box;
+        }
+
+        body {
+          background: light-dark(#fff, #000);
+          display: grid;
+          place-items: center;
+          min-height: 100dvh;
+          font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons",
+            "Helvetica Neue", Helvetica, Arial, sans-serif, system-ui;
+        }
+
+        body::before {
+          --size: 45px;
+          --line: color-mix(in hsl, canvasText, transparent 80%);
+          content: "";
+          height: 100vh;
+          width: 100vw;
+          position: fixed;
+          background: linear-gradient(
+                90deg,
+                var(--line) 1px,
+                transparent 1px var(--size)
+              )
+              calc(var(--size) * 0.36) 50% / var(--size) var(--size),
+            linear-gradient(var(--line) 1px, transparent 1px var(--size)) 0%
+              calc(var(--size) * 0.32) / var(--size) var(--size);
+          -webkit-mask: linear-gradient(-20deg, transparent 50%, white);
+          mask: linear-gradient(-20deg, transparent 50%, white);
+          top: 0;
+          transform-style: flat;
+          pointer-events: none;
+          z-index: -1;
+        }
+
+        .bear-link {
+          color: canvasText;
+          position: fixed;
+          top: 1rem;
+          left: 1rem;
+          width: 48px;
+          aspect-ratio: 1;
+          display: grid;
+          place-items: center;
+          opacity: 0.8;
+        }
+
+        :where(.x-link, .bear-link):is(:hover, :focus-visible) {
+          opacity: 1;
+        }
+
+        .bear-link svg {
+          width: 75%;
+        }
+
+        /* Utilities */
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border-width: 0;
+        }
+      }
+
+      div.tp-dfwv {
+        width: 256px;
+        position: fixed;
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/css-hover-card-parallax-animation-demo">
+</head>
+
+  <body>
+    <section>
+      <article>
+        <span class="value value--north">
+          <span>J</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-gem"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6zm11.386 3.785-1.806-2.41-.776 2.413zm-3.633.004.961-2.989H4.186l.963 2.995zM5.47 5.495 8 13.366l2.532-7.876zm-1.371-.999-.78-2.422-1.818 2.425zM1.499 5.5l5.113 6.817-2.192-6.82zm7.889 6.817 5.123-6.83-2.928.002z"
+            />
+          </svg>
+        </span>
+        <span class="value value--south">
+          <span>J</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-gem"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6zm11.386 3.785-1.806-2.41-.776 2.413zm-3.633.004.961-2.989H4.186l.963 2.995zM5.47 5.495 8 13.366l2.532-7.876zm-1.371-.999-.78-2.422-1.818 2.425zM1.499 5.5l5.113 6.817-2.192-6.82zm7.889 6.817 5.123-6.83-2.928.002z"
+            />
+          </svg>
+        </span>
+        <div class="rings">
+          <div style="--index: 1" class="ring"></div>
+          <div style="--index: 2" class="ring"></div>
+          <div style="--index: 3" class="ring"></div>
+          <div style="--index: 4" class="ring"></div>
+          <div style="--index: 5" class="ring"></div>
+        </div>
+      </article>
+
+      <div class="debug">
+        <svg
+          viewBox="0 0 77 139"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M63.9153 0.37541C62.6706 1.85361 63.1403 31.3942 64.7373 54.4353C65.5593 65.9325 67.0389 77.8285 68.8708 87.6362C71.0784 99.4618 71.3837 102.113 70.7496 103.99C70.1155 105.914 68.6594 106.384 61.9191 106.876C51.2566 107.674 49.3543 108.003 32.6561 112.038C25.9157 113.681 18.8936 115.112 18.7057 114.924C18.6352 114.877 19.1754 113.939 19.8799 112.859C21.3126 110.63 21.5944 109.692 21.1951 108.401C20.6784 106.642 18.5882 105.656 16.8973 106.36C16.451 106.548 14.807 107.604 13.257 108.683C10.5797 110.56 9.0531 111.405 4.54388 113.47C-0.435059 115.745 -1.37449 119.734 1.98395 124.404C3.48702 126.515 4.9901 127.829 8.65384 130.246C12.8578 132.991 16.2397 134.61 20.561 135.971C22.4868 136.581 24.9293 137.426 25.9627 137.872C27.137 138.364 27.9355 138.575 28.0764 138.435C28.9219 137.59 24.718 133.249 18.3534 128.51C15.8404 126.633 13.4684 124.826 13.0691 124.521L12.3646 123.934L13.304 123.77C19.8565 122.667 28.1468 120.861 35.8736 118.819C45.1269 116.379 51.2566 115.018 55.8128 114.385C64.2441 113.211 68.0018 112.578 69.4579 112.132C72.558 111.17 74.977 108.824 75.8929 105.867C76.8559 102.77 76.5505 99.1568 74.2959 87.2842C71.5951 73.0888 70.1155 61.1928 68.5185 41.1785C67.5086 28.5551 66.3813 11.6614 66.1465 5.04465C65.9821 0.750832 65.7707 0 64.7608 0C64.4555 0 64.0797 0.164239 63.9153 0.37541Z"
+            fill="currentColor"
+          />
+        </svg>
+        <span>x: 1.00; y: 1.00</span>
+      </div>
+    </section>
+
+    <script type="module">
+      import gsap from "https://cdn.skypack.dev/gsap@3.13.0";
+      import Draggable from "https://cdn.skypack.dev/gsap@3.13.0/Draggable";
+      import { Pane } from "https://cdn.skypack.dev/tweakpane@4.0.4";
+      gsap.registerPlugin(Draggable);
+
+      const config = {
+        theme: "system",
+        debug: false,
+        rotation: -20,
+        rotationY: 37.5,
+        rotationX: 75,
+        distance: 2,
+        rings: false,
+        device: false,
+      };
+
+      const ctrl = new Pane({
+        title: "config",
+        expanded: true,
+      });
+
+      let reduced;
+      const update = () => {
+        document.documentElement.dataset.theme = config.theme;
+        document.documentElement.dataset.debug = config.debug;
+        document.documentElement.dataset.device = config.device;
+        document.documentElement.dataset.rings = config.rings;
+        document.documentElement.style.setProperty(
+          "--rotation",
+          config.rotation
+        );
+        document.documentElement.style.setProperty(
+          "--rotation-y",
+          config.rotationY
+        );
+        document.documentElement.style.setProperty(
+          "--rotation-x",
+          config.rotationX
+        );
+        document.documentElement.style.setProperty(
+          "--distance",
+          config.distance
+        );
+        reduced.disabled = !config.device;
+      };
+
+      const sync = (event) => {
+        if (
+          !document.startViewTransition ||
+          event.target.controller.view.labelElement.innerText !== "theme"
+        )
+          return update();
+        document.startViewTransition(() => update());
+      };
+
+      ctrl.addBinding(config, "rotation", {
+        min: -30,
+        max: 30,
+        step: 1,
+        label: "rotation",
+      });
+
+      ctrl.addBinding(config, "rotationY", {
+        min: -90,
+        max: 90,
+        step: 1,
+        label: "y(deg)",
+      });
+
+      ctrl.addBinding(config, "rotationX", {
+        min: -90,
+        max: 90,
+        step: 1,
+        label: "x(deg)",
+      });
+
+      ctrl.addBinding(config, "distance", {
+        min: 0,
+        max: 4,
+        step: 0.1,
+        label: "dist(rem)",
+      });
+
+      ctrl.addBinding(config, "debug");
+      ctrl.addBinding(config, "device");
+      reduced = ctrl.addBinding(config, "rings", {
+        label: "reduced",
+        disabled: !config.device,
+      });
+      ctrl.addBinding(config, "theme", {
+        label: "theme",
+        options: {
+          system: "system",
+          light: "light",
+          dark: "dark",
+        },
+      });
+
+      ctrl.on("change", sync);
+      update();
+
+      // make tweakpane panel draggable
+      const tweakClass = "div.tp-dfwv";
+      const d = Draggable.create(tweakClass, {
+        type: "x,y",
+        allowEventDefault: true,
+        trigger: tweakClass + " button.tp-rotv_b",
+      });
+
+      document.querySelector(tweakClass).addEventListener("dblclick", () => {
+        gsap.to(tweakClass, {
+          x: `+=${d[0].x * -1}`,
+          y: `+=${d[0].y * -1}`,
+          onComplete: () => {
+            gsap.set(tweakClass, { clearProps: "all" });
+          },
+        });
+      });
+
+      // parallax stuff
+      const section = document.querySelector("section");
+      const debug = document.querySelector(".debug span");
+      // Throttle pointer events with RAF
+      let pointerRafId = null;
+      section.addEventListener("pointermove", (event) => {
+        if (config.device) return;
+
+        if (!pointerRafId) {
+          pointerRafId = requestAnimationFrame(() => {
+            const rect = section.getBoundingClientRect();
+            const x = gsap.utils.clamp(
+              -1,
+              1,
+              ((event.clientX - rect.left) / rect.width) * 2 - 1
+            );
+            const y = gsap.utils.clamp(
+              -1,
+              1,
+              ((event.clientY - rect.top) / rect.height) * 2 - 1
+            );
+
+            const xStr = x.toFixed(2);
+            const yStr = y.toFixed(2);
+
+            debug.innerText = `x: ${xStr}; y: ${yStr}`;
+
+            // Direct CSS update
+            section.style.setProperty("--x", xStr);
+            section.style.setProperty("--y", yStr);
+
+            pointerRafId = null;
+          });
+        }
+      });
+
+      // Device orientation mapping configuration
+      const deviceMapping = {
+        // -1, 0, 1, beta === barrel, gamma === turnstile
+        beta: {
+          min: 90,
+          center: 45,
+          max: 30,
+
+          // min: 135,
+          // center: 90,
+          // max: 55
+        },
+        gamma: {
+          min: 35,
+          center: 0,
+          max: -35,
+        },
+
+        // Deadzone to prevent micro-jitters (in output units, not degrees)
+        deadzone: 0.02,
+        // Smoothing factor (0 = no smoothing, 0.9 = heavy smoothing)
+        // Increase this if movement is too jumpy, decrease if it feels laggy
+        smoothing: 0.3,
+        // Maximum allowed jump per frame (in output units)
+        // Prevents sudden jumps from -1 to 1, smaller = more limited movement
+        maxJump: 0.5,
+      };
+
+      // Map device orientation value to -1 to 1 range with inverted range support
+      const mapOrientation = (value, { min, center, max }) => {
+        // Handle inverted ranges (min > max)
+        const isInverted = min > max;
+
+        // Clamp input value to the defined range to prevent jumps
+        if (isInverted) {
+          // For inverted ranges, clamp between max and min (since max < min)
+          value = gsap.utils.clamp(max, min, value);
+
+          // For inverted ranges, flip the logic
+          if (value >= center) {
+            return gsap.utils.mapRange(min, center, -1, 0, value);
+          } else {
+            return gsap.utils.mapRange(center, max, 0, 1, value);
+          }
+        } else {
+          // Normal range - clamp between min and max
+          value = gsap.utils.clamp(min, max, value);
+
+          if (value <= center) {
+            return gsap.utils.mapRange(min, center, -1, 0, value);
+          } else {
+            return gsap.utils.mapRange(center, max, 0, 1, value);
+          }
+        }
+      };
+
+      // Cache orientation check
+      let cachedOrientation = null;
+      const checkOrientation = () => {
+        cachedOrientation = window.matchMedia(
+          "(orientation: landscape)"
+        ).matches;
+      };
+      window.addEventListener("orientationchange", checkOrientation);
+      checkOrientation(); // Initial check
+
+      // Throttle mechanism using requestAnimationFrame
+      let rafId = null;
+      let latestEvent = null;
+      let lastX = null;
+      let lastY = null;
+      let smoothedX = null;
+      let smoothedY = null;
+
+      // Process device orientation with RAF throttling
+      const processDeviceOrientation = () => {
+        if (!latestEvent || !config.device) {
+          rafId = null;
+          return;
+        }
+
+        // Use cached orientation value
+        const isLandscape = cachedOrientation;
+
+        // Get raw values
+        const beta = latestEvent.beta;
+        const gamma = latestEvent.gamma;
+
+        if (beta === null || gamma === null)
+          return console.warn("no device orientation data");
+
+        // Map values based on orientation
+        let x, y;
+        if (isLandscape) {
+          // In landscape, swap the axes
+          x = mapOrientation(beta, deviceMapping.beta);
+          y = mapOrientation(gamma, deviceMapping.gamma);
+        } else {
+          // In portrait, use normal mapping
+          x = mapOrientation(gamma, deviceMapping.gamma);
+          y = mapOrientation(beta, deviceMapping.beta);
+        }
+
+        // Clamp once after mapping
+        x = gsap.utils.clamp(-1, 1, x);
+        y = gsap.utils.clamp(-1, 1, y);
+
+        // Initialize smoothed values if needed
+        if (smoothedX === null) smoothedX = x;
+        if (smoothedY === null) smoothedY = y;
+
+        // Apply jump limiting
+        if (lastX !== null && lastY !== null) {
+          const deltaX = x - parseFloat(lastX);
+          const deltaY = y - parseFloat(lastY);
+
+          // Limit maximum jump per frame
+          if (Math.abs(deltaX) > deviceMapping.maxJump) {
+            x = parseFloat(lastX) + Math.sign(deltaX) * deviceMapping.maxJump;
+          }
+          if (Math.abs(deltaY) > deviceMapping.maxJump) {
+            y = parseFloat(lastY) + Math.sign(deltaY) * deviceMapping.maxJump;
+          }
+        }
+
+        // Apply smoothing (exponential moving average)
+        smoothedX =
+          smoothedX * deviceMapping.smoothing +
+          x * (1 - deviceMapping.smoothing);
+        smoothedY =
+          smoothedY * deviceMapping.smoothing +
+          y * (1 - deviceMapping.smoothing);
+
+        // Apply deadzone to smoothed values
+        if (lastX !== null && lastY !== null) {
+          const deltaX = Math.abs(smoothedX - parseFloat(lastX));
+          const deltaY = Math.abs(smoothedY - parseFloat(lastY));
+
+          // If change is within deadzone, use previous values
+          if (deltaX < deviceMapping.deadzone) smoothedX = parseFloat(lastX);
+          if (deltaY < deviceMapping.deadzone) smoothedY = parseFloat(lastY);
+        }
+
+        // Use smoothed values
+        x = smoothedX;
+        y = smoothedY;
+
+        // Format values once
+        const xStr = x.toFixed(2);
+        const yStr = y.toFixed(2);
+
+        // Only update if values have changed
+        if (xStr !== lastX || yStr !== lastY) {
+          lastX = xStr;
+          lastY = yStr;
+
+          // Update debug display
+          debug.innerText = `x: ${xStr}; y: ${yStr} (β: ${beta.toFixed(
+            0
+          )}° γ: ${gamma.toFixed(0)}°)`;
+
+          // Direct CSS update
+          section.style.setProperty("--x", xStr);
+          section.style.setProperty("--y", yStr);
+        }
+
+        // Clear RAF id
+        rafId = null;
+      };
+
+      // Device orientation handling
+      const handleDeviceOrientation = (event) => {
+        if (!config.device) return;
+
+        // Store latest event
+        latestEvent = event;
+
+        // Schedule update if not already scheduled
+        if (!rafId) {
+          rafId = requestAnimationFrame(processDeviceOrientation);
+        }
+      };
+
+      // Request device orientation permission (required for iOS 13+)
+      const requestDeviceOrientationPermission = async () => {
+        if (typeof DeviceOrientationEvent.requestPermission === "function") {
+          try {
+            const response = await DeviceOrientationEvent.requestPermission();
+            return response === "granted";
+          } catch (error) {
+            console.error(
+              "Error requesting device orientation permission:",
+              error
+            );
+            return false;
+          }
+        } else {
+          // Permission not required on this device/browser
+          return true;
+        }
+      };
+
+      // Setup device orientation
+      const setupDeviceOrientation = async () => {
+        if (config.device) {
+          const hasPermission = await requestDeviceOrientationPermission();
+          if (hasPermission) {
+            checkOrientation(); // Update orientation cache
+            window.addEventListener(
+              "deviceorientation",
+              handleDeviceOrientation
+            );
+          } else {
+            console.warn("Device orientation permission denied");
+            // Optionally, disable the device option if permission is denied
+            config.device = false;
+            ctrl.refresh();
+          }
+        } else {
+          window.removeEventListener(
+            "deviceorientation",
+            handleDeviceOrientation
+          );
+          // Clean up any pending RAF
+          if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+          latestEvent = null;
+          lastX = null;
+          lastY = null;
+          smoothedX = null;
+          smoothedY = null;
+        }
+      };
+
+      // Initial setup
+      setupDeviceOrientation();
+
+      // Watch for device toggle changes
+      ctrl.on("change", (event) => {
+        if (event.target.key === "device") {
+          setupDeviceOrientation();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>兔子？青蛙？</title>
+    <link
+      rel="stylesheet"
+      href="https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Sigmar+One');
+      *,
+      *:after,
+      *:before {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+      :root {
+        --scribble: hsl(140 80% 50%);
+      }
+      body {
+        display: grid;
+        font-family: 'Sigmar One', cursive;
+        place-items: center;
+        min-height: 100vh;
+      }
+      .toggle {
+        height: 260px;
+        position: relative;
+        width: 320px;
+        z-index: 2;
+        opacity: 0.65;
+      }
+
+      .toggle__eye {
+        -webkit-animation: blink 6s -2s infinite;
+        animation: blink 6s -2s infinite;
+      }
+
+      @-webkit-keyframes blink {
+        0%,
+        46%,
+        48%,
+        50%,
+        100% {
+          scale: 1 1;
+        }
+        47%,
+        49% {
+          scale: 1 0.01;
+        }
+      }
+
+      @keyframes blink {
+        0%,
+        46%,
+        48%,
+        50%,
+        100% {
+          scale: 1 1;
+        }
+        47%,
+        49% {
+          scale: 1 0.01;
+        }
+      }
+
+      .toggle__head {
+        height: 200px;
+        border: 12px solid #000;
+        background: #fff;
+        border-radius: 207px 170px 221px 179px/117px 115px 110px 160px;
+        position: absolute;
+        bottom: 3px;
+        left: 1px;
+        width: 312px;
+        z-index: 2;
+      }
+      .toggle__ear--left {
+        border: 12px solid #000;
+        position: absolute;
+        top: 15px;
+        left: 2px;
+        height: 129px;
+        width: 110px;
+        border-radius: 66px 54px 23px 82px/54px 59px 21px 76px;
+      }
+      .toggle__ear--right {
+        border: 12px solid #000;
+        position: absolute;
+        top: 5px;
+        right: 25px;
+        height: 129px;
+        width: 103px;
+        border-radius: 40px 65px 50px 50px/42px 59px 50px 50px;
+      }
+      .toggle__ear--clone {
+        border: 12px solid transparent;
+        z-index: 3;
+        background: #fff;
+        transform: scale(0.79);
+      }
+      .toggle__face {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 4;
+        transform: translate(10px, 60px);
+        transition: transform 0.25s ease;
+      }
+      .toggle__mouth {
+        height: 12px;
+        width: 12px;
+        background: #000;
+        border-radius: 100%;
+        position: absolute;
+        top: 114px;
+        left: 189px;
+      }
+      .toggle__mouth:before {
+        content: '';
+        position: absolute;
+        left: -57px;
+        top: -55px;
+        height: 86px;
+        width: 69px;
+        border: 12px solid #000;
+        border-radius: 0 0 31px 36px/0 0 18px 25px;
+        clip-path: polygon(0 100%, 100% 100%, 100% 61px, 17px 57px, 0 63px);
+        -webkit-clip-path: polygon(
+          0 100%,
+          100% 100%,
+          100% 61px,
+          17px 57px,
+          0 63px
+        );
+      }
+      .toggle__mouth:after {
+        content: '';
+        height: 12px;
+        width: 12px;
+        border-radius: 100%;
+        position: absolute;
+        top: 1px;
+        background: #000;
+        left: -56px;
+      }
+      .toggle__eye {
+        border-radius: 10px 15px 10px 20px/16px 28px 14px 27px;
+        height: 45px;
+        width: 30px;
+        background: #000;
+        position: absolute;
+      }
+      .toggle__eye--left {
+        left: 47px;
+        top: 60px;
+      }
+      .toggle__eye--right {
+        left: 228px;
+        top: 44px;
+      }
+      .toggle__label {
+        font-size: 4rem;
+        line-height: 4.25rem;
+        left: 105%;
+        position: absolute;
+        top: 40%;
+      }
+      .toggle__label:after {
+        content: '';
+        width: 100%;
+        height: 4.25rem;
+        background: #fff;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transition: transform 0.25s ease;
+      }
+      .toggle__scribble {
+        height: 40px;
+        width: 181px;
+        background: var(--scribble);
+        position: absolute;
+        top: 85px;
+        left: 72px;
+        z-index: 3;
+        transform: rotate(3deg);
+        transition: background 0.25s ease, -webkit-clip-path 0.24s ease;
+        transition: background 0.25s ease, clip-path 0.24s ease;
+        transition: background 0.25s ease, clip-path 0.24s ease,
+          -webkit-clip-path 0.24s ease;
+        -webkit-clip-path: inset(
+          0 calc(100% - (var(--active, 0) * 100%)) -400% 0
+        );
+        clip-path: inset(0 calc(100% - (var(--active, 0) * 100%)) -400% 0);
+      }
+      .toggle__scribble:after {
+        content: '';
+        height: 40px;
+        background: var(--scribble);
+        position: absolute;
+        width: 160px;
+        top: 0px;
+        right: -4px;
+        transform-origin: right;
+        transform: skew(-10deg, 0) rotate(-18deg);
+        transition: background 0.25s ease, -webkit-clip-path 0.1s 0.12s ease;
+        transition: background 0.25s ease, clip-path 0.1s 0.12s ease;
+        transition: background 0.25s ease, clip-path 0.1s 0.12s ease,
+          -webkit-clip-path 0.1s 0.12s ease;
+        -webkit-clip-path: inset(
+          0 0 -400% calc(100% - (var(--active, 0) * 100%))
+        );
+        clip-path: inset(0 0 -400% calc(100% - (var(--active, 0) * 100%)));
+      }
+      .toggle__scribble:before {
+        content: '';
+        height: 40px;
+        width: 120px;
+        top: 50px;
+        left: 24px;
+        background: var(--scribble);
+        transform-origin: left;
+        position: absolute;
+        transform: skew(23deg, 0) rotate(13deg);
+        transition: background 0.25s ease, -webkit-clip-path 0.12s 0.26s ease;
+        transition: background 0.25s ease, clip-path 0.12s 0.26s ease;
+        transition: background 0.25s ease, clip-path 0.12s 0.26s ease,
+          -webkit-clip-path 0.12s 0.26s ease;
+        -webkit-clip-path: inset(
+          0 calc(100% - (var(--active, 0) * 100%)) -400% 0
+        );
+        clip-path: inset(0 calc(100% - (var(--active, 0) * 100%)) -400% 0);
+      }
+      input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+      label {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+      }
+
+      label:is(:hover) .toggle__label {
+        text-decoration: underline;
+      }
+
+      input:checked + label .toggle .toggle__face {
+        transform: translate(0, 0);
+      }
+      input:checked + label .toggle .toggle__label:after {
+        transform: translate(0, -100%);
+      }
+      input:checked + label .toggle .toggle__scribble,
+      input:checked + label .toggle .toggle__scribble:after,
+      input:checked + label .toggle .toggle__scribble:before {
+        --active: 1;
+      }
+
+      svg {
+        display: none;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .toggle {
+          -webkit-animation: scribble 0.2s infinite;
+          animation: scribble 0.2s infinite;
+        }
+      }
+
+      @-webkit-keyframes scribble {
+        0% {
+          filter: url('#scribble--0');
+        }
+        25% {
+          filter: url('#scribble--1');
+        }
+        50% {
+          filter: url('#scribble--2');
+        }
+        75% {
+          filter: url('#scribble--3');
+        }
+        100% {
+          filter: url('#scribble--4');
+        }
+      }
+
+      @keyframes scribble {
+        0% {
+          filter: url('#scribble--0');
+        }
+        25% {
+          filter: url('#scribble--1');
+        }
+        50% {
+          filter: url('#scribble--2');
+        }
+        75% {
+          filter: url('#scribble--3');
+        }
+        100% {
+          filter: url('#scribble--4');
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/animated-toggle-scribble-css">
+</head>
+  <body>
+    <input type="checkbox" id="toggle" />
+    <label for="toggle">
+      <div class="toggle">
+        <div class="toggle__head"></div>
+        <div class="toggle__ear toggle__ear--left"></div>
+        <div class="toggle__ear toggle__ear--right"></div>
+        <div class="toggle__ear toggle__ear--left toggle__ear--clone"></div>
+        <div class="toggle__ear toggle__ear--right toggle__ear--clone"></div>
+        <div class="toggle__face">
+          <div class="toggle__eyes">
+            <div class="toggle__eye toggle__eye--left"></div>
+            <div class="toggle__eye toggle__eye--right"></div>
+          </div>
+          <div class="toggle__mouth"></div>
+        </div>
+        <div class="toggle__label">BUN<br />FROG</div>
+        <div class="toggle__scribble"></div>
+      </div>
+      <svg>
+        <filter id="scribble--0">
+          <feturbulence
+            basefrequency="0.02"
+            numoctaves="3"
+            result="noise"
+            seed="0"
+          ></feturbulence>
+          <fedisplacementmap
+            id="displacement"
+            in="SourceGraphic"
+            in2="noise"
+            scale="2"
+          ></fedisplacementmap>
+        </filter>
+        <filter id="scribble--1">
+          <feturbulence
+            basefrequency="0.02"
+            numoctaves="3"
+            result="noise"
+            seed="1"
+          ></feturbulence>
+          <fedisplacementmap
+            in="SourceGraphic"
+            in2="noise"
+            scale="3"
+          ></fedisplacementmap>
+        </filter>
+        <filter id="scribble--2">
+          <feturbulence
+            basefrequency="0.02"
+            numoctaves="3"
+            result="noise"
+            seed="2"
+          ></feturbulence>
+          <fedisplacementmap
+            in="SourceGraphic"
+            in2="noise"
+            scale="2"
+          ></fedisplacementmap>
+        </filter>
+        <filter id="scribble--3">
+          <feturbulence
+            basefrequency="0.02"
+            numoctaves="3"
+            result="noise"
+            seed="3"
+          ></feturbulence>
+          <fedisplacementmap
+            in="SourceGraphic"
+            in2="noise"
+            scale="3"
+          ></fedisplacementmap>
+        </filter>
+        <filter id="scribble--4">
+          <feturbulence
+            basefrequency="0.02"
+            numoctaves="3"
+            result="noise"
+            seed="4"
+          ></feturbulence>
+          <fedisplacementmap
+            in="SourceGraphic"
+            in2="noise"
+            scale="2"
+          ></fedisplacementmap>
+        </filter>
+      </svg>
+    </label>
+  </body>
+</html>

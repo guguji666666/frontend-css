@@ -1,0 +1,2202 @@
+[
+  {
+    "id": 285,
+    "title": "一个可交互的火箭 Loading 动画",
+    "slug": "interactive-rocket-through-space-css-animation",
+    "summary": "一个使用纯 HTML 和 CSS 制作的交互式火箭太空飞行动画，包含动态星空、鼠标悬停方向控制和按住加速效果，适合 CSS 动画示例、创意网页动效和太空主题 UI 灵感展示。",
+    "cover": "https://fecoder.cn/minio/notra/6126e53484be0814448f5baf142fe0d9.png",
+    "publishedAt": "2026-04-28T05:51:11.351Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-rocket-through-space-css-animation",
+    "file": "examples/001-一个可交互的火箭-loading-动画-interactive-rocket-through-space-css-animation.html"
+  },
+  {
+    "id": 283,
+    "title": "一个好玩的窗帘",
+    "slug": "strings-code-cloth",
+    "summary": "一个交互式生成艺术画布：将源码字符映射到粒子网格上，通过 Verlet 积分、重力和约束求解模拟悬挂布料的运动；鼠标/触控会对粒子施加力，让“代码之弦”产生动态摆动。",
+    "cover": "https://fecoder.cn/minio/notra/8edeadbe54d95a61f2d214cb5cb3c29b.png",
+    "publishedAt": "2026-04-24T09:05:23.673Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/strings-code-cloth",
+    "file": "examples/002-一个好玩的窗帘-strings-code-cloth.html"
+  },
+  {
+    "id": 281,
+    "title": "不准偷看我的密码",
+    "slug": "interactive-login-page-with-animated-characters",
+    "summary": "简洁美观的登录页面模板，采用左右分栏布局，包含邮箱与密码输入、记住登录、找回密码等功能，配合趣味动画角色交互与密码可视化切换，提升用户体验与界面吸引力。",
+    "cover": "https://fecoder.cn/minio/notra/d87f82341454dcb9c730e9968f2d86ca.png",
+    "publishedAt": "2026-03-18T03:40:33.254Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-login-page-with-animated-characters",
+    "file": "examples/003-不准偷看我的密码-interactive-login-page-with-animated-characters.html"
+  },
+  {
+    "id": 278,
+    "title": "元素周期表",
+    "slug": "animejs-periodic-table-3d-layout-animation",
+    "summary": "基于 Anime.js 实现的交互式元素周期表 3D 动画示例，支持表格、球体、螺旋和网格四种布局切换，包含化学元素信息展示与点击展开动画效果，适用于前端动画与数据可视化学习。",
+    "cover": "https://fecoder.cn/minio/notra/555c8982aefe114c4363886b98b52a16.png",
+    "publishedAt": "2026-03-13T07:01:10.946Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/animejs-periodic-table-3d-layout-animation",
+    "file": "examples/004-元素周期表-animejs-periodic-table-3d-layout-animation.html"
+  },
+  {
+    "id": 276,
+    "title": "一只小鸡",
+    "slug": "css-3d-voxel-chicken-animation",
+    "summary": "本页面展示了一个使用 HTML 和 CSS 实现的 3D 体素风（Voxel）小鸡动画作品。通过纯 CSS 构建立方体结构，结合 transform 与 keyframes 实现动态行走效果，包含头部、翅膀、尾巴、嘴巴与腿部等模块化组件。适合作为 CSS 3D 建模、前端动画、Voxel 风格设计与创意网页特效学习示例。",
+    "cover": "https://fecoder.cn/minio/notra/a7a0071a41831590cb170c4b4b24d78a.png",
+    "publishedAt": "2026-03-03T08:32:48.445Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-3d-voxel-chicken-animation",
+    "file": "examples/005-一只小鸡-css-3d-voxel-chicken-animation.html"
+  },
+  {
+    "id": 274,
+    "title": "窝腰烟牌",
+    "slug": "pure-css-interactive-card-magic-trick",
+    "summary": "这是一个基于纯 CSS 实现的互动式魔术表演页面，通过动画魔术师与扑克牌切换效果，模拟“猜牌”心理魔术过程。无需 JavaScript，利用 CSS 动画与单选按钮控制步骤展示，呈现6张扑克牌选择、记牌、猜牌及结果揭晓的完整交互体验，适合前端学习、CSS 动画案例与创意网页设计参考。",
+    "cover": "https://fecoder.cn/minio/notra/d44f56d1b9ba52ffac499a7c3b657040.png",
+    "publishedAt": "2026-02-26T08:24:23.892Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pure-css-interactive-card-magic-trick",
+    "file": "examples/006-窝腰烟牌-pure-css-interactive-card-magic-trick.html"
+  },
+  {
+    "id": 269,
+    "title": "和 ai 打个台球",
+    "slug": "ai-billiards-physics-canvas-game",
+    "summary": "一个基于 HTML5 Canvas 与 Matter.js 物理引擎 实现的在线 AI 台球对战游戏，支持玩家与 AI 进行 8 球规则对战，包含真实物理碰撞、击球力度控制、回合判定、音效反馈与实时计分，适合浏览器即开即玩的互动娱乐体验。",
+    "cover": "https://fecoder.cn/minio/notra/44c617198215bae11716ce564f3b007b.png",
+    "publishedAt": "2026-02-12T07:45:07.772Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/ai-billiards-physics-canvas-game",
+    "file": "examples/007-和-ai-打个台球-ai-billiards-physics-canvas-game.html"
+  },
+  {
+    "id": 268,
+    "title": "像素风解谜小游戏",
+    "slug": "html5-pixel-puzzle-game",
+    "summary": "Copycat 是一款基于 HTML5 Canvas 的像素风解谜小游戏，采用 16×16 瓦片地图与自定义游戏引擎实现。游戏支持键盘与移动端触控操作，包含多关卡地图、方向箭头、冰面、机关与出口设计，强调路径规划与操作策略，适合网页端与移动端直接游玩。",
+    "cover": "https://fecoder.cn/minio/notra/993e22583368d03277370ece8b405d5d.png",
+    "publishedAt": "2026-02-02T16:01:18.804Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/html5-pixel-puzzle-game",
+    "file": "examples/008-像素风解谜小游戏-html5-pixel-puzzle-game.html"
+  },
+  {
+    "id": 265,
+    "title": "害羞鸡",
+    "slug": "threejs-interactive-3d-bird-animation",
+    "summary": "基于 Three.js 和 GSAP 实现的 3D 互动小鸟动画示例，支持鼠标与触控操作，模拟小鸟注视、回避与害羞行为，展示实时光影、模型变形与动画交互效果，适用于 WebGL 学习、前端动画演示与创意网页展示。",
+    "cover": "https://fecoder.cn/minio/notra/ef73dfa3671c1fe40091409786b14126.png",
+    "publishedAt": "2026-01-29T02:52:43.457Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/threejs-interactive-3d-bird-animation",
+    "file": "examples/009-害羞鸡-threejs-interactive-3d-bird-animation.html"
+  },
+  {
+    "id": 264,
+    "title": "一只狐狸🦊",
+    "slug": "css-day-night-toggle-animation",
+    "summary": "一个基于纯 HTML + CSS 实现的白天与黑夜切换动画组件，通过开关按钮实现日夜场景过渡效果，包含太阳、月亮与卡通狐狸动画，无需 JavaScript，适用于前端特效展示与交互动画学习。",
+    "cover": "https://fecoder.cn/minio/notra/9e507a18c973aed5127c98ebb22ed28c.png",
+    "publishedAt": "2026-01-27T01:22:25.586Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-day-night-toggle-animation",
+    "file": "examples/010-一只狐狸-css-day-night-toggle-animation.html"
+  },
+  {
+    "id": 263,
+    "title": "我愿称之为天才般的创意：纯文本实现水波纹效果",
+    "slug": "ascii-glitch-ripple-hover-effect",
+    "summary": "一个基于 JavaScript 与 CSS 实现的 ASCII 字符波纹悬停特效页面，鼠标经过链接文字时触发动态字符扰动动画，适用于创意网页、互动列表、前端视觉效果展示与实验性 UI 设计示例。",
+    "cover": "https://fecoder.cn/minio/notra/6b35f82d6f4f4207056139aef0667bb7.png",
+    "publishedAt": "2026-01-23T08:39:12.633Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/ascii-glitch-ripple-hover-effect",
+    "file": "examples/011-我愿称之为天才般的创意-纯文本实现水波纹效果-ascii-glitch-ripple-hover-effect.html"
+  },
+  {
+    "id": 262,
+    "title": "404错误脸",
+    "slug": "animated-404-error-face-page",
+    "summary": "404 错误页面动画示例，使用纯 HTML + CSS + SVG 实现。页面展示一个由“404”数字组成的动态人脸效果，包含眨眼、视线移动和表情动画，支持深色与浅色模式切换，适合用于网站 404 页面设计参考与前端动画学习。",
+    "cover": "https://fecoder.cn/minio/notra/c95aac7733485a8d5063ce137144ddbd.png",
+    "publishedAt": "2026-01-21T02:39:43.867Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/animated-404-error-face-page",
+    "file": "examples/012-404错误脸-animated-404-error-face-page.html"
+  },
+  {
+    "id": 261,
+    "title": "擦玻璃",
+    "slug": "interactive-frost-hover-effect-with-svg-filters",
+    "summary": "这是一个基于 HTML、CSS 和 SVG Filter 的交互式视觉效果示例，通过位移映射、模糊、噪声和颜色量化实现冰霜/寒冷风格的图像悬停效果，展示了纯前端实现的高级滤镜动画与创意 UI 设计，适合前端视觉效果与创意编程展示。",
+    "cover": "https://fecoder.cn/minio/notra/b4a34043e02f7e05debb798988420432.png",
+    "publishedAt": "2026-01-16T07:25:51.256Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-frost-hover-effect-with-svg-filters",
+    "file": "examples/013-擦玻璃-interactive-frost-hover-effect-with-svg-filters.html"
+  },
+  {
+    "id": 260,
+    "title": "猫选择器🐈",
+    "slug": "interactive-cat-select-ui",
+    "summary": "一个基于 HTML、CSS 和 SVG 实现的互动式可爱猫咪选择器组件，支持自定义下拉选项、鼠标悬停交互动画和趣味视觉反馈，适合用于前端 Demo、创意 UI 设计与 Web 交互效果展示。",
+    "cover": "https://fecoder.cn/minio/notra/fa7e69a0d2a692599b01a6d3926830b8.png",
+    "publishedAt": "2026-01-13T02:24:36.325Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-cat-select-ui",
+    "file": "examples/014-猫选择器-interactive-cat-select-ui.html"
+  },
+  {
+    "id": 257,
+    "title": "欢迎来到哈比村",
+    "slug": "image-zoom-scrolltrigger-hero-animation",
+    "summary": "使用 GSAP ScrollTrigger 实现的沉浸式首屏动画示例，通过滚动触发图片放大、背景虚化消散与标题渐显效果，打造电影级 Hobbiton 视觉体验，适用于高端品牌官网与创意展示页面。",
+    "cover": "https://fecoder.cn/minio/notra/522f28dd6922ab5fbd3d69ada8011733.png",
+    "publishedAt": "2026-01-07T07:08:34.538Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/image-zoom-scrolltrigger-hero-animation",
+    "file": "examples/015-欢迎来到哈比村-image-zoom-scrolltrigger-hero-animation.html"
+  },
+  {
+    "id": 256,
+    "title": "一个鼠标悬停3D效果",
+    "slug": "fancy-avatar-hover-effect",
+    "summary": "展示一个 头像悬停缩放动画效果 示例页面，使用 纯 CSS 实现 radial-gradient 与 outline 动态缩放，适合前端视觉交互和 UI 动画演示。",
+    "cover": "https://fecoder.cn/minio/notra/1a91317c158191a8b1bc80c5a44a8282.png",
+    "publishedAt": "2025-12-17T01:27:41.895Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/fancy-avatar-hover-effect",
+    "file": "examples/016-一个鼠标悬停3d效果-fancy-avatar-hover-effect.html"
+  },
+  {
+    "id": 255,
+    "title": "这张牌里有个洞",
+    "slug": "css-hover-card-parallax-animation-demo",
+    "summary": "这是一个展示 CSS :hover 视差效果（Parallax）卡片动画 的示例页面，结合 GSAP、Draggable 与 Tweakpane 实现鼠标与设备方向控制的 3D 卡片旋转、环形动态与实时调试面板，适合前端动画学习与视觉交互演示。",
+    "cover": "https://fecoder.cn/minio/notra/e91c5e2c93524dd117d9a51464ecd4de.png",
+    "publishedAt": "2025-12-09T04:57:24.077Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-hover-card-parallax-animation-demo",
+    "file": "examples/017-这张牌里有个洞-css-hover-card-parallax-animation-demo.html"
+  },
+  {
+    "id": 251,
+    "title": "黑白棋",
+    "slug": "play-othello-online",
+    "summary": "在线玩黑白棋（Othello/Reversi），支持单人对战电脑，实时显示黑白棋分数，智能 AI 自动走棋，提供可视化棋盘与交互操作，简单易玩，适合策略游戏爱好者。",
+    "cover": "https://fecoder.cn/minio/notra/937bec34faa7572fe00d6f18c8c63fb1.png",
+    "publishedAt": "2025-11-27T16:35:48.909Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/play-othello-online",
+    "file": "examples/018-黑白棋-play-othello-online.html"
+  },
+  {
+    "id": 250,
+    "title": "CSS实现3D国际象棋模型",
+    "slug": "css-shi-xian-3d-guo-ji-xiang-qi-mo-xing",
+    "summary": "这是一款基于纯 CSS 实现的 3D 立体国际象棋棋盘示例，支持动态旋转展示，拥有完整棋子造型与棋盘阴影效果，无需 JavaScript，即可呈现沉浸式 3D 可视化效果，适合前端学习与视觉演示。",
+    "cover": "https://fecoder.cn/minio/notra/f179f14bc13086fa345e729ee2783025.png",
+    "publishedAt": "2025-11-26T15:58:07.908Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-shi-xian-3d-guo-ji-xiang-qi-mo-xing",
+    "file": "examples/019-css实现3d国际象棋模型-css-shi-xian-3d-guo-ji-xiang-qi-mo-xing.html"
+  },
+  {
+    "id": 249,
+    "title": "赛博拼豆",
+    "slug": "cyber-pixel-art",
+    "summary": "赛博拼豆：在线像素画制作工具，支持画笔、滴管、橡皮擦、颜色选择和画布尺寸调整，提供皮卡丘与精灵球示例，轻松创作像素艺术作品。",
+    "cover": "https://fecoder.cn/minio/notra/a63ebbac3776604529a3eb7dd6898dc6.png",
+    "publishedAt": "2025-11-18T07:02:36.250Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/cyber-pixel-art",
+    "file": "examples/020-赛博拼豆-cyber-pixel-art.html"
+  },
+  {
+    "id": 231,
+    "title": "duang~~~",
+    "slug": "interactive-bloom-particle-field",
+    "summary": "一个基于 Three.js 的互动粒子场特效，呈现梦幻般的光晕与粒子波纹效果。支持鼠标交互与动态绽放动画，适合网页背景、视觉展示或创意互动项目。",
+    "cover": "https://fecoder.cn/minio/notra/3f19e63f5cc25db3989d2b41dceba905.png",
+    "publishedAt": "2025-11-12T15:56:27.883Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-bloom-particle-field",
+    "file": "examples/021-duang-interactive-bloom-particle-field.html"
+  },
+  {
+    "id": 209,
+    "title": "“秘密”涂鸦板",
+    "slug": "webgpu-fluid-motion-demo",
+    "summary": "使用 WebGPU 实现的流体动态特效演示页面，展示高性能实时流体模拟与光影交互效果，支持明暗主题切换，适合 WebGL 与 WebGPU 技术学习和前端可视化展示。",
+    "cover": "https://fecoder.cn/minio/notra/7f0c84cb9aeb1311b8e1cc284c4cf5e2.png",
+    "publishedAt": "2025-10-31T01:55:50.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/webgpu-fluid-motion-demo",
+    "file": "examples/022-秘密-涂鸦板-webgpu-fluid-motion-demo.html"
+  },
+  {
+    "id": 208,
+    "title": "响应式网格布局",
+    "slug": "responsive-grid-image-gallery",
+    "summary": "响应式网格图片布局示例，展示多张高清图片，通过CSS Grid实现自动适配不同屏幕尺寸的瀑布流式排版，适合前端开发学习与网页设计参考。",
+    "cover": "https://fecoder.cn/minio/notra/bf22e7937611bb37a91112936e7dd41a.png",
+    "publishedAt": "2025-10-30T01:55:43.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/responsive-grid-image-gallery",
+    "file": "examples/023-响应式网格布局-responsive-grid-image-gallery.html"
+  },
+  {
+    "id": 207,
+    "title": "消消乐",
+    "slug": "3d-elimination-puzzle-game",
+    "summary": "一款3D立体几何消除游戏，玩家可旋转棋盘、连接相邻图形进行消除，通过策略获得高分。",
+    "cover": "https://fecoder.cn/minio/notra/c9a0d259a6e444e00167a0de34d0e947.png",
+    "publishedAt": "2025-10-12T18:43:39.814Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-elimination-puzzle-game",
+    "file": "examples/024-消消乐-3d-elimination-puzzle-game.html"
+  },
+  {
+    "id": 206,
+    "title": "用代码画一个佐助",
+    "slug": "css-pixel-art-uchiha-sasuke",
+    "summary": "这是一幅使用纯CSS绘制的《火影忍者》角色宇智波佐助像素画，采用HTML5与CSS3实现，无需图片，通过伪元素与box-shadow属性精准还原角色外观，展示前端像素艺术创作与CSS像素绘图技巧。",
+    "cover": "https://fecoder.cn/minio/notra/d3fbb7620c76de545547bf3e41e85429.png",
+    "publishedAt": "2025-10-10T17:36:57.026Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-pixel-art-uchiha-sasuke",
+    "file": "examples/025-用代码画一个佐助-css-pixel-art-uchiha-sasuke.html"
+  },
+  {
+    "id": 205,
+    "title": "起飞咯",
+    "slug": "tiny-poly-world-threejs",
+    "summary": "这是一个基于 Three.js 的低多边形 3D 世界实验，展示动态场景渲染、光照、阴影、天空与地形效果，用户可以通过鼠标控制飞机移动。项目包含旋转的森林、飞行的飞机、太阳和天空等元素，适合作为 WebGL 可视化、3D 前端交互和 Three.js 学习示例。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/4bbc224138985bf872594895476cd89b.png",
+    "publishedAt": "2025-09-28T21:00:50.885Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/tiny-poly-world-threejs",
+    "file": "examples/026-起飞咯-tiny-poly-world-threejs.html"
+  },
+  {
+    "id": 204,
+    "title": "弓箭射靶小游戏",
+    "slug": "svg-bullseye-archery-game",
+    "summary": "一个基于 HTML5 SVG、GSAP 动画和 JavaScript 实现的弓箭射击靶心小游戏，支持鼠标与触摸操作，真实弓弦拉伸与箭矢飞行动画，命中靶心时触发动态提示效果，适合前端动画与交互练习。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8dc26ab0a6f05d78a49f255072562755.png",
+    "publishedAt": "2025-09-27T21:40:34.532Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/svg-bullseye-archery-game",
+    "file": "examples/027-弓箭射靶小游戏-svg-bullseye-archery-game.html"
+  },
+  {
+    "id": 203,
+    "title": "好酷炫的 3D 小蜜蜂",
+    "slug": "threejs-3d-bee-animation-gsap",
+    "summary": "一个使用Three.js、GLTFLoader和GSAP实现的网页3D动画小蜜蜂展示，支持滚动交互、模型动画播放与响应式布局，结合现代CSS与WebGL技术打造沉浸式视觉体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/9e791ebe2ab3f936794c5b6c8ca98e3c.png",
+    "publishedAt": "2025-09-25T19:14:50.057Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/threejs-3d-bee-animation-gsap",
+    "file": "examples/028-好酷炫的-3d-小蜜蜂-threejs-3d-bee-animation-gsap.html"
+  },
+  {
+    "id": 202,
+    "title": "模拟数字时钟",
+    "slug": "analog-digital-clock-html-css-jquery",
+    "summary": "一个基于HTML、CSS和jQuery实现的模拟时钟与数字时钟结合的动态效果展示，支持实时显示时间、日期和星期，适合前端学习与交互动效项目。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/745a6cc097c8f4c77588ce27fd08fcc6.png",
+    "publishedAt": "2025-09-24T22:38:34.089Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/analog-digital-clock-html-css-jquery",
+    "file": "examples/029-模拟数字时钟-analog-digital-clock-html-css-jquery.html"
+  },
+  {
+    "id": 201,
+    "title": "煎鸡蛋 Switch",
+    "slug": "fried-egg-css-switch-button",
+    "summary": "一个使用 HTML、CSS 变量、伪元素、CSS 动画 和 JavaScript 实现的煎鸡蛋风格开关按钮示例，展示前端交互与视觉设计的创意实现。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/384b7462385d3cbf2f73f193820ee276.png",
+    "publishedAt": "2025-09-23T19:23:48.818Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/fried-egg-css-switch-button",
+    "file": "examples/030-煎鸡蛋-switch-fried-egg-css-switch-button.html"
+  },
+  {
+    "id": 200,
+    "title": "两只蜡烛的创意 Loading",
+    "slug": "funny-candle-pure-css-animation",
+    "summary": "一个使用纯 CSS 实现的趣味蜡烛动画示例，包含背景切换、火焰跳动、眼睛眨动、烟雾飘散等效果，展示 CSS3 动画、transform、keyframes 的创意用法，适合前端开发者学习纯 CSS 动画技巧。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/46d7f609f79fc618024464caaa8a066a.png",
+    "publishedAt": "2025-08-28T11:04:15.214Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/funny-candle-pure-css-animation",
+    "file": "examples/031-两只蜡烛的创意-loading-funny-candle-pure-css-animation.html"
+  },
+  {
+    "id": 199,
+    "title": "喷火龙",
+    "slug": "threejs-dragon-sneeze-webgl-animation",
+    "summary": "这是一个基于 Three.js 和 GSAP 动画的 3D 交互式小龙展示，用户可以通过点击和拖拽控制小龙打喷嚏，伴随火焰和烟雾特效，呈现逼真的 WebGL 动画体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/c7814dfe1df8bc50fd19ba4315bc66b2.png",
+    "publishedAt": "2025-08-27T13:03:48.440Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/threejs-dragon-sneeze-webgl-animation",
+    "file": "examples/032-喷火龙-threejs-dragon-sneeze-webgl-animation.html"
+  },
+  {
+    "id": 198,
+    "title": "一个抽象搞怪的 404 页面",
+    "slug": "custom-404-error-page-template",
+    "summary": "一个简洁美观的自定义404错误页面模板，使用Bootstrap 3和Google Fonts Arvo字体设计，支持响应式布局和CSS动画背景，适合网站错误页面优化与用户体验提升。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/741f42a0feb28d55f836ec8f60280bd7.png",
+    "publishedAt": "2025-08-26T09:49:15.719Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/custom-404-error-page-template",
+    "file": "examples/033-一个抽象搞怪的-404-页面-custom-404-error-page-template.html"
+  },
+  {
+    "id": 197,
+    "title": "让小熊吃到星星",
+    "slug": "html5-canvas-puzzle-game-bear-star",
+    "summary": "《让小熊吃到星星》是一款基于 HTML5 Canvas 的益智小游戏，玩家通过拖动和旋转网格，引导小熊抵达星星位置。游戏使用原生 JavaScript、CSS3 动画和交互事件处理，支持多关卡选择和物理旋转效果，提供流畅的网页端游戏体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/2c74d71a6692693b92831240f9669a9e.png",
+    "publishedAt": "2025-08-25T09:42:23.852Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/html5-canvas-puzzle-game-bear-star",
+    "file": "examples/034-让小熊吃到星星-html5-canvas-puzzle-game-bear-star.html"
+  },
+  {
+    "id": 196,
+    "title": "脉冲星崩解",
+    "slug": "pulsar-disintegration-threejs-particle-effects",
+    "summary": "一个基于 Three.js WebGL 粒子特效 的互动演示，展示“脉冲星崩解”视觉效果。支持主题切换（熔岩、宇宙、翡翠）、粒子动画、冲击波效果和交互式控制，结合 UnrealBloomPass 后处理、OrbitControls 相机控制，实现沉浸式 3D 动态体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/cb4e3c7232ab83cfaa8e696492082962.png",
+    "publishedAt": "2025-08-24T09:59:26.512Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pulsar-disintegration-threejs-particle-effects",
+    "file": "examples/035-脉冲星崩解-pulsar-disintegration-threejs-particle-effects.html"
+  },
+  {
+    "id": 195,
+    "title": "给狮子吹吹风",
+    "slug": "threejs-3d-interactive-lion-animation",
+    "summary": "这是一个基于 Three.js 和 WebGL 的 3D 狮子互动动画，用户通过鼠标拖动或触摸可以制造风，让狮子的鬃毛和表情动态变化，展示了现代前端交互动画效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/487ea5fca3c48f843f5d520056a4e13a.png",
+    "publishedAt": "2025-08-20T09:37:32.782Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/threejs-3d-interactive-lion-animation",
+    "file": "examples/036-给狮子吹吹风-threejs-3d-interactive-lion-animation.html"
+  },
+  {
+    "id": 194,
+    "title": "可爱的柴犬",
+    "slug": "cute-shiba-vuejs-svg-css-animation",
+    "summary": "一个基于 Vue.js 的可爱柴犬互动组件示例，结合 SVG 与 CSS 动画实现角色表情、耳朵和眼睛的动态效果，支持随机化展示多种柴犬角色（Ume、Sesame、Tuna、Okaka 等）。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/1264c7dacb5d391a286ab79ac7ae27d2.png",
+    "publishedAt": "2025-08-19T10:19:00.555Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/cute-shiba-vuejs-svg-css-animation",
+    "file": "examples/037-可爱的柴犬-cute-shiba-vuejs-svg-css-animation.html"
+  },
+  {
+    "id": 193,
+    "title": "狼来了",
+    "slug": "threejs-rabbit-endless-runner-game",
+    "summary": "这是一款基于 Three.js 和 GSAP TweenMax 开发的 3D 网页小游戏，玩家操控兔子奔跑、跳跃并收集胡萝卜，同时躲避刺猬。游戏使用 WebGL 渲染、响应式设计，支持鼠标与触屏交互，适合展示前端动画、3D 建模与游戏开发技巧。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/e2b7a76be2accba9afec60ea071d70d7.png",
+    "publishedAt": "2025-08-18T09:42:08.839Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/threejs-rabbit-endless-runner-game",
+    "file": "examples/038-狼来了-threejs-rabbit-endless-runner-game.html"
+  },
+  {
+    "id": 192,
+    "title": "经典泡泡消消乐",
+    "slug": "bubble-shooter-html5-canvas-game",
+    "summary": "一款基于 HTML5 Canvas 与原生 JavaScript 开发的泡泡龙消除游戏，支持鼠标与触摸操作，采用模块化脚本（grid.js、ball.js、shooter.js、manager.js）实现动态渲染与交互，适合前端开发学习与游戏案例展示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/403229027cf64e574ce00063f5790858.png",
+    "publishedAt": "2025-08-17T09:47:25.560Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/bubble-shooter-html5-canvas-game",
+    "file": "examples/039-经典泡泡消消乐-bubble-shooter-html5-canvas-game.html"
+  },
+  {
+    "id": 191,
+    "title": "彩虹兄弟 Loading",
+    "slug": "animated-html5-css3-svg-geometry-effects",
+    "summary": "本页面展示了一个基于HTML5、CSS3和SVG动画实现的多彩几何角色与爆炸特效的创意互动场景，使用关键帧动画（@keyframes）、Bezier缓动函数、prefixfree库自动添加CSS前缀，营造连续运动和动态变化效果，适合动画效果示例与前端动画技术学习。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/abe97af7e5d3ba384219a77568cbc43f.png",
+    "publishedAt": "2025-08-12T09:37:33.407Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/animated-html5-css3-svg-geometry-effects",
+    "file": "examples/040-彩虹兄弟-loading-animated-html5-css3-svg-geometry-effects.html"
+  },
+  {
+    "id": 190,
+    "title": "新拟态组件",
+    "slug": "neumorphic-ui-components-html5-css3-javascript",
+    "summary": "本页面展示了基于CSS Neumorphism新拟态设计的前端UI组件示例，包含开关、复选框、单选按钮、按钮、时钟、搜索框、分段控制、图标、滑块等交互元素，使用HTML5、CSS3、JavaScript及Ionicons、Material Icons等技术，适合UI设计参考与前端开发学习。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/3c2731186c4e2eca38737d5c7d63f97a.png",
+    "publishedAt": "2025-08-11T09:55:30.779Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/neumorphic-ui-components-html5-css3-javascript",
+    "file": "examples/041-新拟态组件-neumorphic-ui-components-html5-css3-javascript.html"
+  },
+  {
+    "id": 189,
+    "title": "人浪",
+    "slug": "css-has-selector-wave-animation",
+    "summary": "一个利用 CSS :has() 伪类与响应式布局实现的互动动画示例，通过鼠标悬停触发人物角色联动“人浪”效果，展示高级 CSS 选择器、Flexbox、渐变背景与过渡动画的综合运用。适合前端开发者学习 CSS 动画、交互设计及复杂选择器的使用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/9bc139336e91cda475eda5a2b6e759cb.png",
+    "publishedAt": "2025-08-10T17:57:12.887Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-has-selector-wave-animation",
+    "file": "examples/042-人浪-css-has-selector-wave-animation.html"
+  },
+  {
+    "id": 188,
+    "title": "粉色冰块闯关游戏",
+    "slug": "pink-ice-slider-puzzle-game",
+    "summary": "PINK ICE 是一款基于 HTML、CSS 和 JavaScript 开发的响应式滑块解谜游戏，支持方向键或触屏操作，适配移动与桌面端，拥有多级挑战关卡与炫酷动画效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/6a45902286c22bfe0080ea3f59566f49.png",
+    "publishedAt": "2025-08-07T10:37:53.133Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pink-ice-slider-puzzle-game",
+    "file": "examples/043-粉色冰块闯关游戏-pink-ice-slider-puzzle-game.html"
+  },
+  {
+    "id": 187,
+    "title": "白昼黑夜切换器",
+    "slug": "react-day-night-toggle-theme-animation",
+    "summary": "一个使用 React Context API 和 styled-components 实现的日夜模式切换动画示例，具有动态太阳、月亮和星星效果，支持白天与夜晚背景自动判断和用户切换。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/d20ee2488dec55f6a4959139c009b8a5.png",
+    "publishedAt": "2025-08-06T10:38:34.119Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/react-day-night-toggle-theme-animation",
+    "file": "examples/044-白昼黑夜切换器-react-day-night-toggle-theme-animation.html"
+  },
+  {
+    "id": 186,
+    "title": "一个花里胡哨的确认按钮",
+    "slug": "interactive-confetti-confirm-button-animation",
+    "summary": "交互式彩带动画确认按钮示例，基于HTML、CSS和GSAP实现3D悬停效果与点击粒子动画，适合前端交互动效开发与UI设计参考。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/f09ce6155f9d25fa00ae9433949d65a4.png",
+    "publishedAt": "2025-08-05T16:51:43.434Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-confetti-confirm-button-animation",
+    "file": "examples/045-一个花里胡哨的确认按钮-interactive-confetti-confirm-button-animation.html"
+  },
+  {
+    "id": 185,
+    "title": "小丑转盘",
+    "slug": "interactive-carnival-spinner-3d-game",
+    "summary": "一个基于 Three.js、GLTFLoader 和 Lottie Web 构建的互动嘉年华转盘游戏，支持 WebGL 3D 场景渲染、动画效果与用户拖拽操作，兼容移动端与桌面端，为用户提供沉浸式的抽奖体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/5db138ede0611fa385e261b8ddb72b77.png",
+    "publishedAt": "2025-08-04T13:30:03.085Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-carnival-spinner-3d-game",
+    "file": "examples/046-小丑转盘-interactive-carnival-spinner-3d-game.html"
+  },
+  {
+    "id": 184,
+    "title": "记忆游戏",
+    "slug": "memory-match-game-html-css-js",
+    "summary": "轻量级的浏览器记忆游戏，使用原生 JavaScript 和 CSS Grid 构建，适合初学者学习 DOM 操作、动画效果和响应式设计的网页小游戏示例。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/6bc91d132aa479236a868738be3f8ea3.png",
+    "publishedAt": "2025-08-03T09:33:07.215Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/memory-match-game-html-css-js",
+    "file": "examples/047-记忆游戏-memory-match-game-html-css-js.html"
+  },
+  {
+    "id": 183,
+    "title": "去吧皮卡丘",
+    "slug": "single-div-pure-css-pikachu-animation",
+    "summary": "这是一个使用纯CSS和单个div创建的皮卡丘动画效果，通过复杂的box-shadow属性和CSS动画实现像素风格的奔跑动画。展示了CSS的强大绘图能力和动画技巧，适合前端开发者学习高级CSS技术。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/fc018bf83cb5d05f74b6f1906da2ee43.png",
+    "publishedAt": "2025-07-31T09:43:30.108Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/single-div-pure-css-pikachu-animation",
+    "file": "examples/048-去吧皮卡丘-single-div-pure-css-pikachu-animation.html"
+  },
+  {
+    "id": 182,
+    "title": "热血贪吃蛇",
+    "slug": "retro-pixel-snake-game-gsap-webflow",
+    "summary": "一款复古像素风格的HTML5贪吃蛇小游戏，融合GSAP动画与Webflow设计元素，支持音效、背景音乐和自定义控制面板，提供沉浸式创意互动体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/6f3d931befe87393681ba90891de691b.png",
+    "publishedAt": "2025-07-30T23:27:17.169Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/retro-pixel-snake-game-gsap-webflow",
+    "file": "examples/049-热血贪吃蛇-retro-pixel-snake-game-gsap-webflow.html"
+  },
+  {
+    "id": 181,
+    "title": "猩球大战",
+    "slug": "canvas-gorilla-throwing-game",
+    "summary": "本页面是一个基于 Canvas 和原生 JavaScript 实现的城市大战小游戏，玩家操控大猩猩投掷炸弹穿越楼宇，击中对手赢得比赛。支持单人、双人与自动对战模式，并配有风速、建筑生成、爆炸效果与深色模式切换，适合前端交互动画与游戏逻辑学习。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/88d0fccc2e9b0960cfd86184a88e5a5b.png",
+    "publishedAt": "2025-07-29T09:42:01.002Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/canvas-gorilla-throwing-game",
+    "file": "examples/050-猩球大战-canvas-gorilla-throwing-game.html"
+  },
+  {
+    "id": 180,
+    "title": "3D 效果的加载动画",
+    "slug": "3d-bouncing-loading-animation",
+    "summary": "本页面使用纯 CSS3 实现了一个富有弹性和表现力的 3D 弹跳加载动画，包含基础弹跳效果、阴影缩放和表情动态变化。该加载动画无须 JavaScript，适合作为网页加载指示器和 CSS 动效学习示例。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/81d46885285418ec5492e07005844f2e.png",
+    "publishedAt": "2025-07-28T17:31:43.488Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-bouncing-loading-animation",
+    "file": "examples/051-3d-效果的加载动画-3d-bouncing-loading-animation.html"
+  },
+  {
+    "id": 179,
+    "title": "旋转拼图",
+    "slug": "rotating-circle-puzzle-game",
+    "summary": "本页面实现了一个旋转拼图益智游戏，玩家通过点击控制彩色圆盘旋转并交换颜色片段，完成颜色归位挑战。使用原生 JavaScript 和 CSS3 实现圆形旋转动画与状态判断，是适合前端交互学习和小游戏开发参考的项目。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/da79333d5bc76e4343c3ea5eb8f78f81.png",
+    "publishedAt": "2025-07-27T09:31:26.519Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/rotating-circle-puzzle-game",
+    "file": "examples/052-旋转拼图-rotating-circle-puzzle-game.html"
+  },
+  {
+    "id": 178,
+    "title": "3D 主题切换",
+    "slug": "3d-theme-switch-transition",
+    "summary": "本页面利用 View Transitions API 和 CSS3 的 perspective 视角效果，打造出具有 3D 翻转视觉的主题切换动画。支持系统、亮色、暗色多种主题，并集成 tweakpane 实时调参，是现代网页交互动画的典型示例。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/89ab641decdd08f143335734c6887e31.png",
+    "publishedAt": "2025-07-24T09:34:55.629Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-theme-switch-transition",
+    "file": "examples/053-3d-主题切换-3d-theme-switch-transition.html"
+  },
+  {
+    "id": 177,
+    "title": "一个创意打赏按钮",
+    "slug": "interactive-tipping-button-animation",
+    "summary": "本页面使用 HTML、CSS 和 GSAP 动画构建了一个具有真实投币效果的打赏按钮。通过 3D 转场、物理动效及声音反馈，提升用户交互体验，并内置 tweakpane 控制面板支持动画参数调节，是极具创意的前端互动组件之一。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/3514a9715920b402ffed3215ba7095af.png",
+    "publishedAt": "2025-07-23T09:50:24.718Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-tipping-button-animation",
+    "file": "examples/054-一个创意打赏按钮-interactive-tipping-button-animation.html"
+  },
+  {
+    "id": 176,
+    "title": "404",
+    "slug": "animated-404-error-page",
+    "summary": "本404页面采用纯HTML与CSS打造，呈现一只卡通奶牛跌入井中的趣味动画效果。页面兼容现代浏览器，具有高性能和轻量级特性，适合作为前端项目中的自定义错误页面模板，增强用户体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/1d4d2d949cb953e867c751d13a855d84.png",
+    "publishedAt": "2025-07-22T09:45:45.384Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/animated-404-error-page",
+    "file": "examples/055-404-animated-404-error-page.html"
+  },
+  {
+    "id": 175,
+    "title": "字符视频生成器",
+    "slug": "video-to-ascii-art-generator",
+    "summary": "本网页工具利用 JavaScript 和 HTML5 技术实现了视频实时转为 ASCII 艺术字符的特效展示。用户可上传本地视频文件，系统自动将视频每一帧转化为彩色 ASCII 字符图形，并支持调整亮度、播放速度与缩放比例，兼容现代浏览器。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/53338b9d1b6dedcee18868daa4f62b7a.png",
+    "publishedAt": "2025-07-21T09:48:06.631Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/video-to-ascii-art-generator",
+    "file": "examples/056-字符视频生成器-video-to-ascii-art-generator.html"
+  },
+  {
+    "id": 174,
+    "title": "字符图片转换器",
+    "slug": "ascii-image-generator",
+    "summary": "这是一款基于 HTML、CSS 和 JavaScript 构建的图像转 ASCII 艺术在线工具，支持亮度、对比度、模糊、反转等图像调整，内置多种字符集与抖动算法，支持 Sobel 与 DoG 边缘检测，适合前端开发者和图像处理爱好者使用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/99e61324806768ae05a1d7069ec471f0.png",
+    "publishedAt": "2025-07-20T10:28:55.392Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/ascii-image-generator",
+    "file": "examples/057-字符图片转换器-ascii-image-generator.html"
+  },
+  {
+    "id": 173,
+    "title": "个性化鼠标指针",
+    "slug": "custom-mouse-cursor-animation-with-gsap",
+    "summary": "本页面展示了一个使用CSS自定义鼠标样式与GSAP动画实现的交互效果示例，包含旋转指针、悬停动画和自定义光标过渡，适用于高级前端动效设计学习与演示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/c129c49b469c87cd35ed3c7543bbbac9.png",
+    "publishedAt": "2025-07-17T09:09:50.938Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/custom-mouse-cursor-animation-with-gsap",
+    "file": "examples/058-个性化鼠标指针-custom-mouse-cursor-animation-with-gsap.html"
+  },
+  {
+    "id": 172,
+    "title": "解压游戏，随便丢",
+    "slug": "interactive-slide-jenga-game-webgl",
+    "summary": "一个使用 Spline 3D 引擎构建的交互式“抽积木”游戏网页，集成了 Bootstrap、Font Awesome 和 jQuery，提供全屏沉浸式的动画展示，适合学习或展示 WebGL、3D 可视化、交互设计等前端技术。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/1cfcb6286b40b5a66d8aa8ef0f1c3b65.png",
+    "publishedAt": "2025-07-16T09:33:25.208Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-slide-jenga-game-webgl",
+    "file": "examples/059-解压游戏-随便丢-interactive-slide-jenga-game-webgl.html"
+  },
+  {
+    "id": 171,
+    "title": "不要一直点",
+    "slug": "interactive-react-bear-animation-with-gsap-css-svg",
+    "summary": "一个有趣的互动式网页动画，使用React和GSAP实现，展示了一个会生气的小熊和开关交互效果。包含CSS动画、SVG图形和响应式设计，适合前端开发学习参考。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/c2075003d2dc6d6fed7f7fc3fd8a4884.png",
+    "publishedAt": "2025-07-15T09:52:33.299Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-react-bear-animation-with-gsap-css-svg",
+    "file": "examples/060-不要一直点-interactive-react-bear-animation-with-gsap-css-svg.html"
+  },
+  {
+    "id": 170,
+    "title": "我要创造一个有琳的世界",
+    "slug": "css-eye-animation-sharingan-rinnegan",
+    "summary": "一个以写轮眼和轮回眼为主题的前端动画展示页面，使用纯 CSS 构建复杂的动画视觉效果，灵感来源于火影忍者角色设计，具有响应式布局。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/4d4fffb1c79f958cd94a3b44d17368ae.png",
+    "publishedAt": "2025-07-14T10:08:39.482Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-eye-animation-sharingan-rinnegan",
+    "file": "examples/061-我要创造一个有琳的世界-css-eye-animation-sharingan-rinnegan.html"
+  },
+  {
+    "id": 169,
+    "title": "黑洞",
+    "slug": "black-hole-visualization-animation-canvas",
+    "summary": "这是一个基于 HTML5 Canvas 和 JavaScript 实现的黑洞可视化动画，具有动态星轨效果和交互式中心按钮，适用于天文、科普或 WebGL 动画展示项目。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/58e611022a5d264c3c7b70dc1c2416e0.png",
+    "publishedAt": "2025-07-13T09:28:41.146Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/black-hole-visualization-animation-canvas",
+    "file": "examples/062-黑洞-black-hole-visualization-animation-canvas.html"
+  },
+  {
+    "id": 168,
+    "title": "读心术纸牌魔术",
+    "slug": "card-mentalism-interactive-magic-game",
+    "summary": "这是一款互动式纸牌心灵魔术网页应用，用户通过选择一张牌，系统最终会神奇地揭示用户心中的牌。页面采用纯原生 JavaScript 实现逻辑，结合 CSS 动画（如 keyframes、hover 效果）和响应式设计，增强用户沉浸感和互动性。视觉上使用烟雾视频背景、卡片浮动发光动画等现代前端技术，带来神秘的视觉体验。\n",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/706f25e2de55b4ec114db02997dbd61c.png",
+    "publishedAt": "2025-07-10T09:14:33.233Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/card-mentalism-interactive-magic-game",
+    "file": "examples/063-读心术纸牌魔术-card-mentalism-interactive-magic-game.html"
+  },
+  {
+    "id": 167,
+    "title": "一个看起来就很厉害的表",
+    "slug": "webgl-fragment-shader-clock",
+    "summary": "这是一个基于 WebGL 和 GLSL Fragment Shader 实现的 3D 着色器时钟动画示例，使用了高精度浮点运算与符号距离函数（SDF）技术，实时渲染小时、分钟与秒钟刻度，展现了 Shader 在时间动画和数字建模上的高级应用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/510878b12b3d9dc8893b4f9645ac7623.png",
+    "publishedAt": "2025-07-09T11:15:15.781Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/webgl-fragment-shader-clock",
+    "file": "examples/064-一个看起来就很厉害的表-webgl-fragment-shader-clock.html"
+  },
+  {
+    "id": 166,
+    "title": "放烟花",
+    "slug": "html5-canvas-javascript-fireworks",
+    "summary": "这是一个使用 HTML5 Canvas 和原生 JavaScript 实现的烟花动画教程，展示了如何通过 requestAnimationFrame 创建流畅粒子效果，适合前端动画初学者学习图形绘制与性能优化技巧。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/a1cf4bcfbeb9d07814a3b320bc14dc69.png",
+    "publishedAt": "2025-07-08T10:39:45.225Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/html5-canvas-javascript-fireworks",
+    "file": "examples/065-放烟花-html5-canvas-javascript-fireworks.html"
+  },
+  {
+    "id": 165,
+    "title": "3D 抽屉柜",
+    "slug": "pure-css-details-drawers-3d-transform",
+    "summary": "本页面展示了一个完全使用纯 CSS 和 HTML5 <details> 与 <summary> 标签实现的 3D 抽屉式柜子，无需 JavaScript，适用于创意 UI 设计演示，体现 CSS 变量与 3D 变换的高级用法。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/392b59b4ab494f00770af41c7be14d22.png",
+    "publishedAt": "2025-07-08T10:10:54.417Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pure-css-details-drawers-3d-transform",
+    "file": "examples/066-3d-抽屉柜-pure-css-details-drawers-3d-transform.html"
+  },
+  {
+    "id": 164,
+    "title": "给小熊投喂甜甜圈",
+    "slug": "feed-the-bear-donut-game",
+    "summary": "一个用 HTML5、CSS3 和原生 JavaScript 实现的可拖拽互动小游戏，用户通过拖动甜甜圈喂给小熊，体验动画反馈和动态元素效果，适合前端动画和交互设计学习者参考。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/d6b1de0c09292e4dfd48347ed1ae8f8e.png",
+    "publishedAt": "2025-07-07T09:59:24.181Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/feed-the-bear-donut-game",
+    "file": "examples/067-给小熊投喂甜甜圈-feed-the-bear-donut-game.html"
+  },
+  {
+    "id": 163,
+    "title": "蜡笔小新",
+    "slug": "css-drawing-crayon-shinchan",
+    "summary": "使用纯 CSS 和 HTML 构建蜡笔小新动画角色，包含头发、眼睛、面部、手脚等多个细节模块，并通过 CSS 动画实现呼吸效果，展示 CSS 绘图与动画的高级应用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/7d84717a99da32906473d912a0993cc8.png",
+    "publishedAt": "2025-07-06T14:33:31.012Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-drawing-crayon-shinchan",
+    "file": "examples/068-蜡笔小新-css-drawing-crayon-shinchan.html"
+  },
+  {
+    "id": 162,
+    "title": "一袋米要扛几楼",
+    "slug": "css-rinnegan-eye",
+    "summary": "使用纯 CSS 实现轮回眼样式的动态视觉效果，展现复杂图形变换与阴影层次，适用于前端视觉实验或动画展示页面。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/b90797fdb2d2324c54b19f7c68fbf365.png",
+    "publishedAt": "2025-07-05T14:45:52.543Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-rinnegan-eye",
+    "file": "examples/069-一袋米要扛几楼-css-rinnegan-eye.html"
+  },
+  {
+    "id": 161,
+    "title": "吉卜力风",
+    "slug": "ghibli-style-threejs-webgl-scene",
+    "summary": "吉卜力风格的 WebGL 三维场景，基于 Three.js 和自定义 Shader 实现动态光照、粒子动画与模型交互，适用于前端三维可视化项目参考。\n\n",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/fff10a4720d9a99bfb43bebca22ba274.png",
+    "publishedAt": "2025-07-03T10:13:42.040Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/ghibli-style-threejs-webgl-scene",
+    "file": "examples/070-吉卜力风-ghibli-style-threejs-webgl-scene.html"
+  },
+  {
+    "id": 160,
+    "title": "3D 叠塔游戏",
+    "slug": "stacking-blocks-3d-game-with-threejs",
+    "summary": "这是一个使用 Three.js 和 GSAP 构建的 3D 叠塔游戏，玩家通过点击或按空格键精准放置方块挑战极限，支持动画过渡和响应式视口设计，适合展示 WebGL、动画控制和游戏逻辑实现能力。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/05e6169784e58eb7ceb8a41395bca7ce.png",
+    "publishedAt": "2025-07-02T09:52:39.211Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/stacking-blocks-3d-game-with-threejs",
+    "file": "examples/071-3d-叠塔游戏-stacking-blocks-3d-game-with-threejs.html"
+  },
+  {
+    "id": 159,
+    "title": "海贼王我当定了！",
+    "slug": "luffy-head-css-drawing",
+    "summary": "使用 HTML 与纯 CSS 绘制的路飞头像，呈现帽子、面部、头发等多层细节造型，无需图像资源即可实现高质量动漫角色展示，适合用于 CSS 绘图、前端动画、纯前端项目展示或简历作品集。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/804bed6fa31c49d1da880d259826d744.png",
+    "publishedAt": "2025-07-01T11:48:03.446Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/luffy-head-css-drawing",
+    "file": "examples/072-海贼王我当定了-luffy-head-css-drawing.html"
+  },
+  {
+    "id": 158,
+    "title": "嘻嘻不嘻嘻",
+    "slug": "css-dog-animation-card",
+    "summary": "纯 CSS 与 HTML 实现的交互动效小狗卡片，支持点击喜欢与不喜欢按钮，呈现不同的表情和动画效果，展示了动画过渡、伪元素应用与响应式布局技巧，适合学习 CSS 动画与前端视觉效果设计。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/282cf2ac3b3502b6bb7f0288a0574560.png",
+    "publishedAt": "2025-06-30T14:29:37.964Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-dog-animation-card",
+    "file": "examples/073-嘻嘻不嘻嘻-css-dog-animation-card.html"
+  },
+  {
+    "id": 157,
+    "title": "阿玛忒拉斯（哥哥版）",
+    "slug": "animated-itachi-sharingan-with-css",
+    "summary": "本页面展示了使用纯 CSS 和 HTML 实现的“写轮眼”动效，灵感来源于火影忍者角色宇智波鼬，通过旋转动画、渐变背景与伪元素组合展现高质量视觉特效，适用于 CSS 动画与自定义 UI 设计学习场景。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/af5cb67f32688d5483f361bc3f5a0510.png",
+    "publishedAt": "2025-06-29T18:27:47.525Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/animated-itachi-sharingan-with-css",
+    "file": "examples/074-阿玛忒拉斯-哥哥版-animated-itachi-sharingan-with-css.html"
+  },
+  {
+    "id": 156,
+    "title": "阿玛忒拉斯",
+    "slug": "css-mangekyou-sharingan-animation",
+    "summary": "使用纯 CSS 实现动态旋转的万花筒写轮眼视觉特效，展示复杂形状、阴影与动画的综合应用，适合前端视觉特效练习与创意演示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/732ea419870a28606c9cb9ab424a8253.png",
+    "publishedAt": "2025-06-26T14:26:48.201Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-mangekyou-sharingan-animation",
+    "file": "examples/075-阿玛忒拉斯-css-mangekyou-sharingan-animation.html"
+  },
+  {
+    "id": 155,
+    "title": "一颗会动的爱心",
+    "slug": "heart-particle-canvas-animation",
+    "summary": "心形粒子动画展示页面，基于 HTML5 Canvas 和 JavaScript 实现动态粒子效果，支持颜色、速度、数量等参数调整，适用于前端动画展示、情人节页面设计或 Web 特效演示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8c2618a774a05793f08f178c527764eb.png",
+    "publishedAt": "2025-06-25T15:00:44.785Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/heart-particle-canvas-animation",
+    "file": "examples/076-一颗会动的爱心-heart-particle-canvas-animation.html"
+  },
+  {
+    "id": 154,
+    "title": "花式扑克洗牌器",
+    "slug": "fancy-card-shuffle-animation",
+    "summary": "一个基于 React 和 Tailwind CSS 实现的交互式花式扑克洗牌动画演示，支持爆炸式、瀑布式、交叉式、弧形等多种动画效果，适用于展示动画原理或构建游戏界面交互。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/5b56cef085d265ac4af72f74dd29c17d.png",
+    "publishedAt": "2025-06-24T10:35:57.757Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/fancy-card-shuffle-animation",
+    "file": "examples/077-花式扑克洗牌器-fancy-card-shuffle-animation.html"
+  },
+  {
+    "id": 153,
+    "title": "超级马里奥",
+    "slug": "3d-mario-canvas-animation",
+    "summary": "本页面使用 Zdog 和 HTML5 Canvas 技术，构建一个可拖拽旋转的 3D 马里奥角色模型，展示 JavaScript 在前端图形动画与三维建模中的实际应用，适合动画开发学习与演示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/1db5fe8abbeb7e20f3e59f6ccfaa9a2c.png",
+    "publishedAt": "2025-06-23T15:55:39.429Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-mario-canvas-animation",
+    "file": "examples/078-超级马里奥-3d-mario-canvas-animation.html"
+  },
+  {
+    "id": 152,
+    "title": "武士游戏角色控制",
+    "slug": "pixel-samurai-keyboard-animation",
+    "summary": "一个基于 CSS 动画与 JavaScript 控制的像素风格武士角色演示网页，支持按键控制角色行走和攻击，适合学习像素动画与事件绑定的前端项目。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/6a340fdd77101232d80d86e6f57206d4.png",
+    "publishedAt": "2025-06-22T16:25:02.035Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pixel-samurai-keyboard-animation",
+    "file": "examples/079-武士游戏角色控制-pixel-samurai-keyboard-animation.html"
+  },
+  {
+    "id": 151,
+    "title": "兔子？青蛙？",
+    "slug": "animated-toggle-scribble-css",
+    "summary": "创意动画开关按钮，采用纯 CSS 和 SVG 滤镜实现动态涂鸦特效，展示一个拟物化的兔子角色，通过 checkbox 控制切换状态，支持无障碍交互和响应式设计。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/45bfb606d5fb87c2be71365540c881f2.png",
+    "publishedAt": "2025-06-21T13:25:45.991Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/animated-toggle-scribble-css",
+    "file": "examples/080-兔子-青蛙-animated-toggle-scribble-css.html"
+  },
+  {
+    "id": 150,
+    "title": "3D 粒子光环球",
+    "slug": "webgl-particle-sphere-threejs-orbit-animation",
+    "summary": "基于 Three.js 和 WebGL 实现的粒子球体与轨道动画，采用 GLSL 编写的自定义顶点与片元着色器，呈现动态呼吸效果与旋转轨迹，适合展示 3D 粒子系统渲染和交互控制技术。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/198ff14fff08ba2926ff8d0010e16607.png",
+    "publishedAt": "2025-06-20T15:53:54.371Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/webgl-particle-sphere-threejs-orbit-animation",
+    "file": "examples/081-3d-粒子光环球-webgl-particle-sphere-threejs-orbit-animation.html"
+  },
+  {
+    "id": 149,
+    "title": "手搓一个螺旋丸",
+    "slug": "chakra-energy-orb-animation",
+    "summary": "一个使用 CSS3 动画和 JavaScript 实现的螺旋丸能量球特效，模拟查克拉流动与动态闪光，适合前端动效展示、Canvas 替代方案或创意作品集展示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/cee23df997ffa79ab27c410bceb00dca.png",
+    "publishedAt": "2025-06-19T15:22:55.513Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/chakra-energy-orb-animation",
+    "file": "examples/082-手搓一个螺旋丸-chakra-energy-orb-animation.html"
+  },
+  {
+    "id": 148,
+    "title": "手搓一只史努比",
+    "slug": "snoopy-pixel-art-css",
+    "summary": "使用纯 HTML 表格与 CSS 样式实现的 Snoopy 史努比像素画，适合展示网页像素风艺术效果与前端布局技巧，无需 JavaScript 即可实现图像绘制。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/48a21e989ea872f648cffdcb2baae4a8.png",
+    "publishedAt": "2025-06-18T09:55:06.775Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/snoopy-pixel-art-css",
+    "file": "examples/083-手搓一只史努比-snoopy-pixel-art-css.html"
+  },
+  {
+    "id": 147,
+    "title": "动态渐变文字",
+    "slug": "animated-gradient-text-with-css-property",
+    "summary": "使用 CSS @property 动态定义变量，实现线性渐变文字动画效果，兼容现代浏览器与旧版 WebKit，演示结合 background-clip 与 text-fill-color 技术的渐变文字实现方式。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/15581bcae0c2a3279ffda93bd5099695.png",
+    "publishedAt": "2025-06-17T11:17:52.881Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/animated-gradient-text-with-css-property",
+    "file": "examples/084-动态渐变文字-animated-gradient-text-with-css-property.html"
+  },
+  {
+    "id": 146,
+    "title": "不到100行代码欺骗你的眼睛",
+    "slug": "css-optical-illusion-effect",
+    "summary": "使用不到 100 行 HTML 和 CSS 实现交互式视觉错觉效果，基于 conic-gradient、clip-path 和 mix-blend-mode 等 CSS3 技术，支持点击切换不同错觉状态。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/d77a425cf63e50917c0f9940ddcf3365.png",
+    "publishedAt": "2025-06-16T09:44:26.986Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-optical-illusion-effect",
+    "file": "examples/085-不到100行代码欺骗你的眼睛-css-optical-illusion-effect.html"
+  },
+  {
+    "id": 145,
+    "title": "Flappy Labubu",
+    "slug": "flappy-bird-canvas-game",
+    "summary": "一个使用原生 JavaScript 和 HTML5 Canvas 开发的简易 Flappy Bird 克隆小游戏，适合初学者练习前端动画、碰撞检测与游戏逻辑控制。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/32d37763d25322553c51d7ce12bc7125.png",
+    "publishedAt": "2025-06-14T23:45:14.022Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/flappy-bird-canvas-game",
+    "file": "examples/086-flappy-labubu-flappy-bird-canvas-game.html"
+  },
+  {
+    "id": 144,
+    "title": "我的世界",
+    "slug": "minecraft-css-sprite-character-selector",
+    "summary": "一个基于 CSS Sprite 动画技术构建的《我的世界》角色选择界面，支持帧率调节和方向切换，适配响应式布局，使用原生 HTML 与 CSS 构建。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/be5293b3b8d623edd55f2f5b9770a928.png",
+    "publishedAt": "2025-06-12T11:27:50.619Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/minecraft-css-sprite-character-selector",
+    "file": "examples/087-我的世界-minecraft-css-sprite-character-selector.html"
+  },
+  {
+    "id": 143,
+    "title": "完全掌握 iOS26 核心科技（bushi)",
+    "slug": "ios-style-liquid-glass-menu-with-svg-filter-effects",
+    "summary": "实现iOS风格液态玻璃菜单效果，使用SVG滤镜和CSS backdrop-filter创建动态玻璃质感，包含悬浮动画和背景移动特效，适合现代网页设计。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/02f4484071b5170ccf97b81ee3e55fa6.png",
+    "publishedAt": "2025-06-11T11:24:00.044Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/ios-style-liquid-glass-menu-with-svg-filter-effects",
+    "file": "examples/088-完全掌握-ios26-核心科技-bushi-ios-style-liquid-glass-menu-with-svg-filter-effects.html"
+  },
+  {
+    "id": 142,
+    "title": "舒尔特方格游戏",
+    "slug": "schulte-grid-memory-game",
+    "summary": "基于 HTML、CSS 和原生 JavaScript 实现的舒尔特方格游戏，支持多种方格尺寸选择与响应式布局，适用于注意力、视觉搜索和反应能力训练。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/067c0a94ced15fd1207400a6ba21593b.png",
+    "publishedAt": "2025-04-17T13:29:01.950Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/schulte-grid-memory-game",
+    "file": "examples/089-舒尔特方格游戏-schulte-grid-memory-game.html"
+  },
+  {
+    "id": 141,
+    "title": "高考倒计时",
+    "slug": "flip-clock-countdown-timer",
+    "summary": "纯前端实现的可视化翻页式倒计时组件，支持自定义目标时间，基于 HTML、CSS3 动画和原生 JavaScript 构建，适用于各种网页活动倒计时场景。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/5ad4dccdebc0c39997f7cebe40d91c6b.png",
+    "publishedAt": "2025-04-15T14:59:20.718Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/flip-clock-countdown-timer",
+    "file": "examples/090-高考倒计时-flip-clock-countdown-timer.html"
+  },
+  {
+    "id": 140,
+    "title": "大哥别删我",
+    "slug": "software-uninstall-confirmation-dialog-with-dynamic-emoji-interaction",
+    "summary": "该页面展示了一个交互式的软件卸载确认对话框，使用HTML、CSS和JavaScript实现。页面包含一个动态表情（Boi），根据用户鼠标移动改变表情状态，提供“保留”和“卸载”两个按钮。采用响应式设计，适配移动端和桌面端，使用CSS变量和JavaScript实现动态效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8c3acc78ff0c5a400d1afd4480c47842.png",
+    "publishedAt": "2025-03-05T18:08:55.087Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/software-uninstall-confirmation-dialog-with-dynamic-emoji-interaction",
+    "file": "examples/091-大哥别删我-software-uninstall-confirmation-dialog-with-dynamic-emoji-interaction.html"
+  },
+  {
+    "id": 139,
+    "title": "3D 过马路游戏",
+    "slug": "crossy-road-threejs-game",
+    "summary": "基于 Three.js 开发的 Crossy Road 复刻版，采用 WebGL 渲染，支持 3D 画面和交互。游戏提供车辆、障碍物、地形等元素，玩家可通过按键控制角色前进，挑战高分。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/521a6870890218c6ec1544f775c8fcc3.png",
+    "publishedAt": "2025-02-18T17:43:19.100Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/crossy-road-threejs-game",
+    "file": "examples/092-3d-过马路游戏-crossy-road-threejs-game.html"
+  },
+  {
+    "id": 138,
+    "title": "射击游戏——病毒消灭计划",
+    "slug": "coronavirus-shooting-game",
+    "summary": "一款基于HTML5 Canvas的病毒射击游戏，采用JavaScript实现游戏逻辑，支持鼠标与触摸交互，具备健康值、敌人生成、子弹射击等机制，画面流畅，兼容主流浏览器。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/f2bca9870a4ac2d8d41a0b4dd4feb173.png",
+    "publishedAt": "2025-02-16T20:39:19.207Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/coronavirus-shooting-game",
+    "file": "examples/093-射击游戏-病毒消灭计划-coronavirus-shooting-game.html"
+  },
+  {
+    "id": 137,
+    "title": "记忆卡片游戏",
+    "slug": "memory-card-game-html5-css3-javascript",
+    "summary": "这是一个基于HTML5、CSS3和JavaScript开发的记忆卡片游戏，玩家需要通过翻转卡片匹配相同的图案。游戏使用了jQuery库进行交互操作，并采用了响应式设计，确保在不同设备上都能流畅运行。游戏结束时，会弹出模态框提示玩家胜利，并提供分享到社交媒体的功能。适合前端开发初学者学习和参考。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/5d8a17a84e86b4ed09aa405c4b2679f7.png",
+    "publishedAt": "2025-02-10T20:07:44.758Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/memory-card-game-html5-css3-javascript",
+    "file": "examples/094-记忆卡片游戏-memory-card-game-html5-css3-javascript.html"
+  },
+  {
+    "id": 136,
+    "title": "用代码画蒙娜丽莎",
+    "slug": "mona-lisa-canvas-circle-drawing-animation",
+    "summary": "使用HTML5 Canvas实现的动态蒙娜丽莎圆圈绘画艺术，通过JavaScript生成器将ASCII艺术转化为动态圆形粒子效果，采用响应式布局和色彩渐变算法，展现创意编程与经典艺术的数字融合，包含伪随机分布和实时动画渲染技术。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/796678bb3a2fc5dc15e58c9fc427275e.png",
+    "publishedAt": "2025-02-09T16:52:34.692Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/mona-lisa-canvas-circle-drawing-animation",
+    "file": "examples/095-用代码画蒙娜丽莎-mona-lisa-canvas-circle-drawing-animation.html"
+  },
+  {
+    "id": 135,
+    "title": "转动的纸牌",
+    "slug": "3d-flipping-playing-cards-animation",
+    "summary": "这是一个使用Deck of Cards API创建的3D翻转扑克牌动画网页。页面展示了36张扑克牌在空间中优雅翻转的效果，每张牌通过CSS动画实现3D旋转，呈现出正面和背面的交替展示。网页使用了HTML5、CSS3和JavaScript技术，结合Deck of Cards API动态加载扑克牌图像，并通过CSS的transform和animation属性实现流畅的3D动画效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/61bdd484972bccd32b2479bc07eead91.png",
+    "publishedAt": "2025-02-06T17:39:27.227Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-flipping-playing-cards-animation",
+    "file": "examples/096-转动的纸牌-3d-flipping-playing-cards-animation.html"
+  },
+  {
+    "id": 134,
+    "title": "能量启动",
+    "slug": "interactive-power-button-animation-with-gsap-and-font-awesome",
+    "summary": "这是一个使用GSAP和Font Awesome创建的交互式电源按钮动画页面，包含动态灯泡、齿轮旋转、电池充电、风扇旋转和原子图标激活效果。页面背景采用渐变色和脉冲动画，适合展示前端动画技术和CSS3特效。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/d8bffecc97503685482927a7a0632a2f.png",
+    "publishedAt": "2025-02-05T17:17:35.804Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-power-button-animation-with-gsap-and-font-awesome",
+    "file": "examples/097-能量启动-interactive-power-button-animation-with-gsap-and-font-awesome.html"
+  },
+  {
+    "id": 133,
+    "title": "灯塔",
+    "slug": "day-night-lighthouse-css-animation",
+    "summary": "使用纯 CSS 实现昼夜切换的灯塔动画，利用 CSS 动画、渐变、3D 效果和关键帧展现视觉效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/14f849f74dce2002b9230f9a008d312e.png",
+    "publishedAt": "2025-01-19T21:05:04.276Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/day-night-lighthouse-css-animation",
+    "file": "examples/098-灯塔-day-night-lighthouse-css-animation.html"
+  },
+  {
+    "id": 132,
+    "title": "多语言轮盘时钟",
+    "slug": "multilingual-rotating-clock",
+    "summary": "这是一个使用 HTML 和 CSS 制作的动态时钟组件，支持展示多层时间刻度（包括年份、月份、日期、星期、小时、分钟和秒），并带有多语言切换功能。页面采用响应式设计，适配不同屏幕宽度，同时运用了 JavaScript 进行动画和交互。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/7dce41017126852b1629e121aaa22a24.png",
+    "publishedAt": "2025-01-15T20:19:44.250Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/multilingual-rotating-clock",
+    "file": "examples/099-多语言轮盘时钟-multilingual-rotating-clock.html"
+  },
+  {
+    "id": 131,
+    "title": "wifi 蓝牙已连接",
+    "slug": "custom-toggle-switch-component",
+    "summary": "该HTML页面展示了一个自定义CSS实现的切换开关（toggle switch）组件，带有LED指示灯和SVG图标。切换开关具有动画效果，通过CSS变量控制外观和交互。页面布局居中，适配多种屏幕尺寸，背景使用径向渐变。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/b4b037f6b6250c65fc3d40115142629d.png",
+    "publishedAt": "2025-01-07T20:52:13.907Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/custom-toggle-switch-component",
+    "file": "examples/100-wifi-蓝牙已连接-custom-toggle-switch-component.html"
+  },
+  {
+    "id": 130,
+    "title": "抽奖机",
+    "slug": "number-slot-machine-animation",
+    "summary": "本页面展示了一个数字老虎机动画效果，使用CSS Grid布局和JavaScript实现交互。页面支持响应式设计，并应用了CSS变量、渐变和过渡动画等技术，使数字滚动效果平滑流畅。通过点击按钮触发老虎机数字滚动，提供动态视觉体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/dfc37f7f2c005c75d15da6aa5539fc41.png",
+    "publishedAt": "2025-01-06T21:27:45.227Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/number-slot-machine-animation",
+    "file": "examples/101-抽奖机-number-slot-machine-animation.html"
+  },
+  {
+    "id": 129,
+    "title": "404绵羊",
+    "slug": "css-animated-404-page",
+    "summary": "这是一个简洁有趣的404页面设计，采用纯CSS动画实现，包含一只摇头晃脑的绵羊图案以及数字404样式。页面使用了CSS自定义属性、Flexbox布局和关键帧动画，提供流畅且富有趣味的视觉效果，适合用于网页的错误提示页面。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/f4fdd79b1088629ecf924d01ba372b40.png",
+    "publishedAt": "2025-01-05T17:45:52.451Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-animated-404-page",
+    "file": "examples/102-404绵羊-css-animated-404-page.html"
+  },
+  {
+    "id": 128,
+    "title": "狗找骨头算法",
+    "slug": "interactive-map-pathfinding",
+    "summary": "这是一个基于HTML和CSS的交互式地图组件，采用Flexbox布局技术，实现动态寻路算法，可视化显示地图路径和障碍物。页面包含动画效果，用户可通过点击与地图进行交互。主要应用于前端开发的路径搜索和地图展示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/d3947022bb9c9e0c4058b6eea8785ffd.png",
+    "publishedAt": "2025-01-02T22:15:51.473Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-map-pathfinding",
+    "file": "examples/103-狗找骨头算法-interactive-map-pathfinding.html"
+  },
+  {
+    "id": 127,
+    "title": "就决定是你了，皮卡丘！",
+    "slug": "pokemon-selection-vue",
+    "summary": "这是一个以 Vue.js 构建的互动式 Pokémon 精灵选择器页面，通过动画和响应式设计展示多个 Pokémon 精灵卡片，用户可以选择精灵组队。页面使用 CSS3 动画、渐变和 Vue 组件，提升用户体验，包含精灵血量、等级、性别等属性展示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8268c850c722cb6bc33c8c800250b10b.png",
+    "publishedAt": "2025-01-01T19:22:12.863Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pokemon-selection-vue",
+    "file": "examples/104-就决定是你了-皮卡丘-pokemon-selection-vue.html"
+  },
+  {
+    "id": 126,
+    "title": "实现一个苹果程序坞",
+    "slug": "apple-dock-navigation-bar",
+    "summary": "该页面展示了一个类似Apple Dock风格的导航栏，使用HTML、CSS和JavaScript构建，具有悬停动画效果。导航栏包含多个应用程序图标，支持流畅的宽度动态调整。页面通过GSAP实现动画效果，主要应用于前端项目和交互式Web设计。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/1dc49ddc1534775072e595468551f892.png",
+    "publishedAt": "2024-12-29T17:59:03.087Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/apple-dock-navigation-bar",
+    "file": "examples/105-实现一个苹果程序坞-apple-dock-navigation-bar.html"
+  },
+  {
+    "id": 125,
+    "title": "发射一颗火球",
+    "slug": "fireball-shooter-particle-animation",
+    "summary": "这是一个基于 HTML5 Canvas 和 JavaScript 实现的粒子动画交互效果项目，用户通过鼠标点击和拖拽生成火球特效，画面动态且具备重力物理模拟，适合作为网页背景或互动特效展示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/97cdc45c9f39c5eaa41455a17627224c.png",
+    "publishedAt": "2024-12-26T23:34:55.922Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/fireball-shooter-particle-animation",
+    "file": "examples/106-发射一颗火球-fireball-shooter-particle-animation.html"
+  },
+  {
+    "id": 124,
+    "title": "新年祝福",
+    "slug": "lunar-new-year-phrase-generator",
+    "summary": "该页面是一个基于HTML、CSS和JavaScript的中文新年祝福语生成器。用户可以通过点击按钮随机生成常见的春节祝福短语，展示拼音、中文和英文翻译，页面设计采用红色和金色调，符合传统节日氛围。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/bc59d34a93dba67ce09317c267cfba41.png",
+    "publishedAt": "2024-12-25T23:52:56.652Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/lunar-new-year-phrase-generator",
+    "file": "examples/107-新年祝福-lunar-new-year-phrase-generator.html"
+  },
+  {
+    "id": 123,
+    "title": "哈哈哈这是什么玩意儿",
+    "slug": "fog-of-worm-webgl-3d-rendering",
+    "summary": "“Fog of Worm” 是一个使用 WebGL 2.0 和 GLSL 着色器构建的 3D 可视化项目，通过片段着色器和顶点着色器在 HTML5 画布上动态渲染复杂的实时动画效果，展示了基于光线步进和体积雾效的创意图形。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/41cb47f9a6e2fffc80602e4d4ee28e12.png",
+    "publishedAt": "2024-12-25T00:24:12.587Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/fog-of-worm-webgl-3d-rendering",
+    "file": "examples/108-哈哈哈这是什么玩意儿-fog-of-worm-webgl-3d-rendering.html"
+  },
+  {
+    "id": 122,
+    "title": "圣诞老人舔“铁”",
+    "slug": "santa-tongue-stuck-pipe",
+    "summary": "这个网页展示了一个幽默的圣诞节动画，圣诞老人的舌头被粘在钢管上，动画通过Processing.js和HTML5 Canvas实现，展现出逐帧滑稽的动态效果。背景设置为冰蓝色，配合雪花飘落和烟雾上升的视觉效果，营造出冬季氛围，非常适合作为节日主题网页或趣味互动展示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/355a3240e096799bcfbf5ad94ec1d339.png",
+    "publishedAt": "2024-12-23T21:58:30.468Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/santa-tongue-stuck-pipe",
+    "file": "examples/109-圣诞老人舔-铁-santa-tongue-stuck-pipe.html"
+  },
+  {
+    "id": 121,
+    "title": "扭蛋机",
+    "slug": "interactive-capsule-machine",
+    "summary": "这个页面展示了一个互动的扭蛋机，用户可以通过点击按钮或摇动设备来获取随机玩具。页面采用HTML、CSS和JavaScript开发，包含像素风格的图形和动画效果，提供了类似游戏的用户体验。\n",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/60e99218c53025c11e59abadcd373f8e.png",
+    "publishedAt": "2024-12-22T21:17:31.999Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-capsule-machine",
+    "file": "examples/110-扭蛋机-interactive-capsule-machine.html"
+  },
+  {
+    "id": 120,
+    "title": "做一个简单的贪吃蛇游戏",
+    "slug": "snake-game-canvas",
+    "summary": "该网页是一个经典的贪吃蛇游戏，使用HTML5的canvas元素进行绘制，并通过JavaScript实现游戏逻辑，包括蛇的移动、食物生成和碰撞检测。页面布局简洁，支持键盘方向键控制，响应快速。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8ccca153e373ddbeff7c51b77d7aa78f.png",
+    "publishedAt": "2024-12-21T21:49:53.349Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/snake-game-canvas",
+    "file": "examples/111-做一个简单的贪吃蛇游戏-snake-game-canvas.html"
+  },
+  {
+    "id": 119,
+    "title": "好玩的3D机器人",
+    "slug": "css-3d-robot-animation",
+    "summary": "一个完全使用纯CSS构建的3D机器人，展示了3D变换、动画和渐变的应用。页面背景为太空场景，并带有动态星星效果。该项目突出了现代CSS技术的强大能力。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/eb367e9cf5736a2f5b56fc7601c9c7cb.png",
+    "publishedAt": "2024-12-20T00:06:34.690Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-3d-robot-animation",
+    "file": "examples/112-好玩的3d机器人-css-3d-robot-animation.html"
+  },
+  {
+    "id": 118,
+    "title": "放烟花啦！",
+    "slug": "fireworks-animation-display",
+    "summary": "绚丽的烟花动画展示，利用 HTML5 Canvas 和 JavaScript 动态生成烟花效果，适配响应式设计，支持 Bootstrap 样式。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/6e818b731a5b38a86c5ecc2561b36979.png",
+    "publishedAt": "2024-12-18T22:44:49.660Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/fireworks-animation-display",
+    "file": "examples/113-放烟花啦-fireworks-animation-display.html"
+  },
+  {
+    "id": 117,
+    "title": "文字雨",
+    "slug": "matrix-text-rain-animation",
+    "summary": "这是一款基于 HTML5 Canvas 和 JavaScript 的动态文本雨动画效果，支持多种字符集（如 Bamum、ASCII、韩文和表情符号），具有颜色切换、字体大小调整、动态暂停、淡出效果等功能，提供灵活的自定义选项，适合开发者和前端爱好者学习和使用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/d4d864010aeda449f5c44e731a205697.png",
+    "publishedAt": "2024-12-17T22:52:36.635Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/matrix-text-rain-animation",
+    "file": "examples/114-文字雨-matrix-text-rain-animation.html"
+  },
+  {
+    "id": 116,
+    "title": "圣诞主题",
+    "slug": "animated-svg-interactive-cursor",
+    "summary": "这是一个基于HTML、CSS和JavaScript的网页示例，运用SVG动画、Particles.js和Bootstrap库，实现动态光标交互效果及粒子背景。适合展示动画特效和前端技术运用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/245d5552828780954cb5670db7771b9f.png",
+    "publishedAt": "2024-12-16T22:24:08.742Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/animated-svg-interactive-cursor",
+    "file": "examples/115-圣诞主题-animated-svg-interactive-cursor.html"
+  },
+  {
+    "id": 115,
+    "title": "土豆吃薯条",
+    "slug": "lottie-canvas-theme-switch",
+    "summary": "这是一个使用Lottie动画的网页示例，通过JavaScript和dotlottie-web库实现动态主题切换功能。用户点击按钮即可切换不同的动画主题，包括白天、黄昏、夜晚、午夜和冬季。页面利用HTML5 Canvas和现代CSS样式，适合展示高质量、可交互的前端动画效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/6d0da8c90f70b76b0fc3d3e38835759a.png",
+    "publishedAt": "2024-12-15T20:02:25.733Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/lottie-canvas-theme-switch",
+    "file": "examples/116-土豆吃薯条-lottie-canvas-theme-switch.html"
+  },
+  {
+    "id": 114,
+    "title": "chrome 离线小恐龙游戏",
+    "slug": "chrome-dino-runner",
+    "summary": "Chrome离线小恐龙游戏（T-Rex Runner），经典的无网络状态下的小游戏，基于JavaScript实现，适配移动端与桌面端，具有音效、碰撞检测和图像加载等功能。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/548c04ae4c1c360bdd53202c5c806b1a.png",
+    "publishedAt": "2024-12-11T20:29:45.614Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/chrome-dino-runner",
+    "file": "examples/117-chrome-离线小恐龙游戏-chrome-dino-runner.html"
+  },
+  {
+    "id": 113,
+    "title": "忍者闯关",
+    "slug": "stick-hero-canvas-game",
+    "summary": "这是一个使用 HTML5 Canvas 和 JavaScript 构建的棍子英雄游戏。用户通过按住鼠标来延伸棍子，帮助英雄跨越平台。页面具有响应式布局，并提供实时得分、重置按钮和动画过渡效果。\n",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/9e99b8a97fd15706aa3f1054bd793799.png",
+    "publishedAt": "2024-12-10T20:42:11.424Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/stick-hero-canvas-game",
+    "file": "examples/118-忍者闯关-stick-hero-canvas-game.html"
+  },
+  {
+    "id": 112,
+    "title": "造房子",
+    "slug": "pure-css-lighthouse-game",
+    "summary": "纯CSS打造的互动网页游戏，挑战在日落前建造灯塔以拯救船只和岛民。利用HTML和CSS动态控制房屋建造和图形质量，带来独特的前端体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/774dd00fce0e4e8755b4fdc2a12b7156.png",
+    "publishedAt": "2024-12-09T21:29:32.436Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pure-css-lighthouse-game",
+    "file": "examples/119-造房子-pure-css-lighthouse-game.html"
+  },
+  {
+    "id": 111,
+    "title": "彩色像素骷髅",
+    "slug": "dynamic-pixel-animation-effect",
+    "summary": "这段HTML页面展示了一个动态的、可交互的动画效果，通过CSS动画和JavaScript生成像素化元素的视觉效果，适合用于展示独特的网页特效。页面采用现代前端技术，包括CSS自定义属性、网格布局、filter滤镜以及JavaScript动态生成DOM元素，提供流畅的用户体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8c2334fa0ef2688a780262edea829570.png",
+    "publishedAt": "2024-12-08T23:16:43.487Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/dynamic-pixel-animation-effect",
+    "file": "examples/120-彩色像素骷髅-dynamic-pixel-animation-effect.html"
+  },
+  {
+    "id": 110,
+    "title": "电流攻击，滋滋",
+    "slug": "dynamic-electric-current-effect",
+    "summary": "这是一个使用HTML5 Canvas实现的动态电流效果动画，通过JavaScript绘制色彩渐变的随机移动线条，页面布局采用CSS Grid实现居中对齐，支持响应式设计。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/4e335f1eaefdf5fcbc449da3f854c878.png",
+    "publishedAt": "2024-12-05T22:58:31.656Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/dynamic-electric-current-effect",
+    "file": "examples/121-电流攻击-滋滋-dynamic-electric-current-effect.html"
+  },
+  {
+    "id": 109,
+    "title": "小火车时钟",
+    "slug": "train-clock-svg-animation",
+    "summary": "一个基于HTML、CSS和JavaScript的动态列车时钟示例，结合SVG动画实现列车沿轨道运行的动态效果，适合前端开发爱好者学习和参考。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/d69d2917c2d4730be8a4346237d919e9.png",
+    "publishedAt": "2024-12-04T22:45:58.739Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/train-clock-svg-animation",
+    "file": "examples/122-小火车时钟-train-clock-svg-animation.html"
+  },
+  {
+    "id": 108,
+    "title": "3D 卡片悬浮",
+    "slug": "3d-card-hover-effect",
+    "summary": "本页面展示了一个3D翻转效果的卡片交互示例，通过CSS实现动态悬停动画效果，结合图像和文字创建视觉冲击力。适用于现代网页设计和交互开发，突出前端技术在用户体验设计中的应用。\n\n",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/999defbc931aa5db49c64ca6a47585e3.png",
+    "publishedAt": "2024-12-03T20:31:33.708Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-card-hover-effect",
+    "file": "examples/123-3d-卡片悬浮-3d-card-hover-effect.html"
+  },
+  {
+    "id": 107,
+    "title": "创意硬币弹跳Loading",
+    "slug": "css-3d-coin-animation",
+    "summary": "该页面通过CSS动画实现了复杂的3D硬币滚动和弹跳效果，结合HSL颜色和自定义变量提供动态的视觉体验，是展示CSS动画、变量和3D转换技术的优秀示例。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/4b5ecfdf43730729fa40d8688c3a5967.png",
+    "publishedAt": "2024-12-02T20:35:18.498Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-3d-coin-animation",
+    "file": "examples/124-创意硬币弹跳loading-css-3d-coin-animation.html"
+  },
+  {
+    "id": 106,
+    "title": "好玩的数独游戏",
+    "slug": "interactive-sudoku-game",
+    "summary": "一个基于现代前端技术开发的在线数独游戏，支持实时高亮、统计功能和便捷的用户交互，为用户提供流畅的数独游戏体验，兼容桌面和移动设备。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/cc681092a2a6ca1138a3cc921ab1ae4e.png",
+    "publishedAt": "2024-12-01T16:38:22.124Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-sudoku-game",
+    "file": "examples/125-好玩的数独游戏-interactive-sudoku-game.html"
+  },
+  {
+    "id": 105,
+    "title": "九尾已捕获",
+    "slug": "pixel-art-animation-naruto",
+    "summary": "本页面展示了使用CSS动画和HTML实现的像素风格“火影忍者”主角鸣人的动态动画，具有头部、躯干、腿部和影子的流畅动画效果，适合前端技术学习和动画演示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/a6fb1ba5a0d76651ec652107aadffe76.png",
+    "publishedAt": "2024-11-27T17:46:17.587Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pixel-art-animation-naruto",
+    "file": "examples/126-九尾已捕获-pixel-art-animation-naruto.html"
+  },
+  {
+    "id": 104,
+    "title": "在“拉”，勿扰",
+    "slug": "css-html-toilet-paper-roll-toggle",
+    "summary": "使用CSS和HTML创建的卫生纸卷开关动画，包含渐变背景、复杂图形和交互效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/fecde52aebb92ab97ab08559f2f6d827.png",
+    "publishedAt": "2024-11-26T17:59:21.086Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-html-toilet-paper-roll-toggle",
+    "file": "examples/127-在-拉-勿扰-css-html-toilet-paper-roll-toggle.html"
+  },
+  {
+    "id": 103,
+    "title": "“造”了一台电脑",
+    "slug": "keyboard-interaction-3d-animation",
+    "summary": "此页面展示一个键盘交互模型，使用HTML、CSS和JavaScript构建，支持动态按键触发与三维动画，具备响应式布局与现代视觉效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/b8a7ac9cffcc6370bc1f9a88d4d7a7bd.png",
+    "publishedAt": "2024-11-25T19:46:22.120Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/keyboard-interaction-3d-animation",
+    "file": "examples/128-造-了一台电脑-keyboard-interaction-3d-animation.html"
+  },
+  {
+    "id": 102,
+    "title": "一个敲桌子Loading动画",
+    "slug": "knocking-table-loading-animation",
+    "summary": "一个以SVG实现的敲桌子Loading动画，使用CSS变量和关键帧动画技术，支持响应式设计和深色模式，适合前端开发者学习和项目中应用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/be20e4d1cef57afd3475caa4752bfc1e.png",
+    "publishedAt": "2024-11-24T17:57:34.915Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/knocking-table-loading-animation",
+    "file": "examples/129-一个敲桌子loading动画-knocking-table-loading-animation.html"
+  },
+  {
+    "id": 101,
+    "title": "有点小酷的光影卡片特效",
+    "slug": "css-glowing-shadows-example",
+    "summary": "该HTML页面展示了一个使用CSS.registerProperty实现动态属性和动画效果的互动按钮，包括发光阴影、渐变动画等现代CSS特性，兼容性检测的脚本也被集成，提供创新的前端体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/5a156d3c1d99880d025fd8875f685930.png",
+    "publishedAt": "2024-11-21T19:10:14.399Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-glowing-shadows-example",
+    "file": "examples/130-有点小酷的光影卡片特效-css-glowing-shadows-example.html"
+  },
+  {
+    "id": 100,
+    "title": "实现一个远古扫雷游戏",
+    "slug": "interactive-minesweeper-game",
+    "summary": "一个基于HTML、CSS和JavaScript的交互式扫雷游戏页面，支持自定义难度级别，实时计时功能，以及通过键盘与鼠标结合操作的插旗功能，兼容多种屏幕尺寸。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/2dcd1693d2c77118afa36a3f66be04b5.png",
+    "publishedAt": "2024-11-20T17:47:48.715Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-minesweeper-game",
+    "file": "examples/131-实现一个远古扫雷游戏-interactive-minesweeper-game.html"
+  },
+  {
+    "id": 99,
+    "title": "猴子下山",
+    "slug": "interactive-monkey-animation",
+    "summary": "这是一个采用HTML、CSS和JavaScript创建的互动动画页面，展示了一个可以滚动和跳跃的像素风格猴子，通过滚动页面触发动画效果，适合前端开发者学习动画制作和代码结构优化。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/22eb2bb420990cb3b53ea79cc65fab94.png",
+    "publishedAt": "2024-11-19T17:17:12.504Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-monkey-animation",
+    "file": "examples/132-猴子下山-interactive-monkey-animation.html"
+  },
+  {
+    "id": 98,
+    "title": "实现一个简易录音机",
+    "slug": "interactive-audio-controls",
+    "summary": "一个支持音频录制、播放、音量调节和麦克风输入显示的交互式前端组件，使用了React、GSAP和现代CSS技术，具有动态响应的用户界面和可自定义的主题。\n\n",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/def8fcd01cac6f5bcc8929d1bb3d9225.png",
+    "publishedAt": "2024-11-18T18:04:53.951Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-audio-controls",
+    "file": "examples/133-实现一个简易录音机-interactive-audio-controls.html"
+  },
+  {
+    "id": 97,
+    "title": "正弦波形成的可视化",
+    "slug": "sine-cosine-wave-visualization-css",
+    "summary": "通过CSS动画将正弦波和余弦波的形成过程进行可视化展示，使用CSS Grid布局和SVG背景图像，结合CSS自定义属性和变量，实现动态的波浪动画效果，适合用于前端可视化教学和网页交互设计。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/67fee19d055e43ff78c7f6453d7ccc76.png",
+    "publishedAt": "2024-11-17T17:50:02.822Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/sine-cosine-wave-visualization-css",
+    "file": "examples/134-正弦波形成的可视化-sine-cosine-wave-visualization-css.html"
+  },
+  {
+    "id": 96,
+    "title": "目标是宝可梦大师",
+    "slug": "interactive-pokemon-animation",
+    "summary": "本页面展示了一种互动的Pokemon动画效果，用户可以点击按钮显示动画角色，演示了使用HTML、CSS和JavaScript结合实现前端动画效果，是学习和了解前端动画技术、用户交互设计的一个实践案例。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8c0575fbd81177e4de1eead8f58cc8d3.png",
+    "publishedAt": "2024-11-14T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-pokemon-animation",
+    "file": "examples/135-目标是宝可梦大师-interactive-pokemon-animation.html"
+  },
+  {
+    "id": 95,
+    "title": "赛博铲屎官逗猫",
+    "slug": "interactive-cat-animation",
+    "summary": "一个简单的前端交互动画示例，通过HTML、CSS和JavaScript实现了一个可移动的卡通猫，支持鼠标移动和跳跃动作，展示了CSS动画和JavaScript事件监听的结合使用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/1281dc4e9b284a8469b6ef387e785d49.png",
+    "publishedAt": "2024-11-13T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-cat-animation",
+    "file": "examples/136-赛博铲屎官逗猫-interactive-cat-animation.html"
+  },
+  {
+    "id": 94,
+    "title": "自己用自己的骰子，我大富翁和飞行棋无敌了!",
+    "slug": "3d-dice-physics-simulation",
+    "summary": "基于 Three.js 和 Cannon.js 的 3D 骰子物理模拟，实现流畅的物理交互和自定义投掷结果，适合用于前端动画展示与物理仿真演示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/a9446777e456bbefe101b1b8cf5c526c.png",
+    "publishedAt": "2024-11-12T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-dice-physics-simulation",
+    "file": "examples/137-自己用自己的骰子-我大富翁和飞行棋无敌了-3d-dice-physics-simulation.html"
+  },
+  {
+    "id": 93,
+    "title": "汽车引擎按钮",
+    "slug": "3d-rotating-animation-with-button-interaction",
+    "summary": "一个包含3D旋转动画和按钮交互效果的前端界面示例，通过键盘操作可以控制旋转角度，并包含启动/停止按钮的动态样式。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/29fe6b8a8b32df704d6f2ee59fdf09c4.png",
+    "publishedAt": "2024-11-11T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-rotating-animation-with-button-interaction",
+    "file": "examples/138-汽车引擎按钮-3d-rotating-animation-with-button-interaction.html"
+  },
+  {
+    "id": 91,
+    "title": "一个科幻风时钟",
+    "slug": "electronic-timer-design",
+    "summary": "一个采用前端技术设计的电子计时器界面，包含数字显示和多层阴影效果，使用现代 CSS 技术和动画效果，呈现出科幻风格。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/37a060b1735a539858e49577745159aa.png",
+    "publishedAt": "2024-11-06T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/electronic-timer-design",
+    "file": "examples/139-一个科幻风时钟-electronic-timer-design.html"
+  },
+  {
+    "id": 92,
+    "title": "钮祜禄·川川回宫！",
+    "slug": "floating-bubbles-interactive-design",
+    "summary": "创建带有漂浮气泡效果的互动网页，使用HTML、CSS和JavaScript实现动态背景和元素动画，适用于前端开发学习和展示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/b430af60decdcf1d096e47a4bd7749c7.png",
+    "publishedAt": "2024-11-06T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/floating-bubbles-interactive-design",
+    "file": "examples/140-钮祜禄-川川回宫-floating-bubbles-interactive-design.html"
+  },
+  {
+    "id": 90,
+    "title": "该充电了",
+    "slug": "interactive-face-power-button",
+    "summary": "该页面展示了一个使用HTML、CSS和JavaScript实现的动画效果，包括动态面部表情、按键控制和能量条的交互效果，适用于前端开发者学习和参考复杂的CSS动画和JavaScript事件管理。页面主要展示了高级CSS效果和交互设计的实现细节。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/495a2ae407815da01dd4f75c9b7db98c.png",
+    "publishedAt": "2024-11-05T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-face-power-button",
+    "file": "examples/141-该充电了-interactive-face-power-button.html"
+  },
+  {
+    "id": 89,
+    "title": "圣诞主题",
+    "slug": "christmas-theme",
+    "summary": "该页面展示了圣诞主题的网页元素，包含圣诞树、雪花飘落动画、飞行圣诞老人、装饰铃铛、驯鹿等互动效果，适合用于节日气氛浓厚的网页设计项目。其动画效果通过CSS3关键帧实现，包含前端开发中的渐变、阴影、旋转等技术。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/64929f68d62baefc3ff6fb5bbe6b164a.png",
+    "publishedAt": "2024-11-04T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/christmas-theme",
+    "file": "examples/142-圣诞主题-christmas-theme.html"
+  },
+  {
+    "id": 88,
+    "title": "拳头游戏粒子特效",
+    "slug": "dynamic-svg-particles-interactive-animation",
+    "summary": "本页面展示了一个基于JavaScript和HTML5 Canvas的交互式粒子动画效果，通过鼠标控制和SVG路径生成，实现动态粒子分布和动画响应。页面代码采用现代JavaScript技术，适合用于前端技术的动态展示与视觉效果开发。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/1eb9087c9d79e0b74bcb1ee5a3d46b92.png",
+    "publishedAt": "2024-11-01T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/dynamic-svg-particles-interactive-animation",
+    "file": "examples/143-拳头游戏粒子特效-dynamic-svg-particles-interactive-animation.html"
+  },
+  {
+    "id": 87,
+    "title": "打乒乓球运动一下",
+    "slug": "pure-css-table-tennis-game",
+    "summary": "这是一个纯CSS实现的乒乓球游戏网页，采用前端技术构建，提供互动式的乒乓球对战体验。用户可以通过选择不同的击球方式，享受游戏的乐趣。页面设计简洁，色彩鲜明，通过CSS动画和关键帧技术，实现了乒乓球的运动效果和玩家的击球动作。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/96438b0d916b7a1b69fdb1b43d4f143e.png",
+    "publishedAt": "2024-10-31T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pure-css-table-tennis-game",
+    "file": "examples/144-打乒乓球运动一下-pure-css-table-tennis-game.html"
+  },
+  {
+    "id": 86,
+    "title": "一个for循环实现飞机大战",
+    "slug": "space-invaders",
+    "summary": "一个用极少的HTML和JavaScript代码实现的空间入侵者小游戏，展示了前端技术中的代码压缩和动画效果。游戏在浏览器中直接运行，无需外部资源。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/c3faeec123b35f3786bb50d40c082822.png",
+    "publishedAt": "2024-10-30T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/space-invaders",
+    "file": "examples/145-一个for循环实现飞机大战-space-invaders.html"
+  },
+  {
+    "id": 85,
+    "title": "我在线上玩魔方",
+    "slug": "rubiks-cube-game",
+    "summary": "在这个互动的魔方游戏中，用户可以通过双击屏幕开始挑战3x3x3魔方。记录并查看您的最佳时间、总解法次数和平均解法时间，提升您的解谜技巧，享受前端技术与游戏的结合。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/36d782d0ea8d32a3c4fdb20a4531da66.png",
+    "publishedAt": "2024-10-29T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/rubiks-cube-game",
+    "file": "examples/146-我在线上玩魔方-rubiks-cube-game.html"
+  },
+  {
+    "id": 84,
+    "title": "翻滚的棍子",
+    "slug": "animated-3d-rotating-sticks",
+    "summary": "一个实现3D旋转动画的HTML示例，通过CSS动画效果展示翻滚的棍子场景，包含多段动画关键帧，适合用于前端CSS3和动画效果的学习或参考。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/df59828e68ed49cbae6c9682949223d1.png",
+    "publishedAt": "2024-10-28T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/animated-3d-rotating-sticks",
+    "file": "examples/147-翻滚的棍子-animated-3d-rotating-sticks.html"
+  },
+  {
+    "id": 83,
+    "title": "一个梨",
+    "slug": "static-pear-css",
+    "summary": "这段HTML代码利用CSS展示了一个静态梨形卡通形象，包含渐变背景和细致的梨体、眼睛、嘴巴等元素。该设计展现了前端技术中的CSS图形绘制和布局技巧，适合用于网页设计示例。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/6c0fe98b884e2ca0b02d62454cae5638.png",
+    "publishedAt": "2024-10-25T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/static-pear-css",
+    "file": "examples/148-一个梨-static-pear-css.html"
+  },
+  {
+    "id": 82,
+    "title": "实现一个2048游戏",
+    "slug": "game-2048",
+    "summary": "这是一款基于JavaScript的2048游戏，用户通过键盘或滑动操作合并数字方块，目标是达到2048。页面采用响应式设计，兼容不同设备尺寸，游戏包括计分和提示信息，提供良好的用户体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/c1576cfb67bbee99a4278ca33f9e2783.png",
+    "publishedAt": "2024-10-24T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/game-2048",
+    "file": "examples/149-实现一个2048游戏-game-2048.html"
+  },
+  {
+    "id": 81,
+    "title": "赛博遛狗",
+    "slug": "interactive-dog-animation",
+    "summary": "一个与前端技术相关的互动小狗动画页面，包含HTML结构和CSS样式，用于在网页上展示可交互的小狗形象，支持用户通过光标移动引导小狗看向不同方向并模拟行走动作。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/49a9cb14367c3d5d7365557e5f94604d.png",
+    "publishedAt": "2024-10-23T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-dog-animation",
+    "file": "examples/150-赛博遛狗-interactive-dog-animation.html"
+  },
+  {
+    "id": 80,
+    "title": "自定义自行车",
+    "slug": "bike-customization-react-controls",
+    "summary": "此页面展示了一个React应用，包含自行车动画效果和配色控制，用户可以通过调节轮胎厚度、切换实心轮胎以及更改颜色进行个性化定制。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/7b0024f1b58d120ee5a04822b7667ebd.png",
+    "publishedAt": "2024-10-22T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/bike-customization-react-controls",
+    "file": "examples/151-自定义自行车-bike-customization-react-controls.html"
+  },
+  {
+    "id": 79,
+    "title": "好玩的地心说模型",
+    "slug": "frontend-three-js-geocentric-model-simulation",
+    "summary": "本页面通过前端技术Three.js和CSS动画，构建了一个展示地心说模型的天文动画。内容包含地球及其周围天体如月亮、水星、金星等行星的轨道模拟，以及天体运动效果和星球表面细节，提供了引人入胜的视觉体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/2a66255aff19fbe5c66a3359f9e17b7f.png",
+    "publishedAt": "2024-10-21T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/frontend-three-js-geocentric-model-simulation",
+    "file": "examples/152-好玩的地心说模型-frontend-three-js-geocentric-model-simulation.html"
+  },
+  {
+    "id": 78,
+    "title": "生一群熊猫玩玩",
+    "slug": "panda-button-animation",
+    "summary": "这是一段互动性按钮特效，通过点击按钮可以触发熊猫图标动画，使用了HTML、CSS、JavaScript实现。此页面展示了如何使用简单的前端技术来创建有趣的用户交互效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/fdc0770d4c0903776b3f00a4a358fb2c.png",
+    "publishedAt": "2024-10-17T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/panda-button-animation",
+    "file": "examples/153-生一群熊猫玩玩-panda-button-animation.html"
+  },
+  {
+    "id": 77,
+    "title": "养了一只仓鼠",
+    "slug": "interactive-hamster-wheel",
+    "summary": "这是一款基于HTML、CSS和JavaScript构建的互动小工具，通过滚动条控制一个仓鼠在滚轮内奔跑，具有速度调整和自动恢复功能，演示了前端动画和事件处理的结合。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/52adea507d47ce480150c22e9b182a35.png",
+    "publishedAt": "2024-10-16T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-hamster-wheel",
+    "file": "examples/154-养了一只仓鼠-interactive-hamster-wheel.html"
+  },
+  {
+    "id": 76,
+    "title": "下“雨”啦",
+    "slug": "matrix-rain-effect-html-css-js",
+    "summary": "这个网页展示了一个基于HTML、CSS和JavaScript的动态“矩阵雨”效果，模仿了电影《黑客帝国》中的雨滴效果。该效果通过动画和随机字符生成，实现了不断下落的雨滴视觉，适合展示前端动画技术和网页设计。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/51d1c7432a0fee3c62d619b80ea90a73.png",
+    "publishedAt": "2024-10-15T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/matrix-rain-effect-html-css-js",
+    "file": "examples/155-下-雨-啦-matrix-rain-effect-html-css-js.html"
+  },
+  {
+    "id": 75,
+    "title": "下“雪”了",
+    "slug": "dynamic-text-terrain-threejs",
+    "summary": "该页面展示了一个使用Three.js和WebGL构建的动态文字地形，包含动画效果和交互功能，通过控制相机视角观察3D文字网格的变化，适合前端开发者学习Three.js的高级使用技巧。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/b922a182173c65ddc88fe87f792dbe5b.png",
+    "publishedAt": "2024-10-14T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/dynamic-text-terrain-threejs",
+    "file": "examples/156-下-雪-了-dynamic-text-terrain-threejs.html"
+  },
+  {
+    "id": 74,
+    "title": "一只滑冰兔子",
+    "slug": "skating-bunny-threejs-webgl-gsap",
+    "summary": "这段HTML代码通过Three.js、GSAP和WebGL创建了一个动画场景，展示了一只滑冰兔子。用户可以通过鼠标点击使兔子跳跃，场景包含实时渲染的反射效果和粒子动画，页面加载GLTF模型并使用着色器实现细致的视觉效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/5e9de0bcc095de3a10ae7d0c57d19583.png",
+    "publishedAt": "2024-10-11T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/skating-bunny-threejs-webgl-gsap",
+    "file": "examples/157-一只滑冰兔子-skating-bunny-threejs-webgl-gsap.html"
+  },
+  {
+    "id": 73,
+    "title": "Duang~",
+    "slug": "interactive-bubble-animation",
+    "summary": "这是一个使用HTML、CSS和JavaScript实现的互动气泡动画效果，气泡在页面中浮动并响应点击事件，呈现橡皮筋式的动画效果。页面响应式设计适配不同屏幕大小，适合前端技术学习和示例展示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/458818586a62a156f685c473e95c47f1.png",
+    "publishedAt": "2024-10-10T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-bubble-animation",
+    "file": "examples/158-duang-interactive-bubble-animation.html"
+  },
+  {
+    "id": 72,
+    "title": "龙骑士",
+    "slug": "dragon-rider-interactive-canvas",
+    "summary": "该页面展示了一个基于HTML5 Canvas和Processing.js的动画，其中有一只可交互的龙骑士角色。页面使用了HTML、CSS和JavaScript来实现高帧率的动画效果，适合前端开发者学习如何使用Canvas进行复杂的动画处理。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/5eafb063996d1edbe5bdaace508284ed.png",
+    "publishedAt": "2024-10-09T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/dragon-rider-interactive-canvas",
+    "file": "examples/159-龙骑士-dragon-rider-interactive-canvas.html"
+  },
+  {
+    "id": 71,
+    "title": "雪球跳跃闯关游戏",
+    "slug": "snowball-jump-game",
+    "summary": "雪球跳跃闯关游戏是一款基于HTML、CSS和JavaScript开发的前端小游戏，玩家通过跳跃躲避障碍物并完成各个关卡，支持全屏模式和键盘控制，适合前端开发者学习和练习互动动画效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/70812f7971f3612d4b43325a3c50cae9.png",
+    "publishedAt": "2024-10-08T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/snowball-jump-game",
+    "file": "examples/160-雪球跳跃闯关游戏-snowball-jump-game.html"
+  },
+  {
+    "id": 70,
+    "title": "简单实现一台 macbook",
+    "slug": "macbook-animation-html-css",
+    "summary": "这段代码实现了一个动画效果的MacBook模型，展示了其外观和键盘设计。通过HTML和CSS技术，模拟了真实MacBook的细节和动态效果，适合前端开发者学习和实践。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/38c7b085b73a6334d3dff84bffe42240.png",
+    "publishedAt": "2024-10-02T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/macbook-animation-html-css",
+    "file": "examples/161-简单实现一台-macbook-macbook-animation-html-css.html"
+  },
+  {
+    "id": 69,
+    "title": "每日待办事项",
+    "slug": "daily-todo-app",
+    "summary": "这个“每日待办事项”应用是一个基于前端技术的简单任务管理工具，支持添加、拖动和删除任务。用户可以将任务分为待办、进行中、已完成和垃圾箱四个类别，提供直观的操作体验，适合希望提高编程技能的初学者。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/b774f9ea02152b3550671427e8576ec2.png",
+    "publishedAt": "2024-09-28T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/daily-todo-app",
+    "file": "examples/162-每日待办事项-daily-todo-app.html"
+  },
+  {
+    "id": 68,
+    "title": "鸭子闯关游戏",
+    "slug": "3d-puzzle-game",
+    "summary": "这是一款基于HTML、CSS和JavaScript构建的3D益智游戏，支持旋转视角和水位控制，具有丰富的交互效果和多关卡设计。通过使用现代前端技术实现了逼真的动画和响应式布局。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/58857a85659e442ff46e8a49f7c62b24.png",
+    "publishedAt": "2024-09-27T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-puzzle-game",
+    "file": "examples/163-鸭子闯关游戏-3d-puzzle-game.html"
+  },
+  {
+    "id": 67,
+    "title": "自制滤镜效果",
+    "slug": "css-halftone-radial-woodcut-grid-filters",
+    "summary": "使用纯CSS实现了多个滤镜效果展示，包括半色调、径向、木刻和网格滤镜，适用于前端开发中图像处理和视觉效果的学习和应用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/ae6edba9c8b5fb0fa4857e73f45c1f57.png",
+    "publishedAt": "2024-09-26T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-halftone-radial-woodcut-grid-filters",
+    "file": "examples/164-自制滤镜效果-css-halftone-radial-woodcut-grid-filters.html"
+  },
+  {
+    "id": 66,
+    "title": "出一张扑克牌老K",
+    "slug": "poker-card-king-image",
+    "summary": "这段HTML展示了扑克牌老K的图像，适合前端开发者学习如何使用HTML和CSS进行图形展示与布局。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/24861a04296ccd3253586fffcb0f1da5.png",
+    "publishedAt": "2024-09-25T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/poker-card-king-image",
+    "file": "examples/165-出一张扑克牌老k-poker-card-king-image.html"
+  },
+  {
+    "id": 65,
+    "title": "实现一辆自行车",
+    "slug": "create-bicycle-with-html-css",
+    "summary": "这段HTML代码实现了一辆自行车的简洁图形，使用纯HTML和CSS创建，包括车轮、车座、踏板和车身的各个部分。此代码适合用于前端技术学习，展示如何使用基础的HTML和CSS实现复杂的图形元素。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/73c59e04a626616ef8fc115d2565a6f0.png",
+    "publishedAt": "2024-09-24T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/create-bicycle-with-html-css",
+    "file": "examples/166-实现一辆自行车-create-bicycle-with-html-css.html"
+  },
+  {
+    "id": 64,
+    "title": "嘻嘻不嘻嘻",
+    "slug": "interactive-dog-toggle-button-example",
+    "summary": "这是一个使用HTML和CSS实现的互动小狗切换按钮示例。用户可以点击按钮触发动画效果，看到小狗的耳朵和嘴巴动作。这个示例展示了如何使用纯CSS创建互动元素，适合用于前端开发中的UI交互设计。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/21a51c581f2c01a409a169b6f1165121.png",
+    "publishedAt": "2024-09-23T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-dog-toggle-button-example",
+    "file": "examples/167-嘻嘻不嘻嘻-interactive-dog-toggle-button-example.html"
+  },
+  {
+    "id": 63,
+    "title": "胖丁气球",
+    "slug": "pure-css-jigglypuff-balloon-animation",
+    "summary": "本页面展示了一个用纯CSS实现的胖丁气球动画，适合前端开发者学习和参考，展示了如何使用CSS制作复杂的动画效果，提升网页互动体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/2d536c676db07e3d21684dd48f30e54b.png",
+    "publishedAt": "2024-09-21T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pure-css-jigglypuff-balloon-animation",
+    "file": "examples/168-胖丁气球-pure-css-jigglypuff-balloon-animation.html"
+  },
+  {
+    "id": 62,
+    "title": "起飞咯！",
+    "slug": "gsap-animated-rocket-kitty",
+    "summary": "本页面展示了一个通过GSAP和SVG实现的动态火箭与小猫动画，结合前端技术实现复杂动画效果，适合前端开发者学习和参考，展示了CSS、SVG与JavaScript的高级应用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/c78e53a228b259f941970a0f43901d38.png",
+    "publishedAt": "2024-09-20T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/gsap-animated-rocket-kitty",
+    "file": "examples/169-起飞咯-gsap-animated-rocket-kitty.html"
+  },
+  {
+    "id": 61,
+    "title": "就决定是你了，卡比兽",
+    "slug": "pure-css-snorlax-animation",
+    "summary": "本页面展示了一个通过纯CSS实现的卡比兽动画，响应式设计与前端技术相结合，适合前端开发者学习和参考，展示了CSS在复杂图形与动画中的应用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/aaddb43cdf564f8bffca7f6695e9d789.png",
+    "publishedAt": "2024-09-19T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/pure-css-snorlax-animation",
+    "file": "examples/170-就决定是你了-卡比兽-pure-css-snorlax-animation.html"
+  },
+  {
+    "id": 60,
+    "title": "3D 警车模型",
+    "slug": "3d-police-car-model",
+    "summary": "本页面展示了一个3D警车模型，使用前端技术如CSS3和JavaScript构建，并通过GSAP实现动画效果。模型的互动设计让用户能够通过鼠标操作观察警车的不同视角，页面支持深色模式切换。适合前端开发学习和展示3D动画效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/90f1bc1af47fdfbc832cec3992dc0eaf.png",
+    "publishedAt": "2024-09-18T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-police-car-model",
+    "file": "examples/171-3d-警车模型-3d-police-car-model.html"
+  },
+  {
+    "id": 59,
+    "title": "有双眼睛盯着我的鼠标",
+    "slug": "interactive-eyes-mousemove",
+    "summary": "该页面展示了一个基于HTML、CSS和JavaScript的互动眼球动画效果，眼球会根据鼠标移动方向进行实时跟随。该示例运用了CSS自定义属性和JavaScript事件监听，适合学习前端动画和鼠标交互效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/6efcf2fd3be1b184e2c4e3b12748d5c2.png",
+    "publishedAt": "2024-09-13T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-eyes-mousemove",
+    "file": "examples/172-有双眼睛盯着我的鼠标-interactive-eyes-mousemove.html"
+  },
+  {
+    "id": 58,
+    "title": "井字棋",
+    "slug": "tic-tac-toe-game",
+    "summary": "这是一个基于HTML、CSS和JavaScript实现的井字棋游戏，支持两位玩家的回合制对战，并通过动态样式切换当前玩家。该游戏采用了现代的前端技术，包括CSS自定义属性与响应式设计，适合学习和实践前端开发。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8c4193d0f38085a610c14f014a635b62.png",
+    "publishedAt": "2024-09-12T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/tic-tac-toe-game",
+    "file": "examples/173-井字棋-tic-tac-toe-game.html"
+  },
+  {
+    "id": 57,
+    "title": "跳动的Loading方块",
+    "slug": "jumping-loading-box",
+    "summary": "该页面展示了一个跳动的Loading方块动画效果，使用CSS3和JavaScript实现动态交互，适合前端开发者学习如何通过动画优化用户等待体验。该示例展示了如何利用3D变换、关键帧动画和自定义样式实现复杂的视觉效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/181c9cb55270c54e70207d215e79fc81.png",
+    "publishedAt": "2024-09-11T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/jumping-loading-box",
+    "file": "examples/174-跳动的loading方块-jumping-loading-box.html"
+  },
+  {
+    "id": 56,
+    "title": "这个地球可以点击",
+    "slug": "interactive-3d-earth-animation",
+    "summary": "该页面展示了一个可点击的3D地球模型，使用HTML、CSS、GSAP和React实现的前端动画效果。用户可以通过点击和双击与地球模型交互，适合前端开发者学习如何创建交互式动画和3D效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/c8c578c21c1f1e6c22cca386213eed84.png",
+    "publishedAt": "2024-09-09T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-3d-earth-animation",
+    "file": "examples/175-这个地球可以点击-interactive-3d-earth-animation.html"
+  },
+  {
+    "id": 55,
+    "title": "战斗机出击",
+    "slug": "3d-airplane-animation-interactive-frontend",
+    "summary": "该页面展示了一个3D立体战斗机模型，通过HTML、CSS和GSAP实现的前端动画效果，用户可以通过鼠标交互控制飞机的视角，适合前端开发者学习和参考动画设计与交互效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/bb790bce968a1a897626ebb0a2b41596.png",
+    "publishedAt": "2024-09-07T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-airplane-animation-interactive-frontend",
+    "file": "examples/176-战斗机出击-3d-airplane-animation-interactive-frontend.html"
+  },
+  {
+    "id": 54,
+    "title": "实现一个手机控制中心",
+    "slug": "mobile-control-center",
+    "summary": "该页面展示了一个手机控制中心的实现，包含亮度、音量和强度调节滑块，使用了现代前端技术如GSAP和Draggable库，适合前端开发者学习和优化用户交互体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8008c6791fa7d2b212952ee5f65b7700.png",
+    "publishedAt": "2024-09-07T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/mobile-control-center",
+    "file": "examples/177-实现一个手机控制中心-mobile-control-center.html"
+  },
+  {
+    "id": 53,
+    "title": "感觉要被吸进去啦",
+    "slug": "interactive-3d-animation-threejs",
+    "summary": "这个页面展示了一个使用Three.js和自定义着色器创建的互动3D动画。通过可调节的摄像机视角和动态光影效果，用户可以体验到一种沉浸式的视觉效果。适合对前端开发、WebGL和3D图形技术感兴趣的用户。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/1f3dfbd862568bbbb47b2c03bf6c363f.png",
+    "publishedAt": "2024-09-06T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-3d-animation-threejs",
+    "file": "examples/178-感觉要被吸进去啦-interactive-3d-animation-threejs.html"
+  },
+  {
+    "id": 52,
+    "title": "彩虹屁猫猫",
+    "slug": "rainbow-cat-loading-animation",
+    "summary": "此页面展示了一个趣味十足的彩虹猫动画，运用SVG和CSS实现流畅的动画效果，适合前端开发者学习如何构建创意性的加载动画。该动画不仅色彩丰富，还展示了如何通过渐变和关键帧动画增强用户体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/d5159d4bf7e648ec321755f29c51b234.png",
+    "publishedAt": "2024-09-05T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/rainbow-cat-loading-animation",
+    "file": "examples/179-彩虹屁猫猫-rainbow-cat-loading-animation.html"
+  },
+  {
+    "id": 51,
+    "title": "颠锅摊煎饼",
+    "slug": "interactive-pancake-flip",
+    "summary": "这个互动网页使用HTML、CSS、JavaScript以及GSAP动画库创建了一个可点击的煎饼翻转场景。用户点击页面时，煎饼会在锅中翻转，并伴随一系列动画效果，展示了如何利用现代前端技术和3D变换制作动态交互效果。这种设计不仅展示了动画的实现，还可以作为前端开发学习的示例，特别是涉及3D效果和SVG动画的实现。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/a735ad49c39ae93dd70a90f70b6952ab.png",
+    "publishedAt": "2024-09-04T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-pancake-flip",
+    "file": "examples/180-颠锅摊煎饼-interactive-pancake-flip.html"
+  },
+  {
+    "id": 49,
+    "title": "别捅马蜂窝",
+    "slug": "interactive-hive-scene",
+    "summary": "这是一个基于HTML、CSS和JavaScript构建的互动网页，展示了一个动态的马蜂窝场景。用户点击马蜂窝后，页面会触发一系列动画效果，包括蜂窝摇晃、蜂群飞出和光标颜色变化等。这种互动效果结合了前端技术和动画效果，适合用于展示和教学，帮助初学者理解前端开发中的动画实现。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8738c416e06b3f540a26c58db5efed3b.png",
+    "publishedAt": "2024-09-03T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-hive-scene",
+    "file": "examples/181-别捅马蜂窝-interactive-hive-scene.html"
+  },
+  {
+    "id": 50,
+    "title": "手拉开灯！关灯！",
+    "slug": "interactive-light-switch-animation",
+    "summary": "这个网页展示了一个交互式的开关灯动画效果，使用了GSAP和SVG技术。用户可以通过拖动灯绳模拟开关灯的动作。网页通过CSS变量和动画增强用户体验，适合前端开发者学习动画实现和SVG应用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/aebefc47dc080af8b0e191a4a3d4c504.png",
+    "publishedAt": "2024-09-03T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-light-switch-animation",
+    "file": "examples/182-手拉开灯-关灯-interactive-light-switch-animation.html"
+  },
+  {
+    "id": 48,
+    "title": "擎天柱变身",
+    "slug": "optimus-prime-3d-transform",
+    "summary": "该网页展示了一个由HTML、CSS和JavaScript构建的3D模型，通过交互效果演示了擎天柱的变形过程。该页面适用于前端开发者学习3D变形动画和CSS效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/316eb268fa9220eaf380fd09c2b892f9.png",
+    "publishedAt": "2024-09-01T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/optimus-prime-3d-transform",
+    "file": "examples/183-擎天柱变身-optimus-prime-3d-transform.html"
+  },
+  {
+    "id": 47,
+    "title": "猫咪摆钟",
+    "slug": "creative-cat-clock-web-app",
+    "summary": "这是一款创意猫咪摆钟的网页应用，使用CSS动画和JavaScript实现动态效果，适合前端开发者学习和参考。通过多种CSS属性及JavaScript的结合，展示了如何制作一个具有视觉吸引力的动态网页组件。细节的 CSS 样式，展示了一个生动的卡通柯基。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/c77e00bb717ed692f86bf0c69af3717b.png",
+    "publishedAt": "2024-08-30T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/creative-cat-clock-web-app",
+    "file": "examples/184-猫咪摆钟-creative-cat-clock-web-app.html"
+  },
+  {
+    "id": 46,
+    "title": "实现一只秒表",
+    "slug": "interactive-stopwatch-web-app",
+    "summary": "这是一个实现秒表功能的网页应用，展示如何使用CSS动画和JavaScript在前端开发中创建一个精美的交互式秒表。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/687914c680519daf91346102782b43ab.png",
+    "publishedAt": "2024-08-29T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-stopwatch-web-app",
+    "file": "examples/185-实现一只秒表-interactive-stopwatch-web-app.html"
+  },
+  {
+    "id": 45,
+    "title": "需要爱的小熊",
+    "slug": "animated-bear-needs-love",
+    "summary": "这是一个关于“需要爱的小熊”的网页应用，展示了如何在前端开发中使用动画和交互技术来增强用户体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/57bb45d4846aa564c33d05447ca478dc.png",
+    "publishedAt": "2024-08-28T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/animated-bear-needs-love",
+    "file": "examples/186-需要爱的小熊-animated-bear-needs-love.html"
+  },
+  {
+    "id": 44,
+    "title": "可以射击的3D直升机",
+    "slug": "shooting-3d-helicopter-day-night-mode",
+    "summary": "这是一款可以进行射击的3D直升机网页应用，具有白天和黑夜模式，展示如何在前端开发中实现复杂的3D效果和环境切换功能。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/3f00e151e5f3507b2b4a0617d9a1e58b.png",
+    "publishedAt": "2024-08-27T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/shooting-3d-helicopter-day-night-mode",
+    "file": "examples/187-可以射击的3d直升机-shooting-3d-helicopter-day-night-mode.html"
+  },
+  {
+    "id": 43,
+    "title": "就决定是你了，百变怪！",
+    "slug": "interactive-ditto-pokeball-animation",
+    "summary": "这段HTML代码展示了一个使用SVG和JavaScript构建的互动百变怪动画。用户可以通过点击精灵球按钮，控制百变怪的形态变化和颜色，并触发动画效果。此示例应用了GSAP和D3.js库，通过这些前端技术实现复杂的图形动画，展示了如何结合SVG、CSS和JavaScript来创建富有创意的前端交互效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/a652ef991e9e612c8cc579736eeeb58d.png",
+    "publishedAt": "2024-08-26T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-ditto-pokeball-animation",
+    "file": "examples/188-就决定是你了-百变怪-interactive-ditto-pokeball-animation.html"
+  },
+  {
+    "id": 42,
+    "title": "钓鱼咯🎣",
+    "slug": "interactive-fishing-game",
+    "summary": "该页面展示了一个基于HTML5 Canvas技术实现的互动小游戏，用户可以通过点击屏幕钓取不同种类的鱼。这是一个学习和体验前端技术的优秀案例，特别适合那些对Canvas和JavaScript有兴趣的前端开发者。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/30bc276046a65037294c7cfe2672206b.png",
+    "publishedAt": "2024-08-25T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-fishing-game",
+    "file": "examples/189-钓鱼咯-interactive-fishing-game.html"
+  },
+  {
+    "id": 41,
+    "title": "好看的摆钟",
+    "slug": "creative-clock-design",
+    "summary": "这是一款前端技术开发的创意时钟网页，包含模拟摆钟和数字时钟，使用HTML、CSS和JavaScript实现。网页中的摆钟具有动态旋转效果，数字时钟精确显示时间并支持AM/PM格式转换，是一个展示前端动画效果的优秀例子，适合前端开发者学习和借鉴。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/991e74ff5769109cbd104facb984f3fa.png",
+    "publishedAt": "2024-08-24T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/creative-clock-design",
+    "file": "examples/190-好看的摆钟-creative-clock-design.html"
+  },
+  {
+    "id": 40,
+    "title": "喜欢喝雪碧还是可乐",
+    "slug": "sprite-or-cola-animation-demo",
+    "summary": "这是一个前端技术示例网页，展示了使用CSS动画和HTML构建的动态饮料效果。页面包含两个玻璃杯，分别代表雪碧和可乐，通过CSS实现了逼真的波浪和气泡动画效果，适合用于学习和探索现代前端动画技术。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/249fc937755364490440fc3bd298541d.png",
+    "publishedAt": "2024-08-23T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/sprite-or-cola-animation-demo",
+    "file": "examples/191-喜欢喝雪碧还是可乐-sprite-or-cola-animation-demo.html"
+  },
+  {
+    "id": 39,
+    "title": "别点这只喵咪",
+    "slug": "click-cat-table-animation",
+    "summary": "点击猫咪后猫咪会拍桌子，通过CSS和JavaScript实现，适合前端开发者学习和应用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/784c101a1e6d578daabf6676b125ed88.png",
+    "publishedAt": "2024-08-22T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/click-cat-table-animation",
+    "file": "examples/192-别点这只喵咪-click-cat-table-animation.html"
+  },
+  {
+    "id": 38,
+    "title": "鼠标粒子特效",
+    "slug": "mouse-particle-effect",
+    "summary": "在本页面中，用户将体验到通过鼠标交互生成的粒子特效。这种前端效果使用了自定义元素和Canvas API，展现出动态的视觉效果，特别适合展示和提升前端开发技能的项目。页面完全使用现代Web技术，旨在为开发者提供灵感，并展示如何使用JavaScript和CSS实现复杂的交互动画。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/0d154d5aaaff20d380ffefd14bb923ec.png",
+    "publishedAt": "2024-08-21T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/mouse-particle-effect",
+    "file": "examples/193-鼠标粒子特效-mouse-particle-effect.html"
+  },
+  {
+    "id": 37,
+    "title": "动态地球仪",
+    "slug": "interactive-svg-threejs-globe",
+    "summary": "本页面展示了一个结合SVG和Three.js实现的动态地球仪，用户可以通过旋转地球仪来选中不同区域，并显示对应国家的名称。该示例展示了前端技术在互动性和可视化方面的高级应用，特别适合学习和了解SVG、Three.js、JavaScript以及HTML的使用。通过这一示例，用户能够更好地掌握前端开发中3D图形绘制与交互的技巧。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/06136efd8c3212e5e2dd2e342dafe2b3.png",
+    "publishedAt": "2024-08-20T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-svg-threejs-globe",
+    "file": "examples/194-动态地球仪-interactive-svg-threejs-globe.html"
+  },
+  {
+    "id": 36,
+    "title": "画一棵樱桃树",
+    "slug": "interactive-cherry-tree",
+    "summary": "本页面展示了一款基于HTML5和Processing.js的互动应用，用户可以通过点击屏幕生成一棵动画樱桃树。页面使用Canvas元素绘制，展现了递归生成树枝、树叶和花朵的效果，是一个学习前端技术特别是动画效果与Canvas应用的优秀示例。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/228060b6bdda9d3e2dae967fb2ea180e.png",
+    "publishedAt": "2024-08-18T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-cherry-tree",
+    "file": "examples/195-画一棵樱桃树-interactive-cherry-tree.html"
+  },
+  {
+    "id": 35,
+    "title": "开灯！关灯！",
+    "slug": "interactive-light-switch",
+    "summary": "这个页面包含简单的灯控制功能示例，展示了如何使用前端技术实现交互式按钮来开关灯。适合学习和了解基础的前端交互设计。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/0267f332c846e3e11707a25de0e45535.png",
+    "publishedAt": "2024-08-17T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-light-switch",
+    "file": "examples/196-开灯-关灯-interactive-light-switch.html"
+  },
+  {
+    "id": 34,
+    "title": "禁止打开盖子",
+    "slug": "do-not-open-lid",
+    "summary": "该网页展示了一个禁止打开的盖子，用户点击盖子后会触发动画效果，盖子划开后会显示一个旋转的钻石图案。这个网页运用了CSS动画和JavaScript事件处理，适用于前端开发学习与示例展示。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/17685f025f9157298aa27729276f9ba0.png",
+    "publishedAt": "2024-08-16T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/do-not-open-lid",
+    "file": "examples/197-禁止打开盖子-do-not-open-lid.html"
+  },
+  {
+    "id": 33,
+    "title": "篮球switch",
+    "slug": "basketball-hoop-toggle-animation",
+    "summary": "本页面展示了一个使用前端技术制作的篮球投篮开关动画，通过CSS和JavaScript实现了点击触发篮球投篮的动态效果，展示了互动性和动画设计在网页中的应用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/5f49428b5b3183015784e17780a777f8.png",
+    "publishedAt": "2024-08-15T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/basketball-hoop-toggle-animation",
+    "file": "examples/198-篮球switch-basketball-hoop-toggle-animation.html"
+  },
+  {
+    "id": 32,
+    "title": "高尔夫switch",
+    "slug": "interactive-golf-switch-animation",
+    "summary": "本页面展示了一个使用前端技术制作的交互式高尔夫球开关动画效果。用户可以点击开关触发动画，模拟高尔夫球杆的击打动作，展示了如何通过CSS和JavaScript实现动态交互效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/2b20f1c81d3df84e9c73baf129e4f415.png",
+    "publishedAt": "2024-08-14T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/interactive-golf-switch-animation",
+    "file": "examples/199-高尔夫switch-interactive-golf-switch-animation.html"
+  },
+  {
+    "id": 31,
+    "title": "3D旋转画廊",
+    "slug": "3d-rotating-gallery",
+    "summary": "一个通过前端技术实现的3D旋转画廊，使用CSS3和JavaScript创建了立体画廊效果，支持图像的旋转和动态展示，带有交互按钮控制画廊旋转方向。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/d49b08b33af7768c960cc23dca9ebeb4.png",
+    "publishedAt": "2024-08-13T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-rotating-gallery",
+    "file": "examples/200-3d旋转画廊-3d-rotating-gallery.html"
+  },
+  {
+    "id": 30,
+    "title": "激光汇聚成爱心",
+    "slug": "laser-heart-animation",
+    "summary": "一个通过前端技术实现的激光汇聚成爱心的动画效果，采用了Canvas和JavaScript实现动态渲染，适用于多设备，带有自适应窗口大小的特性。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/d5780f5e4ba24c62d113e0a0c8b5da58.png",
+    "publishedAt": "2024-08-12T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/laser-heart-animation",
+    "file": "examples/201-激光汇聚成爱心-laser-heart-animation.html"
+  },
+  {
+    "id": 29,
+    "title": "会转头可调速的电风扇",
+    "slug": "rotating-adjustable-speed-fan",
+    "summary": "会转头并且支持多档调速的3D电风扇，展示了通过前端技术实现的动态风扇模型，并且使用了CSS动画和现代布局技术。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/ba4226548562bdaf1067230713e83188.png",
+    "publishedAt": "2024-08-11T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/rotating-adjustable-speed-fan",
+    "file": "examples/202-会转头可调速的电风扇-rotating-adjustable-speed-fan.html"
+  },
+  {
+    "id": 28,
+    "title": "不要轻易相信自己的眼睛",
+    "slug": "3d-cube-rotation-animation",
+    "summary": "这个页面展示了一个利用前端技术实现的3D立体方块动画，通过CSS3和JavaScript创建了多层立方体旋转效果，展示了复杂的三维动画和视觉效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8ac623bc15a2887657a58ccd00595f7a.png",
+    "publishedAt": "2024-08-10T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-cube-rotation-animation",
+    "file": "examples/203-不要轻易相信自己的眼睛-3d-cube-rotation-animation.html"
+  },
+  {
+    "id": 27,
+    "title": "口香糖吹泡泡",
+    "slug": "bubble-gum-animation",
+    "summary": "这个页面展示了一个使用前端技术制作的口香糖吹泡泡动画效果，通过CSS和JavaScript实现了动态的泡泡生成和破裂动画，增强了网页的互动性和视觉效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/ae3424f747b241a444c55caacba7db0c.png",
+    "publishedAt": "2024-08-09T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/bubble-gum-animation",
+    "file": "examples/204-口香糖吹泡泡-bubble-gum-animation.html"
+  },
+  {
+    "id": 25,
+    "title": "生日快乐蛋糕",
+    "slug": "birthday-cake-design",
+    "summary": "这个页面展示了一个绚丽的生日快乐蛋糕设计，使用了CSS渐变背景、动态光斑效果，以及响应式布局技术。通过HTML5和CSS3的结合，页面在各种设备上都能保持良好的视觉效果，是一个优秀的前端设计范例。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/4985aa776e89baafb0347abf5dfc10b5.png",
+    "publishedAt": "2024-08-08T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/birthday-cake-design",
+    "file": "examples/205-生日快乐蛋糕-birthday-cake-design.html"
+  },
+  {
+    "id": 26,
+    "title": "生日快乐烟花",
+    "slug": "fireworks-birthday-animation",
+    "summary": "一个通过前端技术实现的烟花效果展示，使用Canvas和JavaScript制作的动态烟花动画，适用于生日庆祝等场景，结合文字展示，提升网页交互体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/86d4ff897f2ad9531434964a998f9b1f.png",
+    "publishedAt": "2024-08-08T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/fireworks-birthday-animation",
+    "file": "examples/206-生日快乐烟花-fireworks-birthday-animation.html"
+  },
+  {
+    "id": 23,
+    "title": "嘻嘻不嘻嘻",
+    "slug": "emoji-toggle",
+    "summary": "这是一个展示“Emoji Toggle”开关的demo，采用现代前端开发技术，包括响应式设计和自定义CSS变量，以实现流畅的用户体验和视觉效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/f1ce242c9627e3dcd80fff5291c57168.png",
+    "publishedAt": "2024-08-06T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/emoji-toggle",
+    "file": "examples/207-嘻嘻不嘻嘻-emoji-toggle.html"
+  },
+  {
+    "id": 24,
+    "title": "谁说柯基不算爱心呢",
+    "slug": "corgi-heart-animation",
+    "summary": "这是一段 HTML 代码用于展示一个充满爱心的柯基动画。页面包括柯基的心跳效果、摇摆的尾巴和动画眼睛，背景为深色调，与柯基的色彩形成对比。页面中还包含了柯基的身体、胸部、腿部、尾巴以及表情细节的 CSS 样式，展示了一个生动的卡通柯基。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/269762c4ee6f1545169ab8b8b238d1e6.png",
+    "publishedAt": "2024-08-06T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/corgi-heart-animation",
+    "file": "examples/208-谁说柯基不算爱心呢-corgi-heart-animation.html"
+  },
+  {
+    "id": 22,
+    "title": "已拥有 3d 台式机小屋",
+    "slug": "3d-desktop-cabin",
+    "summary": "这是一个展示“台式机小房子”的demo，采用WebGL、Three.js、GLTFLoader、OrbitControls和TextureLoader等前端开发技术。响应式设计确保在各种设备上有最佳展示效果，展示了如何创建互动性强的3D模型页面。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/6e4f58c20a1a4f00e9fab45bf9c93944.png",
+    "publishedAt": "2024-08-05T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/3d-desktop-cabin",
+    "file": "examples/209-已拥有-3d-台式机小屋-3d-desktop-cabin.html"
+  },
+  {
+    "id": 21,
+    "title": "实现一个拼图玩一玩",
+    "slug": "puzzle",
+    "summary": "这个HTML文件实现了一个SVG拼图游戏，使用了GSAP和Draggable库来管理动画和拖动交互。拼图包含多个复杂的路径和形状，这些路径和形状以不同的组合方式呈现，并具有特定的样式和行为。游戏的布局使用了CSS样式来定义其宽度、高度和背景颜色，通过JavaScript增强了用户的互动体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/39bf2d1b7b5ffa88aa7ff42f7345e2ad.png",
+    "publishedAt": "2024-08-04T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/puzzle",
+    "file": "examples/210-实现一个拼图玩一玩-puzzle.html"
+  },
+  {
+    "id": 20,
+    "title": "鱼缸漏水加点水吧",
+    "slug": "save-the-fish",
+    "summary": "这个HTML文件实现了一个动画效果的鱼缸场景，鱼缸中的鱼会随着水位的变化而游动。用户可以点击水龙头为鱼缸加水，水位降低到一定程度时，鱼会表现出不同的状态，包括正常游动、濒死和死亡。鱼缸的动画效果通过CSS3实现，JavaScript用于管理水位的变化和动画的触发。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/f71b603e82ad525a8e0309c8105a61d7.png",
+    "publishedAt": "2024-08-03T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/save-the-fish",
+    "file": "examples/211-鱼缸漏水加点水吧-save-the-fish.html"
+  },
+  {
+    "id": 19,
+    "title": "小幽灵盯着我的鼠标怎么办",
+    "slug": "ghost-mouse-tracker",
+    "summary": "这个 HTML 文件创建了一个带有幽灵形象的网页，该幽灵会跟随用户的鼠标移动。页面背景为深色，并使用 CSS 动画使幽灵看起来像在漂浮和闪烁。幽灵的眼睛会跟随光标移动，增加了交互性。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/03689f2e5f8e44278febbc09798c4f95.png",
+    "publishedAt": "2024-08-02T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/ghost-mouse-tracker",
+    "file": "examples/212-小幽灵盯着我的鼠标怎么办-ghost-mouse-tracker.html"
+  },
+  {
+    "id": 17,
+    "title": "罗盘时钟",
+    "slug": "compass-clock",
+    "summary": "罗盘时钟是一个精美的时钟展示页面，使用了 HTML 和 CSS 技术创建了一个动态的罗盘风格时钟。它能够显示当前的月份、日期、星期、小时、分钟和秒数，并且具有旋转效果，使得每个时间单位都按照圆形布局呈现。适合用于个人网站、时间相关应用程序以及任何需要动态显示时间的项目。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/37273a6644b7301919c9629658b9a389.png",
+    "publishedAt": "2024-08-01T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/compass-clock",
+    "file": "examples/213-罗盘时钟-compass-clock.html"
+  },
+  {
+    "id": 18,
+    "title": "蛙跳特效点赞爱心",
+    "slug": "leap-heart-animation",
+    "summary": "该HTML文件展示了一个带有蛙跳特效的点赞爱心按钮。当用户点击爱心图标时，多个爱心图标会依次跳跃并改变其位置和边框宽度，形成一个有趣的动画效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/0b5f9fd3e047f6a12894beba799b4f26.png",
+    "publishedAt": "2024-08-01T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/leap-heart-animation",
+    "file": "examples/214-蛙跳特效点赞爱心-leap-heart-animation.html"
+  },
+  {
+    "id": 16,
+    "title": "捕捉一只耿鬼",
+    "slug": "gengar-animation",
+    "summary": "这是一个 HTML 文件展示了一个耿鬼的动态效果。通过 CSS 实现了耿鬼的各种特征，包括耳朵、眼睛、嘴巴和手臂的动画。当用户勾选复选框时，耿鬼的眼睛和嘴巴会发生变化，增加了互动性和趣味性。页面背景为白色，整体风格简洁易读。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/89bdafd5a9c370521a2b2c6e507d2227.png",
+    "publishedAt": "2024-07-31T00:00:00.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/gengar-animation",
+    "file": "examples/215-捕捉一只耿鬼-gengar-animation.html"
+  },
+  {
+    "id": 15,
+    "title": "如何实现太阳系「星辰版」",
+    "slug": "solar-system-animation",
+    "summary": "使用CSS动画效果动态展示太阳系行星轨道的网页，包括太阳、地球、火星等八大行星，适合前端开发者学习CSS3动画、HTML布局以及视觉效果设计。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/5b3340b194a7577206df574d42c7f77c.png",
+    "publishedAt": "2024-07-30T18:31:38.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/solar-system-animation",
+    "file": "examples/216-如何实现太阳系-星辰版-solar-system-animation.html"
+  },
+  {
+    "id": 14,
+    "title": "如何实现一只手表",
+    "slug": "digital-clock-style-js-css",
+    "summary": "这是一个使用 JavaScript 和 CSS 制作的数字时钟效果展示，采用了现代化的样式设计，展示时间、日期和 AM/PM 信息，并使用动态更新的数字时钟显示效果，包含丰富的 CSS 自定义属性和动画效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/6bf27424d5e9d323b3daf7a29f68a16a.png",
+    "publishedAt": "2024-07-29T18:31:32.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/digital-clock-style-js-css",
+    "file": "examples/217-如何实现一只手表-digital-clock-style-js-css.html"
+  },
+  {
+    "id": 13,
+    "title": "我的心里只有你，纯css实现",
+    "slug": "image-hover-animation-effect",
+    "summary": "使用 CSS 自定义属性和 clip-path 实现的图片悬停动画效果，适合用于前端开发中的创意图片展示，提升用户体验。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/8082410496f65ee4bd11ebf1d6f6baac.png",
+    "publishedAt": "2024-07-28T18:31:24.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/image-hover-animation-effect",
+    "file": "examples/218-我的心里只有你-纯css实现-image-hover-animation-effect.html"
+  },
+  {
+    "id": 12,
+    "title": "好玩的时钟",
+    "slug": "css-animated-digital-clock",
+    "summary": "一个基于HTML、CSS和JavaScript的数字时钟，使用CSS动画实现时间滚动效果，适合用于前端项目展示，学习CSS过渡和动画效果的应用。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/49b847cd84a3e500b3e6080e72e4211e.png",
+    "publishedAt": "2024-07-27T18:02:39.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/css-animated-digital-clock",
+    "file": "examples/219-好玩的时钟-css-animated-digital-clock.html"
+  },
+  {
+    "id": 11,
+    "title": "彩虹屁猪猪 Loading 动画",
+    "slug": "customizable-loading-animation-with-skin-options",
+    "summary": "此页面展示了一个极具视觉吸引力的加载动画效果，其中包含多种可自定义皮肤的动态彩虹动画和交互设置功能。页面使用了CSS3动画、媒体查询以及SVG图形，实现了响应式设计和复杂的动画效果。",
+    "cover": "https://vlnirxgldurqbnkgmlbx.supabase.co/storage/v1/object/public/notra/5e582a5a5381f0dc0651374856709c05.png",
+    "publishedAt": "2024-07-19T18:17:37.000Z",
+    "sourceUrl": "https://www.fecoder.cn/code-fun/customizable-loading-animation-with-skin-options",
+    "file": "examples/220-彩虹屁猪猪-loading-动画-customizable-loading-animation-with-skin-options.html"
+  }
+]

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>抽奖机</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+    />
+    <style>
+      @import 'normalize.css';
+
+      *,
+      *:after,
+      *:before {
+        box-sizing: border-box;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        font-family: 'SF Pro Text', 'SF Pro Icons', 'AOS Icons',
+          'Helvetica Neue', Helvetica, Arial, sans-serif, system-ui;
+      }
+
+      body::before {
+        --line: color-mix(in lch, canvasText 25%, transparent);
+        --size: 40px;
+        content: '';
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        background: linear-gradient(
+              90deg,
+              var(--line) 1px,
+              transparent 1px var(--size)
+            )
+            0 -5vmin / var(--size) var(--size),
+          linear-gradient(var(--line) 1px, transparent 1px var(--size)) 0 -5vmin /
+            var(--size) var(--size);
+        -webkit-mask: linear-gradient(-15deg, transparent 60%, white);
+        mask: linear-gradient(-15deg, transparent 60%, white);
+        top: 0;
+        z-index: -1;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      .bear-link {
+        color: canvasText;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        width: 48px;
+        aspect-ratio: 1;
+        display: grid;
+        place-items: center;
+        opacity: 0.8;
+      }
+
+      :where(.x-link, .bear-link):is(:hover, :focus-visible) {
+        opacity: 1;
+      }
+      .bear-link svg {
+        width: 75%;
+      }
+
+      .machine {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      button {
+        background: color-mix(
+          in lch,
+          canvasText,
+          canvas calc(30% * var(--intent, 0))
+        );
+        color: canvas;
+        border-radius: 6px;
+        font-weight: 300;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      button:is(:hover, :focus-visible) {
+        --intent: 1;
+      }
+
+      .machine__numbers {
+        display: flex;
+        position: relative;
+      }
+
+      .machine__numbers::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            color-mix(in lch, canvasText, canvas 65%),
+            transparent 10px calc(100% - 10px),
+            color-mix(in lch, canvasText, canvas 65%)
+          ),
+          linear-gradient(
+            white,
+            transparent 20% 80%,
+            color-mix(in lch, canvasText, canvas 75%)
+          );
+      }
+
+      :root {
+        --ease: linear(
+          0 0%,
+          0.7871 2.92%,
+          1.3024 5.5%,
+          1.6128 8.07%,
+          1.6962 9.4%,
+          1.7331 10.78%,
+          1.7332 11.67%,
+          1.7161 12.6%,
+          1.6291 14.65%,
+          1.136 21.61%,
+          0.9679 24.51%,
+          0.869 27.14%,
+          0.8392 28.47%,
+          0.8217 29.84%,
+          0.8168 31.71%,
+          0.8317 33.78%,
+          0.8622 35.91%,
+          0.9975 43.68%,
+          1.0286 46.58%,
+          1.0439 49.53%,
+          1.0459 51.54%,
+          1.0421 53.76%,
+          1.0013 63.48%,
+          0.9894 68.99% 73.67%,
+          1.0023 87.89%,
+          1 100%
+        );
+      }
+
+      .machine__number {
+        width: 20vmin;
+        position: relative;
+        aspect-ratio: 1 / 1.25;
+        background: url(https://assets.codepen.io/605876/numbers.svg) 50%
+          calc(5vmin + (var(--iterations, 0) * 15vmin)) / 75%;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .machine__number {
+          transition: background-position 1s var(--ease);
+        }
+        .machine__number:nth-of-type(1) {
+          transition-duration: 1s;
+        }
+        .machine__number:nth-of-type(2) {
+          transition-duration: 1.1s;
+        }
+        .machine__number:nth-of-type(3) {
+          transition-duration: 1.2s;
+        }
+      }
+
+      /* @keyframes spin {
+	to {
+		background-position: 50% calc(5vmin + ((var(--iterations, 0) + 50) * 15vmin));
+	}
+} */
+
+      .machine__number::before {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        -webkit-mask: linear-gradient(transparent, white, transparent);
+        mask: linear-gradient(transparent, white, transparent);
+        border-inline: 2px solid color-mix(in lch, canvasText, canvas 65%);
+      }
+      .machine__number:nth-of-type(2)::before {
+        border-inline: 1px solid color-mix(in lch, canvasText, canvas 65%);
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/number-slot-machine-animation">
+</head>
+  <body>
+    <div class="machine">
+      <div aria-hidden="true" class="machine__numbers">
+        <div class="machine__number"></div>
+        <div class="machine__number"></div>
+        <div class="machine__number"></div>
+      </div>
+      <p aria-live="polite" class="sr-only">000</p>
+      <button>Go!</button>
+    </div>
+
+    <script>
+      const go = document.querySelector('button');
+      const numbers = document.querySelectorAll('.machine__number');
+      const result = document.querySelector('[aria-live="polite"]');
+      let slides = [0, 0, 0];
+
+      const slide = () => {
+        const first = Math.floor(Math.random() * 20 + 10);
+        const second = first + Math.floor(Math.random() * 10 + 10);
+        const third = second + Math.floor(Math.random() * 10 + 10);
+        slides = [slides[0] + first, slides[1] + second, slides[2] + third];
+        for (let n = 0; n < numbers.length; n++) {
+          const number = numbers[n];
+          number.style.setProperty('--iterations', slides[n]);
+        }
+        result.innerText = slides
+          .map((slide) => 10 - (slide % 10))
+          .map((r) => (r === 10 ? 0 : r))
+          .join('');
+      };
+
+      go.addEventListener('click', slide);
+    </script>
+  </body>
+</html>

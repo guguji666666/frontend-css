@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>自定义自行车</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans&amp;display=swap"
+    />
+    <style>
+      * {
+        border: 0;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --hue: 223;
+        --primary1: hsl(var(--hue), 90%, 50%);
+        --primary2: hsl(var(--hue), 90%, 70%);
+        --black: hsl(0, 0%, 0%);
+        --white: hsl(0, 0%, 100%);
+        --gray1: hsl(var(--hue), 10%, 90%);
+        --gray2: hsl(var(--hue), 10%, 80%);
+        --gray3: hsl(var(--hue), 10%, 70%);
+        --gray4: hsl(var(--hue), 10%, 60%);
+        --gray5: hsl(var(--hue), 10%, 50%);
+        --gray6: hsl(var(--hue), 10%, 40%);
+        --gray7: hsl(var(--hue), 10%, 30%);
+        --gray8: hsl(var(--hue), 10%, 20%);
+        --gray9: hsl(var(--hue), 10%, 10%);
+        --trans-dur: 0.3s;
+        font-size: calc(20px + (30 - 20) * (100vw - 320px) / (3840 - 320));
+      }
+
+      body,
+      button,
+      input {
+        font: 1em/1.5 'DM Sans', sans-serif;
+      }
+
+      body {
+        background-color: var(--gray1);
+        color: var(--gray9);
+        transition: background-color var(--trans-dur), color var(--trans-dur);
+      }
+
+      main {
+        container-name: main;
+        container-type: inline-size;
+        margin: auto;
+        padding: 1.5em 0;
+        width: 100%;
+        max-width: 33em;
+      }
+
+      .bike {
+        display: block;
+        margin: 0 auto 1.5em auto;
+        width: 100%;
+        max-width: 16.5em;
+        height: auto;
+      }
+      .bike__group-x,
+      .bike__group-y,
+      .bike__pedals-spin,
+      .bike__spokes-spin,
+      .bike__tire {
+        animation-duration: 2s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+      .bike__group-x {
+        animation-name: bike-move;
+        animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+      }
+      .bike__group-y {
+        animation-name: bike-bounce;
+        transform-origin: 50% 28px;
+      }
+      .bike__pedals-spin {
+        animation-name: bike-pedals-spin;
+      }
+      .bike__spokes-spin {
+        animation-name: bike-spokes-spin;
+      }
+      .bike__tire {
+        animation-name: bike-tire-bounce;
+      }
+
+      .controls {
+        display: grid;
+        gap: 1.5em;
+        padding: 0 0.75em;
+        width: 100%;
+      }
+      .controls__button,
+      .controls__color,
+      .controls__range,
+      .controls__switch {
+        cursor: pointer;
+        -webkit-appearance: none;
+        appearance: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .controls__color,
+      .controls__range,
+      .controls__switch {
+        flex-shrink: 0;
+      }
+      .controls__button,
+      .controls__row {
+        background-color: var(--white);
+        border-radius: 0.5em;
+        padding: 0.5em 0.75em;
+        position: relative;
+        transition: background-color var(--trans-dur);
+      }
+      .controls__button {
+        color: var(--primary1);
+        width: 100%;
+        text-align: inherit;
+        transition: background-color var(--trans-dur), color var(--trans-dur);
+      }
+      .controls__button:focus-visible,
+      .controls__button:hover {
+        background-color: var(--gray2);
+      }
+      .controls__color {
+        background-color: transparent;
+        border-radius: 0.25em;
+        box-shadow: 0 0 0 1px var(--gray1);
+        width: 1.5em;
+        height: 1.5em;
+        transition: box-shadow var(--trans-dur);
+      }
+      .controls__color::-webkit-color-swatch {
+        border: 0;
+        border-radius: 0.25em;
+      }
+      .controls__color::-moz-color-swatch {
+        border: 0;
+        border-radius: 0.25em;
+      }
+      .controls__color::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+      .controls__icon,
+      .controls__label {
+        margin-inline: 0 0.75em;
+      }
+      .controls__icon {
+        flex-shrink: 0;
+        width: 1.5em;
+        height: 1.5em;
+      }
+      .controls__label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .controls__label--sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+      }
+      .controls__range {
+        background-color: var(--gray1);
+        background-image: linear-gradient(
+          90deg,
+          var(--primary1),
+          var(--primary1)
+        );
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        border-radius: 0.125em;
+        cursor: grab;
+        flex: 1;
+        min-width: 0;
+        height: 0.25em;
+        transition: background-color var(--trans-dur);
+        -webkit-appearance: none;
+        appearance: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .controls__range::-webkit-slider-thumb {
+        background-color: var(--white);
+        border: 0;
+        border-radius: 50%;
+        box-shadow: 0 0 0.125em hsla(var(--hue), 10%, 50%, 0.3), 0 0.25em
+            0.375em hsla(var(--hue), 10%, 50%, 0.3);
+        width: 1.5em;
+        height: 1.5em;
+        transition: transform var(--trans-dur);
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .controls__range::-webkit-slider-thumb:active {
+        cursor: grabbing;
+        transform: scale(0.9);
+      }
+      .controls__range::-moz-range-thumb {
+        background-color: var(--white);
+        border: 0;
+        border-radius: 50%;
+        box-shadow: 0 0 0.125em hsla(var(--hue), 10%, 50%, 0.3), 0 0.25em
+            0.375em hsla(var(--hue), 10%, 50%, 0.3);
+        width: 1.5em;
+        height: 1.5em;
+        transition: transform var(--trans-dur);
+      }
+      .controls__range::-moz-range-thumb:active {
+        cursor: grabbing;
+        transform: scale(0.9);
+      }
+      .controls__range + .controls__icon {
+        margin-inline: 0.75em 0;
+      }
+      .controls__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-width: 0;
+        padding: 0.5em 0.75em;
+        transition: background-color var(--trans-dur);
+      }
+      .controls__row:empty {
+        background-color: transparent;
+      }
+      .controls__row-group {
+        min-width: 0;
+      }
+      .controls__row-group-title {
+        color: var(--gray6);
+        font-size: 0.75em;
+        line-height: 2;
+        padding-inline: 0.75rem 0;
+        text-transform: uppercase;
+        transition: color var(--trans-dur);
+      }
+      .controls__row-group .controls__button,
+      .controls__row-group .controls__row {
+        border-radius: 0;
+      }
+      .controls__row-group .controls__button:first-child,
+      .controls__row-group .controls__row:first-child {
+        border-radius: 0.5em 0.5em 0 0;
+      }
+      .controls__row-group .controls__button:last-child,
+      .controls__row-group .controls__row:last-child {
+        border-radius: 0 0 0.5em 0.5em;
+      }
+      .controls__row-group .controls__button:not(:last-child):after,
+      .controls__row-group .controls__row:not(:last-child):after {
+        background-color: var(--gray2);
+        content: '';
+        display: block;
+        position: absolute;
+        margin-inline: 0.75em 0;
+        right: 0;
+        bottom: -1px;
+        left: 0;
+        height: 1px;
+        transition: background-color var(--trans-dur);
+        z-index: 1;
+      }
+      .controls__switch {
+        background-color: var(--gray1);
+        border-radius: 0.75em;
+        width: 2.5em;
+        height: 1.5em;
+        transition: background-color var(--trans-dur);
+      }
+      .controls__switch:before {
+        background-color: var(--white);
+        border-radius: 50%;
+        box-shadow: 0 0.125em 0.25em hsla(var(--hue), 10%, 50%, 0.3);
+        content: '';
+        display: block;
+        margin: 0.125em;
+        width: 1.25em;
+        height: 1.25em;
+        transition: transform var(--trans-dur), transform-origin var(--trans-dur);
+        transform-origin: 0 50%;
+      }
+      .controls__switch:active:before {
+        transform: scale(1.25, 1);
+      }
+      .controls__switch:checked {
+        background-color: var(--primary1);
+      }
+      .controls__switch:checked:before {
+        transform: translateX(1em);
+        transform-origin: 100% 50%;
+      }
+      .controls__switch:checked:active:before {
+        transform: translateX(1em) scale(1.25, 1);
+      }
+      [dir='rtl'] .controls__switch:before {
+        transform-origin: 100% 50%;
+      }
+      [dir='rtl'] .controls__switch:checked:before {
+        transform: translateX(-1em);
+        transform-origin: 0 50%;
+      }
+      [dir='rtl'] .controls__switch:checked:active:before {
+        transform: translateX(-1em) scale(1.25, 1);
+      }
+      .controls__value-wrap {
+        color: var(--gray6);
+        display: inline-flex;
+        gap: 0.75em;
+        transition: color var(--trans-dur);
+      }
+
+      /* Dark theme */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: var(--black);
+          color: var(--gray1);
+        }
+
+        .controls__button,
+        .controls__row {
+          background-color: var(--gray9);
+        }
+        .controls__row-group .controls__button:not(:last-child):after,
+        .controls__row-group .controls__row:not(:last-child):after {
+          background-color: var(--gray7);
+        }
+        .controls__button {
+          color: var(--primary2);
+        }
+        .controls__range,
+        .controls__switch,
+        .controls__button:focus-visible,
+        .controls__button:hover {
+          background-color: var(--gray7);
+        }
+        .controls__color {
+          box-shadow: 0 0 0 1px var(--gray8);
+        }
+        .controls__row-group-title,
+        .controls__value-wrap {
+          color: var(--gray4);
+        }
+      }
+      /* Beyond mobile */
+      @container main (min-width: 700px) {
+        .controls {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      /* Animations */
+      @keyframes bike-move {
+        from,
+        to {
+          transform: translate(6.5px, 1px);
+        }
+        50% {
+          transform: translate(7.5px, 1px);
+        }
+      }
+      @keyframes bike-bounce {
+        from,
+        25%,
+        50%,
+        75%,
+        to {
+          transform: translate(0, 0);
+        }
+        12.5%,
+        37.5%,
+        62.5%,
+        87.5% {
+          transform: translate(0, 0.5px);
+        }
+      }
+      @keyframes bike-tire-bounce {
+        from,
+        25%,
+        50%,
+        75%,
+        to {
+          transform: scale(1, 1);
+        }
+        12.5%,
+        37.5%,
+        62.5%,
+        87.5% {
+          transform: scale(1.04, 0.96);
+        }
+      }
+      @keyframes bike-pedals-spin {
+        from {
+          transform: rotate(0.1875turn);
+        }
+        to {
+          transform: rotate(4.1875turn);
+        }
+      }
+      @keyframes bike-spokes-spin {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(4turn);
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/bike-customization-react-controls">
+</head>
+  <body>
+    <div id="root"></div>
+
+    <script type="module">
+      import React, { StrictMode, useState } from 'https://esm.sh/react';
+      import { createRoot } from 'https://esm.sh/react-dom/client';
+      createRoot(document.getElementById('root')).render(
+        React.createElement(StrictMode, null, React.createElement(App, null))
+      );
+      function App() {
+        const [thickness, setThickness] = useState(1);
+        const [solidTires, setSolidTires] = useState(false);
+        const [color1, setColor1] = useState('#f2180d');
+        const [color2, setColor2] = useState('#737a8c');
+        function swapColors() {
+          const color1Previous = color1;
+          setColor1(color2);
+          setColor2(color1Previous);
+        }
+        return React.createElement(
+          'main',
+          null,
+          React.createElement(IconSprites, null),
+          React.createElement(Result, {
+            thickness: thickness,
+            solidTires: solidTires,
+            color1: color1,
+            color2: color2,
+          }),
+          React.createElement(
+            Controls,
+            null,
+            React.createElement(
+              RowGroup,
+              { title: 'Lines' },
+              React.createElement(RowRange, {
+                id: 'thickness',
+                label: 'Thickness',
+                iconMin: 'thin',
+                iconMax: 'thick',
+                step: 0.1,
+                min: 0.2,
+                max: 2,
+                value: thickness,
+                valueChange: setThickness,
+              }),
+              React.createElement(RowSwitch, {
+                id: 'solid-tires',
+                label: 'Solid Tires',
+                value: solidTires,
+                valueChange: setSolidTires,
+              })
+            ),
+            React.createElement(
+              RowGroup,
+              { title: 'Colors' },
+              React.createElement(RowColor, {
+                id: 'color1',
+                label: 'Color 1',
+                value: color1,
+                valueChange: setColor1,
+              }),
+              React.createElement(RowColor, {
+                id: 'color2',
+                label: 'Color 2',
+                value: color2,
+                valueChange: setColor2,
+              }),
+              React.createElement(
+                RowButton,
+                { action: swapColors },
+                'Swap Colors'
+              )
+            )
+          )
+        );
+      }
+      function Controls({ children }) {
+        return React.createElement('form', { className: 'controls' }, children);
+      }
+      function Icon({ name }) {
+        return React.createElement(
+          'svg',
+          {
+            className: 'controls__icon',
+            width: '24px',
+            height: '24px',
+            'aria-hidden': 'true',
+          },
+          React.createElement('use', { href: `#${name}` })
+        );
+      }
+      function IconSprites() {
+        const viewBox = '0 0 24 24';
+        const curvePoints = 'M 0 4 C 3 0, 6 0, 10 4 S 17 8, 20 4';
+        return React.createElement(
+          'svg',
+          { display: 'none' },
+          React.createElement(
+            'symbol',
+            { id: 'thin', viewBox: viewBox },
+            React.createElement('path', {
+              fill: 'none',
+              stroke: 'currentcolor',
+              strokeLinecap: 'round',
+              strokeWidth: '1',
+              d: curvePoints,
+              transform: 'translate(2,8)',
+            })
+          ),
+          React.createElement(
+            'symbol',
+            { id: 'thick', viewBox: viewBox },
+            React.createElement('path', {
+              fill: 'none',
+              stroke: 'currentcolor',
+              strokeLinecap: 'round',
+              strokeWidth: '4',
+              d: curvePoints,
+              transform: 'translate(2,8)',
+            })
+          )
+        );
+      }
+      function Result({ thickness, solidTires, color1, color2 }) {
+        return React.createElement(
+          'svg',
+          {
+            className: 'bike',
+            viewBox: '0 0 64 32',
+            width: '64px',
+            height: '32px',
+            'aria-label': 'Bicycle traveling to the right',
+            role: 'img',
+          },
+          React.createElement(
+            'g',
+            {
+              className: 'bike__group-x',
+              fill: 'none',
+              strokeLinecap: 'round',
+              strokeLinejoin: 'round',
+              strokeWidth: thickness,
+              transform: 'translate(7,1)',
+            },
+            React.createElement(
+              'g',
+              { className: 'bike__group-y' },
+              React.createElement(
+                'g',
+                { id: 'back-tire', transform: 'translate(9.5,19)' },
+                React.createElement(
+                  'g',
+                  { className: 'bike__tire' },
+                  React.createElement('circle', {
+                    r: '9',
+                    fill: solidTires ? color2 : 'none',
+                    stroke: color2,
+                  }),
+                  React.createElement('circle', {
+                    className: 'bike__spokes-spin',
+                    stroke: solidTires ? '#ffffff' : color2,
+                    strokeDasharray: '31.416 31.416',
+                    strokeDashoffset: '23.562',
+                    r: '5',
+                    transform: 'rotate(90,0,0)',
+                  })
+                )
+              ),
+              React.createElement(
+                'g',
+                { id: 'pedals', transform: 'translate(22,19)' },
+                React.createElement(
+                  'g',
+                  {
+                    className: 'bike__pedals-spin',
+                    stroke: color2,
+                    strokeDasharray: '31.416 31.416',
+                    strokeDashoffset: '-27.489',
+                    transform: 'rotate(67.5,0,0)',
+                  },
+                  React.createElement('circle', { r: '5' }),
+                  React.createElement('circle', {
+                    r: '5',
+                    transform: 'rotate(180,0,0)',
+                  })
+                )
+              ),
+              React.createElement(
+                'g',
+                {
+                  id: 'front-tire',
+                  stroke: color2,
+                  transform: 'translate(40,19)',
+                },
+                React.createElement(
+                  'g',
+                  { className: 'bike__tire' },
+                  React.createElement('circle', {
+                    r: '9',
+                    fill: solidTires ? color2 : 'none',
+                    stroke: color2,
+                  }),
+                  React.createElement('circle', {
+                    className: 'bike__spokes-spin',
+                    stroke: solidTires ? '#ffffff' : color2,
+                    strokeDasharray: '31.416 31.416',
+                    strokeDashoffset: '23.562',
+                    r: '5',
+                    transform: 'rotate(90,0,0)',
+                  })
+                )
+              ),
+              React.createElement(
+                'g',
+                { id: 'body', stroke: color1 },
+                React.createElement('path', { d: 'm31,2h6s1,0,1,1-1,1-1,1' }),
+                React.createElement('polyline', { points: '33 2,40 19' }),
+                React.createElement('polyline', { points: '16 3,22 19' }),
+                React.createElement('polyline', {
+                  points: '35.75 9,22 19,9.5 19,18 8,35 7',
+                }),
+                React.createElement('polyline', {
+                  stroke: color2,
+                  points: '14 3,18 3',
+                })
+              )
+            )
+          )
+        );
+      }
+      function RowButton({ action, children }) {
+        return React.createElement(
+          'button',
+          { className: 'controls__button', type: 'button', onClick: action },
+          children
+        );
+      }
+      function RowColor({ id, label, value, valueChange }) {
+        return React.createElement(
+          'div',
+          { className: 'controls__row' },
+          React.createElement(
+            'label',
+            { htmlFor: id, className: 'controls__label' },
+            label
+          ),
+          React.createElement(
+            'span',
+            { className: 'controls__value-wrap' },
+            React.createElement('span', { id: `${id}-value` }, value),
+            React.createElement('input', {
+              id: id,
+              className: 'controls__color',
+              type: 'color',
+              value: value,
+              'aria-describedby': `${id}-value`,
+              onChange: (e) => valueChange(e.target.value),
+            })
+          )
+        );
+      }
+      function RowGroup({ title, children }) {
+        return React.createElement(
+          'div',
+          { className: 'controls__row-group' },
+          React.createElement(
+            'div',
+            { className: 'controls__row-group-title' },
+            title
+          ),
+          React.createElement('div', null, children)
+        );
+      }
+      function RowRange({
+        id,
+        label,
+        iconMin,
+        iconMax,
+        step,
+        min,
+        max,
+        value,
+        valueChange,
+      }) {
+        const isRTL = document.dir === 'rtl';
+        const fillX = ((value - min) / (max - min)) * 100;
+        const fill = {
+          backgroundSize: `${fillX}% 100%`,
+          backgroundPosition: `${isRTL ? '100%' : '0'} 0`,
+        };
+        return React.createElement(
+          'div',
+          { className: 'controls__row' },
+          React.createElement(Icon, { name: iconMin }),
+          React.createElement(
+            'label',
+            { htmlFor: id, className: 'controls__label controls__label--sr' },
+            label
+          ),
+          React.createElement('input', {
+            id: id,
+            className: 'controls__range',
+            type: 'range',
+            step: step,
+            min: min,
+            value: value,
+            max: max,
+            onChange: (e) => valueChange(+e.target.value),
+            style: fill,
+          }),
+          React.createElement(Icon, { name: iconMax })
+        );
+      }
+      function RowSwitch({ id, label, value, valueChange }) {
+        return React.createElement(
+          'div',
+          { className: 'controls__row' },
+          React.createElement(
+            'label',
+            { htmlFor: id, className: 'controls__label' },
+            label
+          ),
+          React.createElement('input', {
+            id: id,
+            className: 'controls__switch',
+            type: 'checkbox',
+            checked: value,
+            onChange: () => valueChange(!value),
+          })
+        );
+      }
+    </script>
+  </body>
+</html>
+

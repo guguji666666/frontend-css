@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>一袋米要扛几楼</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      body {
+        margin: 0;
+        background: #123;
+      }
+      .base {
+        min-height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #123;
+      }
+      .eyeleft {
+        overflow: hidden;
+        width: 300px;
+        height: 300px;
+        margin: 100px;
+        background-color: #fff;
+        transform: rotate(55deg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid #000;
+        border-top: 10px solid #000;
+        border-radius: 80% 10% 80% 0%;
+        -webkit-box-shadow: 0px 15px 35px -5px rgba(50, 88, 130, 0.32);
+        -moz-box-shadow: 0px 15px 35px -5px rgba(50, 88, 130, 0.32);
+        box-shadow: 0px 15px 35px -5px rgba(50, 88, 130, 0.32);
+      }
+      .eyeright {
+        overflow: hidden;
+        width: 300px;
+        height: 300px;
+        margin: 100px;
+        background-color: #fff;
+        transform: rotate(35deg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid #000;
+        border-left: 10px solid #000;
+        border-radius: 80% 0% 80% 10%;
+        -webkit-box-shadow: 0px 15px 35px -5px rgba(50, 88, 130, 0.32);
+        -moz-box-shadow: 0px 15px 35px -5px rgba(50, 88, 130, 0.32);
+        box-shadow: 0px 15px 35px -5px rgba(50, 88, 130, 0.32);
+      }
+      .eyem {
+        background-color: #bf96d0;
+      }
+
+      .rinnegan {
+        position: absolute;
+        width: 55%;
+        left: 50px;
+        top: 55px;
+        height: 55%;
+        border-radius: 50%;
+        border: 3px solid black;
+      }
+
+      .rinnegan:nth-child(1) {
+        transform: scale(1.5);
+      }
+
+      .rinnegan:nth-child(2) {
+        transform: scale(1.2);
+      }
+
+      .rinnegan:nth-child(3) {
+        transform: scale(0.9);
+      }
+
+      .rinnegan:nth-child(4) {
+        transform: scale(0.7);
+      }
+
+      .rinnegan:nth-child(5) {
+        transform: scale(0.4);
+        -webkit-box-shadow: inset 0 0 30px #231e1f;
+        border: 4px solid black;
+        background: #936da3;
+      }
+      .rinnegan:nth-child(6) {
+        transform: scale(1.9);
+        border: 4px solid black;
+      }
+      .rinnegan:nth-child(7) {
+        transform: scale(0.15);
+        background: #000;
+        border: 4px solid black;
+      }
+
+      @media (max-width: 900px) {
+        .base {
+          display: block;
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/css-rinnegan-eye">
+</head>
+  <body>
+    <div class="base">
+      <div class="eyeleft eyem">
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+      </div>
+      <div class="eyeright eyem">
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+        <div class="rinnegan"></div>
+      </div>
+    </div>
+  </body>
+</html>

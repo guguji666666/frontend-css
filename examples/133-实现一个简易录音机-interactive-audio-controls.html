@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>实现一个简易录音机</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@300;400&amp;display=swap"
+    />
+    <style>
+      * {
+        border: 0;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --hue: 223;
+        --bg: hsl(var(--hue), 10%, 70%);
+        --fg: hsl(var(--hue), 10%, 10%);
+        --focus: hsl(var(--hue), 90%, 60%);
+        --focus-t: hsla(var(--hue), 90%, 60%, 0);
+        --red-orange: hsl(11, 90%, 50%);
+        --orange: hsl(21, 90%, 50%);
+        --yellow-orange: hsl(31, 90%, 50%);
+        --blue: hsl(198, 90%, 50%);
+        --purple: hsl(287, 40%, 70%);
+        --trans-dur: 0.3s;
+        font-size: calc(20px + (80 - 20) * (100vw - 280px) / (3840 - 280));
+      }
+
+      body,
+      button {
+        color: var(--fg);
+        font: 1em/1.5 'Asap Condensed', sans-serif;
+      }
+
+      body {
+        background-color: var(--bg);
+        overflow: hidden;
+        height: 100vh;
+        transition: background-color var(--trans-dur), color var(--trans-dur);
+      }
+
+      main {
+        display: flex;
+        overflow-x: hidden;
+        padding: 1.5em 0;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .tb1 {
+        --display-dim: 0.2;
+        border-radius: 0.75em;
+        box-shadow: 0.125em 0.125em 0.125em hsl(var(--hue), 10%, 90%) inset,
+          -0.0625em -0.0625em 0.1875em hsl(var(--hue), 10%, 50%) inset,
+          0 0 0.5em rgba(0, 0, 0, 0.5);
+        margin: auto;
+        padding: 1em;
+        width: 14.25em;
+        height: 15.75em;
+        transition: background-color var(--trans-dur),
+          box-shadow var(--trans-dur);
+      }
+      .tb1,
+      .tb1__cell {
+        background-color: hsl(var(--hue), 10%, 80%);
+      }
+      .tb1__bar {
+        background-color: currentColor;
+        height: 0.125em;
+        opacity: var(--display-dim);
+        transition: opacity calc(var(--trans-dur) / 2);
+      }
+      .tb1__bar--blue {
+        background-color: var(--blue);
+      }
+      .tb1__bar--purple {
+        background-color: var(--purple);
+      }
+      .tb1__bar--on {
+        opacity: 1;
+      }
+      .tb1__bar--tall {
+        height: 0.375em;
+      }
+      .tb1__bar--25p {
+        width: 25%;
+      }
+      .tb1__bar--30p {
+        width: 30%;
+      }
+      .tb1__bar--35p {
+        width: 35%;
+      }
+      .tb1__bar--40p {
+        width: 40%;
+      }
+      .tb1__bar--45p {
+        width: 45%;
+      }
+      .tb1__bar--50p {
+        width: 50%;
+      }
+      .tb1__bar--55p {
+        width: 55%;
+      }
+      .tb1__bar--60p {
+        width: 60%;
+      }
+      .tb1__bar--65p {
+        width: 65%;
+      }
+      .tb1__bar--70p {
+        width: 70%;
+      }
+      .tb1__bars {
+        display: flex;
+        gap: 0.125em;
+        flex-direction: column-reverse;
+      }
+      .tb1__bars + .tb1__bars {
+        align-items: flex-end;
+      }
+      .tb1__button,
+      .tb1__dial {
+        border-radius: 50%;
+        margin: auto;
+        width: 2.25em;
+        height: 2.25em;
+      }
+      .tb1__button,
+      .tb1__dial-control {
+        display: flex;
+      }
+      .tb1__button {
+        box-shadow: 0.0625em 0 0.125em hsl(var(--hue), 10%, 70%) inset,
+          -0.0625em 0 0.125em hsl(var(--hue), 10%, 90%) inset,
+          0.0625em 0 0.125em hsl(var(--hue), 10%, 85%),
+          -0.25em 0 0.375em rgba(0, 0, 0, 0.4);
+        transition: background-color var(--trans-dur),
+          box-shadow var(--trans-dur), color var(--trans-dur);
+      }
+      .tb1__cell {
+        border-radius: 0.25em;
+        box-shadow: 0 0 0 0.125em var(--focus-t),
+          0.0625em 0.0625em 0.0625em hsl(var(--hue), 10%, 90%) inset,
+          -0.0625em -0.0625em 0.0625em hsl(var(--hue), 10%, 50%) inset;
+        display: flex;
+        transition: background-color var(--trans-dur),
+          box-shadow var(--trans-dur),
+          transform calc(var(--trans-dur) / 3) cubic-bezier(0.65, 0, 0.35, 1);
+      }
+      .tb1__cell[type='button'] {
+        cursor: pointer;
+      }
+      .tb1__cell[type='button']:active {
+        transform: scale(0.95);
+      }
+      .tb1__cell[type='button']:focus-visible {
+        box-shadow: 0 0 0 0.125em var(--focus),
+          0.0625em 0.0625em 0.0625em hsl(var(--hue), 10%, 90%) inset,
+          -0.0625em -0.0625em 0.0625em hsl(var(--hue), 10%, 50%) inset;
+      }
+      .tb1__cell--display {
+        background-image: linear-gradient(
+            80deg,
+            hsl(var(--hue), 10%, 15%) 49%,
+            hsla(var(--hue), 10%, 15%, 0) 50%
+          ),
+          linear-gradient(hsl(var(--hue), 10%, 25%), hsl(var(--hue), 10%, 30%));
+        box-shadow: 0 0 0.125em hsl(var(--hue), 10%, 30%) inset !important;
+        display: grid;
+        grid-column: 3;
+        grid-row-start: 2;
+        grid-row-end: 4;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 0.75em 1fr;
+        padding: 0.5em;
+        text-transform: uppercase;
+      }
+      .tb1__cell--speakers {
+        display: grid;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-template-columns: repeat(15, 0.625em);
+        grid-template-rows: repeat(7, 0.625em);
+        justify-content: center;
+        align-content: center;
+        place-items: center;
+      }
+      .tb1__dial {
+        box-shadow: 0.0625em 0 0.125em hsl(var(--hue), 10%, 70%) inset,
+          -0.0625em 0 0.125em hsl(var(--hue), 10%, 30%) inset,
+          0.0625em 0 0.0125em hsl(var(--hue), 10%, 90%),
+          -0.25em 0 0.375em rgba(0, 0, 0, 0.4);
+        transition: background-color var(--trans-dur),
+          box-shadow var(--trans-dur), color var(--trans-dur);
+      }
+      .tb1__dial-control {
+        --shadow-before-rotate: 0;
+        --shadow-after1-x: 1;
+        --shadow-after1-y: 1;
+        --shadow-after2-x: -1;
+        --shadow-after2-y: -1;
+        background-color: transparent;
+        border-radius: inherit;
+        box-shadow: 0 0 0 0.125em var(--focus-t);
+        cursor: grab;
+        position: relative;
+        transition: box-shadow var(--trans-dur);
+        width: 100%;
+        height: 100%;
+      }
+      .tb1__dial-control:active {
+        cursor: grabbing;
+      }
+      .tb1__dial-control:focus-visible {
+        box-shadow: 0 0 0 0.125em var(--focus);
+      }
+      .tb1__dial-control:before,
+      .tb1__dial-control:after {
+        background-color: var(--blue);
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+      }
+      .tb1__dial-control:before {
+        border-radius: 50%;
+        box-shadow: 0.0625em 0 0.0625em rgba(0, 0, 0, 0.3) inset,
+          -0.0625em 0 0.0625em rgba(255, 255, 255, 0.3) inset;
+        width: 1.75em;
+        height: 1.75em;
+        transform: translate(-50%, -50%)
+          rotate(calc(1deg * var(--shadow-before-rotate)));
+      }
+      .tb1__dial-control:after {
+        border-radius: 0.1875em;
+        box-shadow: 2px 0 0 hsl(var(--hue), 10%, var(--shadow-after1-x)) inset,
+          0 2px 0 hsl(var(--hue), 10%, var(--shadow-after1-y)) inset,
+          -2px 0 0 hsl(var(--hue), 10%, var(--shadow-after2-x)) inset,
+          0 -2px 0 hsl(var(--hue), 10%, var(--shadow-after2-y)) inset;
+        opacity: 0.4;
+        width: 0.375em;
+        height: 1.25em;
+      }
+      .tb1__cell[type='button'],
+      .tb1__dial-control {
+        outline: 0;
+        -webkit-appearance: none;
+        appearance: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .tb1__display-label {
+        color: white;
+        display: block;
+        font-size: 0.5em;
+        line-height: 2;
+      }
+      .tb1__grid {
+        background-color: hsl(var(--hue), 10%, 10%);
+        border-radius: 0.25em;
+        box-shadow: -0.0625em -0.0625em 0.0625em hsl(var(--hue), 10%, 90%),
+          0.0625em 0.0625em 0.125em hsl(var(--hue), 10%, 50%);
+        display: grid;
+        gap: 0.25em;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr repeat(2, 3.75em);
+        padding: 0.25em;
+        width: 100%;
+        height: 100%;
+        transition: box-shadow var(--trans-dur);
+      }
+      .tb1__icon {
+        display: block;
+        margin: auto;
+        width: 1.5em;
+        height: 1.5em;
+      }
+      .tb1__rec {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+      .tb1__rec-light {
+        border-radius: 50%;
+        box-shadow: 0 0 0 0.25rem var(--orange) inset;
+        display: block;
+        opacity: var(--display-dim);
+        transition: opacity calc(var(--trans-dur) / 2);
+        width: 0.625rem;
+        height: 0.625rem;
+      }
+      .tb1__rec-light--on {
+        opacity: 1;
+      }
+      .tb1__speaker-hole {
+        background-color: hsl(var(--hue), 10%, 10%);
+        border-radius: 50%;
+        box-shadow: 0 -0.0625em 0.0625em hsl(var(--hue), 10%, 70%),
+          0 0.0625em 0.0625em hsl(var(--hue), 10%, 90%);
+        width: 50%;
+        height: 50%;
+        transition: box-shadow var(--trans-dur);
+      }
+      .tb1__speaker-hole:first-child,
+      .tb1__speaker-hole:nth-child(83) {
+        grid-column: 3;
+      }
+      .tb1__speaker-hole:nth-child(12),
+      .tb1__speaker-hole:nth-child(70) {
+        grid-column: 2;
+      }
+      .tb1__speaker-hole:nth-child(25) {
+        grid-column: 1;
+      }
+      .tb1__sr-only {
+        position: absolute;
+        overflow: hidden;
+        width: 1px;
+        height: 1px;
+      }
+
+      /* Dark theme */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: hsl(var(--hue), 10%, 20%);
+          --fg: hsl(var(--hue), 10%, 90%);
+        }
+
+        .tb1 {
+          box-shadow: 0.125em 0.125em 0.125em hsl(var(--hue), 10%, 40%) inset,
+            -0.0625em -0.0625em 0.1875em hsl(var(--hue), 10%, 20%) inset,
+            0 0 0.5em rgba(0, 0, 0, 0.5);
+        }
+        .tb1,
+        .tb1__cell {
+          background-color: hsl(var(--hue), 10%, 30%);
+        }
+        .tb1__button {
+          box-shadow: 0.0625em 0 0.125em hsl(var(--hue), 10%, 20%) inset,
+            -0.0625em 0 0.125em hsl(var(--hue), 10%, 40%) inset,
+            0.0625em 0 0.125em hsl(var(--hue), 10%, 35%),
+            -0.25em 0 0.375em rgba(0, 0, 0, 0.4);
+        }
+        .tb1__cell {
+          box-shadow: 0 0 0 0.125em var(--focus-t),
+            0.0625em 0.0625em 0.0625em hsl(var(--hue), 10%, 40%) inset,
+            -0.0625em -0.0625em 0.0625em hsl(var(--hue), 10%, 20%) inset;
+        }
+        .tb1__cell[type='button']:focus-visible {
+          box-shadow: 0 0 0 0.125em var(--focus),
+            0.0625em 0.0625em 0.0625em hsl(var(--hue), 10%, 40%) inset,
+            -0.0625em -0.0625em 0.0625em hsl(var(--hue), 10%, 20%) inset;
+        }
+        .tb1__dial {
+          box-shadow: 0.0625em 0 0.125em hsl(var(--hue), 10%, 30%) inset,
+            -0.0625em 0 0.125em hsl(var(--hue), 10%, 10%) inset,
+            0.0625em 0 0.0125em hsl(var(--hue), 10%, 40%),
+            -0.25em 0 0.375em rgba(0, 0, 0, 0.4);
+        }
+        .tb1__grid {
+          box-shadow: -0.0625em -0.0625em 0.0625em hsl(var(--hue), 10%, 40%),
+            0.0625em 0.0625em 0.125em hsl(var(--hue), 10%, 20%);
+        }
+        .tb1__speaker-hole {
+          box-shadow: 0 -0.0625em 0.0625em hsl(var(--hue), 10%, 30%),
+            0 0.0625em 0.0625em hsl(var(--hue), 10%, 50%);
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/interactive-audio-controls">
+</head>
+  <body>
+    <div id="root"></div>
+
+    <script type="module">
+      import React, {
+        StrictMode,
+        useEffect,
+        useRef,
+        useState,
+      } from 'https://esm.sh/react';
+      import { createRoot } from 'https://esm.sh/react-dom/client';
+      import gsap from 'https://esm.sh/gsap';
+      import { useGSAP } from 'https://esm.sh/@gsap/react?deps=react@18.3.1';
+      import { Draggable } from 'https://esm.sh/gsap/Draggable';
+      gsap.registerPlugin(useGSAP, Draggable);
+      createRoot(document.getElementById('root')).render(
+        React.createElement(
+          StrictMode,
+          null,
+          React.createElement(
+            'main',
+            null,
+            React.createElement(IconSprites, null),
+            React.createElement(TB1, null)
+          )
+        )
+      );
+      function IconSprites() {
+        const viewBox = '0 0 24 24';
+        return React.createElement(
+          'svg',
+          { width: '0', height: '0', 'aria-hidden': 'true' },
+          React.createElement(
+            'defs',
+            null,
+            React.createElement(
+              'clipPath',
+              { id: 'record-clip' },
+              React.createElement('circle', { cx: '12', cy: '12', r: '12' })
+            ),
+            React.createElement(
+              'linearGradient',
+              { id: 'record-grad', x1: '1', y1: '0', x2: '0', y2: '1' },
+              React.createElement('stop', { offset: '0%', stopColor: '#000' }),
+              React.createElement('stop', { offset: '100%', stopColor: '#fff' })
+            ),
+            React.createElement(
+              'mask',
+              { id: 'record-mask' },
+              React.createElement('rect', {
+                x: '0',
+                y: '0',
+                width: '24',
+                height: '24',
+                fill: 'url(#record-grad)',
+              })
+            )
+          ),
+          React.createElement(
+            'symbol',
+            { id: 'play', viewBox: viewBox },
+            React.createElement('polygon', {
+              points: '8 6,18 12,8 18',
+              fill: 'currentcolor',
+              stroke: 'currentcolor',
+              strokeLinejoin: 'round',
+              strokeWidth: '2',
+            })
+          ),
+          React.createElement(
+            'symbol',
+            { id: 'record', viewBox: viewBox },
+            React.createElement(
+              'g',
+              {
+                clipPath: 'url(#record-clip)',
+                fill: 'none',
+                strokeWidth: '18',
+              },
+              React.createElement('circle', {
+                cx: '12',
+                cy: '12',
+                r: '12',
+                stroke: 'var(--yellow-orange)',
+              }),
+              React.createElement(
+                'g',
+                { mask: 'url(#record-mask)' },
+                React.createElement('circle', {
+                  cx: '12',
+                  cy: '12',
+                  r: '12',
+                  stroke: 'var(--red-orange)',
+                })
+              )
+            )
+          ),
+          React.createElement(
+            'symbol',
+            { id: 'stop', viewBox: viewBox },
+            React.createElement('rect', {
+              fill: 'currentcolor',
+              rx: '2',
+              ry: '2',
+              x: '6',
+              y: '6',
+              width: '12',
+              height: '12',
+            })
+          )
+        );
+      }
+      function TB1() {
+        const [playing, setPlaying] = useState(false);
+        const [recording, setRecording] = useState(false);
+        const [volume, setVolume] = useState(10);
+        const volumeBars = 10;
+        const [micLevel, setMicLevel] = useState(0);
+        const micBars = 9;
+        const recorder = useRef(null);
+        const audio = useRef(null);
+        const frameId = useRef(0);
+        // audio recording
+        useEffect(() => {
+          if (!recording) {
+            const stopRecording = async () => {
+              var _a;
+              audio.current = await ((_a = recorder.current) === null ||
+              _a === void 0
+                ? void 0
+                : _a.stop());
+              setMicLevel(0);
+              cancelAnimationFrame(frameId.current);
+            };
+            stopRecording();
+            return;
+          }
+          const audioCtx = new AudioContext();
+          let analyser;
+          let bufferLength;
+          let frequencyData;
+          let waveData;
+          const analyzeAudio = (stream) => {
+            analyser = audioCtx.createAnalyser();
+            analyser.smoothingTimeConstant = 0.75;
+            analyser.fftSize = 1024;
+            bufferLength = analyser.frequencyBinCount;
+            frequencyData = new Uint8Array(bufferLength);
+            waveData = new Uint8Array(bufferLength);
+            const source = audioCtx.createMediaStreamSource(stream);
+            source.connect(analyser);
+            // start the loop for displaying the mic level
+            getMicLevel();
+          };
+          const getMicLevel = () => {
+            analyser.getByteFrequencyData(frequencyData);
+            analyser.getByteTimeDomainData(waveData);
+            const level = Math.round((frequencyData[0] / 255) * micBars);
+            setMicLevel(level);
+            frameId.current = requestAnimationFrame(getMicLevel);
+          };
+          const recordAudio = async () => {
+            return await navigator.mediaDevices
+              .getUserMedia({ audio: true, video: false })
+              .then(
+                (stream) =>
+                  new Promise((resolve) => {
+                    const mimeTypes = ['audio/mp4', 'audio/ogg'];
+                    const mimeType = mimeTypes.find((type) =>
+                      MediaRecorder.isTypeSupported(type)
+                    );
+                    const recorder = new MediaRecorder(stream, { mimeType });
+                    const chunks = [];
+                    recorder.addEventListener('dataavailable', (e) => {
+                      var _a;
+                      if (
+                        ((_a = e.data) === null || _a === void 0
+                          ? void 0
+                          : _a.size) > 0
+                      )
+                        chunks.push(e.data);
+                    });
+                    // recorder methods
+                    const start = () => recorder.start(500);
+                    const stop = async () =>
+                      await new Promise((resolve) => {
+                        recorder.addEventListener('stop', () => {
+                          const blob = new Blob(chunks, { type: mimeType });
+                          const url = URL.createObjectURL(blob);
+                          const audio = new Audio(url);
+                          // methods for controlling the audio via top-level functions
+                          const play = () => audio.play();
+                          const stop = () => {
+                            audio.pause();
+                            audio.currentTime = 0;
+                          };
+                          const volumeTo = (volume) => {
+                            audio.volume = volume;
+                          };
+                          // audio listeners
+                          audio.addEventListener('pause', () =>
+                            setPlaying(false)
+                          );
+                          audio.addEventListener('ended', () => stop());
+                          // stop the stream
+                          stream.getTracks().forEach((track) => track.stop());
+                          resolve({ blob, url, play, stop, volumeTo });
+                        });
+                        recorder.stop();
+                      });
+                    resolve({ start, stop, stream });
+                  })
+              )
+              .catch(() => setRecording(false));
+          };
+          const startRecording = async () => {
+            recorder.current = await recordAudio();
+            if (!recorder.current) return;
+            recorder.current.start();
+            analyzeAudio(recorder.current.stream);
+          };
+          startRecording();
+          return () => cancelAnimationFrame(frameId.current);
+        }, [recording]);
+        // volume control
+        useEffect(() => {
+          if (!audio.current) return;
+          audio.current.volumeTo(volume / volumeBars);
+        }, [volume]);
+        /** Play the recorded audio. */
+        async function play() {
+          var _a;
+          if (recording || playing) return;
+          try {
+            setPlaying(true);
+            await ((_a = audio.current) === null || _a === void 0
+              ? void 0
+              : _a.play());
+          } catch (_b) {
+            setPlaying(false);
+          }
+        }
+        /** Stop playing the recorded audio. */
+        function stop() {
+          var _a;
+          if (recording || !playing) return;
+          (_a = audio.current) === null || _a === void 0 ? void 0 : _a.stop();
+        }
+        /** Record or stop recording audio (secure connection required). */
+        function record() {
+          var _a;
+          // `mediaDevices` is disabled in insecure HTTP
+          if (!navigator.mediaDevices) {
+            alert('Connection isn’t secure for recording!');
+            return;
+          }
+          stop();
+          setRecording(!recording);
+          if (recording) return;
+          // ensure the current volume is retained
+          (_a = audio.current) === null || _a === void 0
+            ? void 0
+            : _a.volumeTo(volume / volumeBars);
+        }
+        return React.createElement(
+          'div',
+          { className: 'tb1' },
+          React.createElement(
+            TB1Grid,
+            null,
+            React.createElement(TB1Speakers, null),
+            React.createElement(
+              TB1Button,
+              { icon: 'play', action: play },
+              'Play'
+            ),
+            React.createElement(
+              TB1Button,
+              { icon: 'stop', action: stop },
+              'Stop'
+            ),
+            React.createElement(
+              TB1Display,
+              null,
+              React.createElement(TB1Rec, { recording: recording }),
+              React.createElement(TB1Bars, {
+                color: 'blue',
+                label: 'Vol',
+                level: volume,
+                levels: volumeBars,
+              }),
+              React.createElement(TB1Bars, {
+                color: 'purple',
+                label: 'Mic',
+                level: micLevel,
+                levels: micBars,
+                tall: true,
+              })
+            ),
+            React.createElement(
+              TB1Button,
+              { icon: 'record', action: record },
+              'Record'
+            ),
+            React.createElement(
+              TB1Dial,
+              { tick: volume, ticks: volumeBars, action: setVolume },
+              'Volume'
+            )
+          )
+        );
+      }
+      function TB1Bars({ color, label, level = 0, levels = 0, tall }) {
+        const bars = [];
+        for (let l = 0; l < levels; ++l) {
+          const _color = color ? ` tb1__bar--${color}` : '';
+          const _tall = tall ? ' tb1__bar--tall' : '';
+          // use the nearest bar if the level is a decimal
+          const _on = l < Math.round(level) ? ' tb1__bar--on' : '';
+          const width = !tall ? ` tb1__bar--${25 + l * 5}p` : ' tb1__bar--25p';
+          bars.push(
+            React.createElement('div', {
+              key: l,
+              className: `tb1__bar${_color}${_tall}${_on}${width}`,
+            })
+          );
+        }
+        return React.createElement(
+          'div',
+          { className: 'tb1__bars' },
+          bars,
+          React.createElement(
+            'span',
+            { className: 'tb1__display-label' },
+            label
+          )
+        );
+      }
+      function TB1Button({ action, children, icon }) {
+        return React.createElement(
+          'button',
+          { className: 'tb1__cell', type: 'button', onClick: action },
+          React.createElement(
+            'div',
+            { className: 'tb1__button' },
+            React.createElement(
+              'svg',
+              {
+                className: 'tb1__icon',
+                width: '20px',
+                height: '20px',
+                'aria-hidden': 'true',
+              },
+              React.createElement('use', { href: `#${icon}` })
+            ),
+            React.createElement('span', { className: 'tb1__sr-only' }, children)
+          )
+        );
+      }
+      function TB1Dial({ action, children, tick, ticks }) {
+        const dialRef = useRef(null);
+        const startAngle = (tick / ticks) * 360;
+        const [angle, setAngle] = useState(startAngle);
+        const [isKeyDown, setIsKeydown] = useState(false);
+        const _tick = (angle / 360) * ticks;
+        const percent = `${Math.round((angle / 360) * 100)}%`;
+        const toRad = Math.PI / 180;
+        const shadowRotate = {
+          '--shadow-before-rotate': -angle,
+          '--shadow-after1-x': `${
+            (Math.cos((-45 + angle) * toRad) / 2 + 0.5) * 100
+          }%`,
+          '--shadow-after1-y': `${
+            (Math.cos((45 + angle) * toRad) / 2 + 0.5) * 100
+          }%`,
+          '--shadow-after2-x': `${
+            (-Math.cos((-45 + angle) * toRad) / 2 + 0.5) * 100
+          }%`,
+          '--shadow-after2-y': `${
+            (-Math.cos((45 + angle) * toRad) / 2 + 0.5) * 100
+          }%`,
+        };
+        // action to update the tick when the angle changes
+        useEffect(() => {
+          action === null || action === void 0 ? void 0 : action(_tick);
+        }, [action, _tick]);
+        // initiate the draggable
+        useEffect(() => {
+          Draggable.create(dialRef.current, {
+            type: 'rotation',
+            bounds: {
+              minRotation: 0,
+              maxRotation: 360,
+            },
+            onDrag: function () {
+              setAngle(this.rotation);
+            },
+          });
+        }, []);
+        // run a transition when adjusting using arrow keys
+        useGSAP(() => {
+          if (isKeyDown) {
+            gsap.to(dialRef.current, {
+              rotation: angle,
+              duration: 0.15,
+            });
+          }
+        }, [angle]);
+        // starting angle
+        useGSAP(() => {
+          gsap.to(dialRef.current, {
+            rotation: startAngle,
+            duration: 0,
+          });
+        }, []);
+        /** Go to the previous tick. */
+        function tickDecrement() {
+          let previousTick = _tick - 1;
+          if (previousTick < 0) {
+            previousTick = 0;
+          }
+          setAngle((previousTick / ticks) * 360);
+        }
+        /** Go to the next tick. */
+        function tickIncrement() {
+          let nextTick = _tick + 1;
+          if (nextTick > ticks) {
+            nextTick = ticks;
+          }
+          setAngle((nextTick / ticks) * 360);
+        }
+        /**
+         * Perform a keyboard action on this dial.
+         * @param e Keyboard event
+         */
+        function keyboardAction(e) {
+          const increment = e.code === 'ArrowUp' || e.code === 'ArrowRight';
+          const decrement = e.code === 'ArrowDown' || e.code === 'ArrowLeft';
+          if (increment || decrement) {
+            e.preventDefault();
+            setIsKeydown(true);
+          }
+          if (increment) {
+            tickIncrement();
+          } else if (decrement) {
+            tickDecrement();
+          }
+        }
+        return React.createElement(
+          'div',
+          { className: 'tb1__cell' },
+          React.createElement(
+            'div',
+            { className: 'tb1__dial' },
+            React.createElement(
+              'button',
+              {
+                className: 'tb1__dial-control',
+                type: 'button',
+                ref: dialRef,
+                onKeyDown: keyboardAction,
+                onKeyUp: () => setIsKeydown(false),
+                'aria-description': percent,
+                style: shadowRotate,
+              },
+              React.createElement(
+                'span',
+                { className: 'tb1__sr-only' },
+                children
+              )
+            )
+          )
+        );
+      }
+      function TB1Display({ children }) {
+        return React.createElement(
+          'div',
+          { className: 'tb1__cell tb1__cell--display' },
+          children
+        );
+      }
+      function TB1Grid({ children }) {
+        return React.createElement('div', { className: 'tb1__grid' }, children);
+      }
+      function TB1Rec({ recording }) {
+        return React.createElement(
+          'div',
+          { className: 'tb1__rec' },
+          React.createElement('span', {
+            className: `tb1__rec-light${
+              recording === true ? ' tb1__rec-light--on' : ''
+            }`,
+          }),
+          React.createElement(
+            'span',
+            { className: 'tb1__display-label' },
+            'Rec'
+          )
+        );
+      }
+      function TB1Speakers() {
+        const holes = [];
+        const holeCount = 93;
+        for (let h = 0; h < holeCount; ++h) {
+          holes.push(
+            React.createElement('div', {
+              key: h,
+              className: 'tb1__speaker-hole',
+            })
+          );
+        }
+        return React.createElement(
+          'div',
+          { className: 'tb1__cell tb1__cell--speakers' },
+          holes
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>目标是宝可梦大师</title>
+    <style>
+      @font-face {
+        font-family: 'pokemon';
+        src: url(https://assets.codepen.io/13471/Pokemon-DPPt.woff2) format('woff2');
+        font-weight: 100;
+      }
+      .visually-hidden {
+        position: absolute;
+        left: -100vw;
+        /* Note, you may want to position the checkbox over top the label and set the opacity to zero instead. It can be better for accessibilty on some touch devices for discoverability. */
+      }
+
+      body {
+        height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font-family: 'pokemon';
+        color: white;
+        font-size: 12px;
+      }
+
+      img {
+        position: absolute;
+        left: 35vw;
+        top: 10px;
+        width: 30vw;
+        z-index: 10000;
+        opacity: 0.2;
+      }
+
+      h2,
+      h3 {
+        color: white;
+        left: 36vw;
+        top: 10vw;
+        width: 30vw;
+        z-index: 10001;
+        position: absolute;
+        text-align: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      h2.show {
+        opacity: 0.5;
+      }
+
+      h3 {
+        top: 50%;
+        opacity: 1;
+      }
+
+      h3.hide {
+        opacty: 0;
+      }
+
+      .label {
+        bottom: 30%;
+        left: 50%;
+        position: fixed;
+        translate: 0 -60px;
+        transition: all 0.3s ease;
+      }
+
+      .pokonami {
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: #1d1f20;
+      }
+      .pokonami .sprite {
+        position: absolute;
+        bottom: 30%;
+        left: 0;
+        opacity: 1;
+        display: grid;
+        place-items: center;
+      }
+      .pokonami .sprite i {
+        background: url('https://assets.codepen.io/13471/pokemon-sprite.png');
+        background-repeat: no-repeat;
+        display: block;
+        width: 28px;
+        height: 26px;
+      }
+      .pokonami .sprite quote {
+        position: absolute;
+        background: url('https://assets.codepen.io/13471/pokemon-sprite.png');
+        background-repeat: no-repeat;
+        display: block;
+        width: 15px;
+        height: 18px;
+        padding: 0;
+        margin: 0;
+        top: -8px;
+        left: 8px;
+        scale: 1.5;
+        image-rendering: pixelated;
+      }
+      .pokonami .sprite quote.love {
+        background-position: -32px -62px;
+      }
+      .pokonami .sprite quote.exclamation {
+        background-position: -129px -62px;
+      }
+      .pokonami .sprite quote.happy {
+        background-position: -79px -62px;
+      }
+      .pokonami .sprite.ash,
+      .pokonami .sprite.misty,
+      .pokonami .sprite.brock,
+      .pokonami .sprite.may,
+      .pokonami .sprite.pikachu {
+        left: 50%;
+        width: 36px;
+        height: 52px;
+      }
+      .pokonami .sprite.ash i,
+      .pokonami .sprite.misty i,
+      .pokonami .sprite.brock i,
+      .pokonami .sprite.may i,
+      .pokonami .sprite.pikachu i {
+        background-image: url(https://assets.codepen.io/13471/ash-misty-brock);
+        background-position: -36px 0;
+        background-size: 400% 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        image-rendering: pixelated;
+      }
+      .pokonami .sprite.ash quote,
+      .pokonami .sprite.misty quote,
+      .pokonami .sprite.brock quote,
+      .pokonami .sprite.may quote,
+      .pokonami .sprite.pikachu quote {
+        top: -19px;
+        left: 8px;
+        box-shadow: 0 0 7px 3px #1d1f20;
+        background-color: #1d1f20;
+        translate: 0 -5px;
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+      .pokonami .sprite.ash quote {
+        scale: 2 !important;
+        translate: 2px -8px;
+      }
+      .pokonami .sprite.misty {
+        translate: 90% 0;
+      }
+      .pokonami .sprite.misty i {
+        background-position: -72px 0;
+      }
+      .pokonami .sprite.misty quote {
+        transition-delay: 0.1s;
+      }
+      .pokonami .sprite.brock {
+        translate: 180% 0;
+      }
+      .pokonami .sprite.brock i {
+        background-position: -110px 0;
+      }
+      .pokonami .sprite.brock quote {
+        transition-delay: 0.2s;
+      }
+      .pokonami .sprite.may {
+        translate: -90% 0;
+      }
+      .pokonami .sprite.may i {
+        background-position: 0px 0;
+      }
+      .pokonami .sprite.may quote {
+        transition-delay: 0.1s;
+      }
+      .pokonami .sprite.pikachu {
+        translate: 15px 8px;
+        width: 32px;
+        height: 32px;
+        opacity: 1 !important;
+        animation: pika-move 0.5s 0.75s steps(1) infinite;
+      }
+      .pokonami .sprite.pikachu i {
+        background-image: url(https://assets.codepen.io/13471/pikachu-overworld.png);
+        background-position: 0 0 !important;
+        background-size: cover;
+        scale: 1.25;
+      }
+      .pokonami .sprite.pokemon {
+        translate: 0 50px;
+        image-rendering: pixelated;
+        scale: 1.25;
+      }
+      .pokonami .sprite.pokemon.move {
+        animation: poke-move 10s linear both infinite;
+        animation-play-state: paused;
+      }
+      .pokonami .sprite.pokemon.move.togepi {
+        bottom: 30%;
+        animation-duration: 12s;
+        animation-delay: 4s;
+        animation-play-state: paused;
+      }
+      .pokonami .sprite.pokemon:after {
+        content: '';
+        width: 10px;
+        height: 2px;
+        position: absolute;
+        z-index: -1;
+        border-radius: 50%;
+        margin-left: -5px;
+        bottom: -2px;
+        left: 50%;
+        background: rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.6);
+      }
+      .pokonami .sprite.pokemon i {
+        width: 30px;
+        height: 30px;
+      }
+      .pokonami .sprite.caterpie i {
+        background-position: -30px 0;
+        animation: caterpie 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.weedle i {
+        background-position: -60px 0;
+        animation: weedle 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.beedrill i {
+        background-position: -90px 0;
+        animation: beedrill 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.pidgey i {
+        background-position: -120px 0;
+        animation: pidgey 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.spearow i {
+        background-position: -150px 0;
+        animation: spearow 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.ekans i {
+        background-position: -180px 0;
+        animation: ekans 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.sandshrew i {
+        background-position: -210px 0;
+        animation: sandshrew 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.nidoran-f i {
+        background-position: -240px 0;
+        animation: nidoran-f 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.vulpix i {
+        background-position: -270px 0;
+        animation: vulpix 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.jigglypuff i {
+        background-position: -300px 0;
+        animation: jigglypuff 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.eevee i {
+        background-position: -330px 0;
+        animation: eevee 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.sentret i {
+        background-position: -360px 0;
+        animation: sentret 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.ledyba i {
+        background-position: -390px 0;
+        animation: ledyba 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.togepi i {
+        background-position: -420px 0;
+        animation: togepi 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.flaafy i {
+        background-position: -450px 0;
+        animation: flaafy 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.butterfree i {
+        background-position: -480px 0;
+        animation: butterfree 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.pidgeotto i {
+        background-position: -510px 0;
+        animation: pidgeotto 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.rattata i {
+        background-position: -540px 0;
+        animation: rattata 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.pikachu i {
+        background-position: -570px 0;
+        animation: pikachu 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.nidoran-m i {
+        background-position: -600px 0;
+        animation: nidoran-m 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.clefairy i {
+        background-position: -630px 0;
+        animation: clefairy 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.zubat i {
+        background-position: -660px 0;
+        animation: zubat 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.oddish i {
+        background-position: -690px 0;
+        animation: oddish 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.paras i {
+        background-position: -720px 0;
+        animation: paras 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.venonat i {
+        background-position: -750px 0;
+        animation: venonat 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.growlithe i {
+        background-position: -780px 0;
+        animation: growlithe 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.poliwag i {
+        background-position: -810px 0;
+        animation: poliwag 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.abra i {
+        background-position: -840px 0;
+        animation: abra 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.bellsprout i {
+        background-position: -870px 0;
+        animation: bellsprout 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.geodude i {
+        background-position: -900px 0;
+        animation: geodude 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.cubone i {
+        background-position: -930px 0;
+        animation: cubone 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.dratini i {
+        background-position: -960px 0;
+        animation: dratini 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.spinarak i {
+        background-position: -990px 0;
+        animation: spinarak 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.mareep i {
+        background-position: -1020px 0;
+        animation: mareep 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.marill i {
+        background-position: -1050px 0;
+        animation: marill 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.hoppip i {
+        background-position: -1080px 0;
+        animation: hoppip 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.phanpy i {
+        background-position: -1110px 0;
+        animation: phanpy 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.miltank i {
+        background-position: -1140px 0;
+        animation: miltank 0.25s infinite steps(1);
+      }
+      .pokonami .sprite.still i {
+        animation: none;
+      }
+
+      .pokemons {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .control-me .sprite {
+        cursor: pointer;
+      }
+
+      .control-me .pikachu:hover quote {
+        opacity: 1;
+      }
+
+      #toggle:checked ~ .control-me .sprite:not(.pikachu) quote {
+        opacity: 1;
+      }
+
+      #toggle:checked ~ .control-me .move,
+      #toggle:checked ~ .control-me .togepi.move {
+        animation-play-state: running !important;
+      }
+
+      #toggle:not(:checked) ~ .control-me .move i {
+        animation-play-state: paused;
+      }
+
+      #toggle:checked ~ .control-me .label {
+        opacity: 0;
+      }
+
+      @keyframes pika-move {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(1px);
+        }
+      }
+      @keyframes poke-move {
+        0% {
+          opacity: 0;
+          transform: translateX(0);
+        }
+        10% {
+          opacity: 1;
+        }
+        40% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+          transform: translateX(100vw);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(100vw);
+        }
+      }
+      @keyframes caterpie {
+        0% {
+          background-position: -30px 0;
+        }
+        50% {
+          background-position: -30px -30px;
+        }
+      }
+      @keyframes weedle {
+        0% {
+          background-position: -60px 0;
+        }
+        50% {
+          background-position: -60px -30px;
+        }
+      }
+      @keyframes beedrill {
+        0% {
+          background-position: -90px 0;
+        }
+        50% {
+          background-position: -90px -30px;
+        }
+      }
+      @keyframes pidgey {
+        0% {
+          background-position: -120px 0;
+        }
+        50% {
+          background-position: -120px -30px;
+        }
+      }
+      @keyframes spearow {
+        0% {
+          background-position: -150px 0;
+        }
+        50% {
+          background-position: -150px -30px;
+        }
+      }
+      @keyframes ekans {
+        0% {
+          background-position: -180px 0;
+        }
+        50% {
+          background-position: -180px -30px;
+        }
+      }
+      @keyframes sandshrew {
+        0% {
+          background-position: -210px 0;
+        }
+        50% {
+          background-position: -210px -30px;
+        }
+      }
+      @keyframes nidoran-f {
+        0% {
+          background-position: -240px 0;
+        }
+        50% {
+          background-position: -240px -30px;
+        }
+      }
+      @keyframes vulpix {
+        0% {
+          background-position: -270px 0;
+        }
+        50% {
+          background-position: -270px -30px;
+        }
+      }
+      @keyframes jigglypuff {
+        0% {
+          background-position: -300px 0;
+        }
+        50% {
+          background-position: -300px -30px;
+        }
+      }
+      @keyframes eevee {
+        0% {
+          background-position: -330px 0;
+        }
+        50% {
+          background-position: -330px -30px;
+        }
+      }
+      @keyframes sentret {
+        0% {
+          background-position: -360px 0;
+        }
+        50% {
+          background-position: -360px -30px;
+        }
+      }
+      @keyframes ledyba {
+        0% {
+          background-position: -390px 0;
+        }
+        50% {
+          background-position: -390px -30px;
+        }
+      }
+      @keyframes togepi {
+        0% {
+          background-position: -420px 0;
+        }
+        50% {
+          background-position: -420px -30px;
+        }
+      }
+      @keyframes flaafy {
+        0% {
+          background-position: -450px 0;
+        }
+        50% {
+          background-position: -450px -30px;
+        }
+      }
+      @keyframes butterfree {
+        0% {
+          background-position: -480px 0;
+        }
+        50% {
+          background-position: -480px -30px;
+        }
+      }
+      @keyframes pidgeotto {
+        0% {
+          background-position: -510px 0;
+        }
+        50% {
+          background-position: -510px -30px;
+        }
+      }
+      @keyframes rattata {
+        0% {
+          background-position: -540px 0;
+        }
+        50% {
+          background-position: -540px -30px;
+        }
+      }
+      @keyframes pikachu {
+        0% {
+          background-position: -570px 0;
+        }
+        50% {
+          background-position: -570px -30px;
+        }
+      }
+      @keyframes nidoran-m {
+        0% {
+          background-position: -600px 0;
+        }
+        50% {
+          background-position: -600px -30px;
+        }
+      }
+      @keyframes clefairy {
+        0% {
+          background-position: -630px 0;
+        }
+        50% {
+          background-position: -630px -30px;
+        }
+      }
+      @keyframes zubat {
+        0% {
+          background-position: -660px 0;
+        }
+        50% {
+          background-position: -660px -30px;
+        }
+      }
+      @keyframes oddish {
+        0% {
+          background-position: -690px 0;
+        }
+        50% {
+          background-position: -690px -30px;
+        }
+      }
+      @keyframes paras {
+        0% {
+          background-position: -720px 0;
+        }
+        50% {
+          background-position: -720px -30px;
+        }
+      }
+      @keyframes venonat {
+        0% {
+          background-position: -750px 0;
+        }
+        50% {
+          background-position: -750px -30px;
+        }
+      }
+      @keyframes growlithe {
+        0% {
+          background-position: -780px 0;
+        }
+        50% {
+          background-position: -780px -30px;
+        }
+      }
+      @keyframes poliwag {
+        0% {
+          background-position: -810px 0;
+        }
+        50% {
+          background-position: -810px -30px;
+        }
+      }
+      @keyframes abra {
+        0% {
+          background-position: -840px 0;
+        }
+        50% {
+          background-position: -840px -30px;
+        }
+      }
+      @keyframes bellsprout {
+        0% {
+          background-position: -870px 0;
+        }
+        50% {
+          background-position: -870px -30px;
+        }
+      }
+      @keyframes geodude {
+        0% {
+          background-position: -900px 0;
+        }
+        50% {
+          background-position: -900px -30px;
+        }
+      }
+      @keyframes cubone {
+        0% {
+          background-position: -930px 0;
+        }
+        50% {
+          background-position: -930px -30px;
+        }
+      }
+      @keyframes dratini {
+        0% {
+          background-position: -960px 0;
+        }
+        50% {
+          background-position: -960px -30px;
+        }
+      }
+      @keyframes spinarak {
+        0% {
+          background-position: -990px 0;
+        }
+        50% {
+          background-position: -990px -30px;
+        }
+      }
+      @keyframes mareep {
+        0% {
+          background-position: -1020px 0;
+        }
+        50% {
+          background-position: -1020px -30px;
+        }
+      }
+      @keyframes marill {
+        0% {
+          background-position: -1050px 0;
+        }
+        50% {
+          background-position: -1050px -30px;
+        }
+      }
+      @keyframes hoppip {
+        0% {
+          background-position: -1080px 0;
+        }
+        50% {
+          background-position: -1080px -30px;
+        }
+      }
+      @keyframes phanpy {
+        0% {
+          background-position: -1110px 0;
+        }
+        50% {
+          background-position: -1110px -30px;
+        }
+      }
+      @keyframes miltank {
+        0% {
+          background-position: -1140px 0;
+        }
+        50% {
+          background-position: -1140px -30px;
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/interactive-pokemon-animation">
+</head>
+  <body>
+    <div>
+      <input type="checkbox" id="toggle" class="visually-hidden" />
+
+      <label for="toggle" class="control-me pokonami">
+        <span class="label">I'm a checkbox, Click Me!</span>
+
+        <i class="sprite brock">
+          <i></i>
+          <quote class="happy"></quote>
+        </i>
+        <i class="sprite misty">
+          <i></i>
+          <quote class="happy"></quote>
+        </i>
+        <i class="sprite may">
+          <i></i>
+          <quote class="happy"></quote>
+        </i>
+        <i class="sprite ash">
+          <i></i>
+          <quote class="exclamation"></quote>
+        </i>
+        <i class="sprite pikachu">
+          <i></i>
+          <quote class="love"></quote>
+        </i>
+
+        <i class="sprite pokemon togepi move">
+          <i></i>
+          <quote class="love"></quote>
+        </i>
+
+        <div class="pokemons">
+          <i
+            class="sprite pokemon move mareep"
+            style="-webkit-animation-delay: 0.118s; bottom: 30.1%; z-index: 990"
+          >
+            <i style="-webkit-animation-delay: 0.118s"></i
+          ></i>
+          <i
+            class="sprite pokemon move rattata"
+            style="
+              -webkit-animation-delay: 1.082s;
+              bottom: 29.19%;
+              z-index: 1081;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.082s"></i
+          ></i>
+          <i
+            class="sprite pokemon move mareep"
+            style="
+              -webkit-animation-delay: 1.596s;
+              bottom: 30.81%;
+              z-index: 919;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.596s"></i
+          ></i>
+          <i
+            class="sprite pokemon move nidoran-f"
+            style="
+              -webkit-animation-delay: 1.692s;
+              bottom: 29.98%;
+              z-index: 1002;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.692s"></i
+          ></i>
+          <i
+            class="sprite pokemon move pidgey"
+            style="
+              -webkit-animation-delay: 0.603s;
+              bottom: 29.45%;
+              z-index: 1055;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.603s"></i
+          ></i>
+          <i
+            class="sprite pokemon move nidoran-f"
+            style="
+              -webkit-animation-delay: 0.762s;
+              bottom: 30.09%;
+              z-index: 991;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.762s"></i
+          ></i>
+          <i
+            class="sprite pokemon move spearow"
+            style="
+              -webkit-animation-delay: 0.585s;
+              bottom: 29.02%;
+              z-index: 1098;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.585s"></i
+          ></i>
+          <i
+            class="sprite pokemon move oddish"
+            style="
+              -webkit-animation-delay: 0.768s;
+              bottom: 30.18%;
+              z-index: 982;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.768s"></i
+          ></i>
+          <i
+            class="sprite pokemon move geodude"
+            style="
+              -webkit-animation-delay: 0.389s;
+              bottom: 29.82%;
+              z-index: 1018;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.389s"></i
+          ></i>
+          <i
+            class="sprite pokemon move nidoran-m"
+            style="
+              -webkit-animation-delay: 1.434s;
+              bottom: 30.11%;
+              z-index: 989;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.434s"></i
+          ></i>
+          <i
+            class="sprite pokemon move geodude"
+            style="
+              -webkit-animation-delay: 1.057s;
+              bottom: 29.88%;
+              z-index: 1011;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.057s"></i
+          ></i>
+          <i
+            class="sprite pokemon move oddish"
+            style="
+              -webkit-animation-delay: 0.726s;
+              bottom: 29.75%;
+              z-index: 1025;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.726s"></i
+          ></i>
+          <i
+            class="sprite pokemon move sentret"
+            style="
+              -webkit-animation-delay: 0.875s;
+              bottom: 29.7%;
+              z-index: 1030;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.875s"></i
+          ></i>
+          <i
+            class="sprite pokemon move spearow"
+            style="
+              -webkit-animation-delay: 0.563s;
+              bottom: 30.08%;
+              z-index: 992;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.563s"></i
+          ></i>
+          <i
+            class="sprite pokemon move geodude"
+            style="
+              -webkit-animation-delay: 1.199s;
+              bottom: 29.3%;
+              z-index: 1070;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.199s"></i
+          ></i>
+          <i
+            class="sprite pokemon move oddish"
+            style="
+              -webkit-animation-delay: 0.532s;
+              bottom: 31.58%;
+              z-index: 842;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.532s"></i
+          ></i>
+          <i
+            class="sprite pokemon move geodude"
+            style="
+              -webkit-animation-delay: 0.978s;
+              bottom: 29.56%;
+              z-index: 1044;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.978s"></i
+          ></i>
+          <i
+            class="sprite pokemon move oddish"
+            style="
+              -webkit-animation-delay: 1.356s;
+              bottom: 30.04%;
+              z-index: 996;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.356s"></i
+          ></i>
+          <i
+            class="sprite pokemon move oddish"
+            style="-webkit-animation-delay: 0.6s; bottom: 31.52%; z-index: 848"
+          >
+            <i style="-webkit-animation-delay: 0.6s"></i
+          ></i>
+          <i
+            class="sprite pokemon move oddish"
+            style="
+              -webkit-animation-delay: 1.363s;
+              bottom: 31.78%;
+              z-index: 822;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.363s"></i
+          ></i>
+          <i
+            class="sprite pokemon move nidoran-f"
+            style="
+              -webkit-animation-delay: 1.64s;
+              bottom: 29.46%;
+              z-index: 1054;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.64s"></i
+          ></i>
+          <i
+            class="sprite pokemon move nidoran-m"
+            style="
+              -webkit-animation-delay: 1.562s;
+              bottom: 31.88%;
+              z-index: 811;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.562s"></i
+          ></i>
+          <i
+            class="sprite pokemon move nidoran-f"
+            style="
+              -webkit-animation-delay: 1.101s;
+              bottom: 31.65%;
+              z-index: 835;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.101s"></i
+          ></i>
+          <i
+            class="sprite pokemon move geodude"
+            style="
+              -webkit-animation-delay: 0.979s;
+              bottom: 30.64%;
+              z-index: 936;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.979s"></i
+          ></i>
+          <i
+            class="sprite pokemon move geodude"
+            style="
+              -webkit-animation-delay: 0.193s;
+              bottom: 29.6%;
+              z-index: 1040;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.193s"></i
+          ></i>
+          <i
+            class="sprite pokemon move pidgey"
+            style="
+              -webkit-animation-delay: 1.347s;
+              bottom: 30.35%;
+              z-index: 965;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.347s"></i
+          ></i>
+          <i
+            class="sprite pokemon move spearow"
+            style="-webkit-animation-delay: 1.04s; bottom: 31.99%; z-index: 801"
+          >
+            <i style="-webkit-animation-delay: 1.04s"></i
+          ></i>
+          <i
+            class="sprite pokemon move nidoran-m"
+            style="
+              -webkit-animation-delay: 0.08s;
+              bottom: 29.02%;
+              z-index: 1098;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.08s"></i
+          ></i>
+          <i
+            class="sprite pokemon move mareep"
+            style="-webkit-animation-delay: 0.02s; bottom: 31.83%; z-index: 817"
+          >
+            <i style="-webkit-animation-delay: 0.02s"></i
+          ></i>
+          <i
+            class="sprite pokemon move mareep"
+            style="
+              -webkit-animation-delay: 1.532s;
+              bottom: 29.51%;
+              z-index: 1049;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.532s"></i
+          ></i>
+          <i
+            class="sprite pokemon move mareep"
+            style="
+              -webkit-animation-delay: 0.692s;
+              bottom: 30.66%;
+              z-index: 934;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.692s"></i
+          ></i>
+          <i
+            class="sprite pokemon move pidgey"
+            style="-webkit-animation-delay: 0.33s; bottom: 30.62%; z-index: 938"
+          >
+            <i style="-webkit-animation-delay: 0.33s"></i
+          ></i>
+          <i
+            class="sprite pokemon move cubone"
+            style="
+              -webkit-animation-delay: 0.427s;
+              bottom: 31.61%;
+              z-index: 839;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.427s"></i
+          ></i>
+          <i
+            class="sprite pokemon move bellsprout"
+            style="
+              -webkit-animation-delay: 0.463s;
+              bottom: 29.06%;
+              z-index: 1094;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.463s"></i
+          ></i>
+          <i
+            class="sprite pokemon move abra"
+            style="
+              -webkit-animation-delay: 1.587s;
+              bottom: 30.92%;
+              z-index: 908;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.587s"></i
+          ></i>
+          <i
+            class="sprite pokemon move bellsprout"
+            style="-webkit-animation-delay: 0.972s; bottom: 31.8%; z-index: 819"
+          >
+            <i style="-webkit-animation-delay: 0.972s"></i
+          ></i>
+          <i
+            class="sprite pokemon move venonat"
+            style="
+              -webkit-animation-delay: 1.601s;
+              bottom: 29.33%;
+              z-index: 1067;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.601s"></i
+          ></i>
+          <i
+            class="sprite pokemon move ekans"
+            style="
+              -webkit-animation-delay: 1.976s;
+              bottom: 30.18%;
+              z-index: 982;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.976s"></i
+          ></i>
+          <i
+            class="sprite pokemon move cubone"
+            style="
+              -webkit-animation-delay: 1.342s;
+              bottom: 31.43%;
+              z-index: 857;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.342s"></i
+          ></i>
+          <i
+            class="sprite pokemon move cubone"
+            style="
+              -webkit-animation-delay: 0.983s;
+              bottom: 29.82%;
+              z-index: 1018;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.983s"></i
+          ></i>
+          <i
+            class="sprite pokemon move marill"
+            style="-webkit-animation-delay: 1.201s; bottom: 31%; z-index: 900"
+          >
+            <i style="-webkit-animation-delay: 1.201s"></i
+          ></i>
+          <i
+            class="sprite pokemon move venonat"
+            style="
+              -webkit-animation-delay: 0.976s;
+              bottom: 29.99%;
+              z-index: 1001;
+            "
+          >
+            <i style="-webkit-animation-delay: 0.976s"></i
+          ></i>
+          <i
+            class="sprite pokemon move zubat"
+            style="
+              -webkit-animation-delay: 1.331s;
+              bottom: 31.01%;
+              z-index: 899;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.331s"></i
+          ></i>
+          <i
+            class="sprite pokemon move bellsprout"
+            style="-webkit-animation-delay: 2.042s; bottom: 30.7%; z-index: 930"
+          >
+            <i style="-webkit-animation-delay: 2.042s"></i
+          ></i>
+          <i
+            class="sprite pokemon move dratini"
+            style="
+              -webkit-animation-delay: 1.027s;
+              bottom: 30.16%;
+              z-index: 984;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.027s"></i
+          ></i>
+          <i
+            class="sprite pokemon move dratini"
+            style="
+              -webkit-animation-delay: 2.204s;
+              bottom: 31.59%;
+              z-index: 841;
+            "
+          >
+            <i style="-webkit-animation-delay: 2.204s"></i
+          ></i>
+          <i
+            class="sprite pokemon move butterfree"
+            style="
+              -webkit-animation-delay: 1.439s;
+              bottom: 32.75%;
+              z-index: 725;
+            "
+          >
+            <i style="-webkit-animation-delay: 1.439s"></i
+          ></i>
+          <i
+            class="sprite pokemon move beedrill"
+            style="
+              -webkit-animation-delay: 2.035s;
+              bottom: 33.84%;
+              z-index: 616;
+            "
+          >
+            <i style="-webkit-animation-delay: 2.035s"></i
+          ></i>
+        </div>
+      </label>
+    </div>
+    <!-- partial -->
+  </body>
+</html>
+

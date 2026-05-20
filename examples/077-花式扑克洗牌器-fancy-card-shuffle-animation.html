@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>花式扑克洗牌器</title>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        background-color: #f0f0f0;
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+      }
+      .form-radio {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid white;
+        border-radius: 50%;
+        outline: none;
+        cursor: pointer;
+      }
+
+      .form-radio:checked {
+        background-color: white;
+        box-shadow: inset 0 0 0 3px #10b981;
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/fancy-card-shuffle-animation">
+</head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.487.0/dist/cjs/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+      function CardShuffleAnimation() {
+        const [cards, setCards] = React.useState([]);
+        const [isShuffling, setIsShuffling] = React.useState(false);
+        const [isAnimating, setIsAnimating] = React.useState(true);
+        const [animationSpeed, setAnimationSpeed] = React.useState(1000);
+        const [shuffleStyle, setShuffleStyle] = React.useState("explosion");
+
+        const suits = ["♥", "♦", "♠", "♣"];
+        const values = [
+          "A",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "J",
+          "Q",
+          "K",
+        ];
+
+        // Initialize deck
+        React.useEffect(() => {
+          const deck = [];
+          suits.forEach((suit) => {
+            values.forEach((value) => {
+              deck.push({
+                id: `${value}-${suit}`,
+                value,
+                suit,
+                color:
+                  suit === "♥" || suit === "♦"
+                    ? "text-red-600"
+                    : "text-gray-900",
+                rotation: Math.random() * 4 - 2,
+                position: Math.random() * 10 - 5,
+                zIndex: deck.length, // Start with ordered z-indices
+                scale: 1,
+                translateY: 0,
+              });
+            });
+          });
+          setCards(deck);
+        }, []);
+
+        const shuffleDeck = () => {
+          if (isShuffling) return;
+          setIsShuffling(true);
+
+          const shuffleFunctions = {
+            explosion: performExplosionShuffle,
+            cascade: performCascadeShuffle,
+            riffle: performRiffleShuffle,
+            arc: performArcShuffle, // Add the new shuffle function
+          };
+
+          if (shuffleFunctions[shuffleStyle]) {
+            shuffleFunctions[shuffleStyle]();
+          }
+        };
+
+        const performExplosionShuffle = () => {
+          let shuffledCards = [...cards];
+          // Phase 1: Cards fly out in different directions
+          shuffledCards = shuffledCards.map((card) => ({
+            ...card,
+            rotation: Math.random() * 720 - 360,
+            position: Math.random() * 100 - 50,
+            zIndex: Math.floor(Math.random() * 52),
+            scale: 1.2,
+            translateY: 0,
+          }));
+
+          setCards(shuffledCards);
+
+          // Phase 2: Cards start gathering in a loose formation
+          setTimeout(() => {
+            shuffledCards = shuffledCards.map((card) => ({
+              ...card,
+              rotation: Math.random() * 180 - 90,
+              position: Math.random() * 50 - 25,
+              scale: 1.1,
+              translateY: 0,
+            }));
+
+            setCards(shuffledCards);
+
+            // Phase 3: Cards start forming a more organized pile
+            setTimeout(() => {
+              shuffledCards = [...shuffledCards]
+                .sort(() => Math.random() - 0.5)
+                .map((card, index) => ({
+                  ...card,
+                  rotation: Math.random() * 30 - 15,
+                  position: Math.random() * 25 - 12.5,
+                  zIndex: index,
+                  scale: 1.05,
+                  translateY: 0,
+                }));
+
+              setCards(shuffledCards);
+
+              // Phase 4: Cards settle into final stack
+              setTimeout(() => {
+                shuffledCards = shuffledCards.map((card, index) => ({
+                  ...card,
+                  rotation: Math.random() * 4 - 2,
+                  position: Math.random() * 10 - 5,
+                  zIndex: index,
+                  scale: 1,
+                  translateY: 0,
+                }));
+
+                setCards(shuffledCards);
+                setTimeout(() => setIsShuffling(false), animationSpeed / 2);
+              }, animationSpeed);
+            }, animationSpeed);
+          }, animationSpeed);
+        };
+
+        const performCascadeShuffle = () => {
+          let stackedCards = [...cards];
+
+          // Phase 1: Gather the cards into a single stack
+          stackedCards = stackedCards.map((card, index) => ({
+            ...card,
+            rotation: 0,
+            position: 0,
+            zIndex: 52 - index, // Stack from bottom to top
+            translateY: 0,
+            scale: 1,
+          }));
+
+          setCards(stackedCards);
+
+          setTimeout(() => {
+            // Phase 2: Split the stack into two piles with a subtle fan effect
+            const splitCards = stackedCards.map((card, index) => {
+              const xOffset = index % 2 === 0 ? -20 : 20; // Horizontal separation
+              const rotation = index % 2 === 0 ? -5 : 5; // Slight rotation
+              const yOffset = index * 2; // Vertical offset for fan
+              return {
+                ...card,
+                position: xOffset,
+                rotation: rotation,
+                translateY: yOffset,
+                zIndex: 26 - Math.floor(index / 2),
+              };
+            });
+            setCards(splitCards);
+
+            setTimeout(() => {
+              // Phase 3: Cascade the cards from each pile, interleaving them
+              const cascadedCards = [];
+              let leftIndex = 0;
+              let rightIndex = 0;
+              let cardIndex = 0;
+              const leftHalf = splitCards.filter((_, index) => index % 2 === 0);
+              const rightHalf = splitCards.filter(
+                (_, index) => index % 2 !== 0
+              );
+
+              while (
+                leftIndex < leftHalf.length ||
+                rightIndex < rightHalf.length
+              ) {
+                if (leftIndex < leftHalf.length) {
+                  cascadedCards.push({
+                    ...leftHalf[leftIndex],
+                    position: 0,
+                    rotation: 0,
+                    translateY: 0,
+                    zIndex: cardIndex++,
+                    transition: `all ${animationSpeed * 0.7}ms ease-in-out`, // Make this phase a bit faster
+                  });
+                  leftIndex++;
+                }
+                if (rightIndex < rightHalf.length) {
+                  cascadedCards.push({
+                    ...rightHalf[rightIndex],
+                    position: 0,
+                    rotation: 0,
+                    translateY: 0,
+                    zIndex: cardIndex++,
+                    transition: `all ${animationSpeed * 0.7}ms ease-in-out`,
+                  });
+
+                  rightIndex++;
+                }
+              }
+              setCards(cascadedCards);
+
+              setTimeout(() => {
+                setIsShuffling(false);
+              }, animationSpeed);
+            }, animationSpeed);
+          }, animationSpeed);
+        };
+
+        const performRiffleShuffle = () => {
+          const leftHalf = [...cards.slice(0, 26)];
+          const rightHalf = [...cards.slice(26)];
+
+          // Phase 1: Split deck into two halves - slightly offset vertically too
+          const initialCards = [
+            ...leftHalf.map((card, index) => ({
+              ...card,
+              rotation: -20,
+              position: -15,
+              zIndex: index,
+              scale: 1,
+              translateY: -10,
+            })),
+
+            ...rightHalf.map((card, index) => ({
+              ...card,
+              rotation: 20,
+              position: 15,
+              zIndex: index + 26,
+              scale: 1,
+              translateY: -10,
+            })),
+          ];
+
+          setCards(initialCards);
+
+          // Phase 2: Prepare for riffle - thumbs bending cards
+          setTimeout(() => {
+            const bentCards = [
+              ...leftHalf.map((card, index) => ({
+                ...card,
+                rotation: -30,
+                position: -5,
+                zIndex: index,
+                scale: 1,
+                translateY: index * 0.5,
+              })),
+
+              ...rightHalf.map((card, index) => ({
+                ...card,
+                rotation: 30,
+                position: 5,
+                zIndex: index + 26,
+                scale: 1,
+                translateY: index * 0.5,
+              })),
+            ];
+
+            setCards(bentCards);
+
+            // Phase 3: Actual riffle - cards falling into place alternately
+            setTimeout(() => {
+              const riffledCards = [];
+              let leftIndex = 0;
+              let rightIndex = 0;
+              let cardIndex = 0;
+              let fromLeft = true;
+              let previousPosition = 0;
+
+              while (
+                leftIndex < leftHalf.length ||
+                rightIndex < rightHalf.length
+              ) {
+                const groupSize = Math.floor(Math.random() * 3) + 1;
+
+                if (fromLeft && leftIndex < leftHalf.length) {
+                  for (
+                    let i = 0;
+                    i < groupSize && leftIndex < leftHalf.length;
+                    i++
+                  ) {
+                    const card = leftHalf[leftIndex];
+                    const newPosition = Math.random() * 3 - 1.5;
+                    riffledCards.push({
+                      ...card,
+                      translateY: 0,
+                      position: newPosition,
+                      zIndex: cardIndex++,
+                    });
+
+                    leftIndex++;
+                    previousPosition = newPosition;
+                  }
+                } else if (rightIndex < rightHalf.length) {
+                  for (
+                    let i = 0;
+                    i < groupSize && rightIndex < rightHalf.length;
+                    i++
+                  ) {
+                    const card = rightHalf[rightIndex];
+                    const newPosition = Math.random() * 3 - 1.5;
+                    riffledCards.push({
+                      ...card,
+                      translateY: 0,
+                      position: newPosition,
+                      zIndex: cardIndex++,
+                    });
+
+                    rightIndex++;
+                    previousPosition = newPosition;
+                  }
+                } else if (leftIndex < leftHalf.length) {
+                  const card = leftHalf[leftIndex];
+                  const newPosition = Math.random() * 3 - 1.5;
+                  riffledCards.push({
+                    ...card,
+                    translateY: 0,
+                    position: newPosition,
+                    zIndex: cardIndex++,
+                  });
+
+                  leftIndex++;
+                  previousPosition = newPosition;
+                } else if (rightIndex < rightHalf.length) {
+                  const card = rightHalf[rightIndex];
+                  const newPosition = Math.random() * 3 - 1.5;
+                  riffledCards.push({
+                    ...card,
+                    translateY: 0,
+                    position: newPosition,
+                    zIndex: cardIndex++,
+                  });
+
+                  rightIndex++;
+                  previousPosition = newPosition;
+                }
+                fromLeft = !fromLeft;
+              }
+
+              const animatedRiffle = riffledCards.map((card) => ({
+                ...card,
+                rotation: Math.random() * 1 - 0.5,
+                scale: 1,
+              }));
+
+              setCards(animatedRiffle);
+
+              // Phase 4: Square up the deck
+              setTimeout(() => {
+                const squaredCards = animatedRiffle.map((card, index) => ({
+                  ...card,
+                  rotation: 0,
+                  position: 0,
+                  zIndex: index,
+                  scale: 1,
+                }));
+
+                setCards(squaredCards);
+                setTimeout(() => setIsShuffling(false), animationSpeed / 2);
+              }, animationSpeed);
+            }, animationSpeed);
+          }, animationSpeed);
+        };
+
+        const performArcShuffle = () => {
+          let splitCards = [...cards];
+          const half = Math.ceil(splitCards.length / 2);
+          const leftCards = splitCards.slice(0, half);
+          const rightCards = splitCards.slice(half);
+
+          // Phase 1: Split and move cards to the sides with rotation
+          const initialLeftPositions = leftCards.map((card, index) => ({
+            ...card,
+            position: -150 - index * 5,
+            rotation: -40,
+            zIndex: index,
+            translateY: -20 + index * 2,
+            scale: 1.3, // Make cards bigger
+          }));
+
+          const initialRightPositions = rightCards.map((card, index) => ({
+            ...card,
+            position: 150 + index * 5,
+            rotation: 40,
+            zIndex: half + index,
+            translateY: -20 + index * 2,
+            scale: 1.3, // Make cards bigger
+          }));
+
+          splitCards = [...initialLeftPositions, ...initialRightPositions];
+          setCards(splitCards);
+
+          setTimeout(() => {
+            // Phase 2:  Move cards in an arc and start to combine
+            const combinedCards = splitCards.map((card, index) => {
+              const isLeft = index < leftCards.length;
+              const xOffset = isLeft
+                ? -50 + index * 3
+                : 50 - (index - leftCards.length) * 3;
+              const rotationDir = isLeft ? -20 : 20;
+              return {
+                ...card,
+                position: xOffset,
+                rotation: rotationDir,
+                translateY: -50 * Math.sin(index / 10),
+                zIndex: isLeft
+                  ? 26 - Math.floor(index / 2)
+                  : 26 - Math.floor((52 - index) / 2),
+                scale: 1.3, // Keep cards bigger
+              };
+            });
+            setCards(combinedCards);
+
+            setTimeout(() => {
+              // Phase 3: Bring cards to the center
+              const finalCards = combinedCards.map((card, index) => ({
+                ...card,
+                position: 0,
+                rotation: 0,
+                translateY: 0,
+                zIndex: index,
+                scale: 1, // Return to normal size
+              }));
+              setCards(finalCards);
+              setTimeout(() => setIsShuffling(false), animationSpeed / 2);
+            }, animationSpeed);
+          }, animationSpeed);
+        };
+
+        const resetDeck = () => {
+          const orderedDeck = [];
+          suits.forEach((suit) => {
+            values.forEach((value) => {
+              orderedDeck.push({
+                id: `${value}-${suit}`,
+                value,
+                suit,
+                color:
+                  suit === "♥" || suit === "♦"
+                    ? "text-red-600"
+                    : "text-gray-900",
+                rotation: 0,
+                position: 0,
+                zIndex: orderedDeck.length,
+                scale: 1,
+                translateY: 0,
+              });
+            });
+          });
+          setCards(orderedDeck);
+        };
+
+        const toggleAnimation = () => {
+          setIsAnimating(!isAnimating);
+        };
+
+        const handleShuffleStyleChange = (e) => {
+          setShuffleStyle(e.target.value);
+        };
+
+        return /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            style: {
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+              background: "linear-gradient(to bottom right, #047857, #065f46)",
+              padding: "1rem",
+              borderRadius: "0.5rem",
+              boxShadow:
+                "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+            },
+          } /*#__PURE__*/,
+
+          React.createElement(
+            "h1",
+            {
+              style: {
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: "white",
+                marginBottom: "1rem",
+              },
+            },
+            "✨ 花式扑克洗牌器 ✨"
+          ) /*#__PURE__*/,
+
+          React.createElement(
+            "div",
+            {
+              style: {
+                position: "relative",
+                height: "16rem",
+                width: "16rem",
+                marginBottom: "1.5rem",
+              },
+            },
+
+            cards.map((card /*#__PURE__*/) =>
+              React.createElement(
+                "div",
+                {
+                  key: card.id,
+                  style: {
+                    position: "absolute",
+                    backgroundColor: "white",
+                    borderRadius: "0.5rem",
+                    boxShadow:
+                      "0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)",
+                    width: "4rem",
+                    height: "6rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    padding: "0.25rem",
+                    transform: `translate(${card.position}px, ${card.translateY}px) rotate(${card.rotation}deg) scale(${card.scale})`,
+                    zIndex: card.zIndex,
+                    left: "calc(50% - 2rem)",
+                    top: "calc(50% - 3rem)",
+                    transition: isAnimating
+                      ? `all ${animationSpeed}ms ease-in-out`
+                      : "none",
+                  },
+                } /*#__PURE__*/,
+
+                React.createElement(
+                  "div",
+                  {
+                    style: {
+                      fontSize: "1.125rem",
+                      fontWeight: "bold",
+                      color:
+                        card.color === "text-red-600" ? "#dc2626" : "#111827",
+                      alignSelf: "flex-start",
+                    },
+                  },
+
+                  card.value
+                ) /*#__PURE__*/,
+
+                React.createElement(
+                  "div",
+                  {
+                    style: {
+                      fontSize: "1.5rem",
+                      color:
+                        card.color === "text-red-600" ? "#dc2626" : "#111827",
+                      alignSelf: "center",
+                    },
+                  },
+
+                  card.suit
+                ) /*#__PURE__*/,
+
+                React.createElement(
+                  "div",
+                  {
+                    style: {
+                      fontSize: "1.125rem",
+                      fontWeight: "bold",
+                      color:
+                        card.color === "text-red-600" ? "#dc2626" : "#111827",
+                      alignSelf: "flex-end",
+                      transform: "rotate(180deg)",
+                    },
+                  },
+
+                  card.value
+                )
+              )
+            )
+          ) /*#__PURE__*/,
+
+          React.createElement(
+            "div",
+            { style: { marginBottom: "1rem" } } /*#__PURE__*/,
+            React.createElement(
+              "label",
+              {
+                style: {
+                  display: "block",
+                  color: "white",
+                  fontSize: "0.875rem",
+                  fontWeight: "bold",
+                  marginBottom: "0.5rem",
+                },
+              },
+              "洗牌样式："
+            ) /*#__PURE__*/,
+
+            React.createElement(
+              "div",
+              { style: { display: "flex", gap: "0.5rem" } } /*#__PURE__*/,
+              React.createElement(
+                "label",
+                {
+                  style: { display: "inline-flex", alignItems: "center" },
+                } /*#__PURE__*/,
+                React.createElement("input", {
+                  type: "radio",
+                  className: "form-radio h-5 w-5 text-green-600",
+                  name: "shuffleStyle",
+                  value: "explosion",
+                  checked: shuffleStyle === "explosion",
+                  onChange: handleShuffleStyleChange,
+                }) /*#__PURE__*/,
+
+                React.createElement(
+                  "span",
+                  { style: { marginLeft: "0.5rem", color: "white" } },
+                  "爆炸式"
+                )
+              ) /*#__PURE__*/,
+
+              React.createElement(
+                "label",
+                {
+                  style: { display: "inline-flex", alignItems: "center" },
+                } /*#__PURE__*/,
+                React.createElement("input", {
+                  type: "radio",
+                  className: "form-radio h-5 w-5 text-green-600",
+                  name: "shuffleStyle",
+                  value: "cascade",
+                  checked: shuffleStyle === "cascade",
+                  onChange: handleShuffleStyleChange,
+                }) /*#__PURE__*/,
+
+                React.createElement(
+                  "span",
+                  { style: { marginLeft: "0.5rem", color: "white" } },
+                  "瀑布式"
+                )
+              ) /*#__PURE__*/,
+
+              React.createElement(
+                "label",
+                {
+                  style: { display: "inline-flex", alignItems: "center" },
+                } /*#__PURE__*/,
+                React.createElement("input", {
+                  type: "radio",
+                  className: "form-radio h-5 w-5 text-green-600",
+                  name: "shuffleStyle",
+                  value: "riffle",
+                  checked: shuffleStyle === "riffle",
+                  onChange: handleShuffleStyleChange,
+                }) /*#__PURE__*/,
+
+                React.createElement(
+                  "span",
+                  { style: { marginLeft: "0.5rem", color: "white" } },
+                  "交叉式"
+                )
+              ) /*#__PURE__*/,
+
+              React.createElement(
+                "label",
+                {
+                  style: { display: "inline-flex", alignItems: "center" },
+                } /*#__PURE__*/,
+                React.createElement("input", {
+                  type: "radio",
+                  className: "form-radio h-5 w-5 text-green-600",
+                  name: "shuffleStyle",
+                  value: "arc",
+                  checked: shuffleStyle === "arc",
+                  onChange: handleShuffleStyleChange,
+                }) /*#__PURE__*/,
+
+                React.createElement(
+                  "span",
+                  { style: { marginLeft: "0.5rem", color: "white" } },
+                  "弧形"
+                )
+              )
+            )
+          ) /*#__PURE__*/,
+
+          React.createElement(
+            "div",
+            { style: { display: "flex", gap: "1rem" } } /*#__PURE__*/,
+            React.createElement(
+              "button",
+              {
+                onClick: shuffleDeck,
+                disabled: isShuffling,
+                className:
+                  "bg-white text-green-600 font-bold py-2 px-4 rounded-full shadow-md flex items-center disabled:opacity-50",
+              },
+
+              isShuffling ? "洗牌中..." : "洗牌"
+            ) /*#__PURE__*/,
+
+            React.createElement(
+              "button",
+              {
+                onClick: resetDeck,
+                className:
+                  "bg-white text-green-600 font-bold py-2 px-4 rounded-full shadow-md flex items-center cursor-pointer",
+              },
+              "重置"
+            )
+          ) /*#__PURE__*/
+        );
+      }
+
+      // Render the app
+      ReactDOM.render(
+        /*#__PURE__*/ React.createElement(CardShuffleAnimation, null),
+        document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>

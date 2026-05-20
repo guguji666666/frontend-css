@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>吉卜力风</title>
+    <style>
+      :root {
+        --x: rgb(107, 127, 111);
+        --bg: #b9dcc5;
+        --test: #fde7ec;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 2000ms linear;
+        font-family: monospace;
+      }
+
+      html {
+        background-color: var(--bg);
+        -webkit-font-smoothing: antialiased;
+        font-family: "Inter", sans-serif;
+        overflow: hidden;
+      }
+
+      .webgl,
+      #loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      #loader {
+        display: grid;
+        place-content: center;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bg);
+      }
+
+      .screen,
+      .screen-1,
+      .screen-2,
+      .screen-3,
+      .screen-4 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 11;
+      }
+
+      .screen {
+        background-image: radial-gradient(
+          ellipse,
+          transparent 30%,
+          transparent 50%,
+          rgba(107, 127, 111, 0.35),
+          rgba(107, 127, 111, 0.85) 90%
+        );
+        background-size: 100%;
+        background-repeat: no-repeat;
+        animation: screen 150ms cubic-bezier(0.07, 0.87, 1, 0.2) infinite;
+        cursor: pointer;
+        display: none;
+      }
+
+      .screen-1 {
+        animation: screen-1 200ms cubic-bezier(0.07, 0.87, 1, 0.2) infinite;
+        background-image: radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.15) 30%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.17) 30%,
+            transparent 60%
+          ),
+          radial-gradient(circle, rgba(107, 127, 111, 0.2) 20%, transparent 65%),
+          radial-gradient(circle, rgba(107, 127, 111, 0.1) 40%, transparent 60%),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.27) 30%,
+            transparent 70%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.12) 36%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.17) 36%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.22) 36%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.15) 36%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.19) 36%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.15) 30%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.17) 30%,
+            transparent 60%
+          ),
+          radial-gradient(circle, rgba(107, 127, 111, 0.1) 20%, transparent 65%);
+        background-repeat: no-repeat;
+        background-size: 10vmin 10vmin, 5vmin 5vmin, 3vmin 3vmin,
+          0.5vmin 100vmin, 1vmin 1vmin, 5vmin 5vmin, 2vmin 2vmin, 7vmin 6vmin,
+          5vmin 3vmin, 2vmin 2vmin, 7vmin 6vmin, 5vmin 3vmin, 2vmin 2vmin;
+        background-position: 10vmin 10vmin, 40vmin 20vmin, 30vmin 5vmin,
+          60vmin 0vmin, 100vmin 70vmin, 180vmin 90vmin, 70vmin 10vmin,
+          30vmin 90vmin, 190vmin 30vmin, 90vmin 50vmin, 140vmin 10vmin,
+          120vmin 20vmin, 190vmin 5vmin;
+      }
+
+      .screen-2 {
+        animation: screen-2 200ms cubic-bezier(0.07, 0.87, 1, 0.2) infinite;
+        background-image: radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.15) 30%,
+            transparent 50%
+          ),
+          radial-gradient(circle, rgba(107, 127, 111, 0.1) 30%, transparent 60%),
+          radial-gradient(circle, rgba(107, 127, 111, 0.1) 20%, transparent 65%),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.15) 10%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.27) 20%,
+            transparent 70%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.12) 36%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.27) 36%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.22) 36%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.25) 36%,
+            transparent 60%
+          ),
+          radial-gradient(circle, rgba(107, 127, 111, 0.2) 36%, transparent 60%),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.15) 30%,
+            transparent 50%
+          ),
+          radial-gradient(circle, rgba(107, 127, 111, 0.2) 30%, transparent 60%),
+          radial-gradient(circle, rgba(107, 127, 111, 0.1) 20%, transparent 65%);
+        background-repeat: no-repeat;
+        background-size: 1vmin 1vmin, 0.5vmin 100vmin, 2vmin 200vmin,
+          7vmin 7vmin, 20vmin 20vmin, 2vmin 2vmin, 1vmin 1vmin, 4vmin 4vmin,
+          0.5vmin 100vmin, 2vmin 1vmin, 3vmin 3vmin, 1vmin 1vmin, 4vmin 4vmin;
+        background-position: 10vmin 40vmin, 180vmin 0vmin, 30vmin 0vmin,
+          40vmin 20vmin, 80vmin 80vmin, 140vmin 80vmin, 170vmin 30vmin,
+          130vmin 50vmin, 190vmin 35vmin, 180vmin 15vmin, 32vmin 12vmin,
+          23vmin 23vmin, 10vmin 57vmin;
+      }
+
+      .screen-3 {
+        animation: screen-3 200ms cubic-bezier(0.07, 0.87, 1, 0.2) infinite;
+        background-image: radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.3) 30%,
+            transparent 70%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.23) 30%,
+            transparent 70%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.15) 30%,
+            transparent 75%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.14) 30%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.12) 20%,
+            transparent 70%
+          ),
+          radial-gradient(circle, rgba(107, 127, 111, 0.2) 36%, transparent 60%),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.13) 36%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.18) 36%,
+            transparent 70%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.15) 36%,
+            transparent 70%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.19) 36%,
+            transparent 70%
+          ),
+          radial-gradient(circle, rgba(107, 127, 111, 0.1) 30%, transparent 50%),
+          radial-gradient(circle, rgba(107, 127, 111, 0.1) 30%, transparent 60%),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.15) 20%,
+            transparent 65%
+          );
+        background-repeat: no-repeat;
+        background-size: 1vmin 1vmin, 0.35vmin 100vmin, 2vmin 20vmin,
+          3vmin 3vmin, 5vmin 5vmin, 2vmin 2vmin, 3vmin 1vmin, 3vmin 4vmin,
+          0.35vmin 200vmin, 0.5vmin 100vmin, 7vmin 7vmin, 4vmin 4vmin,
+          14vmin 4vmin;
+        background-position: 30vmin 40vmin, 180vmin 10vmin, 130vmin 80vmin,
+          160vmin 20vmin, 80vmin 60vmin, 140vmin 50vmin, 170vmin 32vmin,
+          30vmin 55vmin, 150vmin 52vmin, 60vmin 34vmin, 132vmin 12vmin,
+          123vmin 23vmin, 110vmin 57vmin;
+      }
+
+      .screen-4 {
+        animation: screen-4 250ms cubic-bezier(0.07, 0.87, 1, 0.2) infinite;
+        background-image: radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.8) 40%,
+            transparent 70%
+          ),
+          radial-gradient(circle, rgba(107, 127, 111, 0.3) 34%, transparent 70%),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.25) 30%,
+            transparent 75%
+          ),
+          radial-gradient(circle, rgba(107, 127, 111, 0.1) 30%, transparent 60%),
+          radial-gradient(circle, rgba(107, 127, 111, 0.2) 20%, transparent 70%),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.18) 30%,
+            transparent 60%
+          ),
+          radial-gradient(circle, rgba(107, 127, 111, 0.8) 30%, transparent 60%),
+          radial-gradient(circle, rgba(107, 127, 111, 0.3) 36%, transparent 70%),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.15) 36%,
+            transparent 70%
+          ),
+          radial-gradient(
+            circle,
+            rgba(107, 127, 111, 0.19) 36%,
+            transparent 70%
+          );
+        background-repeat: no-repeat;
+        background-size: 1vmin 5vmin, 0.5vmin 10vmin, 2vmin 20vmin,
+          0.35vmin 100vmin, 20vmin 20vmin, 4vmin 4vmin, 1vmin 1vmin, 2vmin 4vmin,
+          0.25vmin 200vmin, 1vmin 1vmin;
+        background-position: 10vmin 80vmin, 80vmin 5vmin, 50vmin 85vmin,
+          20vmin 50vmin, 100vmin 40vmin, 120vmin 40vmin, 160vmin 32vmin,
+          70vmin 55vmin, 50vmin 45vmin, 80vmin 60vmin;
+      }
+
+      @keyframes screen {
+        0%,
+        45%,
+        90%,
+        100% {
+          background-image: radial-gradient(
+            ellipse,
+            transparent 30%,
+            transparent 50%,
+            rgba(107, 127, 111, 0.35),
+            rgba(107, 127, 111, 0.85) 90%
+          );
+        }
+        55%,
+        60% {
+          background-image: radial-gradient(
+            ellipse,
+            transparent 30%,
+            transparent 49%,
+            rgba(107, 127, 111, 0.35),
+            rgba(107, 127, 111, 0.85) 87.5%
+          );
+        }
+      }
+      @keyframes screen-1 {
+        0%,
+        45%,
+        90%,
+        100% {
+          top: -1vmin;
+          left: -1;
+          opacity: 0;
+        }
+        55%,
+        60% {
+          top: 1vmin;
+          left: 1vmin;
+          opacity: 0.6;
+        }
+      }
+      @keyframes screen-2 {
+        0%,
+        45%,
+        90%,
+        100% {
+          left: 0;
+          opacity: 0;
+        }
+        55%,
+        60% {
+          left: -10vmin;
+          opacity: 1;
+        }
+      }
+      @keyframes screen-3 {
+        0%,
+        45%,
+        90%,
+        100% {
+          top: 0;
+          left: 10vmin;
+          opacity: 0;
+        }
+        55%,
+        60% {
+          top: 2vmin;
+          left: 20vmin;
+          opacity: 0.7;
+        }
+      }
+      @keyframes screen-4 {
+        0%,
+        45%,
+        90%,
+        100% {
+          top: 1vmin;
+          left: 0vmin;
+          opacity: 0.2;
+        }
+        55%,
+        60% {
+          top: 1vmin;
+          left: 1vmin;
+          opacity: 0.7;
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/ghibli-style-threejs-webgl-scene">
+</head>
+  <body>
+    <canvas class="webgl"></canvas>
+
+    <div id="loader">
+      <h1>Loading</h1>
+    </div>
+
+    <canvas class="webgl"></canvas>
+
+    <div class="screen" id="screen">
+      <div class="screen-1"></div>
+      <div class="screen-2"></div>
+      <div class="screen-3"></div>
+      <div class="screen-4"></div>
+    </div>
+
+    <script type="x-shader/x-vertex" id="vertexshader">
+      uniform float uPixelRatio;
+      uniform float uSize;
+      uniform float uTime;
+      attribute float aScale;
+      void main() {
+          vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+          modelPosition.y += sin(uTime + modelPosition.x * 100.0) * aScale * 0.2;
+          modelPosition.z += sin(uTime + modelPosition.x * 100.0) * aScale * 0.2;
+          modelPosition.x += cos(uTime + modelPosition.x * 100.0) * aScale * 0.2;
+          vec4 viewPosition = viewMatrix * modelPosition;
+          vec4 projectionPostion = projectionMatrix * viewPosition;
+
+          gl_Position = projectionPostion;
+          gl_PointSize = uSize * aScale * uPixelRatio;
+          gl_PointSize += (1.0 / - viewPosition.z);
+      }
+    </script>
+
+    <script type="x-shader/x-fragment" id="fragmentshader">
+      void main() {
+          float distanceToCenter = distance(gl_PointCoord, vec2(0.5));
+          float strength = 0.1 / distanceToCenter - 0.25;
+          gl_FragColor = vec4(0.502,0.725,0.094, strength);
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "https://esm.sh/three@0.151.3";
+
+      import { GLTFLoader } from "https://esm.sh/three@0.151.3/examples/jsm/loaders/GLTFLoader.js";
+      import { OrbitControls } from "https://esm.sh/three@0.151.3/addons/controls/OrbitControls.js";
+      import { OutlineEffect } from "https://esm.sh/three@0.151.3/addons/effects/OutlineEffect.js";
+      import { DRACOLoader } from "https://esm.sh/three/examples/jsm/loaders/DRACOLoader.js";
+      import gsap from "https://esm.sh/gsap";
+
+      /*=======*/
+      const loading = document.querySelector("#loader");
+
+      const canvas = document.querySelector(".webgl");
+      const root = document.documentElement;
+      const audioElement = document.querySelector("#audio");
+      const screen = document.querySelector("#screen");
+      const scene = new THREE.Scene(),
+        scene2 = new THREE.Scene();
+      const raycaster = new THREE.Raycaster();
+      const dracoLoader = new DRACOLoader();
+      dracoLoader.setDecoderPath(
+        "https://www.gstatic.com/draco/versioned/decoders/1.5.7/"
+      );
+      const gltfLoader = new GLTFLoader();
+      gltfLoader.setDRACOLoader(dracoLoader);
+
+      const sizes = { width: window.innerWidth, height: window.innerHeight };
+      let blenderCamera = new THREE.PerspectiveCamera(
+        10,
+        sizes.width / sizes.height,
+        0.1,
+        1000
+      );
+      const controls = new OrbitControls(blenderCamera, canvas);
+
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true,
+        side: THREE.DoubleSide,
+      });
+
+      const minPan = new THREE.Vector3(-0.05, -0.05, -0.05),
+        maxPan = new THREE.Vector3(0.05, 0.05, 0.05);
+
+      const effect = new OutlineEffect(renderer, {
+        defaultThickness: 0.002,
+        defaultColor: new THREE.Color(0x202020).toArray(),
+        defaultAlpha: 1,
+        defaultKeepAlive: true,
+        defaultVisible: true,
+      });
+
+      let clock = new THREE.Clock();
+      let movementSpeed = 3;
+      let firefliesMaterial;
+      const objects = [];
+      const outerRadius = 1.35;
+      const innerRadius = 0.45;
+      const mouse = new THREE.Vector2();
+      let mixer,
+        hat,
+        mesh,
+        dummy = new THREE.Object3D(),
+        model,
+        items = 10000;
+      const matrix = new THREE.Matrix4();
+
+      //original shader: https://github.com/craftzdog/ghibli-style-shader
+      const vertexShader = `
+    // Set the precision for data types used in this shader
+    precision highp float;
+    precision highp int;
+
+    // Variables to pass from vertex to fragment shader
+    varying vec3 vNormal;
+    varying vec3 vPosition;
+
+    void main() {
+        vNormal = normal;
+        vPosition = position;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+    }
+`;
+
+      const fragmentShader = `
+    precision highp float;
+    precision highp int;
+
+    // Default THREE.js uniforms available to both fragment and vertex shader
+    uniform mat4 modelMatrix;
+
+    uniform vec3 colorMap[4];
+    uniform float brightnessThresholds[3];
+    uniform vec3 lightPosition;
+
+    // Variables passed from vertex to fragment shader
+    varying vec3 vNormal;
+    varying vec3 vPosition;
+
+    void main() {
+        vec3 worldPosition = ( modelMatrix * vec4( vPosition, 1.0 )).xyz;
+        vec3 worldNormal = normalize( vec3( modelMatrix * vec4( vNormal, 0.0 ) ) );
+        vec3 lightVector = normalize( lightPosition - worldPosition );
+        float brightness = dot( worldNormal, lightVector );
+
+        vec4 final;
+
+        if (brightness > brightnessThresholds[0])
+            final = vec4(colorMap[0], 1);
+        else if (brightness > brightnessThresholds[1])
+            final = vec4(colorMap[1], 1);
+        else if (brightness > brightnessThresholds[2])
+            final = vec4(colorMap[2], 1);
+        else
+            final = vec4(colorMap[3], 1);
+
+        gl_FragColor = vec4( final );
+    }
+`;
+
+      const vertexShader2 = `
+    varying vec2 vUv;
+    varying vec3 worldPosition;
+
+    void main() {
+        vUv = uv; // Pasamos las coordenadas UV al fragment shader
+        worldPosition = (modelMatrix * vec4(position, 1.0)).xyz; // Calculamos la posición en el espacio del mundo
+        // gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(position,1.0);
+    }
+`;
+
+      const fragmentShader2 = `
+    varying vec2 vUv;
+    varying vec3 worldPosition;
+
+    uniform vec3 baseColor1; // Color superior base
+    uniform vec3 baseColor2; // Color medio base
+    uniform vec3 baseColor3; // Color inferior base
+
+    void main() {
+        vec3 dynamicColor1 = baseColor1 - 0.1 * sin(worldPosition.x + worldPosition.y);
+        vec3 dynamicColor2 = baseColor2 - 0.125 * cos(worldPosition.x + worldPosition.y); 
+        vec3 dynamicColor3 = baseColor3 - 0.100 * sin(worldPosition.x  * 0.15); // claro
+
+        vec3 gradientColor;
+
+        if (vUv.y < 0.6) {
+            gradientColor = mix(dynamicColor3, dynamicColor2, vUv.y * 2.0);
+        } else {
+            gradientColor = mix(dynamicColor2, dynamicColor1, (vUv.y - 0.6) * 2.0); 
+        }
+
+        gl_FragColor = vec4(gradientColor, 1.0); 
+    }
+`;
+
+      const uniforms2 = {
+        baseColor1: { value: new THREE.Color(0x6ea860) },
+        baseColor2: { value: new THREE.Color(0xaedf89) },
+        baseColor3: { value: new THREE.Color(0xccdf89) }, //claro
+      };
+
+      const gradientMaterial = new THREE.ShaderMaterial({
+        vertexShader: vertexShader2,
+        fragmentShader: fragmentShader2,
+        uniforms: uniforms2,
+      });
+
+      const getRandomOffset = (min, max) => Math.random() * (max - min) + min;
+
+      function createShaderMaterial(
+        colorMap,
+        brightnessThresholds,
+        lightPosition
+      ) {
+        return new THREE.ShaderMaterial({
+          uniforms: {
+            colorMap: { value: colorMap },
+            brightnessThresholds: { value: brightnessThresholds },
+            lightPosition: { value: lightPosition },
+          },
+          vertexShader: vertexShader,
+          fragmentShader: fragmentShader,
+        });
+      }
+      const brightnessThresholds = [0.7, 0.35, 0.0001];
+      const lightPosition = new THREE.Vector3(-15, 15, 10);
+
+      const getModel = () => {
+        gltfLoader.load(
+          "https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/ramen.glb",
+          (gltf) => {
+            gltf.scene.traverse((child) => {
+              if (child.material) {
+                const colorMap = getMaterials(child.material?.name);
+                const shaderMaterial = createShaderMaterial(
+                  colorMap,
+                  brightnessThresholds,
+                  lightPosition
+                );
+                child.material = shaderMaterial;
+                child.castShadow = true;
+              }
+            });
+
+            const animations = gltf.animations;
+            mixer = new THREE.AnimationMixer(gltf.scene);
+            animations.forEach((clip) => mixer.clipAction(clip).play());
+            scene.add(blenderCamera);
+            scene.add(gltf.scene);
+            scene.position.set(0, 0.16, 0);
+            loading.style.display = "none";
+          }
+        );
+
+        gltfLoader.load(
+          "https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/ramen2.glb",
+          (gltf) => {
+            scene.add(gltf.scene);
+            scene.position.set(0, 0.16, 0);
+          }
+        );
+
+        gltfLoader.load(
+          "https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/ramen3.glb",
+          (gltf) => {
+            model = gltf.scene.children[0];
+            const geometry = model.geometry.clone();
+            mesh = new THREE.InstancedMesh(geometry, gradientMaterial, items);
+            scene2.add(mesh);
+            scene2.position.set(0, 0.16, 0);
+
+            for (let i = 0; i <= items; i++) {
+              let x, z, distance, angle;
+
+              do {
+                angle = Math.random() * Math.PI * 2;
+                distance = Math.sqrt(Math.random()) * outerRadius;
+                x = distance * Math.cos(angle);
+                z = distance * Math.sin(angle);
+              } while (distance < innerRadius);
+
+              dummy.position.set(x, -0.375, z);
+              dummy.rotation.z = getRandomOffset(-2, 4);
+              dummy.scale.x = getRandomOffset(0.02, 0.025);
+              dummy.scale.y = getRandomOffset(0.14, 0.14);
+              dummy.scale.z = getRandomOffset(0.07, 0.08);
+              dummy.rotation.x = 1.5;
+
+              dummy.updateMatrix();
+              mesh.setMatrixAt(i, dummy.matrix);
+              mesh.setColorAt(
+                i,
+                new THREE.Color(0x619553 * Math.cos(i * 0.000015) * 0.02)
+              );
+            }
+          }
+        );
+
+        gltfLoader.load(
+          "https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/ramen4.glb",
+          (gltf) => {
+            gltf.scene.traverse((child) => {
+              if (child.material) {
+                const colorMap = getMaterials(child.material?.name);
+                const shaderMaterial = createShaderMaterial(
+                  colorMap,
+                  brightnessThresholds,
+                  lightPosition
+                );
+                child.material = shaderMaterial;
+                child.castShadow = true;
+              }
+            });
+            hat = gltf.scene;
+            scene.add(hat);
+            scene.position.set(0, 0.16, 0);
+            hat.visible = false;
+          }
+        );
+      };
+
+      const getFireflies = () => {
+        //  Original code: https://codepen.io/aderaaij/details/BapYONL
+        const firefliesGeometry = new THREE.BufferGeometry();
+        const firefliesCount = 50;
+        const positionArray = new Float32Array(firefliesCount * 3);
+        const scaleArray = new Float32Array(firefliesCount);
+
+        for (let i = 0; i < firefliesCount; i++) {
+          new THREE.Vector3(
+            (Math.random() - 0.5) * 1, //x
+            Math.random() * 0.75 * 2, //z
+            (Math.random() - 0.5) * 1.5
+          ).toArray(positionArray, i * 3);
+
+          scaleArray[i] = Math.random();
+          scaleArray[i] = Math.random();
+        }
+
+        firefliesGeometry.setAttribute(
+          "position",
+          new THREE.BufferAttribute(positionArray, 3)
+        );
+        firefliesGeometry.setAttribute(
+          "aScale",
+          new THREE.BufferAttribute(scaleArray, 1)
+        );
+
+        firefliesMaterial = new THREE.ShaderMaterial({
+          uniforms: {
+            uTime: { value: 0 },
+            // uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+            uPixelRatio: { value: 1 },
+            uSize: { value: 15 },
+          },
+          vertexShader: document.getElementById("vertexshader").textContent,
+          fragmentShader: document.getElementById("fragmentshader").textContent,
+          transparent: true,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+        });
+        const fireflies = new THREE.Points(
+          firefliesGeometry,
+          firefliesMaterial
+        );
+        scene.add(fireflies);
+      };
+
+      const setMaterials = (c01, c02, c03, c04) => [
+        new THREE.Color(c04),
+        new THREE.Color(c03),
+        new THREE.Color(c02),
+        new THREE.Color(c01),
+      ];
+
+      const getMaterials = (name) => {
+        const materialColors = {
+          _default: setMaterials("#9fd6ea", "#c3dbea", "#cfe8ef", "#ffffff"),
+          Arbusto: setMaterials("#3c6153", "#549367", "#78b885", "#9fc679"),
+          Sombrero: setMaterials("#b08968", "#ddb892", "#e6ccb2", "#eed9c3"),
+          Suelo: setMaterials("#619553", "#6ea860", "#aedf89", "#ccdf89"),
+          Lampara: setMaterials("#137547", "#2a9134", "#3fa34d", "#5bba6f"),
+          Huevo: setMaterials("#feebe2", "#feeee7", "#e8e8e4", "#ffffff"),
+          HuevoYema: setMaterials("#fcac5d", "#fcb75d", "#fcbc5d", "#fcc75d"),
+          Noodles: setMaterials("#eda268", "#ffc599", "#ffd1ad", "#ffdcc2"),
+          Cebolla: setMaterials("#03440c", "#036016", "#04773b", "#058e3f"),
+          CebollaBlanca: setMaterials(
+            "#c6edc3",
+            "#daf2d7",
+            "#e4fde1",
+            "#ffffff"
+          ),
+          Carne: setMaterials("#ffd4de", "#fde7ec", "#fbedef", "#ffffff"),
+          CarneDecoracion: setMaterials(
+            "#a53860",
+            "#da627d",
+            "#ffb4ac",
+            "#fcb9b2"
+          ),
+          CarneDecoracion2: setMaterials(
+            "#a53860",
+            "#da627d",
+            "#ffa5ab",
+            "#fcb9b2"
+          ),
+          PlatoDecoracion: setMaterials(
+            "#c9184a",
+            "#ff4d6d",
+            "#ff758f",
+            "#ff8fa3"
+          ),
+          Palillo: setMaterials("#d4a276", "#e7bc91", "#f3d5b5", "#ffedd8"),
+          PalilloDecoracion: setMaterials(
+            "#6f4518",
+            "#8b5e34",
+            "#a47148",
+            "#bc8a5f"
+          ),
+          Totoro: setMaterials("#595959", "#7f7f7f", "#a5a5a5", "#cccccc"),
+          TotoroNariz: setMaterials("#212529", "#212529", "#212529", "#212529"),
+          TotoroPanza: setMaterials("#ffedd8", "#ffedd8", "#ffedd8", "#ffedd8"),
+        };
+
+        if (materialColors.hasOwnProperty(name)) return materialColors[name];
+        return materialColors["_default"];
+      };
+
+      const getRenderer = () => {
+        renderer.setSize(sizes.width, sizes.height);
+        // renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+        renderer.setPixelRatio(1);
+        renderer.outputEncoding = THREE.sRGBEncoding;
+      };
+
+      const getCamera = () => {
+        blenderCamera.position.x = 7;
+        blenderCamera.position.y = 3;
+        blenderCamera.position.z = 6;
+        scene.add(blenderCamera);
+      };
+
+      const getLights = () => {
+        const ambientLight = new THREE.AmbientLight("#ffffff", 1);
+        scene.add(ambientLight);
+
+        const light = new THREE.DirectionalLight("#ffffff");
+        scene.add(light);
+        light.position.set(-2, 0, 1);
+        light.intensity = 2;
+      };
+
+      const getControls = () => {
+        controls.enableDamping = true;
+        controls.enableZoom = true;
+        controls.enablePan = true;
+        controls.minPolarAngle = Math.PI / 2.8;
+        controls.maxPolarAngle = Math.PI / 2;
+        controls.minDistance = 5;
+        controls.maxDistance = 12;
+      };
+
+      const onMouseDown = (event) => {
+        const coords = new THREE.Vector2(
+          (event.clientX / renderer.domElement.clientWidth) * 2 - 1,
+          -((event.clientY / renderer.domElement.clientHeight) * 2 - 1)
+        );
+
+        raycaster.setFromCamera(coords, blenderCamera);
+        const intersections = raycaster.intersectObjects(scene.children, true);
+
+        if (intersections.length > 0) {
+          const selectedObject = intersections[0].object;
+
+          if (selectedObject.name == "Sphere005_1") {
+            if (!hat.visible) {
+              screen.style.display = "block";
+              hat.visible = true;
+              root.style.setProperty("--bg", "#414e45");
+              audioElement.currentTime = 0;
+              audioElement.play();
+              audioElement.loop = true;
+
+              if (hat.visible) {
+                gsap.to(blenderCamera.position, {
+                  duration: 3,
+                  x: 2.25,
+                  y: 0,
+                  z: 4,
+                  onUpdate: () => {
+                    blenderCamera.lookAt(hat.position);
+                    blenderCamera.updateProjectionMatrix();
+                    controls.update();
+                  },
+                });
+              }
+            } else {
+              hat.visible = false;
+              audioElement.pause();
+              root.style.setProperty("--bg", "#b9dcc5");
+            }
+          }
+        }
+      };
+
+      const tick = () => {
+        let elapsedTime = clock.elapsedTime;
+        requestAnimationFrame(tick);
+        let delta = clock.getDelta();
+        if (mixer) mixer.update(delta);
+
+        effect.render(scene, blenderCamera);
+        renderer.autoClear = false;
+        renderer.render(scene2, blenderCamera);
+
+        firefliesMaterial.uniforms.uTime.value = elapsedTime;
+        controls.update();
+        controls.target.clamp(minPan, maxPan);
+
+        if (mesh) {
+          for (let i = 0; i <= items; i++) {
+            mesh.getMatrixAt(i, matrix);
+            matrix.decompose(dummy.position, dummy.rotation, dummy.scale);
+
+            dummy.rotation.x +=
+              Math.sin(elapsedTime * movementSpeed + i) * 0.001;
+            dummy.rotation.y +=
+              Math.sin(elapsedTime * movementSpeed + i) * 0.001;
+            dummy.updateMatrix();
+            mesh.setMatrixAt(i, dummy.matrix);
+          }
+          mesh.instanceMatrix.needsUpdate = true;
+        }
+      };
+
+      window.addEventListener("resize", (e) => {
+        sizes.width = window.innerWidth;
+        sizes.height = window.innerHeight;
+        blenderCamera.aspect = sizes.width / sizes.height;
+        blenderCamera.updateProjectionMatrix();
+        renderer.setSize(sizes.width, sizes.height);
+        // renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+        renderer.setPixelRatio(1);
+
+        mouse.x = (e.clientX / sizes.width) * 2 - 1;
+        mouse.y = -(e.clientY / sizes.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, blenderCamera);
+      });
+
+      document.addEventListener("mousedown", onMouseDown);
+
+      screen.addEventListener("click", () => {
+        hat.visible = false;
+        audioElement.pause();
+        root.style.setProperty("--bg", "#aad4b8");
+        screen.style.display = "none";
+      });
+
+      getModel();
+      getRenderer();
+      getLights();
+      getCamera();
+      getControls();
+      getFireflies();
+      tick();
+    </script>
+  </body>
+</html>

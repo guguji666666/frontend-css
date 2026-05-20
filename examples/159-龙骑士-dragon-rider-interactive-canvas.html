@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>龙骑士</title>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      body {
+        background: #8972a4;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      body canvas {
+        box-shadow: 0.2em 0.2em 2em #0008;
+        border: none;
+        outline: none;
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/dragon-rider-interactive-canvas">
+</head>
+  <body>
+    <!-- partial:index.partial.html -->
+    <canvas id="canvas"></canvas>
+    <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+    <script>
+      var sketchProc = function (processingInstance) {
+        with (processingInstance) {
+          size(600, 600);
+          frameRate(60);
+          smooth();
+
+          var app;
+
+          var DragonRider = function () {
+            this.x = 300;
+            this.y = 300;
+            this.rot = 0;
+            this.momentum = -2;
+            this.speed = 0.08;
+            this.dir = 1;
+            this.max = 1.9;
+            this.pause = false;
+            this.timer = 0;
+            this.person = {
+              arm: {
+                from: {
+                  x1: 281,
+                  y1: 260,
+                  x2: 272,
+                  y2: 245,
+                  x3: 268,
+                  y3: 233,
+                  x4: 272,
+                  y4: 210,
+                },
+                to: {
+                  x1: 281,
+                  y1: 260,
+                  x2: 265,
+                  y2: 255,
+                  x3: 251,
+                  y3: 253,
+                  x4: 230,
+                  y4: 251,
+                },
+                value: {
+                  x1: 281,
+                  y1: 260,
+                  x2: 265,
+                  y2: 255,
+                  x3: 251,
+                  y3: 253,
+                  x4: 230,
+                  y4: 251,
+                },
+              },
+              leg: {
+                from: {
+                  x1: 297,
+                  y1: 296,
+                  x2: 304,
+                  y2: 321,
+                  x3: 279,
+                  y3: 328,
+                  x4: 282,
+                  y4: 328,
+                },
+                to: {
+                  x1: 297,
+                  y1: 296,
+                  x2: 308,
+                  y2: 312,
+                  x3: 313,
+                  y3: 320,
+                  x4: 316,
+                  y4: 325,
+                },
+                value: {
+                  x1: 297,
+                  y1: 296,
+                  x2: 308,
+                  y2: 312,
+                  x3: 313,
+                  y3: 320,
+                  x4: 316,
+                  y4: 325,
+                },
+              },
+            };
+            this.offset = {
+              from: -20,
+              to: 10,
+              value: 10,
+            };
+            this.draw = function () {
+              pushMatrix();
+              translate(this.rot * 2.5, 0);
+              //shadow
+              pushStyle();
+              noStroke();
+              fill(40, 70);
+              ellipse(290, 509, 350, 20);
+              popStyle();
+              popMatrix();
+
+              pushMatrix();
+              translate(-10 + this.rot * 3.0, 30);
+              translate(298, 302);
+              rotate(radians(this.rot));
+              translate(-298, -302);
+
+              pushStyle();
+              noStroke();
+
+              //ear back
+              fill(106, 75, 122);
+              beginShape();
+              vertex(367, 206);
+              bezierVertex(353, 197, 345, 194, 336, 190);
+              bezierVertex(341, 197, 344, 200, 346, 205);
+              endShape(CLOSE);
+
+              //wing back
+              pushMatrix();
+              translate(40, 0);
+              beginShape();
+              vertex(274, 297);
+              bezierVertex(260, 275, 245, 248, 226, 233);
+              bezierVertex(205, 218, 185, 214, 169, 206);
+              bezierVertex(179, 217, 183, 235, 177, 248);
+              bezierVertex(194, 251, 201, 259, 195, 271);
+              bezierVertex(218, 273, 248, 284, 263, 298);
+              endShape(CLOSE);
+              popMatrix();
+
+              //teeth top
+              fill(250);
+              ellipse(413, 226, 11, 10);
+              ellipse(436, 226, 11, 10);
+              ellipse(459, 226, 11, 10);
+              //teeth bottom
+              ellipse(447, 238, 11, 10);
+              ellipse(424, 238, 11, 10);
+
+              //spines on neck
+              ellipse(345, 237, 8, 8);
+              ellipse(338, 264, 8, 8);
+              //spines on tail
+              ellipse(115, 304, 8, 8);
+              ellipse(141, 301, 8, 8);
+              ellipse(166, 299, 8, 8);
+              ellipse(191, 297, 8, 8);
+              ellipse(216, 296, 8, 8);
+              ellipse(241, 295, 8, 8);
+
+              //wooden sticks
+              image(app.images.legs, 188, 352);
+
+              //leg back
+              stroke(106, 75, 122);
+              strokeWeight(12);
+              bezier(265, 397, 272, 396, 281, 393, 287, 385);
+
+              //arm back
+              noFill();
+              stroke(172, 234, 227);
+              strokeWeight(16);
+              bezier(296, 255, 296, 255, 348, 259, 348, 259);
+
+              //body/wing/leg
+              image(app.images.body, 98, 192);
+
+              //eyes
+              noStroke();
+              fill(250);
+              ellipse(371, 207, 21, 21);
+              fill(101, 226, 214);
+              ellipse(368, 208, 11, 11);
+
+              //nostrils
+              fill(69, 154, 152);
+              ellipse(437, 209, 9, 9);
+              ellipse(457, 209, 9, 9);
+
+              //spot on neck
+              //actually the person's hand
+              fill(69, 154, 152);
+              ellipse(377, 267, 19, 19);
+              fill(172, 234, 227);
+              ellipse(379, 264, 19, 19);
+
+              //lines on body
+              noFill();
+              stroke(183, 242, 236, 100);
+              strokeWeight(5);
+              bezier(378, 318, 377, 336, 373, 351, 364, 362);
+              bezier(344, 376, 331, 384, 317, 387, 301, 386);
+
+              //scales
+              stroke(73, 165, 161);
+              strokeWeight(2);
+              var arcAngle = radians(180);
+              arc(259, 346, 8, 10, 0, arcAngle);
+              arc(284, 336, 8, 10, 0, arcAngle);
+              arc(292, 336, 8, 10, 0, arcAngle);
+              arc(322, 333, 8, 10, 0, arcAngle);
+              arc(359, 323, 8, 10, 0, arcAngle);
+              arc(301, 355, 8, 10, 0, arcAngle);
+              arc(309, 355, 8, 10, 0, arcAngle);
+              arc(305, 370, 8, 10, 0, arcAngle);
+              arc(348, 345, 8, 10, 0, arcAngle);
+              arc(330, 363, 8, 10, 0, arcAngle);
+              arc(337, 363, 8, 10, 0, arcAngle);
+
+              //line on back leg/body
+              stroke(73, 165, 161);
+              strokeWeight(1);
+              bezier(266, 366, 264, 370, 265, 371, 257, 377);
+
+              //curved rocker
+              image(app.images.arc, 148, 348);
+
+              //PERSON
+              pushMatrix();
+              translate(310, 270);
+              rotate(radians(this.offset.value));
+              translate(-310, -270);
+
+              //leg
+              noFill();
+              strokeWeight(16);
+              stroke(69, 154, 152);
+              bezier(
+                this.person.leg.value.x1 + 2,
+                this.person.leg.value.y1,
+                this.person.leg.value.x2 + 2,
+                this.person.leg.value.y2,
+                this.person.leg.value.x3 + 2,
+                this.person.leg.value.y3,
+                this.person.leg.value.x4 + 2,
+                this.person.leg.value.y4
+              );
+
+              stroke(172, 234, 227);
+              strokeWeight(18);
+              bezier(
+                this.person.leg.value.x1,
+                this.person.leg.value.y1,
+                this.person.leg.value.x2,
+                this.person.leg.value.y2,
+                this.person.leg.value.x3,
+                this.person.leg.value.y3,
+                this.person.leg.value.x4,
+                this.person.leg.value.y4
+              );
+
+              //arm back drawn before dragon body
+
+              //person's body
+              noStroke();
+              fill(35, 49, 67);
+              beginShape();
+              vertex(329, 282);
+              vertex(287, 302);
+              bezierVertex(275, 290, 275, 270, 271, 255);
+              vertex(318, 243);
+              bezierVertex(318, 254, 321, 274, 329, 282);
+              endShape();
+
+              //square collar
+              noStroke();
+              fill(55, 77, 104);
+              quad(326, 241, 308, 260, 263, 258, 284, 238);
+
+              //persons head
+              pushMatrix();
+              translate(-8, -17);
+
+              translate(310, 250);
+              rotate(radians(this.offset.value * 1));
+              translate(-310, -250);
+
+              noStroke();
+              fill(172, 234, 227);
+              beginShape();
+              vertex(314, 220);
+              bezierVertex(321, 234, 320, 252, 312, 260);
+              bezierVertex(304, 267, 291, 265, 282, 258);
+              bezierVertex(275, 251, 272, 246, 270, 235);
+              bezierVertex(265, 229, 262, 217, 263, 205);
+              bezierVertex(265, 208, 266, 212, 270, 216);
+              bezierVertex(271, 211, 271, 208, 272, 203);
+              bezierVertex(277, 206, 277, 210, 279, 210);
+              bezierVertex(281, 207, 282, 202, 284, 195);
+              bezierVertex(287, 200, 290, 205, 292, 207);
+              bezierVertex(295, 207, 296, 203, 296, 195);
+              bezierVertex(298, 199, 301, 204, 304, 205);
+              bezierVertex(306, 203, 307, 200, 307, 189);
+              bezierVertex(312, 201, 314, 210, 314, 220);
+              endShape(CLOSE);
+
+              //eyes
+              fill(85, 164, 187);
+              beginShape();
+              vertex(303, 220);
+              bezierVertex(309, 219, 312, 224, 313, 230);
+              bezierVertex(312, 235, 310, 237, 306, 236);
+              bezierVertex(301, 232, 299, 224, 302, 222);
+              endShape(CLOSE);
+              beginShape();
+              vertex(286, 226);
+              bezierVertex(292, 224, 296, 230, 297, 237);
+              bezierVertex(296, 242, 291, 244, 287, 241);
+              bezierVertex(284, 235, 283, 230, 286, 226);
+              endShape(CLOSE);
+              //eye balls
+              fill(101, 226, 214);
+              ellipse(289, 234, 6, 6);
+              ellipse(305, 229, 6, 6);
+              //mouth
+              noFill();
+              stroke(240);
+              strokeWeight(5);
+              bezier(300, 247, 301, 248, 304, 246, 307, 245);
+              popMatrix();
+
+              //arm front
+              noFill();
+              strokeWeight(16);
+              stroke(69, 154, 152);
+              bezier(
+                this.person.arm.value.x1 + 1,
+                this.person.arm.value.y1,
+                this.person.arm.value.x2 + 1,
+                this.person.arm.value.y2,
+                this.person.arm.value.x3 + 1,
+                this.person.arm.value.y3,
+                this.person.arm.value.x4 + 1,
+                this.person.arm.value.y4
+              );
+              stroke(172, 234, 227);
+              strokeWeight(16);
+              bezier(
+                this.person.arm.value.x1,
+                this.person.arm.value.y1,
+                this.person.arm.value.x2,
+                this.person.arm.value.y2,
+                this.person.arm.value.x3,
+                this.person.arm.value.y3,
+                this.person.arm.value.x4,
+                this.person.arm.value.y4
+              );
+
+              popStyle();
+
+              popMatrix();
+
+              popMatrix();
+            };
+            this.update = function () {
+              if (this.pause) {
+                if (this.timer++ === 1) {
+                  this.pause = false;
+                  this.timer = 0;
+                }
+              }
+
+              if (this.dir === 1) {
+                this.person.arm.value.x1 = lerp(
+                  this.person.arm.value.x1,
+                  this.person.arm.to.x1,
+                  0.1
+                );
+                this.person.arm.value.y1 = lerp(
+                  this.person.arm.value.y1,
+                  this.person.arm.to.y1,
+                  0.1
+                );
+                this.person.arm.value.x2 = lerp(
+                  this.person.arm.value.x2,
+                  this.person.arm.to.x2,
+                  0.1
+                );
+                this.person.arm.value.y2 = lerp(
+                  this.person.arm.value.y2,
+                  this.person.arm.to.y2,
+                  0.1
+                );
+                this.person.arm.value.x3 = lerp(
+                  this.person.arm.value.x3,
+                  this.person.arm.to.x3,
+                  0.1
+                );
+                this.person.arm.value.y3 = lerp(
+                  this.person.arm.value.y3,
+                  this.person.arm.to.y3,
+                  0.1
+                );
+                this.person.arm.value.x4 = lerp(
+                  this.person.arm.value.x4,
+                  this.person.arm.to.x4,
+                  0.1
+                );
+                this.person.arm.value.y4 = lerp(
+                  this.person.arm.value.y4,
+                  this.person.arm.to.y4,
+                  0.1
+                );
+
+                this.person.leg.value.x1 = lerp(
+                  this.person.leg.value.x1,
+                  this.person.leg.to.x1,
+                  0.1
+                );
+                this.person.leg.value.y1 = lerp(
+                  this.person.leg.value.y1,
+                  this.person.leg.to.y1,
+                  0.1
+                );
+                this.person.leg.value.x2 = lerp(
+                  this.person.leg.value.x2,
+                  this.person.leg.to.x2,
+                  0.1
+                );
+                this.person.leg.value.y2 = lerp(
+                  this.person.leg.value.y2,
+                  this.person.leg.to.y2,
+                  0.1
+                );
+                this.person.leg.value.x3 = lerp(
+                  this.person.leg.value.x3,
+                  this.person.leg.to.x3,
+                  0.1
+                );
+                this.person.leg.value.y3 = lerp(
+                  this.person.leg.value.y3,
+                  this.person.leg.to.y3,
+                  0.1
+                );
+                this.person.leg.value.x4 = lerp(
+                  this.person.leg.value.x4,
+                  this.person.leg.to.x4,
+                  0.1
+                );
+                this.person.leg.value.y4 = lerp(
+                  this.person.leg.value.y4,
+                  this.person.leg.to.y4,
+                  0.1
+                );
+              } else {
+                this.person.arm.value.x1 = lerp(
+                  this.person.arm.value.x1,
+                  this.person.arm.from.x1,
+                  0.1
+                );
+                this.person.arm.value.y1 = lerp(
+                  this.person.arm.value.y1,
+                  this.person.arm.from.y1,
+                  0.1
+                );
+                this.person.arm.value.x2 = lerp(
+                  this.person.arm.value.x2,
+                  this.person.arm.from.x2,
+                  0.1
+                );
+                this.person.arm.value.y2 = lerp(
+                  this.person.arm.value.y2,
+                  this.person.arm.from.y2,
+                  0.1
+                );
+                this.person.arm.value.x3 = lerp(
+                  this.person.arm.value.x3,
+                  this.person.arm.from.x3,
+                  0.1
+                );
+                this.person.arm.value.y3 = lerp(
+                  this.person.arm.value.y3,
+                  this.person.arm.from.y3,
+                  0.1
+                );
+                this.person.arm.value.x4 = lerp(
+                  this.person.arm.value.x4,
+                  this.person.arm.from.x4,
+                  0.1
+                );
+                this.person.arm.value.y4 = lerp(
+                  this.person.arm.value.y4,
+                  this.person.arm.from.y4,
+                  0.1
+                );
+
+                this.person.leg.value.x1 = lerp(
+                  this.person.leg.value.x1,
+                  this.person.leg.from.x1,
+                  0.1
+                );
+                this.person.leg.value.y1 = lerp(
+                  this.person.leg.value.y1,
+                  this.person.leg.from.y1,
+                  0.1
+                );
+                this.person.leg.value.x2 = lerp(
+                  this.person.leg.value.x2,
+                  this.person.leg.from.x2,
+                  0.1
+                );
+                this.person.leg.value.y2 = lerp(
+                  this.person.leg.value.y2,
+                  this.person.leg.from.y2,
+                  0.1
+                );
+                this.person.leg.value.x3 = lerp(
+                  this.person.leg.value.x3,
+                  this.person.leg.from.x3,
+                  0.1
+                );
+                this.person.leg.value.y3 = lerp(
+                  this.person.leg.value.y3,
+                  this.person.leg.from.y3,
+                  0.1
+                );
+                this.person.leg.value.x4 = lerp(
+                  this.person.leg.value.x4,
+                  this.person.leg.from.x4,
+                  0.1
+                );
+                this.person.leg.value.y4 = lerp(
+                  this.person.leg.value.y4,
+                  this.person.leg.from.y4,
+                  0.1
+                );
+              }
+
+              this.offset.value = lerp(
+                this.offset.value,
+                this.dir === 1 ? this.offset.from : this.offset.to,
+                0.05
+              );
+
+              if (!this.pause) {
+                this.momentum = constrain(
+                  this.momentum + this.speed * this.dir,
+                  -this.max,
+                  this.max
+                );
+
+                if (this.momentum === this.max || this.momentum === -this.max) {
+                  this.dir *= -1;
+                  this.rot = 0;
+                }
+
+                this.rot += this.momentum;
+
+                if (this.rot < -23 || this.rot > 23) {
+                  this.pause = true;
+                  this.timer = 0;
+                }
+              }
+            };
+            this.go = function () {
+              this.draw();
+              this.update();
+            };
+          };
+
+          var App = function () {
+            this.dragonrider = new DragonRider();
+            this.dragonriderReflection = new DragonRider();
+            this.page = 'load';
+            this.images = undefined;
+            this.imageIndex = 0;
+            this.loaded = false;
+            this.sin = sin;
+            this.snow = [];
+            this.pattern = function (args) {
+              background(0, 0);
+              var xoff = 0.0,
+                yoff,
+                bright;
+              for (var x = args.px; x < args.px + args.w; x++) {
+                yoff = 0.0;
+                for (var y = args.py; y < args.py + args.h; y++) {
+                  bright = map(noise(xoff, yoff), 0, 1, args.min, args.max);
+                  if (bright > 47) {
+                    stroke(227, 163, 91);
+                  } else {
+                    stroke(args.r - bright, args.g - bright, args.b - bright);
+                  }
+                  point(x, y);
+                  yoff += args.yf;
+                }
+                xoff += args.xf;
+              }
+            };
+            this.setup = function () {
+              for (var i = 0; i < 50; i++) {
+                this.snow.push({
+                  x: random(width),
+                  y: random(-height * 0.5, 0),
+                  radius: random(3, 8),
+                  opacity: random(100, 150),
+                  speed: random(0.75, 3),
+                  vx: random(-1.5, 1.5),
+                  vamp: random(20, 30),
+                });
+              }
+
+              this.images = {
+                back: function () {
+                  background(0, 0);
+
+                  noStroke();
+                  for (var i = 0; i <= 450; i++) {
+                    fill(
+                      lerpColor(
+                        color(137, 114, 164),
+                        color(112, 89, 140),
+                        i / 450
+                      )
+                    );
+                    rect(0, i, width, 1);
+                  }
+
+                  pushMatrix();
+                  translate(0, -100);
+
+                  noStroke();
+                  fill(129, 108, 156);
+                  beginShape();
+                  vertex(0, 388);
+                  bezierVertex(29, 389, 59, 394, 89, 408);
+                  bezierVertex(129, 423, 186, 436, 240, 452);
+                  bezierVertex(279, 455, 308, 450, 321, 446);
+                  bezierVertex(355, 466, 374, 477, 398, 486);
+                  bezierVertex(416, 485, 423, 480, 432, 477);
+                  bezierVertex(447, 482, 468, 494, 483, 504);
+                  bezierVertex(514, 509, 550, 506, 600, 486);
+                  vertex(600, 550);
+                  vertex(0, 550);
+                  endShape(CLOSE);
+
+                  fill(123, 102, 150);
+                  beginShape();
+                  vertex(0, 465);
+                  bezierVertex(16, 454, 30, 449, 41, 443);
+                  bezierVertex(45, 437, 52, 425, 60, 426);
+                  bezierVertex(64, 423, 69, 418, 74, 414);
+                  bezierVertex(77, 408, 81, 407, 86, 407);
+                  bezierVertex(92, 406, 97, 401, 101, 396);
+                  bezierVertex(107, 395, 109, 393, 112, 390);
+                  bezierVertex(119, 386, 136, 382, 191, 379);
+                  bezierVertex(231, 388, 266, 408, 284, 421);
+                  bezierVertex(306, 446, 328, 474, 357, 493);
+                  bezierVertex(400, 512, 504, 531, 600, 540);
+                  vertex(600, 550);
+                  vertex(0, 550);
+                  endShape(CLOSE);
+
+                  beginShape();
+                  vertex(119, 400);
+                  vertex(119, 316);
+                  vertex(135, 307);
+                  vertex(135, 285);
+                  vertex(129, 282);
+                  vertex(129, 249);
+                  vertex(124, 248);
+                  vertex(136, 217);
+                  vertex(146, 246);
+                  vertex(148, 244);
+                  vertex(150, 247);
+                  vertex(153, 244);
+                  vertex(157, 246);
+                  vertex(157, 244);
+                  vertex(162, 247);
+                  vertex(163, 238);
+                  vertex(180, 231);
+                  vertex(180, 188);
+                  vertex(174, 188);
+                  vertex(192, 134);
+                  vertex(213, 187);
+                  vertex(207, 187);
+                  vertex(207, 242);
+                  vertex(211, 244);
+                  vertex(211, 221);
+                  vertex(217, 206);
+                  vertex(224, 222);
+                  vertex(224, 282);
+                  vertex(220, 283);
+                  vertex(220, 313);
+                  bezierVertex(224, 321, 221, 330, 224, 349);
+                  bezierVertex(227, 362, 230, 370, 235, 375);
+                  bezierVertex(235, 381, 234, 385, 234, 400);
+                  endShape(CLOSE);
+                  popMatrix();
+
+                  return get(0, 0, width, 450);
+                },
+                body: function () {
+                  background(0, 0, 0, 0);
+                  stroke(0);
+                  fill(255);
+                  beginShape();
+                  vertex(311, 199);
+                  bezierVertex(330, 198, 347, 201, 356, 203);
+                  bezierVertex(360, 197, 366, 192, 374, 194);
+                  bezierVertex(382, 197, 385, 203, 385, 209);
+                  bezierVertex(394, 213, 406, 214, 430, 213);
+                  bezierVertex(429, 207, 431, 202, 437, 201);
+                  bezierVertex(444, 202, 445, 207, 444, 212);
+                  vertex(450, 212);
+                  bezierVertex(449, 207, 451, 203, 454, 202);
+                  bezierVertex(462, 200, 466, 207, 463, 213);
+                  bezierVertex(468, 213, 473, 214, 480, 222);
+                  bezierVertex(464, 224, 439, 226, 411, 224);
+                  bezierVertex(398, 224, 394, 230, 403, 234);
+                  bezierVertex(417, 236, 425, 237, 435, 238);
+                  bezierVertex(444, 238, 455, 238, 468, 238);
+                  bezierVertex(460, 244, 444, 245, 427, 246);
+                  bezierVertex(400, 246, 388, 247, 383, 249);
+                  bezierVertex(380, 257, 384, 273, 385, 301);
+                  bezierVertex(386, 333, 383, 358, 362, 375);
+                  bezierVertex(341, 390, 318, 398, 292, 392);
+                  bezierVertex(280, 391, 274, 386, 269, 384);
+                  bezierVertex(259, 391, 250, 394, 244, 392);
+                  bezierVertex(240, 390, 239, 385, 244, 382);
+                  bezierVertex(251, 381, 254, 380, 258, 376);
+                  bezierVertex(223, 342, 205, 333, 181, 325);
+                  bezierVertex(157, 318, 122, 311, 96, 306);
+                  bezierVertex(125, 301, 176, 299, 215, 296);
+                  bezierVertex(243, 295, 267, 294, 299, 292);
+                  bezierVertex(320, 289, 332, 280, 342, 255);
+                  bezierVertex(345, 247, 347, 234, 342, 224);
+                  bezierVertex(335, 213, 324, 206, 310, 200);
+                  endShape(CLOSE);
+
+                  beginShape();
+                  vertex(274, 294);
+                  bezierVertex(260, 275, 245, 248, 226, 233);
+                  bezierVertex(205, 218, 185, 214, 169, 206);
+                  bezierVertex(179, 217, 183, 235, 177, 248);
+                  bezierVertex(194, 251, 201, 259, 195, 271);
+                  bezierVertex(218, 273, 248, 284, 263, 295);
+                  endShape(CLOSE);
+
+                  var bodyShape = get(98, 192, 382, 203);
+
+                  background(101, 226, 214);
+
+                  app.pattern({
+                    px: 90,
+                    py: 190,
+                    w: 390,
+                    h: 220,
+                    r: 101,
+                    g: 226,
+                    b: 214,
+                    xf: 0.035,
+                    yf: 0.16,
+                    min: 0,
+                    max: 50,
+                  });
+
+                  var bodyImage = get(98, 192, 382, 203);
+
+                  bodyImage.mask(bodyShape);
+
+                  return bodyImage;
+                },
+                arc: function () {
+                  background(0, 0, 0);
+                  noFill();
+                  stroke(255);
+                  strokeWeight(25);
+                  arc(298, 302, 323, 323, radians(34), radians(147));
+
+                  strokeWeight(8);
+                  line(352, 368, 391, 421);
+                  line(237, 354, 182, 402);
+
+                  var arcShape = get(148, 347, 300, 132);
+
+                  background(0, 0, 0, 0);
+
+                  app.pattern({
+                    px: 140,
+                    py: 350,
+                    w: 310,
+                    h: 130,
+                    r: 227,
+                    g: 163,
+                    b: 91,
+                    xf: 0.015,
+                    yf: 0.2,
+                    min: 0,
+                    max: 80,
+                  });
+
+                  var arcImage = get(148, 347, 300, 132);
+
+                  arcImage.mask(arcShape);
+
+                  return arcImage;
+                },
+                legs: function () {
+                  background(0, 0, 0);
+                  noFill();
+                  stroke(255);
+
+                  strokeWeight(8);
+                  line(368, 361, 405, 408);
+                  line(250, 367, 197, 415);
+
+                  var arcShape = get(188, 351, 224, 73);
+
+                  background(0, 0, 0, 0);
+
+                  app.pattern({
+                    px: 140,
+                    py: 350,
+                    w: 310,
+                    h: 130,
+                    r: 247,
+                    g: 183,
+                    b: 111,
+                    xf: 0.015,
+                    yf: 0.2,
+                    min: 0,
+                    max: 80,
+                  });
+
+                  var arcImage = get(188, 351, 224, 73);
+
+                  arcImage.mask(arcShape);
+
+                  return arcImage;
+                },
+              };
+            };
+            this.setup();
+            this.load = function (s) {
+              var obj = Object.keys(this.images);
+              this.images[obj[this.imageIndex]] =
+                this.images[obj[this.imageIndex]]();
+              this.imageIndex++;
+
+              background(137, 114, 164);
+              pushStyle();
+              fill(240, 200);
+              textAlign(CENTER, CENTER);
+              textSize(40);
+              text('LOADING', 300, 300);
+              noFill();
+              stroke(240, 200);
+              strokeWeight(10);
+              arc(
+                300,
+                300,
+                300,
+                300,
+                0,
+                map(this.imageIndex / obj.length, 0, 1, 0, 360)
+              );
+              strokeWeight(1);
+              popStyle();
+
+              if (this.imageIndex < obj.length) {
+                this.loaded = false;
+              } else {
+                this.loaded = true;
+                this.page = s;
+              }
+            };
+            this.runSnow = function () {
+              noStroke();
+
+              for (var i = 0; i < this.snow.length; i++) {
+                var flake = this.snow[i];
+
+                fill(255, 255, 255, flake.opacity--);
+
+                flake.y += flake.speed;
+
+                ellipse(
+                  flake.x +
+                    this.sin(radians(frameCount * flake.vx)) * flake.vamp,
+                  flake.y,
+                  flake.radius,
+                  flake.radius
+                );
+
+                if (flake.opacity < 0) {
+                  flake.y = random(-flake.radius);
+                  flake.opacity = random(100, 150);
+                }
+              }
+            };
+            this.run = function () {
+              image(this.images.back, 0, 0);
+
+              this.dragonrider.go();
+
+              this.runSnow();
+            };
+          };
+
+          app = new App();
+
+          draw = function () {
+            background(137, 114, 164);
+
+            switch (app.page) {
+              case 'load':
+                app.load('run');
+                break;
+              case 'run':
+                app.run();
+                break;
+            }
+          };
+        }
+      };
+
+      var canvas = document.getElementById('canvas');
+      var processingInstance = new Processing(canvas, sketchProc);
+    </script>
+  </body>
+</html>
+

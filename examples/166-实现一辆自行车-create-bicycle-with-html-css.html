@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>实现一辆自行车</title>
+    <style>
+      body {
+        margin: 0px;
+      }
+      .container {
+        position: relative;
+        max-width: 1000px;
+        width: 100%;
+        margin: 0px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .cycle_container {
+        position: relative;
+        width: 500px;
+        height: 400px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+      .tier {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border: 20px solid #0f0f6a;
+        border-radius: 50%;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .tier::after,
+      .tier::before {
+        position: absolute;
+        content: '';
+        border-radius: 50%;
+        box-sizing: border-box;
+      }
+      .tier:after {
+        height: 100%;
+        width: 100%;
+        border: 10px solid #ddd;
+      }
+      .tier::before {
+        height: 40px;
+        width: 40px;
+        background: #0f0f6a;
+        z-index: -1;
+      }
+      .pedle_round {
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        background: #0f0f6a;
+        border-radius: 50%;
+        box-sizing: border-box;
+        top: 74%;
+        left: 42%;
+      }
+      .pedle_round::after {
+        position: absolute;
+        content: '';
+        height: 140px;
+        width: 12px;
+        background: #ddd;
+        border-radius: 20px;
+        transform: rotate(278deg);
+        top: -140%;
+        right: 193%;
+        z-index: -1;
+      }
+      .pedle_round::before {
+        position: absolute;
+        content: '';
+        height: 123px;
+        width: 4px;
+        background: #0f0f6a;
+        transform: rotate(278deg);
+        top: -98%;
+        right: 205%;
+      }
+      .seat {
+        position: absolute;
+        width: 70px;
+        height: 20px;
+        background: #0f0f6a;
+        border-radius: 12px;
+        top: 35%;
+        left: 23%;
+      }
+      .seat::after {
+        position: absolute;
+        content: '';
+        width: 48px;
+        height: 16px;
+        border-radius: 12px;
+        background: #0f0f6a;
+        top: -221%;
+        left: 253%;
+        transform: rotate(9deg);
+      }
+      .front_rod {
+        position: absolute;
+        width: 50px;
+        height: 15px;
+        background: #ddd;
+        top: 28%;
+        left: 58%;
+        transform: rotate(329deg);
+        z-index: -1;
+        border-radius: 12px;
+      }
+      .front_rod::after,
+      .front_rod::before {
+        position: absolute;
+        content: '';
+        height: 203px;
+        width: 12px;
+        background: #ddd;
+        border-radius: 20px;
+        transform: rotate(0deg);
+      }
+      .front_rod::before {
+        right: 368%;
+        top: -56px;
+      }
+      .front_rod_outer {
+        position: absolute;
+        width: 24px;
+        height: 3px;
+        background: #0f0f6a;
+        top: 37%;
+        left: 58%;
+        transform: rotate(56deg);
+        /* z-index: -1; */
+        border-radius: 12px;
+      }
+      .side_rod {
+        position: absolute;
+        width: 187px;
+        height: 15px;
+        background: #ddd;
+        top: 54%;
+        left: 35%;
+        transform: rotate(295deg);
+        z-index: -1;
+        border-radius: 12px;
+      }
+      .side_rod::after {
+        position: absolute;
+        content: '';
+        width: 262px;
+        height: 15px;
+        background: #ddd;
+        top: -421%;
+        left: -35%;
+        transform: rotate(28deg);
+        z-index: -1;
+        border-radius: 12px;
+      }
+      .side_rod_outer {
+        position: absolute;
+        width: 48px;
+        height: 4px;
+        background: #0f0f6a;
+        top: 46%;
+        left: 51%;
+        transform: rotate(295deg);
+        z-index: -1;
+        border-radius: 12px;
+      }
+      .side_rod_outer::after {
+        position: absolute;
+        content: '';
+        width: 30px;
+        height: 4px;
+        background: #0f0f6a;
+        top: -7px;
+        left: 38%;
+        transform: rotate(28deg);
+        z-index: -1;
+        border-radius: 12px;
+      }
+      .peddle {
+        position: absolute;
+        width: 55px;
+        height: 15px;
+        background: #0f0f6a;
+        border-radius: 12px;
+        top: 63%;
+        left: 46%;
+        transform: rotate(23deg);
+      }
+      .peddle::after {
+        position: absolute;
+        content: '';
+        width: 55px;
+        height: 15px;
+        background: #0f0f6a;
+        border-radius: 12px;
+        top: 115px;
+        left: -21px;
+        transform: rotate(18deg);
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/create-bicycle-with-html-css">
+</head>
+  <body>
+    <div class="container">
+      <div class="cycle_container">
+        <div class="tier"></div>
+        <div class="tier"></div>
+        <div class="pedle_round"></div>
+        <div class="seat"></div>
+        <div class="front_rod"></div>
+        <div class="front_rod_outer"></div>
+        <div class="side_rod"></div>
+        <div class="side_rod_outer"></div>
+        <div class="peddle"></div>
+      </div>
+    </div>
+  </body>
+</html>
+

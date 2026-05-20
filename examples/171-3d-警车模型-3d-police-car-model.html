@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>3D 警车模型</title>
+    <style>
+      .cuboid {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      .cuboid__side:nth-of-type(1) {
+        height: calc(var(--thickness) * 1vmin);
+        width: 100%;
+        position: absolute;
+        top: 0;
+        transform: translate(0, -50%) rotateX(90deg);
+      }
+      .cuboid__side:nth-of-type(2) {
+        height: 100%;
+        width: calc(var(--thickness) * 1vmin);
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(50%, -50%) rotateY(90deg);
+      }
+      .cuboid__side:nth-of-type(3) {
+        width: 100%;
+        height: calc(var(--thickness) * 1vmin);
+        position: absolute;
+        bottom: 0;
+        transform: translate(0%, 50%) rotateX(90deg);
+      }
+      .cuboid__side:nth-of-type(4) {
+        height: 100%;
+        width: calc(var(--thickness) * 1vmin);
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(-50%, -50%) rotateY(90deg);
+      }
+      .cuboid__side:nth-of-type(5) {
+        height: 100%;
+        width: 100%;
+        transform: translate3d(0, 0, calc(var(--thickness) * 0.5vmin));
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .cuboid__side:nth-of-type(6) {
+        height: 100%;
+        width: 100%;
+        transform: translate3d(0, 0, calc(var(--thickness) * -0.5vmin)) rotateY(
+            180deg
+          );
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      *,
+      *:after,
+      *:before {
+        box-sizing: border-box;
+        transform-style: preserve-3d;
+        transition: background 0.1s ease;
+      }
+      body {
+        min-height: 100vh;
+        display: grid;
+        background: var(--bg);
+        place-items: center;
+        touch-action: none;
+      }
+      :root {
+        --base-size: 1vmin;
+        --base-height: calc(45 * 0.65);
+        --base-width: calc(75 * 0.65);
+        --speed: 0.4s;
+        --bg: hsl(210, 80%, calc((15 + (var(--on, 0) * 75)) * 1%));
+        --width: calc(var(--base-width) * var(--base-size));
+        --height: calc(var(--base-height) * var(--base-size));
+        --road-one: hsl(0, 0%, calc((40 + (var(--on, 0) * 35)) * 1%));
+        --road-two: hsl(0, 0%, calc((30 + (var(--on, 0) * 35)) * 1%));
+        --road-three: hsl(0, 0%, calc((20 + (var(--on, 0) * 35)) * 1%));
+        --road-four: hsl(0, 0%, calc((10 + (var(--on, 0) * 35)) * 1%));
+        --road-marking-one: hsl(0, 0%, calc((85 + (var(--on, 0) * 15)) * 1%));
+        --road-marking-two: hsl(0, 0%, calc((80 + (var(--on, 0) * 15)) * 1%));
+        --road-marking-three: hsl(0, 0%, calc((75 + (var(--on, 0) * 15)) * 1%));
+        --white-one: hsl(0, 0%, calc((85 + (var(--on, 0) * 10)) * 1%));
+        --white-two: hsl(0, 0%, calc((80 + (var(--on, 0) * 10)) * 1%));
+        --white-three: hsl(0, 0%, calc((75 + (var(--on, 0) * 10)) * 1%));
+        --white-four: hsl(0, 0%, calc((70 + (var(--on, 0) * 10)) * 1%));
+        --glass-one: hsl(210, 80%, calc((85 + (var(--on, 0) * 10)) * 1%));
+        --glass-two: hsl(210, 80%, calc((80 + (var(--on, 0) * 10)) * 1%));
+        --glass-three: hsl(210, 80%, calc((75 + (var(--on, 0) * 10)) * 1%));
+        --glass-four: hsl(210, 80%, calc((70 + (var(--on, 0) * 10)) * 1%));
+        --bumper-one: hsl(0, 0%, calc((80 + (var(--on, 0) * 10)) * 1%));
+        --bumper-two: hsl(0, 0%, calc((75 + (var(--on, 0) * 10)) * 1%));
+        --bumper-three: hsl(0, 0%, calc((70 + (var(--on, 0) * 10)) * 1%));
+        --bumper-four: hsl(0, 0%, calc((65 + (var(--on, 0) * 10)) * 1%));
+        --wheel-one: hsl(0, 0%, calc((15 + (var(--on, 0) * 10)) * 1%));
+        --wheel-two: hsl(0, 0%, calc((10 + (var(--on, 0) * 10)) * 1%));
+        --wheel-three: hsl(0, 0%, calc((5 + (var(--on, 0) * 10)) * 1%));
+        --wheel-four: hsl(0, 0%, calc((0 + (var(--on, 0) * 10)) * 1%));
+        --white-four: hsl(0, 0%, calc((70 + (var(--on, 0) * 10)) * 1%));
+        --black-one: hsl(0, 0%, calc((20 + (var(--on, 0) * 10)) * 1%));
+        --black-two: hsl(0, 0%, calc((15 + (var(--on, 0) * 10)) * 1%));
+        --black-three: hsl(0, 0%, calc((10 + (var(--on, 0) * 10)) * 1%));
+        --black-four: hsl(0, 0%, calc((5 + (var(--on, 0) * 10)) * 1%));
+        --hub: hsl(0, 0%, calc((65 + (var(--on, 0) * 25)) * 1%));
+        --glare: rgba(255, 255, 255, 0.25);
+        --siren-red: rgba(242, 32, 13, 0.25);
+        --siren-blue: rgba(13, 147, 242, 0.25);
+        --lamp: hsl(45, 90%, 90%, calc(0.75 - calc(var(--on, 0) * 0.75)));
+        --headlight: hsl(45, 90%, 100%, calc(1 - calc(var(--on, 0) * 0.5)));
+        --indicator: hsl(35, 90%, 50%, calc(1 - calc(var(--on, 0) * 0.5)));
+        --taillight: hsl(0, 90%, 50%, calc(1 - calc(var(--on, 0) * 0.5)));
+        --shift: calc(var(--height) * 0.1);
+        --bob: calc(var(--width) * 0.08);
+        --bob-speed: 2s;
+        --shift-speed: 5s;
+      }
+      .scene {
+        position: fixed;
+        height: var(--height);
+        width: var(--width);
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 100vmin);
+        transform: translate3d(-50%, -65%, 100vmin) rotateX(-24deg) rotateY(
+            44deg
+          ) rotateX(calc(var(--rotate-x, 0) * 1deg)) rotateY(calc(var(
+                  --rotate-y,
+                  0
+                ) * 1deg));
+      }
+      .road {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 20%;
+        transform: translate3d(0, 1px, 0);
+      }
+      .car {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        -webkit-animation: bob var(--bob-speed) infinite linear alternate;
+        animation: bob var(--bob-speed) infinite linear alternate;
+      }
+      .car__bob {
+        position: absolute;
+        left: 50%;
+        bottom: 20%;
+        height: 50%;
+        width: 50%;
+        transform: translate3d(-50%, 0%, 0vmin);
+        -webkit-animation: shift var(--shift-speed) infinite linear alternate;
+        animation: shift var(--shift-speed) infinite linear alternate;
+      }
+      @-webkit-keyframes shift {
+        0% {
+          transform: translate3d(-50%, 0%, calc(var(--shift) * -1));
+        }
+        100% {
+          transform: translate3d(-50%, 0%, calc(var(--shift) * 1));
+        }
+      }
+      @keyframes shift {
+        0% {
+          transform: translate3d(-50%, 0%, calc(var(--shift) * -1));
+        }
+        100% {
+          transform: translate3d(-50%, 0%, calc(var(--shift) * 1));
+        }
+      }
+      .car > * {
+        position: absolute;
+      }
+      .car__shadow {
+        width: 100%;
+        height: calc(var(--height) * 0.4);
+        background: rgba(0, 0, 0, 0.5);
+        bottom: 0;
+        transform: translate(0, 50%) rotateX(90deg) translate3d(0, 0, 1px) scale(
+            1.05,
+            1.1
+          );
+      }
+      .car__headlights {
+        width: 25%;
+        height: calc(var(--height) * 0.5);
+        bottom: 0%;
+        left: 0;
+        transform: translate(-125%, 50%) rotateX(90deg) translate3d(0, 0, 1px);
+        position: relative;
+      }
+      .car__headlights:after,
+      .car__headlights:before {
+        content: '';
+        position: absolute;
+        height: 50%;
+        width: 100%;
+        background: var(--lamp);
+        border-radius: 50%;
+        filter: blur(10px);
+      }
+      .car__headlights:after {
+        top: 0;
+      }
+      .car__headlights:before {
+        bottom: 0;
+      }
+      .car__wheel {
+        height: calc(var(--height) * 0.13);
+        width: calc(var(--height) * 0.13);
+        bottom: 0;
+      }
+      .car__wheel--f {
+        left: 10%;
+      }
+      .car__wheel--r {
+        right: 10%;
+      }
+      .car__wheel--osf,
+      .car__wheel--osr {
+        transform: translate3d(0, 0, calc(var(--height) * 0.2));
+      }
+      .car__wheel--nsf,
+      .car__wheel--nsr {
+        transform: translate3d(0, 0, calc(var(--height) * -0.2));
+      }
+      .car__body--bottom {
+        bottom: 5%;
+        width: 100%;
+        height: 40%;
+      }
+      .car__body--top {
+        bottom: 44.5%;
+        width: 60%;
+        height: 40%;
+        left: 22%;
+      }
+      .car__siren {
+        bottom: 85%;
+        height: calc(var(--height) * 0.0725);
+        width: calc(var(--height) * 0.0725);
+        left: 50%;
+      }
+      .car__siren > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .car__mirrors {
+        width: 5%;
+        height: 13%;
+        left: 24%;
+        bottom: 40%;
+      }
+      .car__mirror {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+      }
+      .car__mirror--left {
+        transform: translate3d(0, 0, calc((var(--height) * 0.2325) + 2px));
+      }
+      .car__mirror--right {
+        transform: translate3d(0, 0, calc((var(--height) * -0.2325) - 2px));
+      }
+      .car__bumper {
+        height: calc(var(--height) * 0.05);
+        width: calc(var(--height) * 0.05);
+        bottom: 4%;
+      }
+      .car__bumper--front {
+        left: 0;
+        transform: translate(-40%, 0);
+      }
+      .car__bumper--rear {
+        right: 0;
+        transform: translate(40%, 0);
+      }
+      @-webkit-keyframes bob {
+        0% {
+          transform: translate(calc(var(--bob) * -0.5));
+        }
+        100% {
+          transform: translate(calc(var(--bob) * 1.5));
+        }
+      }
+      @keyframes bob {
+        0% {
+          transform: translate(calc(var(--bob) * -0.5));
+        }
+        100% {
+          transform: translate(calc(var(--bob) * 1.5));
+        }
+      }
+      .body {
+        --thickness: calc(var(--base-height) * 0.4);
+      }
+      .body--top div {
+        background: var(--white-two);
+      }
+      .body--top div:nth-of-type(1) {
+        background: linear-gradient(
+          90deg,
+          transparent 0 20%,
+          var(--white-one) 20% 80%,
+          transparent 80% 100%
+        );
+      }
+      .body--top div:nth-of-type(2) {
+        background: transparent;
+      }
+      .body--top div:nth-of-type(2):after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 112%;
+        background: var(--white-two);
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0) rotateX(27deg);
+        transform-origin: 50% 100%;
+      }
+      .body--top div:nth-of-type(2):before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 112%;
+        background: linear-gradient(
+            55deg,
+            transparent 0 30%,
+            var(--glare) 30% 40%,
+            transparent 40% 45%,
+            var(--glare) 45% 50%,
+            transparent 50% 100%
+          ), var(--glass-two);
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0) rotateX(27deg) translate3d(0, 0, 1px);
+        transform-origin: 50% 100%;
+        --clip: inset(10% 10% 10% 10%);
+        -webkit-clip-path: var(--clip);
+        clip-path: var(--clip);
+      }
+      .body--top div:nth-of-type(3) {
+        background: var(--white-four);
+      }
+      .body--top div:nth-of-type(4) {
+        background-color: transparent;
+      }
+      .body--top div:nth-of-type(4):after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 112%;
+        background: var(--white-two);
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0) rotateX(-27deg);
+        transform-origin: 50% 100%;
+      }
+      .body--top div:nth-of-type(4):before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 112%;
+        background: linear-gradient(
+            55deg,
+            transparent 0 30%,
+            var(--glare) 30% 40%,
+            transparent 40% 45%,
+            var(--glare) 45% 50%,
+            transparent 50% 100%
+          ), var(--glass-two);
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0) rotateX(-27deg) translate3d(0, 0, -1px);
+        transform-origin: 50% 100%;
+        --clip: inset(10% 10% 10% 10%);
+        -webkit-clip-path: var(--clip);
+        clip-path: var(--clip);
+      }
+      .body--top div:nth-of-type(5) {
+        background: var(--white-three);
+        --clip: polygon(0 100%, 20% 0, 80% 0, 100% 100%);
+        -webkit-clip-path: var(--clip);
+        clip-path: var(--clip);
+      }
+      .body--top div:nth-of-type(5):after {
+        content: '';
+        background: linear-gradient(var(--white-three), var(--white-three)) 65% 50%/8%
+          100% no-repeat;
+        background-color: var(--glass-three);
+        position: absolute;
+        height: 90%;
+        width: 90%;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        --clip: polygon(0 100%, 20% 0, 80% 0, 100% 100%);
+        -webkit-clip-path: var(--clip);
+        clip-path: var(--clip);
+      }
+      .body--top div:nth-of-type(6) {
+        background: var(--white-four);
+        --clip: polygon(0 100%, 20% 0, 80% 0, 100% 100%);
+        -webkit-clip-path: var(--clip);
+        clip-path: var(--clip);
+      }
+      .body--top div:nth-of-type(6):after {
+        content: '';
+        background: linear-gradient(var(--white-four), var(--white-four)) 35% 50%/8%
+          100% no-repeat;
+        background-color: var(--glass-four);
+        position: absolute;
+        height: 90%;
+        width: 90%;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        --clip: polygon(0 100%, 20% 0, 80% 0, 100% 100%);
+        -webkit-clip-path: var(--clip);
+        clip-path: var(--clip);
+      }
+      .body--bottom div {
+        background: var(--black-two);
+      }
+      .body--bottom div:nth-of-type(1) {
+        background: linear-gradient(
+          90deg,
+          var(--black-one) 0 22%,
+          var(--white-one) 22% 82%,
+          var(--black-one) 82% 100%
+        );
+        background-color: var(--black-one);
+      }
+      .body--bottom div:nth-of-type(1):after {
+        content: '';
+        background: var(--black-one);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 99%;
+        width: 101%;
+        transform: translate3d(-50%, -50%, -1px);
+      }
+      .body--bottom div:nth-of-type(1):before {
+        content: '382';
+        font-family: sans-serif;
+        font-weight: bold;
+        height: 30%;
+        width: 40%;
+        text-align: center;
+        overflow: hidden;
+        position: absolute;
+        font-size: calc(var(--height) * 0.1);
+        color: var(--white-one);
+        right: 0;
+        bottom: 50%;
+        transform: translate3d(50%, 50%, 2px) rotate(-90deg) translate(0, -50%);
+      }
+      .body--bottom div:nth-of-type(2) {
+        background: linear-gradient(var(--indicator), var(--indicator)) 95% 50%/5%
+            25% no-repeat, linear-gradient(var(--indicator), var(--indicator)) 5%
+            50%/5% 25% no-repeat,
+          linear-gradient(var(--taillight), var(--taillight)) 10% 50%/15% 25% no-repeat,
+          linear-gradient(var(--taillight), var(--taillight)) 90% 50%/15% 25% no-repeat;
+        background-color: var(--black-two);
+      }
+      .body--bottom div:nth-of-type(3) {
+        background-color: var(--black-four);
+      }
+      .body--bottom div:nth-of-type(4) {
+        background: repeating-linear-gradient(
+              transparent 0 20%,
+              var(--black-four) 20% 40%
+            ) 50% 50%/25% 25% no-repeat, linear-gradient(
+              var(--bumper-one),
+              var(--bumper-one)
+            ) 50% 50%/35% 25% no-repeat,
+          linear-gradient(var(--indicator), var(--indicator)) 95% 50%/5% 25% no-repeat,
+          linear-gradient(var(--indicator), var(--indicator)) 5% 50%/5% 25% no-repeat,
+          linear-gradient(var(--headlight), var(--headlight)) 10% 50%/15% 25% no-repeat,
+          linear-gradient(var(--headlight), var(--headlight)) 90% 50%/15% 25% no-repeat;
+        background-color: var(--black-two);
+      }
+      .body--bottom div:nth-of-type(5) {
+        background: linear-gradient(
+          90deg,
+          var(--black-three) 0 22%,
+          var(--white-three) 22% 82%,
+          var(--black-three) 82% 100%
+        );
+        background-color: var(--black-three);
+      }
+      .body--bottom div:nth-of-type(5):after {
+        content: '';
+        height: 75%;
+        width: 35%;
+        background: url('https://assets.codepen.io/605876/bear--gold-badge--large.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: absolute;
+        left: 35%;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+      .body--bottom div:nth-of-type(6) {
+        background: linear-gradient(
+          90deg,
+          var(--black-four) 0 18%,
+          var(--white-four) 18% 78%,
+          var(--black-four) 78% 100%
+        );
+        background-color: var(--black-four);
+      }
+      .body--bottom div:nth-of-type(6):after {
+        content: '';
+        height: 75%;
+        width: 35%;
+        background: url('https://assets.codepen.io/605876/bear--gold-badge--large.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: absolute;
+        left: 45%;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+      .scene__road {
+        --thickness: calc(var(--base-height));
+      }
+      .scene__road > div:nth-of-type(1) {
+        background-color: var(--road-one);
+      }
+      .scene__road > div:nth-of-type(2) {
+        background: var(--road-two);
+      }
+      .scene__road > div:nth-of-type(3) {
+        background: var(--road-four);
+      }
+      .scene__road > div:nth-of-type(4) {
+        background-color: var(--road-two);
+      }
+      .scene__road > div:nth-of-type(5) {
+        background: var(--road-three);
+      }
+      .scene__road > div:nth-of-type(6) {
+        background: var(--road-four);
+      }
+      .siren--red {
+        --thickness: calc(var(--base-height) * 0.1);
+        --alpha: 0.25;
+        transform: translate3d(0, 0, calc(var(--height) * -0.075));
+        --siren-red: hsla(5, 90%, 50%, var(--alpha));
+        -webkit-animation: flash var(--siren) infinite;
+        animation: flash var(--siren) infinite;
+      }
+      .siren--red div {
+        background: var(--siren-red);
+      }
+      .siren--blue {
+        --alpha: 0.25;
+        --thickness: calc(var(--base-height) * 0.1);
+        --siren-blue: hsla(210, 90%, 50%, var(--alpha));
+        transform: translate3d(0, 0, calc(var(--height) * 0.075));
+        animation: flash var(--siren) infinite reverse;
+      }
+      .siren--blue div {
+        background: var(--siren-blue);
+      }
+      .siren--middle {
+        --thickness: calc(var(--base-height) * 0.05);
+        transform: translate3d(0, 0, 0);
+      }
+      .siren--middle div {
+        background: var(--white-one);
+      }
+      .siren--middle div:nth-of-type(1) {
+        background: var(--white-one);
+      }
+      .siren--middle div:nth-of-type(2) {
+        background: var(--white-two);
+      }
+      .siren--middle div:nth-of-type(3) {
+        background: var(--white-three);
+      }
+      .siren--middle div:nth-of-type(4),
+      .siren--middle div:nth-of-type(5) {
+        background: var(--white-four);
+      }
+      .siren--middle div:nth-of-type(6) {
+        background: var(--white-three);
+      }
+      .wheel {
+        --thickness: calc(var(--base-height) * 0.05);
+      }
+      .wheel div {
+        background: var(--wheel-four);
+      }
+      .wheel div:nth-of-type(1) {
+        background: var(--wheel-one);
+      }
+      .wheel div:nth-of-type(2) {
+        background: var(--wheel-two);
+      }
+      .wheel div:nth-of-type(3) {
+        background: var(--wheel-three);
+      }
+      .wheel div:nth-of-type(4) {
+        background: var(--wheel-four);
+      }
+      .wheel div:nth-of-type(5) {
+        background: linear-gradient(var(--hub), var(--hub)) 50% 50%/35% 35% no-repeat;
+        background-color: var(--wheel-four);
+      }
+      .wheel div:nth-of-type(6) {
+        background: linear-gradient(var(--hub), var(--hub)) 50% 50%/35% 35% no-repeat;
+        background-color: var(--wheel-three);
+      }
+      .bumper {
+        --thickness: calc(var(--base-height) * 0.45);
+      }
+      .bumper div {
+        background: var(--bumper-one);
+      }
+      .bumper div:nth-of-type(1) {
+        background: var(--bumper-one);
+      }
+      .bumper div:nth-of-type(2) {
+        background: var(--bumper-two);
+      }
+      .bumper div:nth-of-type(3) {
+        background: var(--bumper-three);
+      }
+      .bumper div:nth-of-type(4),
+      .bumper div:nth-of-type(5) {
+        background: var(--bumper-four);
+      }
+      .bumper div:nth-of-type(6) {
+        background: var(--bumper-three);
+      }
+      .mirror {
+        --thickness: calc(var(--base-height) * 0.075);
+      }
+      .mirror div {
+        background: var(--black-two);
+      }
+      .mirror div:nth-of-type(1) {
+        background-color: var(--black-one);
+      }
+      .mirror div:nth-of-type(2) {
+        background: linear-gradient(var(--white-one), var(--white-one)) 50% 50%/75%
+          75% no-repeat;
+        background-color: var(--black-two);
+      }
+      .mirror div:nth-of-type(3) {
+        background: var(--black-four);
+      }
+      .mirror div:nth-of-type(4) {
+        background-color: var(--black-two);
+      }
+      .mirror div:nth-of-type(5) {
+        background: var(--black-three);
+      }
+      .mirror div:nth-of-type(6) {
+        background: var(--black-four);
+      }
+      .road__markings {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+      .road__markings--bottom {
+        transform: translate3d(0, 0, -1px);
+      }
+      .road__markings--bottom:after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: calc(var(--width) * 2);
+        background: repeating-linear-gradient(
+            270deg,
+            var(--road-marking-three) 0 10%,
+            transparent 10% 15%
+          ) 0 50%/100% 5% no-repeat;
+        bottom: 0;
+        left: 50%;
+        transform: translate3d(-50%, 0, 0);
+        -webkit-animation: roll-bottom var(--speed) infinite linear;
+        animation: roll-bottom var(--speed) infinite linear;
+      }
+      .road__markings--front {
+        transform: translate3d(0, 0, -1px);
+      }
+      .road__markings--front:after {
+        content: '';
+        position: absolute;
+        height: calc(var(--base-height) * 1vmin);
+        width: calc(var(--width) * 2);
+        background: repeating-linear-gradient(
+            270deg,
+            var(--road-marking-two) 0 10%,
+            transparent 10% 15%
+          ) 0 50%/100% 5% no-repeat;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-90deg) translate3d(-35%, 0, -1px);
+        -webkit-animation: roll-front var(--speed) infinite linear;
+        animation: roll-front var(--speed) infinite linear;
+      }
+      @-webkit-keyframes roll-front {
+        to {
+          transform: translate(-50%, -50%) rotate(-90deg) translate3d(-20%, 0, -1px);
+        }
+      }
+      @keyframes roll-front {
+        to {
+          transform: translate(-50%, -50%) rotate(-90deg) translate3d(-20%, 0, -1px);
+        }
+      }
+      .road__markings--back {
+        transform: translate3d(0, 0, 1px);
+      }
+      .road__markings--back:after {
+        content: '';
+        position: absolute;
+        height: calc(var(--base-height) * 1vmin);
+        width: calc(var(--width) * 2);
+        background: repeating-linear-gradient(
+            270deg,
+            var(--road-marking-two) 0 10%,
+            transparent 10% 15%
+          ) 0 50%/100% 5% no-repeat;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-90deg) translate3d(-35%, 0, 1px);
+        -webkit-animation: roll-back var(--speed) infinite linear;
+        animation: roll-back var(--speed) infinite linear;
+      }
+      @-webkit-keyframes roll-back {
+        to {
+          transform: translate(-50%, -50%) rotate(-90deg) translate3d(-50%, 0, 1px);
+        }
+      }
+      @keyframes roll-back {
+        to {
+          transform: translate(-50%, -50%) rotate(-90deg) translate3d(-50%, 0, 1px);
+        }
+      }
+      .road__markings--top {
+        transform: translate3d(0, 0, 1px);
+      }
+      .road__markings--top:after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: calc(var(--width) * 2);
+        background: repeating-linear-gradient(
+            270deg,
+            var(--road-marking-one) 0 10%,
+            transparent 10% 15%
+          ) 0 50%/100% 5% no-repeat;
+        bottom: 0;
+        left: 50%;
+        transform: translate3d(-50%, 0, 1px);
+        -webkit-animation: roll-top var(--speed) infinite linear;
+        animation: roll-top var(--speed) infinite linear;
+      }
+      @-webkit-keyframes roll-top {
+        to {
+          transform: translate3d(-35%, 0, 1px);
+        }
+      }
+      @keyframes roll-top {
+        to {
+          transform: translate3d(-35%, 0, 1px);
+        }
+      }
+      .controls {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        display: flex;
+        flex-direction: column;
+      }
+      .controls > * + * {
+        margin-top: 1rem;
+      }
+      button {
+        height: 48px;
+        width: 48px;
+        cursor: pointer;
+        transform: translate3d(0, 0, 150vmin);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: 0;
+        background: transparent;
+        outline: transparent;
+      }
+      button > svg {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+      }
+      button path {
+        fill: hsl(210, 80%, calc((90 - (var(--on, 0) * 75)) * 1%));
+      }
+      button svg:nth-of-type(1),
+      button span:nth-of-type(1) {
+        display: none;
+      }
+      button span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+      [aria-pressed='true'] svg:nth-of-type(1),
+      [aria-pressed='true'] span:nth-of-type(1) {
+        display: block;
+      }
+      [aria-pressed='true'] svg:nth-of-type(2),
+      [aria-pressed='true'] span:nth-of-type(2) {
+        display: none;
+      }
+      @-webkit-keyframes roll-bottom {
+        to {
+          transform: translate3d(-65%, 0, 0);
+        }
+      }
+      @keyframes roll-bottom {
+        to {
+          transform: translate3d(-65%, 0, 0);
+        }
+      }
+      @-webkit-keyframes flash {
+        50% {
+          --alpha: 1;
+        }
+      }
+      @keyframes flash {
+        50% {
+          --alpha: 1;
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/3d-police-car-model">
+</head>
+  <body>
+    <div class="scene">
+      <div class="road">
+        <div class="cuboid scene__road">
+          <div class="cuboid__side">
+            <div class="road__markings road__markings--top"></div>
+          </div>
+          <div class="cuboid__side">
+            <div class="road__markings road__markings--back"></div>
+          </div>
+          <div class="cuboid__side">
+            <div class="road__markings road__markings--bottom"></div>
+          </div>
+          <div class="cuboid__side">
+            <div class="road__markings road__markings--front"></div>
+          </div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+        </div>
+      </div>
+      <div class="car__bob">
+        <div class="car">
+          <div class="car__body car__body--bottom">
+            <div class="cuboid body body--bottom">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+          </div>
+          <div class="car__body car__body--top">
+            <div class="cuboid body body--top">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+          </div>
+          <div class="car__siren">
+            <div class="cuboid siren--blue">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+            <div class="cuboid siren--middle">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+            <div class="cuboid siren--red">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+          </div>
+          <div class="car__wheel car__wheel--nsf car__wheel--f">
+            <div class="cuboid wheel">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+          </div>
+          <div class="car__wheel car__wheel--nsr car__wheel--r">
+            <div class="cuboid wheel">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+          </div>
+          <div class="car__wheel car__wheel--osf car__wheel--f">
+            <div class="cuboid wheel">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+          </div>
+          <div class="car__wheel car__wheel--osr car__wheel--r">
+            <div class="cuboid wheel">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+          </div>
+          <div class="car__mirrors">
+            <div class="car__mirror car__mirror--left">
+              <div class="cuboid mirror">
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+              </div>
+            </div>
+            <div class="car__mirror car__mirror--right">
+              <div class="cuboid mirror">
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+              </div>
+            </div>
+          </div>
+          <div class="car__bumper car__bumper--front">
+            <div class="cuboid bumper">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+          </div>
+          <div class="car__bumper car__bumper--rear">
+            <div class="cuboid bumper">
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+              <div class="cuboid__side"></div>
+            </div>
+          </div>
+          <div class="car__shadow"></div>
+          <div class="car__headlights"></div>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="theme-toggle" title="Toggle theme">
+        <span>Turn Lights Off</span><span>Turn Lights On</span>
+        <svg viewBox="0 0 512 512" width="100" title="moon">
+          <path
+            d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"
+          ></path>
+        </svg>
+        <svg viewBox="0 0 512 512" width="100" title="sun">
+          <path
+            d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <!-- partial -->
+    <script type="module">
+      import gsap from 'https://cdn.skypack.dev/gsap@3.11.0';
+
+      const BOUNDS = 50;
+      document.addEventListener('pointermove', ({ x, y }) => {
+        const newX = gsap.utils.mapRange(
+          0,
+          window.innerWidth,
+          -BOUNDS * 1.5,
+          BOUNDS * 1.5,
+          x
+        );
+
+        const newY = gsap.utils.mapRange(
+          0,
+          window.innerHeight,
+          BOUNDS * 0.5,
+          -BOUNDS * 0.5,
+          y
+        );
+
+        gsap.set(document.documentElement, {
+          '--rotate-x': newY,
+          '--rotate-y': newX,
+        });
+      });
+
+      document.addEventListener('pointerdown', () => {
+        gsap.set(document.documentElement, {
+          '--speed': '0.1s',
+          '--bob-speed': 0,
+          '--shift-speed': '1.5s',
+          '--siren': '0.5s',
+        });
+      });
+      document.addEventListener('pointerup', () => {
+        gsap.set(document.documentElement, {
+          '--speed': '0.4s',
+          '--bob-speed': '2s',
+          '--shift-speed': '5s',
+          '--siren': '0s',
+        });
+      });
+
+      // Purely for debugging purposes
+      // import { GUI } from 'https://cdn.skypack.dev/dat.gui'
+      // const CONTROLLER = new GUI()
+      // const CONFIG = {
+      //   'rotate-x': -360,
+      //   'rotate-y': -360,
+      // }
+      // const UPDATE = () => {
+      //   Object.entries(CONFIG).forEach(([key, value]) => {
+      //     document.documentElement.style.setProperty(`--${key}`, value)
+      //   })
+      // }
+      // const PLANE_FOLDER = CONTROLLER.addFolder('Plane')
+      // PLANE_FOLDER.add(CONFIG, 'rotate-x', -360, 360, 1)
+      //   .name('Rotate X (deg)')
+      //   .onChange(UPDATE)
+      // PLANE_FOLDER.add(CONFIG, 'rotate-y', -360, 360, 1)
+      //   .name('Rotate Y (deg)')
+      //   .onChange(UPDATE)
+      // UPDATE()
+
+      // Dark Mode
+      const THEMES = (window.THEMES = {
+        LIGHT: 'LIGHT',
+        DARK: 'DARK',
+        KEY: 'THEME',
+      });
+
+      window.LIGHT_QUERY = window.matchMedia('(prefers-color-scheme: light)'); // Mode enums
+
+      window.__setTheme = (theme) => {
+        window.__THEME = theme;
+        window.localStorage.setItem(THEMES.KEY, theme);
+      }; // Need to check the box based on different criteria.
+      // Check if mode is Light and preference is dark or no preference.
+
+      const stored = localStorage.getItem(THEMES.KEY);
+
+      if (stored) {
+        window.__THEME = stored;
+        window.__setTheme(stored);
+      } else {
+        if (window.LIGHT_QUERY.matches) {
+          window.__THEME = THEMES.LIGHT;
+        } else {
+          window.__THEME = THEMES.DARK;
+        }
+
+        window.__setTheme(window.__THEME);
+      }
+
+      window.INITIAL_THEME =
+        (window.__THEME && window.__THEME === THEMES.LIGHT) ||
+        (window.localStorage.getItem(THEMES.KEY) &&
+          window.localStorage.getItem(THEMES.KEY) === THEMES.LIGHT);
+
+      const THEME_TOGGLE = document.querySelector('.theme-toggle');
+
+      gsap.set(THEME_TOGGLE, {
+        attr: {
+          'aria-pressed': window.__THEME === THEMES.DARK ? 'false' : 'true',
+        },
+      });
+
+      gsap.set('html', {
+        '--on': window.__THEME === THEMES.DARK ? 0 : 1,
+      });
+
+      THEME_TOGGLE.addEventListener('click', () => {
+        const NEW_THEME =
+          window.__THEME === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK;
+        window.__setTheme(NEW_THEME);
+        gsap.set(THEME_TOGGLE, {
+          attr: {
+            'aria-pressed': NEW_THEME === THEMES.DARK ? 'false' : 'true',
+          },
+        });
+
+        gsap.set('html', {
+          '--on': window.__THEME === THEMES.DARK ? 0 : 1,
+        });
+      });
+
+      const AUDIO_TOGGLE = document.querySelector('.audio-toggle');
+      window.AUDIO_MUTED =
+        (window.localStorage.getItem('3d-squad-audio') &&
+          window.localStorage.getItem('3d-squad-audio') === 'true') ||
+        false;
+    </script>
+  </body>
+</html>
+

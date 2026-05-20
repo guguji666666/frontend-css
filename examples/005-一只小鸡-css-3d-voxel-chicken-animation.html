@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chicky (Voxel by HTML and CSS)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Tiny5&display=swap");
+
+    .tiny5-regular {
+      font-family: "Tiny5", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .title {
+      color: white;
+      font-size: 4rem;
+      text-align: center;
+      padding: 0rem 1.5rem;
+      transform: translateY(-5rem);
+    }
+
+    .container {
+      background-color: green;
+      width: 100dvw;
+      height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .chicky {
+      --rotate-x: -10deg;
+      --rotate-y: -15deg;
+      position: relative;
+      transform-style: preserve-3d;
+      -webkit-animation: full-body 500ms ease-out infinite;
+      animation: full-body 500ms ease-out infinite;
+    }
+
+    .chicky .head {
+      position: absolute;
+      transform: translateZ(-3.5rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .hair {
+      position: absolute;
+      transform: translate3d(-0.5rem, -4rem, 3rem);
+    }
+
+    .chicky .head .hair.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .hair.cube .front {
+      background-color: #ffea03;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateZ(1rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .hair.cube .rear {
+      background-color: #cfbe00;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .hair.cube .top {
+      background-color: #fff583;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .hair.cube .bottom {
+      background-color: #cfbe00;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateY(2rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .hair.cube .left {
+      background-color: #fff050;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .hair.cube .right {
+      background-color: #e9d500;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top {
+      position: absolute;
+      transform: translate3d(-2.5rem, -2rem, 2rem);
+    }
+
+    .chicky .head .top.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .top.cube .front {
+      background-color: #ffea03;
+      width: 5rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(3rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .top.cube .rear {
+      background-color: #cfbe00;
+      width: 5rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .top.cube .top {
+      background-color: #fff583;
+      width: 5rem;
+      height: 3rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top.cube .bottom {
+      background-color: #cfbe00;
+      width: 5rem;
+      height: 3rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top.cube .left {
+      background-color: #fff050;
+      width: 3rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top.cube .right {
+      background-color: #e9d500;
+      width: 3rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(5rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top-middle {
+      position: absolute;
+      transform: translate3d(-3.5rem, -1rem, 1rem);
+    }
+
+    .chicky .head .top-middle.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .top-middle.cube .front {
+      background-color: #ffea03;
+      width: 7rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(5rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .top-middle.cube .rear {
+      background-color: #cfbe00;
+      width: 7rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .top-middle.cube .top {
+      background-color: #fff583;
+      width: 7rem;
+      height: 5rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top-middle.cube .bottom {
+      background-color: #cfbe00;
+      width: 7rem;
+      height: 5rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top-middle.cube .left {
+      background-color: #fff050;
+      width: 5rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top-middle.cube .right {
+      background-color: #e9d500;
+      width: 5rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(7rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .main {
+      position: absolute;
+      transform: translateX(-4.5rem);
+    }
+
+    .chicky .head .main.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .main.cube .front {
+      background-color: #ffea03;
+      width: 9rem;
+      height: 6rem;
+      position: absolute;
+      transform: translateZ(7rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .main.cube .rear {
+      background-color: #cfbe00;
+      width: 9rem;
+      height: 6rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .main.cube .top {
+      background-color: #fff583;
+      width: 9rem;
+      height: 7rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .main.cube .bottom {
+      background-color: #cfbe00;
+      width: 9rem;
+      height: 7rem;
+      position: absolute;
+      transform: translateY(6rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .main.cube .left {
+      background-color: #fff050;
+      width: 7rem;
+      height: 6rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .main.cube .right {
+      background-color: #e9d500;
+      width: 7rem;
+      height: 6rem;
+      position: absolute;
+      transform: translateX(9rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .main .front::before,
+    .chicky .head .main .front::after {
+      content: "";
+      background-color: #0f0f0f;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      top: 1rem;
+    }
+
+    .chicky .head .main .front::before {
+      left: 2rem;
+    }
+
+    .chicky .head .main .front::after {
+      left: 6rem;
+    }
+
+    .chicky .head .bottom {
+      position: absolute;
+      transform: translate3d(-3.5rem, 6rem, 1rem);
+    }
+
+    .chicky .head .bottom.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .bottom.cube .front {
+      background-color: #ffea03;
+      width: 7rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(5rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .bottom.cube .rear {
+      background-color: #cfbe00;
+      width: 7rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .bottom.cube .top {
+      background-color: #fff583;
+      width: 7rem;
+      height: 5rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .bottom.cube .bottom {
+      background-color: #cfbe00;
+      width: 7rem;
+      height: 5rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .bottom.cube .left {
+      background-color: #fff050;
+      width: 5rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .bottom.cube .right {
+      background-color: #e9d500;
+      width: 5rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(7rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .left.wing.base {
+      position: absolute;
+      transform: translate3d(-5.5rem, 3rem, 3rem);
+    }
+
+    .chicky .head .left.wing.base.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .left.wing.base.cube .front {
+      background-color: #ffea03;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateZ(1rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .left.wing.base.cube .rear {
+      background-color: #cfbe00;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .left.wing.base.cube .top {
+      background-color: #fff583;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .left.wing.base.cube .bottom {
+      background-color: #cfbe00;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateY(2rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .left.wing.base.cube .left {
+      background-color: #fff050;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .left.wing.base.cube .right {
+      background-color: #e9d500;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .left.wing {
+      position: absolute;
+      transform: translate3d(-6.5rem, 3rem, 3rem);
+    }
+
+    .chicky .head .left.wing.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .left.wing.cube .front {
+      background-color: #ffea03;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(1rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .left.wing.cube .rear {
+      background-color: #cfbe00;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .left.wing.cube .top {
+      background-color: #fff583;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .left.wing.cube .bottom {
+      background-color: #cfbe00;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .left.wing.cube .left {
+      background-color: #fff050;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .left.wing.cube .right {
+      background-color: #e9d500;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .right.wing.base {
+      position: absolute;
+      transform: translate3d(4.5rem, 3rem, 3rem);
+    }
+
+    .chicky .head .right.wing.base.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .right.wing.base.cube .front {
+      background-color: #ffea03;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateZ(1rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .right.wing.base.cube .rear {
+      background-color: #cfbe00;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .right.wing.base.cube .top {
+      background-color: #fff583;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .right.wing.base.cube .bottom {
+      background-color: #cfbe00;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateY(2rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .right.wing.base.cube .left {
+      background-color: #fff050;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .right.wing.base.cube .right {
+      background-color: #e9d500;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .right.wing {
+      position: absolute;
+      transform: translate3d(5.5rem, 3rem, 3rem);
+    }
+
+    .chicky .head .right.wing.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .right.wing.cube .front {
+      background-color: #ffea03;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(1rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .right.wing.cube .rear {
+      background-color: #cfbe00;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .right.wing.cube .top {
+      background-color: #fff583;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .right.wing.cube .bottom {
+      background-color: #cfbe00;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .right.wing.cube .left {
+      background-color: #fff050;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .right.wing.cube .right {
+      background-color: #e9d500;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .tail.base {
+      position: absolute;
+      transform: translate3d(-2.5rem, 3rem, -1rem);
+    }
+
+    .chicky .head .tail.base.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .tail.base.cube .front {
+      background-color: #ffea03;
+      width: 5rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateZ(1rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .tail.base.cube .rear {
+      background-color: #cfbe00;
+      width: 5rem;
+      height: 2rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .tail.base.cube .top {
+      background-color: #fff583;
+      width: 5rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .tail.base.cube .bottom {
+      background-color: #cfbe00;
+      width: 5rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateY(2rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .tail.base.cube .left {
+      background-color: #fff050;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .tail.base.cube .right {
+      background-color: #e9d500;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateX(5rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .tail {
+      position: absolute;
+      transform: translate3d(-1.5rem, 3rem, -2rem);
+    }
+
+    .chicky .head .tail.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .tail.cube .front {
+      background-color: #ffea03;
+      width: 3rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(1rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .tail.cube .rear {
+      background-color: #cfbe00;
+      width: 3rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .tail.cube .top {
+      background-color: #fff583;
+      width: 3rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .tail.cube .bottom {
+      background-color: #cfbe00;
+      width: 3rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .tail.cube .left {
+      background-color: #fff050;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .tail.cube .right {
+      background-color: #e9d500;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(3rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top.beak {
+      position: absolute;
+      transform: translate3d(-0.5rem, 3rem, 7rem);
+    }
+
+    .chicky .head .top.beak.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .top.beak.cube .front {
+      background-color: #ffa303;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(2rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .top.beak.cube .rear {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .top.beak.cube .top {
+      background-color: #ffd283;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top.beak.cube .bottom {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top.beak.cube .left {
+      background-color: #ffbf50;
+      width: 2rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .top.beak.cube .right {
+      background-color: #e99400;
+      width: 2rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .bottom.beak {
+      position: absolute;
+      transform: translate3d(-0.5rem, 4rem, 7rem);
+    }
+
+    .chicky .head .bottom.beak.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .bottom.beak.cube .front {
+      background-color: #ffa303;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(1rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .bottom.beak.cube .rear {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .head .bottom.beak.cube .top {
+      background-color: #ffd283;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .bottom.beak.cube .bottom {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .bottom.beak.cube .left {
+      background-color: #ffbf50;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .head .bottom.beak.cube .right {
+      background-color: #e99400;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet {
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .left.foot-group,
+    .chicky .feet .right.foot-group {
+      transform-style: preserve-3d;
+      transform-origin: 0.5rem 0rem 0.5rem;
+    }
+
+    .chicky .feet .left.foot-group {
+      -webkit-animation: left-leg 500ms ease-out infinite;
+      animation: left-leg 500ms ease-out infinite;
+    }
+
+    .chicky .feet .right.foot-group {
+      -webkit-animation: right-leg 500ms ease-out infinite;
+      animation: right-leg 500ms ease-out infinite;
+    }
+
+    .chicky .feet .left.leg {
+      position: absolute;
+      transform: translate3d(-2.5rem, 7rem, 0.5rem);
+    }
+
+    .chicky .feet .left.leg.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .left.leg.cube .front {
+      background-color: #ffa303;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(1rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .left.leg.cube .rear {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .left.leg.cube .top {
+      background-color: #ffd283;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .left.leg.cube .bottom {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .left.leg.cube .left {
+      background-color: #ffbf50;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .left.leg.cube .right {
+      background-color: #e99400;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .left.foot {
+      position: absolute;
+      transform: translate3d(-2.5rem, 8rem, 0.5rem);
+    }
+
+    .chicky .feet .left.foot.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .left.foot.cube .front {
+      background-color: #ffa303;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(2rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .left.foot.cube .rear {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .left.foot.cube .top {
+      background-color: #ffd283;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .left.foot.cube .bottom {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .left.foot.cube .left {
+      background-color: #ffbf50;
+      width: 2rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .left.foot.cube .right {
+      background-color: #e99400;
+      width: 2rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .right.leg {
+      position: absolute;
+      transform: translate3d(1.5rem, 7rem, 0.5rem);
+    }
+
+    .chicky .feet .right.leg.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .right.leg.cube .front {
+      background-color: #ffa303;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(1rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .right.leg.cube .rear {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .right.leg.cube .top {
+      background-color: #ffd283;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .right.leg.cube .bottom {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .right.leg.cube .left {
+      background-color: #ffbf50;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .right.leg.cube .right {
+      background-color: #e99400;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .right.foot {
+      position: absolute;
+      transform: translate3d(1.5rem, 8rem, 0.5rem);
+    }
+
+    .chicky .feet .right.foot.cube {
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .right.foot.cube .front {
+      background-color: #ffa303;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateZ(2rem);
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .right.foot.cube .rear {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+
+    .chicky .feet .right.foot.cube .top {
+      background-color: #ffd283;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .right.foot.cube .bottom {
+      background-color: #cf8300;
+      width: 1rem;
+      height: 2rem;
+      position: absolute;
+      transform: translateY(1rem) rotateX(90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .right.foot.cube .left {
+      background-color: #ffbf50;
+      width: 2rem;
+      height: 1rem;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .chicky .feet .right.foot.cube .right {
+      background-color: #e99400;
+      width: 2rem;
+      height: 1rem;
+      position: absolute;
+      transform: translateX(1rem) rotateY(-90deg);
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    @-webkit-keyframes full-body {
+
+      0%,
+      50%,
+      100% {
+        transform: translate3d(0rem, -2rem, 0rem) rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
+      }
+
+      25%,
+      75% {
+        transform: translate3d(0rem, -3rem, 0rem) rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
+      }
+    }
+
+    @keyframes full-body {
+
+      0%,
+      50%,
+      100% {
+        transform: translate3d(0rem, -2rem, 0rem) rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
+      }
+
+      25%,
+      75% {
+        transform: translate3d(0rem, -3rem, 0rem) rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
+      }
+    }
+
+    @-webkit-keyframes left-leg {
+
+      0%,
+      50%,
+      100% {
+        transform: rotateX(0deg);
+      }
+
+      25% {
+        transform: rotateX(15deg);
+      }
+
+      75% {
+        transform: rotateX(-25deg);
+      }
+    }
+
+    @keyframes left-leg {
+
+      0%,
+      50%,
+      100% {
+        transform: rotateX(0deg);
+      }
+
+      25% {
+        transform: rotateX(15deg);
+      }
+
+      75% {
+        transform: rotateX(-25deg);
+      }
+    }
+
+    @-webkit-keyframes right-leg {
+
+      0%,
+      50%,
+      100% {
+        transform: rotateX(0deg);
+      }
+
+      25% {
+        transform: rotateX(-25deg);
+      }
+
+      75% {
+        transform: rotateX(15deg);
+      }
+    }
+
+    @keyframes right-leg {
+
+      0%,
+      50%,
+      100% {
+        transform: rotateX(0deg);
+      }
+
+      25% {
+        transform: rotateX(-25deg);
+      }
+
+      75% {
+        transform: rotateX(15deg);
+      }
+    }
+  </style>
+
+<meta name="source" content="https://www.fecoder.cn/code-fun/css-3d-voxel-chicken-animation">
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="title tiny5-regular">Hello Chicky!</h1>
+    <div class="chicky">
+      <div class="head">
+        <div class="cube hair">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube top">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube top-middle">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube main">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube bottom">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube left wing base">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube left wing">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube right wing base">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube right wing">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube tail base">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube tail">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube top beak">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <div class="cube bottom beak">
+          <div class="front"></div>
+          <div class="rear"></div>
+          <div class="top"> </div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+      </div>
+      <div class="feet">
+        <div class="left foot-group">
+          <div class="cube left leg">
+            <div class="front"></div>
+            <div class="rear"></div>
+            <div class="top"> </div>
+            <div class="bottom"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+          </div>
+          <div class="cube left foot">
+            <div class="front"></div>
+            <div class="rear"></div>
+            <div class="top"> </div>
+            <div class="bottom"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+          </div>
+        </div>
+        <div class="right foot-group">
+          <div class="cube right leg">
+            <div class="front"></div>
+            <div class="rear"></div>
+            <div class="top"> </div>
+            <div class="bottom"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+          </div>
+          <div class="cube right foot">
+            <div class="front"></div>
+            <div class="rear"></div>
+            <div class="top"> </div>
+            <div class="bottom"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

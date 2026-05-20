@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>一个梨</title>
+    <style>
+      html {
+        font-size: 1vmin;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100svh;
+        background: linear-gradient(#0000 calc(50% + 22.5em), #0000 0, #0003),
+          linear-gradient(#c551 calc(50% + 22.5em), #c55 0);
+      }
+
+      article {
+        width: 90em;
+        aspect-ratio: 1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(40% 8% at 45% 88%, #0003, #0000),
+          radial-gradient(50% 12% at 50% 85%, #0005, #0000);
+      }
+
+      article *,
+      article *::before,
+      article *::after {
+        position: absolute;
+        box-sizing: border-box;
+      }
+
+      .stem {
+        width: 10%;
+        height: 20%;
+        background: radial-gradient(40% 10% at 70% 0%, #ffc3 99%, #0000),
+          radial-gradient(80% 176% at 80% 80%, #fff5, #0000 60%),
+          radial-gradient(80% 176% at 80% 90%, #0000 60%, #0008),
+          linear-gradient(#0000 80%, #0004), #963;
+        border-radius: 100% / 50% 120% 50% 20%;
+        --mask: radial-gradient(
+          80% 176% at 80% 80%,
+          #0000 calc(45% - 1px),
+          #000 45% 70%,
+          #0000 calc(70% + 1px)
+        );
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+        left: 50%;
+        top: 0;
+        transform: translate(-50%, -90%) rotate(-5deg);
+      }
+
+      .body {
+        --mask: radial-gradient(
+            35% 25% at 50% 25%,
+            #f00 calc(100% - 1px),
+            #0000
+          ), radial-gradient(50% 35% at 50% 65%, #f00 calc(100% - 1px), #0000),
+          linear-gradient(#0000 19%, #000 0 60%, #0000 0);
+        --mask: radial-gradient(
+            35% 25% at 50% 25%,
+            #f00 calc(100% - 1px),
+            #0000
+          ), radial-gradient(50% 35% at 50% 65%, #f00 calc(100% - 1px), #0000),
+          radial-gradient(48% 155% at -20% -20%, #0000 calc(100% - 1px), #000) 0
+            33.5% / 55% 24% no-repeat, radial-gradient(
+              48% 155% at 120% -20%,
+              #0000 calc(100% - 1px),
+              #000
+            ) 100% 33.5% / 55% 24% no-repeat;
+        width: 80%;
+        height: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+
+        aclip-path: polygon(
+          0 0,
+          85% 0,
+          84% 19%,
+          100% 61.5%,
+          100% 100%,
+          0 100%,
+          0 61.5%,
+          16% 19%,
+          15% 0
+        );
+        background: linear-gradient(170deg, #0000 40%, #0001 50%, #0000 60%) 0 1% /
+            48% 9% no-repeat, radial-gradient(
+            85% 75% at 50% 30%,
+            #0000 85%,
+            #7005
+          ), radial-gradient(90% 100% at 50% 30%, #0000 50%, #56a06877), linear-gradient(
+            -75deg,
+            #0000 79%,
+            #fff7
+          ), /*     radial-gradient(60% 155% at -20% -20%, #fff1 50%, #0000) 0 34% / 55% 23% no-repeat, */
+            linear-gradient(75deg, #0000 70%, #fff7), radial-gradient(
+            40% 7% at 50% 100%,
+            #0702,
+            #0000
+          ), linear-gradient(#0000 95%, #26a048 110%), linear-gradient(
+            #0000 70%,
+            #56a06877
+          ), linear-gradient(90deg, #0002 30%, #fff2 70%), linear-gradient(
+            90deg,
+            #0001,
+            #0000 30% 70%,
+            #fff4
+          ), #9fc89e;
+      }
+
+      .cheek {
+        --p: 30%;
+        --color: #da63a3;
+        --shadow: inset 1em -1em 2em #00000018, inset -0.25em 0 0.75em 0.45em
+            var(--color), inset -1.5em 0.5em 0.5em -1em #fff, inset 0 -0.25em
+            0.25em #0005;
+        background: var(--color);
+        width: 14%;
+        aspect-ratio: 0.95;
+        left: var(--p);
+        top: 45%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        box-shadow: var(--shadow), -1em 0.75em 1em #0001, 1.5em 0 2em #0001,
+          -2.5em 2.5em 2.5em #0001, 0 0.5em 1em #0001;
+
+        & ~ & {
+          --color: #e8a6b6;
+          --color: #fa83c3;
+          --shadow: inset 0 0 1em 0.25em #ea83c388, inset 0.5em -0.5em 0.5em
+              #d1648fcc, inset 2em -2em 2em -0.5em #da73a3cc, inset -2em 1em 5em
+              #fff6, inset -4em 0 7em #da73a366, -0.5em 0.35em 0.25em #aa4b6caa,
+            -2em 1em 1.5em #0001;
+          left: calc(100% - var(--p));
+        }
+      }
+
+      .mouth {
+        width: 22%;
+        height: 30%;
+        border: 0.6em solid #0000;
+        border-bottom-color: #000;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+
+        &::before {
+          content: '';
+          width: 96%;
+          height: 102%;
+          left: 5%;
+          border: 0.6em solid #0000;
+          border-bottom-color: #000;
+          border-radius: 50%;
+          transform-origin: 90% 85%;
+          transform: rotate(-7deg) scaleX(1.2);
+          filter: blur(0.75em);
+          opacity: 0.25;
+        }
+      }
+
+      .eye {
+        --p: 35%;
+        --color: #45273a;
+        --shadow: inset -0.75em 0.5em 0.5em #fff3, inset 2em -1em 2em #0004;
+        width: 8%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        left: var(--p);
+        top: 34%;
+        background: radial-gradient(at 66% 30%, #fff3, #fff0 30%),
+          radial-gradient(40% 80% at 20% 20%, #fdd3 38%, #0000), radial-gradient(
+            40% 80% at 100% -20%,
+            #fdd3 38%,
+            #0000
+          ), var(--color);
+        transform: translate(-50%, -50%);
+        box-shadow: inset 0 0 0.25em 0.25em var(--color), var(--shadow), -0.25em
+            0.25em 0.25em #0004, -5em -5em 15em;
+
+        & + & {
+          background: radial-gradient(at 30% 30%, #fff6, #fff0 20%),
+            radial-gradient(25% 80% at 20% 20%, #fdd2 60%, #0000),
+            radial-gradient(40% 50% at 100% 20%, #fdd5 48%, #0000), var(--color);
+          left: calc(100% - var(--p));
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/static-pear-css">
+</head>
+  <body>
+    <article>
+      <div class="body">
+        <div class="eye"></div>
+        <div class="eye"></div>
+        <div class="mouth"></div>
+        <div class="cheek"></div>
+        <div class="cheek"></div>
+      </div>
+      <div class="stem"></div>
+    </article>
+  </body>
+</html>
+

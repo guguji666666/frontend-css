@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>一个创意打赏按钮</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1.0"
+    />
+    <style>
+      @import url("https://unpkg.com/normalize.css") layer(normalize);
+      @import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+      @layer normalize, base, demo;
+
+      @layer demo {
+        :root {
+          --ru: 15;
+        }
+        *,
+        *::before,
+        *::after {
+          transform-style: preserve-3d;
+        }
+
+        .tp-lblv.tp-v-disabled .tp-lblv_l {
+          opacity: 1 !important;
+        }
+
+        :root:has([aria-label]:active) .tp-txtv.tp-v-disabled {
+          -webkit-clip-path: inset(0 0 0 0);
+          clip-path: inset(0 0 0 0);
+        }
+
+        .tp-txtv.tp-v-disabled {
+          height: 14.3px;
+          background: repeating-linear-gradient(
+            90deg,
+            var(--lbl-fg) 0 3%,
+            #0000 3% 5%
+          );
+          -webkit-clip-path: inset(0 100% 0 0);
+          clip-path: inset(0 100% 0 0);
+          transition: -webkit-clip-path 0.26s;
+          transition: clip-path 0.26s;
+          transition: clip-path 0.26s, -webkit-clip-path 0.26s;
+          input {
+            display: none;
+          }
+        }
+        main {
+          scale: 1.2;
+          transform: translate3d(0, 0, 100vmax);
+        }
+        [aria-label] {
+          touch-action: none;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          -webkit-tap-highlight-color: #0000;
+          --bg: #1871f4;
+          background: var(--bg);
+          border-radius: 6px;
+          font-size: 0.875rem;
+          color: #fff;
+          font-family: inherit;
+          border: 1px solid color-mix(in oklch, var(--bg), #000 12%);
+          cursor: pointer;
+          transform-origin: 75% 50%;
+          transition: transform 0.26s, box-shadow 0.26s;
+          padding: 0;
+          --shadow-color: 0 0% 0%;
+          box-shadow: 0px 0.6px 0.7px hsl(var(--shadow-color) / 0.14),
+            0px 2.3px 2.6px -0.8px hsl(var(--shadow-color) / 0.14),
+            0px 5.9px 6.6px -1.7px hsl(var(--shadow-color) / 0.14),
+            0px 14.5px 16.3px -2.5px hsl(var(--shadow-color) / 0.14);
+
+          .content {
+            align-items: center;
+            -webkit-clip-path: inset(-100vmax 0 1px 0);
+            clip-path: inset(-100vmax 0 1px 0);
+            display: flex;
+            gap: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            height: 100%;
+          }
+
+          &[data-tipping="false"]:active {
+            transform: rotate(calc(var(--ru) * -1deg));
+            box-shadow: -0.5px 0.7px 1px hsl(var(--shadow-color) / 0.14),
+              -1.8px 2.3px 3.3px -0.8px hsl(var(--shadow-color) / 0.14),
+              -4.6px 6px 8.5px -1.7px hsl(var(--shadow-color) / 0.14),
+              -11.4px 14.6px 20.8px -2.5px hsl(var(--shadow-color) / 0.14);
+          }
+
+          &:is(:focus-visible, :hover) {
+            --bg: color-mix(in oklch, #1871f4, #000 5%);
+            .purse {
+              rotate: y 360deg;
+              transition: rotate 0.26s 0.12s ease-out;
+            }
+          }
+
+          .purse {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            inset: 0;
+            transform-style: preserve-3d;
+          }
+
+          .scene {
+            --thickness: 4;
+            display: inline-block;
+            width: 1.2lh;
+            aspect-ratio: 1;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 100vh;
+
+            .hole {
+              position: absolute;
+              z-index: 10;
+              inset: 0;
+              scale: 0;
+              transform-style: preserve-3d;
+              transform: translate3d(0, 0, calc(var(--thickness) * -2px));
+              transform-origin: 50% 70%;
+
+              &::before {
+                content: "";
+                position: absolute;
+                width: 125%;
+                height: 40%;
+                border-radius: 50%;
+                top: 70%;
+                left: 50%;
+                translate: -50% -50%;
+                background: black;
+                box-shadow: 0 2px hsl(0 0% 20%) inset;
+              }
+
+              &::after {
+                transform-style: preserve-3d;
+                content: "";
+                background: var(--bg);
+                height: 200%;
+                top: 0;
+                left: 50%;
+                translate: -50% 25%;
+                width: 121%;
+                position: absolute;
+                transform: translate3d(0, 0, calc(var(--thickness) * 5px));
+                -webkit-mask: radial-gradient(
+                  125% 32% at 50% 3%,
+                  rgba(0, 0, 0, 0) 50%,
+                  #fff 50%
+                );
+                mask: radial-gradient(
+                  125% 32% at 50% 3%,
+                  rgba(0, 0, 0, 0) 50%,
+                  #fff 50%
+                );
+              }
+            }
+          }
+        }
+        .coin {
+          --depth: 2;
+          --detail: hsl(43 97% 46%);
+          --face: #ffdc02;
+          --side: #f4ae00;
+          width: 100%;
+          aspect-ratio: 1;
+
+          border-radius: 50%;
+          position: absolute;
+          translate: -50% -50%;
+          top: 50%;
+          left: 50%;
+          transform-style: preserve-3d;
+
+          .coin__core {
+            height: 100%;
+            width: calc(var(--depth) * 2px);
+            background: var(--side);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            transform: rotateY(90deg) rotateX(calc((90 - var(--rx, 0)) * -1deg));
+            transform-style: preserve-3d;
+
+            &.coin__core--rotated {
+              --base: 90;
+              transform: rotateY(90deg)
+                rotateX(calc((90 - var(--rx, 0)) * 1deg));
+            }
+
+            &::after,
+            &::before {
+              content: "";
+              height: 100%;
+              width: calc(var(--depth) * 2px);
+              background: var(--side);
+              position: absolute;
+              inset: 0;
+              transform-style: preserve-3d;
+            }
+
+            &::after {
+              transform: rotateX(calc((var(--base, 0) - var(--rx, 0)) * 1deg));
+            }
+            &::before {
+              transform: rotateX(calc((var(--base, 0) - var(--rx, 0)) * -1deg));
+            }
+          }
+
+          .coin__face {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            transform-style: preserve-3d;
+            background: var(--face);
+            display: grid;
+            place-items: center;
+            color: var(--detail);
+
+            svg {
+              width: 65%;
+              scale: -1 1;
+              translate: -5% 0;
+            }
+
+            &::after {
+              content: "";
+              position: absolute;
+              inset: 0;
+              border-radius: 50%;
+              background: var(--side);
+              -webkit-backface-visibility: hidden;
+              backface-visibility: hidden;
+            }
+
+            &.coin__face--front {
+              transform: translate3d(0, 0, calc((var(--depth) * 1px) + 0.5px))
+                rotateY(180deg);
+            }
+            &.coin__face--rear {
+              transform: translate3d(0, 0, calc((var(--depth) * -1px) - 0.5px));
+            }
+          }
+        }
+      }
+
+      @layer base {
+        :root {
+          --font-size-min: 16;
+          --font-size-max: 20;
+          --font-ratio-min: 1.2;
+          --font-ratio-max: 1.33;
+          --font-width-min: 375;
+          --font-width-max: 1500;
+        }
+
+        html {
+          color-scheme: light dark;
+        }
+
+        [data-theme="light"] {
+          color-scheme: light only;
+        }
+
+        [data-theme="dark"] {
+          color-scheme: dark only;
+        }
+
+        :where(.fluid) {
+          --fluid-min: calc(
+            var(--font-size-min) *
+              pow(var(--font-ratio-min), var(--font-level, 0))
+          );
+          --fluid-max: calc(
+            var(--font-size-max) *
+              pow(var(--font-ratio-max), var(--font-level, 0))
+          );
+          --fluid-preferred: calc(
+            (var(--fluid-max) - var(--fluid-min)) /
+              (var(--font-width-max) - var(--font-width-min))
+          );
+          --fluid-type: clamp(
+            (var(--fluid-min) / 16) * 1rem,
+            ((var(--fluid-min) / 16) * 1rem) -
+              (((var(--fluid-preferred) * var(--font-width-min)) / 16) * 1rem) +
+              (var(--fluid-preferred) * var(--variable-unit, 100vi)),
+            (var(--fluid-max) / 16) * 1rem
+          );
+          font-size: var(--fluid-type);
+        }
+
+        *,
+        *:after,
+        *:before {
+          box-sizing: border-box;
+        }
+
+        body {
+          background: light-dark(#fff, #000);
+          display: grid;
+          overflow: hidden;
+          place-items: center;
+          min-height: 100vh;
+          font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons",
+            "Helvetica Neue", Helvetica, Arial, sans-serif, system-ui;
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/interactive-tipping-button-animation">
+</head>
+  <body>
+    <main>
+      <button aria-label="Leave a tip" data-tipping="false">
+        <span class="content">
+          <span class="scene">
+            <span class="hole"></span>
+            <div class="purse">
+              <div class="coin">
+                <div class="coin__face coin__face--front">
+                  <svg
+                    role="img"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>Webflow</title>
+                    <path
+                      d="m24 4.515-7.658 14.97H9.149l3.205-6.204h-.144C9.566 16.713 5.621 18.973 0 19.485v-6.118s3.596-.213 5.71-2.435H0V4.515h6.417v5.278l.144-.001 2.622-5.277h4.854v5.244h.144l2.72-5.244H24Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <div class="coin__core"></div>
+                <div class="coin__core coin__core--rotated"></div>
+                <div class="coin__face coin__face--rear">
+                  <svg
+                    role="img"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>Webflow</title>
+                    <path
+                      d="m24 4.515-7.658 14.97H9.149l3.205-6.204h-.144C9.566 16.713 5.621 18.973 0 19.485v-6.118s3.596-.213 5.71-2.435H0V4.515h6.417v5.278l.144-.001 2.622-5.277h4.854v5.244h.144l2.72-5.244H24Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </span>
+          <span>留下你的小费</span>
+        </span>
+      </button>
+    </main>
+    <script type="module">
+      import gsap from "https://cdn.skypack.dev/gsap@3.13.0";
+      import { Physics2DPlugin } from "https://cdn.skypack.dev/gsap@3.13.0/Physics2DPlugin";
+      import { Pane } from "https://cdn.skypack.dev/tweakpane@4.0.4";
+
+      gsap.registerPlugin(Physics2DPlugin);
+
+      const button = document.querySelector('[aria-label="Leave a tip"]');
+      const coin = button.querySelector(".coin");
+
+      const config = {
+        theme: "light",
+        power: "",
+        muted: true,
+        timeScale: 1.1,
+        distance: {
+          lower: 100,
+          upper: 350,
+        },
+
+        bounce: {
+          lower: 2,
+          upper: 12,
+        },
+
+        velocity: {
+          lower: 300,
+          upper: 700,
+        },
+
+        rotation: {
+          lower: 0,
+          upper: 15,
+        },
+
+        flipSpeed: {
+          lower: 0.25,
+          upper: 0.6,
+        },
+
+        spins: {
+          lower: 1,
+          upper: 6,
+        },
+
+        rotate: {
+          lower: 0,
+          upper: 90,
+        },
+      };
+
+      const tipSound = new Audio(
+        "https://myinstants.com/media/sounds/coin_1.mp3"
+      );
+      tipSound.volume = 0.3;
+      tipSound.muted = config.muted;
+
+      const tip = () => {
+        if (button.dataset.tipping === "true") return;
+        const currentRotation = gsap.getProperty(button, "rotate");
+        if (currentRotation < 0)
+          document.documentElement.dataset.flipped = "true";
+        button.dataset.tipping = "true";
+        const duration = gsap.utils.mapRange(
+          config.rotation.lower,
+          config.rotation.upper,
+          0,
+          config.flipSpeed.upper
+        )(Math.abs(currentRotation));
+        const distance = gsap.utils.snap(
+          1,
+          gsap.utils.mapRange(
+            config.rotation.lower,
+            config.rotation.upper,
+            config.distance.lower,
+            config.distance.upper
+          )(Math.abs(currentRotation))
+        );
+
+        const velocity = gsap.utils.mapRange(
+          config.rotation.lower,
+          config.rotation.upper,
+          config.velocity.lower,
+          config.velocity.upper
+        )(Math.abs(currentRotation));
+        const bounce = gsap.utils.mapRange(
+          config.velocity.lower,
+          config.velocity.upper,
+          config.bounce.lower,
+          config.bounce.upper
+        )(Math.abs(velocity));
+
+        const distanceDuration = gsap.utils.mapRange(
+          config.distance.lower,
+          config.distance.upper,
+          config.flipSpeed.lower,
+          config.flipSpeed.upper
+        )(distance);
+
+        const spin = gsap.utils.snap(
+          1,
+          gsap.utils.mapRange(
+            config.distance.lower,
+            config.distance.upper,
+            config.spins.lower,
+            config.spins.upper
+          )(distance)
+        );
+
+        const offRotate =
+          gsap.utils.random(config.rotate.lower, config.rotate.upper, 1) * -1;
+        const hangtime = Math.max(1, duration * 4);
+
+        const tl = gsap
+          .timeline({
+            onComplete: () => {
+              if (config.muted === false) {
+                tipSound.muted = config.muted;
+                tipSound.play();
+              }
+              gsap.set(coin, {
+                yPercent: 100,
+              });
+
+              gsap
+                .timeline({
+                  onComplete: () => {
+                    gsap.set(button, { clearProps: "all" });
+                    gsap.set(coin, { clearProps: "all" });
+                    gsap.set(".purse", { clearProps: "all" });
+                    button.dataset.tipping = "false";
+                  },
+                })
+                .to(button, {
+                  yPercent: bounce,
+                  repeat: 1,
+                  duration: 0.12,
+                  yoyo: true,
+                })
+                .fromTo(
+                  ".hole",
+                  {
+                    scale: 1,
+                  },
+
+                  {
+                    scale: 0,
+                    duration: 0.2,
+                    delay: 0.2,
+                  }
+                )
+                .set(coin, {
+                  clearProps: "all",
+                })
+                .set(coin, {
+                  yPercent: -50,
+                })
+                .fromTo(
+                  ".purse",
+                  {
+                    xPercent: -200,
+                  },
+
+                  {
+                    delay: 0.5,
+                    xPercent: 0,
+                    duration: 0.5,
+                    ease: "power1.out",
+                  }
+                )
+                .fromTo(
+                  coin,
+                  {
+                    rotate: -460,
+                  },
+
+                  {
+                    rotate: 0,
+                    duration: 0.5,
+                    ease: "power1.out",
+                  },
+
+                  "<"
+                )
+                .timeScale(config.timeScale);
+            },
+          })
+          .set(button, { transition: "none" })
+          .fromTo(
+            button,
+            {
+              rotate: currentRotation,
+            },
+
+            {
+              rotate: 0,
+              duration,
+              ease: "elastic.out(1.75,0.75)",
+            }
+          )
+          .to(
+            coin,
+            {
+              onUpdate: function () {
+                const y = gsap.getProperty(coin, "y");
+                if (y >= coin.offsetHeight) {
+                  this.progress(1);
+                  tl.progress(1);
+                }
+              },
+              duration: hangtime,
+              physics2D: {
+                velocity,
+                angle: -90,
+                gravity: 1000,
+              },
+            },
+
+            `>-${duration * 0.825}`
+          )
+          .fromTo(
+            coin,
+            {
+              rotateX: 0,
+            },
+
+            {
+              duration: distanceDuration * 2,
+              rotateX: spin * -360,
+            },
+
+            "<"
+          )
+          .to(
+            coin,
+            {
+              rotateY: offRotate,
+              duration: distanceDuration,
+            },
+
+            "<"
+          )
+          .to(
+            coin,
+            {
+              "--rx": offRotate,
+              duration: distanceDuration,
+            },
+
+            "<"
+          )
+          .fromTo(
+            ".hole",
+            {
+              scale: 0,
+            },
+
+            {
+              scale: 1,
+              duration: 0.2,
+            },
+
+            hangtime * 0.35
+          )
+          .timeScale(config.timeScale);
+      };
+      button.addEventListener("click", tip);
+
+      const ctrl = new Pane({
+        title: "设置",
+        expanded: true,
+      });
+
+      const update = () => {
+        document.documentElement.dataset.theme = config.theme;
+      };
+
+      const sync = (event) => {
+        if (
+          !document.startViewTransition ||
+          event.target.controller.view.labelElement.innerText !== "theme"
+        )
+          return update();
+        document.startViewTransition(() => update());
+      };
+
+      ctrl.addBinding(config, "timeScale", {
+        label: "速度",
+        min: 0.1,
+        max: 2,
+        step: 0.1,
+      });
+
+      ctrl.addBinding(config, "muted", {
+        label: "静音",
+      });
+
+      ctrl.addBinding(config, "power", {
+        label: "力度",
+        disabled: true,
+      });
+
+      ctrl.addBinding(config, "theme", {
+        label: "主题",
+        options: {
+          System: "system",
+          Light: "light",
+          Dark: "dark",
+        },
+      });
+
+      ctrl.on("change", sync);
+      update();
+    </script>
+  </body>
+</html>

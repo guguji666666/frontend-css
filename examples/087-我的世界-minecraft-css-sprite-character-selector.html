@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>我的世界</title>
+    <style>
+      @font-face {
+        font-family: "Minecraft";
+        src: url("https://assets.codepen.io/36869/MinecraftTen-VGORe.woff")
+          format("woff");
+      }
+
+      @layer reset {
+        :root {
+          font-family: "Minecraft", sans-serif;
+          font-optical-sizing: auto;
+          line-height: 1.5;
+          font-weight: 400;
+
+          font-synthesis: none;
+          text-rendering: optimizeLegibility;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+        }
+
+        * {
+          margin: 0;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+          html {
+            interpolate-size: allow-keywords;
+          }
+        }
+
+        body {
+          min-height: 100vh;
+          line-height: 1.5;
+          -webkit-font-smoothing: antialiased;
+          display: grid;
+          place-content: center;
+          background-color: #333;
+          padding: 1rem;
+        }
+
+        ul {
+          padding: 0;
+          list-style: none;
+        }
+      }
+
+      @layer main {
+        /* Frame start position */
+        @property --sprite-fs {
+          syntax: "<integer>";
+          initial-value: 0;
+          inherits: false;
+        }
+
+        :root {
+          /* animation duration */
+          /*--sprite-as: .8s;*/
+          /* animation direction */
+          --sprite-ad: normal;
+          /* animation fill mode */
+          --sprite-af: none;
+          /* animation play state */
+          --sprite-ap: running;
+          /* animation iteration count */
+          --sprite-ai: infinite;
+          /* animation timing function */
+          --sprite-at: linear;
+          /* animation frame rate */
+          --sprite-fr: 48;
+
+          /*--image-1: url(/cat.webp);*/
+          --image-1: url(https://assets.codepen.io/36869/cat.webp);
+          /*--image-2: url(/spider.webp);*/
+          --image-2: url(https://assets.codepen.io/36869/spider.webp);
+          /*--image-3: url(/cow.webp);*/
+          --image-3: url(https://assets.codepen.io/36869/cow.webp);
+          /*--image-4: url(/creeper.webp);*/
+          --image-4: url(https://assets.codepen.io/36869/creeper.webp);
+          /*--image-5: url(/enderman.webp);*/
+          --image-5: url(https://assets.codepen.io/36869/enderman.webp);
+          /*--image-6: url(/evoker.webp);*/
+          --image-6: url(https://assets.codepen.io/36869/evoker.webp);
+          /*--image-7: url(/golem.webp);*/
+          --image-7: url(https://assets.codepen.io/36869/golem.webp);
+          /*--image-8: url(/horse.webp);*/
+          --image-8: url(https://assets.codepen.io/36869/horse.webp);
+          /*--image-9: url(/ocelot.webp);*/
+          --image-9: url(https://assets.codepen.io/36869/ocelot.webp);
+          /*--image-10: url(/panda.webp);*/
+          --image-10: url(https://assets.codepen.io/36869/panda.webp);
+          /*--image-11: url(/skeleton.webp);*/
+          --image-11: url(https://assets.codepen.io/36869/skeleton.webp);
+          /*--image-12: url(/wolf.webp);*/
+          --image-12: url(https://assets.codepen.io/36869/wolf.webp);
+          /*--image-13: url(/squid.webp);*/
+          --image-13: url(https://assets.codepen.io/36869/squid.webp);
+          /*--image-14: url(/fox.webp);*/
+          --image-14: url(https://assets.codepen.io/36869/fox.webp);
+          /*--image-15: url(/villager.webp);*/
+          --image-15: url(https://assets.codepen.io/36869/villager.webp);
+
+          --characater-1: "Cat";
+          --characater-2: "Spider";
+          --characater-3: "Cow";
+          --characater-4: "Creeper";
+          --characater-5: "Enderman";
+          --characater-6: "Evoker";
+          --characater-7: "Steel golem";
+          --characater-8: "Skeleton horse";
+          --characater-9: "Ocelot";
+          --characater-10: "Panda";
+          --characater-11: "Skeleton";
+          --characater-12: "Wolf";
+          --characater-13: "Squid";
+          --characater-14: "Fox";
+          --characater-15: "Villager";
+        }
+      }
+
+      @media (width < 940px) {
+        #app {
+          main {
+            .characters {
+              grid-template-columns: repeat(3, minmax(110px, 1fr));
+              grid-template-rows: repeat(5, 160px);
+            }
+
+            .preview {
+              position: sticky;
+              top: 0.5rem;
+              height: fit-content;
+
+              .preview-container {
+                --sprite-tw: 220;
+              }
+            }
+          }
+        }
+      }
+
+      @media (width < 680px) {
+        #app {
+          header {
+            > div {
+              & > small {
+                display: none;
+              }
+            }
+          }
+
+          main {
+            .characters {
+              grid-template-columns: repeat(2, minmax(110px, 1fr));
+              grid-template-rows: repeat(8, 160px);
+            }
+          }
+        }
+      }
+
+      @media (width < 560px) {
+        #app {
+          header {
+            > div.additional {
+              display: none;
+
+              kbd {
+                width: 36px;
+                font-size: 1.25rem;
+              }
+            }
+          }
+
+          main.container {
+            gap: 1rem;
+
+            .characters {
+              grid-template-columns: repeat(2, minmax(90px, 1fr));
+              grid-template-rows: repeat(8, 120px);
+
+              > div {
+                .character > img {
+                  max-width: 50px;
+                  max-height: 50px;
+                }
+              }
+            }
+
+            .preview {
+              .preview-container {
+                --sprite-tw: 160;
+
+                .sprite-stats {
+                  font-size: 0.7rem;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      @media (width < 435px) {
+        #app {
+          main.container {
+            .characters {
+              grid-template-columns: repeat(1, minmax(90px, 1fr));
+              grid-template-rows: repeat(15, 100px);
+            }
+          }
+        }
+      }
+
+      @media (prefers-reduced-motion) {
+        * {
+          animation: none;
+        }
+      }
+
+      @keyframes frame {
+        to {
+          --sprite-fs: var(--sprite-fe);
+        }
+      }
+
+      #app {
+        display: grid;
+        gap: 1rem;
+
+        header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          h1 {
+            --color: black;
+            --shadow-width: 2px;
+            --shadow-width-negative: calc(2px * -1);
+            color: white;
+            font-size: clamp(1.25rem, 0.875rem + 2vw, 2rem);
+            text-box: trim-both cap alphabetic;
+            text-shadow: 0 var(--shadow-width) 0 var(--color),
+              var(--shadow-width) 0 0 var(--color),
+              var(--shadow-width) var(--shadow-width) 0 var(--color),
+              var(--shadow-width-negative) var(--shadow-width-negative) 0
+                var(--color),
+              var(--shadow-width) var(--shadow-width-negative) 0 var(--color),
+              var(--shadow-width-negative) var(--shadow-width) 0 var(--color);
+          }
+
+          & > div {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            opacity: 0.5;
+
+            small {
+              color: white;
+              width: 10rem;
+              text-align: right;
+            }
+
+            kbd {
+              border: 2px solid #5e5e5e;
+              box-shadow: 6px 6px #222222;
+              font-size: 1.25rem;
+              font-weight: 600;
+              white-space: nowrap;
+              height: 100%;
+              aspect-ratio: 1 / 1;
+              width: 40px;
+              display: flex;
+              text-align: center;
+              align-items: center;
+              justify-content: center;
+              background: #fff;
+            }
+          }
+        }
+
+        main {
+          display: grid;
+          gap: 2rem;
+          grid-template-columns: 1fr auto;
+        }
+      }
+
+      div.characters {
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: repeat(5, minmax(110px, 1fr));
+        grid-template-rows: repeat(3, 160px);
+        padding: 0.5rem;
+        background-color: black;
+        box-shadow: 6px 6px #222222;
+        border: 2px solid #999999;
+
+        > div {
+          position: relative;
+          background-color: #181818;
+          overflow: hidden;
+          display: grid;
+          place-items: center;
+
+          &:has(input:checked) {
+            overflow: visible;
+            background-color: #4c8ee1;
+
+            .character > img {
+              scale: 1.2;
+              opacity: 1;
+              --color: #ffda0e;
+            }
+          }
+
+          input {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            appearance: none;
+            cursor: pointer;
+            z-index: 1;
+
+            &:checked {
+              outline-offset: 0;
+              outline: 0;
+              border: 6px double black;
+            }
+
+            &:focus,
+            &:focus-visible {
+              outline: 0;
+            }
+          }
+
+          label {
+            display: block;
+          }
+
+          & > .character {
+            img {
+              max-width: 70px;
+              max-height: 70px;
+              width: auto;
+              transition: scale 0.2s ease;
+              opacity: 0.75;
+              --color: white;
+              filter: drop-shadow(0px 1px 0px var(--color))
+                drop-shadow(-1px 0px 0px var(--color))
+                drop-shadow(1px 0px 0px var(--color))
+                drop-shadow(0px 1px 0px var(--color))
+                drop-shadow(0px -1px 0px var(--color))
+                drop-shadow(1px 0px 0px var(--color));
+            }
+          }
+        }
+      }
+
+      .characters:has(div:nth-child(1) > input:checked) + .preview {
+        --name: var(--characater-1);
+
+        & > .preview-container {
+          --sprite-image: var(--image-1);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 5364;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 42;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(2) > input:checked) + .preview {
+        --name: var(--characater-2);
+
+        & > .preview-container {
+          --sprite-image: var(--image-2);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 3576;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 28;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(3) > input:checked) + .preview {
+        --name: var(--characater-3);
+
+        & > .preview-container {
+          --sprite-image: var(--image-3);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 7152;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 60;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(4) > input:checked) + .preview {
+        --name: var(--characater-4);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-4);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 6556;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 55;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(5) > input:checked) + .preview {
+        --name: var(--characater-5);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-5);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 6556;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 55;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(6) > input:checked) + .preview {
+        --name: var(--characater-6);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-6);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 11920;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 99;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(7) > input:checked) + .preview {
+        --name: var(--characater-7);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-7);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 8940;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 72;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(8) > input:checked) + .preview {
+        --name: var(--characater-8);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-8);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 5960;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 47;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(9) > input:checked) + .preview {
+        --name: var(--characater-9);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-9);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 4768;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 37;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(10) > input:checked) + .preview {
+        --name: var(--characater-10);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-10);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 10728;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 88;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(11) > input:checked) + .preview {
+        --name: var(--characater-11);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-11);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 7748;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 65;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(12) > input:checked) + .preview {
+        --name: var(--characater-12);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-12);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 7152;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 58;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(13) > input:checked) + .preview {
+        --name: var(--characater-13);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-13);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 12516;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 104;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(14) > input:checked) + .preview {
+        --name: var(--characater-14);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-14);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 8344;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 69;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      .characters:has(div:nth-child(15) > input:checked) + .preview {
+        --name: var(--characater-15);
+
+        & > .preview-container {
+          /* sprite image */
+          --sprite-image: var(--image-15);
+          /* sprite columns */
+          --sprite-c: 5;
+          /* sprite image height */
+          --sprite-h: 4768;
+          /* sprite image width */
+          --sprite-w: 2980;
+          /* Frame frames */
+          --sprite-f: 37;
+          /* Frame end position */
+          --sprite-fe: calc(var(--sprite-f) - 1);
+        }
+      }
+
+      div.preview {
+        display: grid;
+        position: relative;
+        grid-template-rows: auto 1fr;
+        place-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        background-color: black;
+        border: 2px solid #4c8ee1;
+        box-shadow: 6px 6px #222222;
+        user-select: none;
+
+        &:before {
+          content: var(--name);
+          background: #adcbf1;
+          position: relative;
+          width: 100%;
+          text-align: center;
+          line-height: 2.5rem;
+          font-weight: 700;
+          font-size: 1.25rem;
+          box-sizing: border-box;
+        }
+
+        & > .preview-container {
+          height: 100%;
+          width: 100%;
+          display: grid;
+          gap: 0.5rem;
+          place-items: center;
+          place-content: center;
+          grid-template-rows: 1fr auto;
+          counter-reset: num var(--sprite-cf) col var(--sprite-cc) row
+            var(--sprite-cr);
+
+          /* frame target width */
+          --sprite-tw: 260;
+          --sprite-r: round(up, calc(var(--sprite-f) / var(--sprite-c)), 1);
+
+          --sprite-sw: calc(var(--sprite-w) / var(--sprite-c));
+          --sprite-ar: calc(var(--sprite-tw) / var(--sprite-sw));
+          --sprite-uh: calc(var(--sprite-h) * var(--sprite-ar));
+          --sprite-uw: calc(var(--sprite-w) * var(--sprite-ar));
+          --sprite-th: calc(var(--sprite-uh) / var(--sprite-r));
+          --sprite-as: calc(var(--sprite-f) / var(--sprite-fr) * 1s);
+
+          --sprite-cf: calc(var(--sprite-fs) + 1);
+          --sprite-cc: calc(mod(var(--sprite-fs), var(--sprite-c)) + 1);
+          --sprite-cr: calc(
+            round(
+                down,
+                calc(
+                  calc(var(--sprite-tw) * var(--sprite-fs)) / var(--sprite-uw)
+                ),
+                1
+              ) + 1
+          );
+          /* Y position, round to check next ROW */
+          --row: calc(
+            round(
+                down,
+                calc(
+                  calc(var(--sprite-tw) * var(--sprite-fs)) / var(--sprite-uw)
+                ),
+                1
+              ) * var(--sprite-th)
+          );
+          /* X position, mod to check COLUMN */
+          --col: mod(
+            calc(var(--sprite-tw) * var(--sprite-fs)),
+            var(--sprite-uw)
+          );
+          /* animation duration based on frame rate */
+          animation: frame var(--sprite-as) var(--sprite-at) 0s var(--sprite-ai)
+            var(--sprite-ad) var(--sprite-af) var(--sprite-ap);
+
+          & > .sprite-container {
+            position: relative;
+            z-index: 1;
+            background-color: white;
+            height: 100%;
+
+            &:has(> div input[type="radio"]:nth-child(2):checked) {
+              .sprite {
+                scale: -1 1;
+
+                &:hover {
+                  scale: -1.4 1.4;
+                }
+              }
+            }
+
+            .sprite-direction {
+              position: absolute;
+              right: 0;
+              bottom: 0;
+              display: flex;
+
+              input {
+                appearance: none;
+                width: 26px;
+                height: 28px;
+
+                &:before {
+                  font-size: 1.25rem;
+                  opacity: 0.25;
+                  cursor: pointer;
+                }
+
+                &:checked {
+                  &:before {
+                    opacity: 0.5;
+                  }
+                }
+
+                &:first-child {
+                  &:before {
+                    content: "◀️";
+                  }
+                }
+
+                &:last-child {
+                  &:before {
+                    content: "▶️";
+                  }
+                }
+              }
+            }
+
+            .sprite {
+              top: 50%;
+              position: relative;
+              translate: 0 -50%;
+              filter: drop-shadow(2px 4px 6px black);
+              height: calc(1px * var(--sprite-th));
+              width: calc(1px * var(--sprite-tw));
+              background-image: var(--sprite-image);
+              background-size: calc(1px * var(--sprite-uw))
+                calc(1px * var(--sprite-uh));
+              background-position: calc(-1px * var(--col))
+                calc(-1px * var(--row));
+              z-index: 1;
+              will-change: scale;
+              transition: scale 0.2s ease;
+
+              &:hover {
+                scale: 1.4;
+                --color: #ffda0e;
+                filter: drop-shadow(0px 1px 0px var(--color))
+                  drop-shadow(-1px 0px 0px var(--color))
+                  drop-shadow(1px 0px 0px var(--color))
+                  drop-shadow(0px 1px 0px var(--color))
+                  drop-shadow(0px -1px 0px var(--color))
+                  drop-shadow(1px 0px 0px var(--color))
+                  drop-shadow(2px 4px 6px black);
+              }
+            }
+          }
+
+          &:has(.sprite-stats .sprite-fps select option[value="12"]:checked) {
+            --sprite-fr: 12;
+          }
+
+          &:has(.sprite-stats .sprite-fps select option[value="24"]:checked) {
+            --sprite-fr: 36;
+          }
+
+          &:has(.sprite-stats .sprite-fps select option[value="36"]:checked) {
+            --sprite-fr: 36;
+          }
+
+          &:has(.sprite-stats .sprite-fps select option[value="48"]:checked) {
+            --sprite-fr: 48;
+          }
+
+          &:has(.sprite-stats .sprite-fps select option[value="64"]:checked) {
+            --sprite-fr: 64;
+          }
+
+          &:has(.sprite-stats .sprite-fps select option[value="76"]:checked) {
+            --sprite-fr: 76;
+          }
+
+          &:has(.sprite-stats .sprite-fps select option[value="100"]:checked) {
+            --sprite-fr: 100;
+          }
+
+          & > .sprite-stats {
+            background: #adcbf1;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 0.5rem;
+
+            dl {
+              display: grid;
+              grid-template-columns: 1fr auto;
+
+              dt,
+              dd {
+                &:not(:last-of-type) {
+                  border-bottom: 1px solid #99b3d3;
+                }
+              }
+
+              dd {
+                font-weight: bold;
+                font-variant-numeric: tabular-nums;
+                text-align: right;
+
+                &.sprite-c {
+                  &:before {
+                    counter-reset: variable var(--sprite-c);
+                    content: counter(variable);
+                  }
+                }
+
+                &.sprite-r {
+                  &:before {
+                    counter-reset: variable var(--sprite-r);
+                    content: counter(variable);
+                  }
+                }
+
+                &.sprite-fps {
+                  select {
+                    background: transparent;
+                    border: 0;
+                    outline: none;
+                    padding: 0;
+                    font-weight: 700;
+                    font-family: inherit;
+                    font-size: inherit;
+                    color: #2949c5;
+                  }
+                }
+
+                &.sprite-fr {
+                  &:before {
+                    counter-reset: variable var(--sprite-f);
+                    content: counter(variable);
+                  }
+                }
+
+                &.sprite-tw {
+                  &:before {
+                    counter-reset: variable var(--sprite-f);
+                    content: counter(num) "/" counter(variable);
+                  }
+                }
+
+                &.sprite-cc {
+                  &:before {
+                    counter-reset: variable var(--sprite-c);
+                    content: counter(col) "/" counter(variable);
+                  }
+                }
+
+                &.sprite-cr {
+                  &:before {
+                    counter-reset: variable var(--sprite-r);
+                    content: counter(row) "/" counter(variable);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/minecraft-css-sprite-character-selector">
+</head>
+  <body>
+    <!-- partial:index.partial.html -->
+    <div id="app">
+      <header>
+        <h1>选择你的角色</h1>
+        <div class="additional">
+          <small>支持键盘箭头</small>
+          <kbd>←</kbd>
+          <kbd>→</kbd>
+        </div>
+      </header>
+      <main class="container">
+        <div class="characters">
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-1"
+              aria-hidden="true"
+              tabindex="1"
+              checked
+              autofocus
+            />
+            <label for="character-1" class="character">
+              <img
+                src="https://assets.codepen.io/36869/cat-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-2"
+              aria-hidden="true"
+            />
+            <label for="character-2" class="character">
+              <img
+                src="https://assets.codepen.io/36869/spider-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-3"
+              aria-hidden="true"
+            />
+            <label for="character-3" class="character">
+              <img
+                src="https://assets.codepen.io/36869/cow-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-4"
+              aria-hidden="true"
+            />
+            <label for="character-4" class="character">
+              <img
+                src="https://assets.codepen.io/36869/creeper-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-5"
+              aria-hidden="true"
+            />
+            <label for="character-5" class="character">
+              <img
+                src="https://assets.codepen.io/36869/enderman-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-6"
+              aria-hidden="true"
+            />
+            <label for="character-6" class="character">
+              <img
+                src="https://assets.codepen.io/36869/evoker-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-7"
+              aria-hidden="true"
+            />
+            <label for="character-7" class="character">
+              <img
+                src="https://assets.codepen.io/36869/golem-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-8"
+              aria-hidden="true"
+            />
+            <label for="character-8" class="character">
+              <img
+                src="https://assets.codepen.io/36869/horse-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-9"
+              aria-hidden="true"
+            />
+            <label for="character-9" class="character">
+              <img
+                src="https://assets.codepen.io/36869/ocelot-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-10"
+              aria-hidden="true"
+            />
+            <label for="character-10" class="character">
+              <img
+                src="https://assets.codepen.io/36869/panda-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-11"
+              aria-hidden="true"
+            />
+            <label for="character-11" class="character">
+              <img
+                src="https://assets.codepen.io/36869/skeleton-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-12"
+              aria-hidden="true"
+            />
+            <label for="character-12" class="character">
+              <img
+                src="https://assets.codepen.io/36869/wolf-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-13"
+              aria-hidden="true"
+            />
+            <label for="character-13" class="character">
+              <img
+                src="https://assets.codepen.io/36869/squid-preview.png"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-14"
+              aria-hidden="true"
+            />
+            <label for="character-14" class="character">
+              <img
+                src="https://assets.codepen.io/36869/fox-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="character"
+              id="character-15"
+              aria-hidden="true"
+            />
+            <label for="character-15" class="character">
+              <img
+                src="https://assets.codepen.io/36869/villager-preview.webp"
+                alt=""
+              />
+            </label>
+          </div>
+        </div>
+
+        <div class="preview">
+          <div class="preview-container">
+            <div class="sprite-container">
+              <div class="sprite"></div>
+              <div class="sprite-direction">
+                <input type="radio" name="direction" checked />
+                <input type="radio" name="direction" />
+              </div>
+            </div>
+            <div class="sprite-stats">
+              <dl>
+                <dt>当前帧:</dt>
+                <dd class="sprite-tw"></dd>
+                <dt>当前列:</dt>
+                <dd class="sprite-cc"></dd>
+                <dt>当前行:</dt>
+                <dd class="sprite-cr"></dd>
+                <dt>
+                  <label for="select-fps">帧率:</label>
+                </dt>
+                <dd class="sprite-fps">
+                  <select id="select-fps">
+                    <option value="12">12</option>
+                    <option value="24">24</option>
+                    <option value="48" selected>48</option>
+                    <option value="64">64</option>
+                    <option value="76">76</option>
+                    <option value="100">100</option>
+                  </select>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

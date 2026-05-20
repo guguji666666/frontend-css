@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>解压游戏，随便丢</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        height: 100vh;
+        background-color: #a88;
+      }
+
+      .spline {
+        height: 100vh;
+      }
+
+      .caption {
+        position: absolute;
+        top: 70vh;
+        left: 0;
+        background-color: rgba(129, 255, 129, 0.8);
+        position: absolute;
+        transform: translate(10px, 10px);
+        border-radius: 6px;
+        padding: 6px;
+        font-family: "Ubuntu", sans-serif;
+        z-index: 2;
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/interactive-slide-jenga-game-webgl">
+</head>
+  <body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <spline-viewer
+      url="https://prod.spline.design/NOjZs2HwFl8pebrE/scene.splinecode"
+    ></spline-viewer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@0.9.336/build/spline-viewer.js"
+    ></script>
+  </body>
+</html>

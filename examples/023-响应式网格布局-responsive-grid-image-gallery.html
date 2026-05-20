@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>响应式网格布局</title>
+    <style>
+      html,
+      body {
+        display: grid;
+      }
+      html {
+        min-height: 100%;
+      }
+
+      body {
+        --gap: 6px;
+        display: grid;
+        grid-gap: var(--gap);
+        grid-template-rows: repeat(2, var(--row-rep, 7fr 3fr 7fr));
+        margin: 0;
+      }
+
+      img {
+        /* prevent from overflowing its grid-area */
+        contain: size;
+        /* stretch across its grid-area */
+        place-self: stretch;
+        object-fit: cover;
+
+        &:nth-child(1) {
+          grid-column: 1 / span 2;
+        }
+
+        &:nth-child(2) {
+          grid-area: 3/ 1 / span 1 / span 2;
+        }
+
+        &:nth-child(3) {
+          grid-row: 5;
+          object-position: 50% 40%;
+        }
+
+        &:nth-child(4) {
+          grid-row: 6;
+        }
+
+        &:nth-child(5) {
+          grid-area: 2/ 2;
+        }
+
+        &:nth-child(6) {
+          grid-area: 4/ 1;
+          object-position: 50% 0;
+        }
+
+        &:nth-child(7) {
+          grid-area: 4/ 2;
+        }
+
+        &:nth-child(8) {
+          grid-row: 5 / span 2;
+        }
+
+        &:nth-child(8n + 1) {
+          object-position: 50% 30%;
+        }
+
+        &:last-child {
+          --span: /span 2 / span 2;
+          grid-area: 3/ 1 var(--span);
+          place-self: center;
+          border: solid var(--gap) #fff;
+          width: 9em;
+          aspect-ratio: 1;
+          object-position: 50% 5%;
+          border-radius: 50%;
+        }
+      }
+
+      @media (min-width: 600px) {
+        body {
+          --row-rep: 1fr 1fr;
+        }
+
+        img {
+          &:nth-child(1) {
+            grid-area: 1/ 1 / span 2;
+          }
+
+          &:nth-child(2) {
+            grid-area: 1/ 2 / span 2 / span 2;
+          }
+
+          &:nth-child(3) {
+            grid-area: 1/ 4;
+          }
+
+          &:nth-child(4) {
+            grid-area: 2/ 4;
+          }
+
+          &:nth-child(5) {
+            grid-area: 3/ 1;
+          }
+
+          &:nth-child(6) {
+            grid-area: 3/ 2 / span 2;
+          }
+
+          &:nth-child(7) {
+            grid-area: 3/ 3 / span 2;
+          }
+
+          &:nth-child(8) {
+            grid-area: 3/ 4 / span 2;
+          }
+
+          &:last-child {
+            grid-area: 2/ 2 var(--span);
+            width: 15em;
+          }
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/responsive-grid-image-gallery">
+</head>
+
+  <body>
+    <img
+      src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/97753ec0599c1bbc59e0dc5b0d4bd29e.jpg"
+    /><img
+      src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/luffy.jpg"
+    /><img
+      src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/4a75441e7e973cde6784098e8de32103.jpg"
+    /><img
+      src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/e599801b8f55f62293b2f6756e3576e1.jpg"
+    /><img
+      src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/fd41465b53e960c3bc87b601697de6f9.jpg"
+    /><img
+      src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/e974bc7ad1804c49b7a9f7c82cdf7f26.jpg"
+    /><img
+      src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/214c12be8357d1c8fb71cc36eb5dd706.jpg"
+    /><img
+      src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/527982a85dccd3278191035bbe64c8cb.jpg"
+    /><img
+      src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/78cb2871947e6a047369ac52e210b00e.jpg"
+    /><img
+      src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/f151530efcc8257f435f5fccd0891627.jpg"
+    />
+  </body>
+</html>

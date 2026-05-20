@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>这个地球可以点击</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        align-items: center;
+        background: #2c3e50;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      :root {
+        --b: #22a7f0;
+        --c: rgba(255, 255, 255, 0.3);
+        --g: #2ecc71;
+        --s: 100;
+      }
+      .earth {
+        background: var(--b);
+        border-radius: 100%;
+        cursor: pointer;
+        height: calc(var(--s) * 1px);
+        overflow: hidden;
+        position: relative;
+        width: calc(var(--s) * 1px);
+      }
+      .earth__face {
+        --size: calc((var(--s) * 0.1) * 1px);
+        height: 20%;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -75%);
+        width: 45%;
+      }
+      .earth__face--straining:after {
+        background: #fff;
+        border-radius: 0 100% 100%;
+        content: '';
+        height: var(--size);
+        left: 85%;
+        opacity: 0.65;
+        position: absolute;
+        top: -65%;
+        transform: rotate(45deg);
+        width: var(--size);
+      }
+      .earth__eye {
+        background: #000;
+        border-radius: 100%;
+        height: var(--size);
+        position: absolute;
+        top: 0;
+        width: var(--size);
+      }
+      .earth__eye--blinking {
+        -webkit-animation: blink 10s infinite linear;
+        animation: blink 10s infinite linear;
+      }
+      .earth__eye:after,
+      .earth__eye:before {
+        background: #fff;
+        border-radius: 100%;
+        content: '';
+        position: absolute;
+      }
+      .earth__eye:after {
+        height: 30%;
+        left: 20%;
+        top: 15%;
+        width: 30%;
+      }
+      .earth__eye:before {
+        height: 15%;
+        left: 25%;
+        top: 55%;
+        width: 15%;
+      }
+      .earth__eye:nth-of-type(1) {
+        left: 0;
+      }
+      .earth__eye:nth-of-type(2) {
+        right: 0;
+      }
+      .earth__eye--straining {
+        background: transparent;
+      }
+      .earth__eye--straining:nth-of-type(2) {
+        transform: rotate(180deg);
+      }
+      .earth__eye--straining:after,
+      .earth__eye--straining:before {
+        background: #000;
+        border-radius: 0;
+        height: calc((var(--s) * 0.025) * 1px);
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform-origin: right;
+        width: var(--size);
+      }
+      .earth__eye--straining:after {
+        transform: translate(-50%, -50%) rotate(20deg);
+      }
+      .earth__eye--straining:before {
+        transform: translate(-50%, -50%) rotate(-20deg);
+      }
+      .earth__eye--spinning {
+        background: transparent;
+      }
+      .earth__eye--spinning:after,
+      .earth__eye--spinning:before {
+        background: #000;
+        border-radius: 0;
+        height: calc((var(--s) * 0.025) * 1px);
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform-origin: center;
+        width: var(--size);
+      }
+      .earth__eye--spinning:after {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+      .earth__eye--spinning:before {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+      @-webkit-keyframes blink {
+        0%,
+        73%,
+        75%,
+        100% {
+          transform: scaleY(1);
+        }
+        74% {
+          transform: scaleY(0.1);
+        }
+      }
+      @keyframes blink {
+        0%,
+        73%,
+        75%,
+        100% {
+          transform: scaleY(1);
+        }
+        74% {
+          transform: scaleY(0.1);
+        }
+      }
+      .earth__mouth {
+        -webkit-clip-path: circle(50% at 50% 0);
+        background: #000;
+        bottom: 0;
+        clip-path: circle(50% at 50% 0);
+        height: var(--size);
+        left: 40%;
+        position: absolute;
+        width: var(--size);
+      }
+      .earth__mouth--extended,
+      .earth__mouth--dizzy {
+        -webkit-clip-path: circle(50% at 50%);
+        clip-path: circle(50% at 50%);
+      }
+      .earth__mouth--straining {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 15%, 0 15%);
+        border-radius: 0;
+        clip-path: polygon(0 0, 100% 0, 100% 15%, 0 15%);
+      }
+      .earth__map {
+        --starter: calc(var(--s) * 0.05);
+        background: var(--g);
+        border-radius: calc(var(--starter) * 1px);
+        cursor: pointer;
+        height: calc(var(--starter) * 1px);
+        left: 50%;
+        margin: calc(var(--starter) * -1px) 0 0 calc(var(--starter) * -1px);
+        position: absolute;
+        top: 30%;
+        width: calc(var(--starter) * 1px);
+        box-shadow: calc(var(--s) * -1px) 0 0 calc((var(--s) * 0.2) * 1px) var(--g),
+          calc((var(--s) * 0.825) * -1px) 0 0 calc((var(--s) * 0.175) * 1px) var(--g),
+          calc((var(--s) * 0.75) * -1px) calc((var(--s) * 0.4) * 1px) 0 calc(
+              (var(--s) * 0.15) * 1px
+            ) var(--g), calc((var(--s) * 0.15) * 1px) 0 0 calc(
+              (var(--s) * 0.075) * 1px
+            )
+            var(--g),
+          calc((var(--s) * 0.075) * 1px) calc((var(--s) * 0.3) * 1px) 0 calc(
+              (var(--s) * 0.125) * 1px
+            ) var(--g), calc((var(--s) * 0.6) * 1px) calc(
+              (var(--s) * 0.15) * 1px
+            )
+            0 calc((var(--s) * 0.25) * 1px) var(--g),
+          calc((var(--s) * 1.1) * 1px) calc((var(--s) * 0.4) * 1px) 0 calc(
+              (var(--s) * 0.2) * 1px
+            ) var(--g), calc((var(--s) * 2) * 1px) 0 0 calc(
+              (var(--s) * 0.2) * 1px
+            )
+            var(--g),
+          calc((var(--s) * 2.175) * 1px) 0 0 calc((var(--s) * 0.175) * 1px) var(--g),
+          calc((var(--s) * 2.25) * 1px) calc((var(--s) * 0.4) * 1px) 0 calc(
+              (var(--s) * 0.15) * 1px
+            ) var(--g), calc((var(--s) * 3) * 1px) 0 0 0 var(--g), calc(
+              (var(--s) * 3.15) * 1px
+            ) 0 0 calc((var(--s) * 0.075) * 1px) var(--g),
+          calc((var(--s) * 3.075) * 1px) calc((var(--s) * 0.3) * 1px) 0 calc(
+              (var(--s) * 0.125) * 1px
+            ) var(--g), calc((var(--s) * 3.6) * 1px) calc(
+              (var(--s) * 0.15) * 1px
+            )
+            0 calc((var(--s) * 0.25) * 1px) var(--g),
+          calc((var(--s) * 4.1) * 1px) calc((var(--s) * 0.4) * 1px) 0 calc(
+              (var(--s) * 0.2) * 1px
+            ) var(--g);
+      }
+      .earth__clouds {
+        --starter: calc(var(--s) * 0.05);
+        -webkit-animation: rotate 60s infinite linear;
+        animation: rotate 60s infinite linear;
+        background: var(--c);
+        border-radius: 100%;
+        height: calc(var(--starter) * 2px);
+        left: 50%;
+        position: absolute;
+        top: 60%;
+        width: calc(var(--starter) * 4px);
+        box-shadow: calc((var(--s) * 1) * -1px) calc((var(--s) * 0.1) * -1px) 0
+            calc((var(--s) * 0.05) * 1px) var(--c), calc(
+              (var(--s) * 0.5) * -1px
+            ) calc((var(--s) * 0.05) * 1px) 0 calc((var(--s) * 0.15) * 1px) var(
+              --c
+            ),
+          calc((var(--s) * 0.6) * -1px) calc((var(--s) * 0.425) * -1px) 0 calc(
+              (var(--s) * 0.1) * 1px
+            ) var(--c), calc((var(--s) * 0.05) * 1px) calc(
+              (var(--s) * 0.375) * -1px
+            )
+            0 calc((var(--s) * 0.2) * 1px) var(--c),
+          calc((var(--s) * 0.7) * 1px) calc((var(--s) * 0.15) * -1px) 0 calc(
+              (var(--s) * 0.15) * 1px
+            ) var(--c), calc((var(--s) * 1.1) * 1px) calc(
+              (var(--s) * 0.4) * -1px
+            )
+            0 calc((var(--s) * 0.1) * 1px) var(--c),
+          calc((var(--s) * 0.3) * 1px) calc((var(--s) * 0.1) * 1px) 0 calc(
+              (var(--s) * 0.05) * 1px
+            ) var(--c), calc((var(--s) * 1.2) * -1px) calc(
+              (var(--s) * 0.4) * -1px
+            )
+            0 calc((var(--s) * 0.1) * 1px) var(--c),
+          calc((var(--s) * 1.25) * -1px) calc((var(--s) * 0.2) * 1px) 0 calc(
+              (var(--s) * 0.125) * 1px
+            ) var(--c), calc((var(--s) * 1.1) * 1px) calc(
+              (var(--s) * 0.15) * 1px
+            )
+            0 calc((var(--s) * 0.15) * 1px) var(--c),
+          0 0 0 calc((var(--s) * 0.025) * 1px) var(--c), calc(
+              (var(--s) * 3) * 1px
+            ) 0 0 calc((var(--s) * 0.025) * 1px) var(--c),
+          calc((var(--s) * 2) * 1px) calc((var(--s) * 0.1) * -1px) 0 calc(
+              (var(--s) * 0.05) * 1px
+            ) var(--c), calc((var(--s) * 2.5) * 1px) calc(
+              (var(--s) * 0.05) * 1px
+            )
+            0 calc((var(--s) * 0.15) * 1px) var(--c),
+          calc((var(--s) * 2.4) * 1px) calc((var(--s) * 0.425) * -1px) 0 calc(
+              (var(--s) * 0.1) * 1px
+            ) var(--c), calc((var(--s) * 3.05) * 1px) calc(
+              (var(--s) * 0.375) * -1px
+            )
+            0 calc((var(--s) * 0.2) * 1px) var(--c),
+          calc((var(--s) * 3.7) * 1px) calc((var(--s) * 0.15) * -1px) 0 calc(
+              (var(--s) * 0.15) * 1px
+            ) var(--c), calc((var(--s) * 4.1) * 1px) calc(
+              (var(--s) * 0.4) * -1px
+            )
+            0 calc((var(--s) * 0.1) * 1px) var(--c),
+          calc((var(--s) * 3.3) * 1px) calc((var(--s) * 0.1) * 1px) 0 calc(
+              (var(--s) * 0.05) * 1px
+            ) var(--c), calc((var(--s) * 1.8) * 1px) calc(
+              (var(--s) * 0.4) * -1px
+            )
+            0 calc((var(--s) * 0.1) * 1px) var(--c),
+          calc((var(--s) * 1.75) * 1px) calc((var(--s) * 0.2) * 1px) 0 calc(
+              (var(--s) * 0.125) * 1px
+            ) var(--c), calc((var(--s) * 4.1) * 1px) calc(
+              (var(--s) * 0.15) * 1px
+            )
+            0 calc((var(--s) * 0.15) * 1px) var(--c);
+      }
+      @media (min-width: 768px) {
+        .earth {
+          --s: 200;
+        }
+      }
+      @-webkit-keyframes rotate {
+        to {
+          transform: translate(calc(var(--s) * -3px), 0);
+        }
+      }
+      @keyframes rotate {
+        to {
+          transform: translate(calc(var(--s) * -3px), 0);
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/interactive-3d-earth-animation">
+</head>
+  <body>
+    <!-- partial:index.partial.html -->
+    <div id="app"></div>
+    <!-- partial -->
+    <script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <script>
+      function _defineProperty(obj, key, value) {
+        if (key in obj) {
+          Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true,
+          });
+        } else {
+          obj[key] = value;
+        }
+        return obj;
+      }
+      const { React, ReactDOM, Linear, Elastic, TimelineMax } = window;
+      const { Component } = React;
+      const { render } = ReactDOM;
+
+      const shake = (el, dur) => {
+        const TL = new TimelineMax({ repeat: 1 });
+        const shakes = [
+          [1, 1, 0],
+          [-1, -2, -1],
+          [-3, 0, 1],
+          [3, 2, 0],
+          [1, -1, 1],
+          [-1, 2, -1],
+          [-3, 1, 0],
+          [3, 1, -1],
+          [-1, -1, 1],
+          [1, 2, 0],
+          [1, -2, -1],
+          [0, 0, 0],
+        ];
+
+        for (const shake of shakes) {
+          TL.to(el, dur / 12, {
+            x: shake[0],
+            y: shake[1],
+            rotation: shake[2],
+          });
+        }
+        return TL;
+      };
+
+      class Earth extends Component {
+        constructor(...args) {
+          super(...args);
+          _defineProperty(this, 'state', {
+            spinning: false,
+            shrinking: false,
+            extended: false,
+            extending: false,
+          });
+          _defineProperty(
+            this,
+            'toggleT',
+
+            []
+          );
+          _defineProperty(this, 'spin', () => {
+            const {
+              state: { extending, spinning, extended, width },
+            } = this;
+            if (spinning || extended || extending) return;
+            this.setState(
+              {
+                spinning: true,
+              },
+
+              () => {
+                for (let toggle of this.toggleT) clearInterval(toggle);
+                const TL = new TimelineMax({
+                  onComplete: () => this.setState({ spinning: false }),
+                });
+
+                TL.to(this.map, 0.25, {
+                  x: -(width * 3),
+                  repeat: 4,
+                  ease: Linear.easeNone,
+                });
+
+                TL.to(this.map, 0, {
+                  x: 0,
+                });
+              }
+            );
+          });
+          _defineProperty(this, 'componentDidMount', () => {
+            this.reset();
+            window.addEventListener('resize', this.reset());
+          });
+          _defineProperty(this, 'reset', () => {
+            this.earth.removeAttribute('style');
+            const { height, width } = this.earth.getBoundingClientRect();
+            this.setState({
+              height,
+              width,
+            });
+          });
+          _defineProperty(this, 'extend', () => {
+            const {
+              earth,
+              state: { height, width, extended },
+            } = this;
+            const TL = new TimelineMax({
+              onStart: () =>
+                this.setState({
+                  shrinking: extended,
+                  extending: !extended,
+                }),
+
+              onComplete: () =>
+                this.setState({
+                  extended: !extended,
+                  extending: false,
+                  shrinking: false,
+                }),
+            });
+
+            // If not expanded, do a little shake then a shrink then a blimp
+            if (!extended) TL.add(shake(earth, 0.5));
+            TL.to(earth, 0.5, {
+              ease: Elastic.easeOut.config(1, 0.3),
+              width: !extended ? width * 3 : width,
+              borderRadius: !extended ? height / 10 : height / 2,
+            });
+          });
+          _defineProperty(this, 'toggle', () => {
+            const {
+              extend,
+              state: { extending, spinning },
+            } = this;
+            if (extending || spinning) return;
+            this.toggleT = [...this.toggleT, setTimeout(extend, 200)];
+          });
+          _defineProperty(this, 'render', () => {
+            const {
+              spin,
+              toggle,
+              state: { extended, extending, spinning, shrinking },
+            } = this;
+            return /*#__PURE__*/ React.createElement(
+              'div',
+              {
+                onClick: toggle,
+                onDoubleClick: spin,
+                ref: (e) => (this.earth = e),
+                className: 'earth',
+              } /*#__PURE__*/,
+              React.createElement('div', {
+                ref: (m) => (this.map = m),
+                className: 'earth__map',
+              }) /*#__PURE__*/,
+              React.createElement('div', {
+                className: 'earth__clouds',
+              }) /*#__PURE__*/,
+              React.createElement(
+                'div',
+                {
+                  className: `earth__face ${
+                    extending ? 'earth__face--straining' : ''
+                  }`,
+                } /*#__PURE__*/,
+                React.createElement('div', {
+                  className: `earth__eye ${
+                    spinning ? 'earth__eye--spinning' : ''
+                  } ${extending ? 'earth__eye--straining' : ''} ${
+                    !spinning && !extending ? 'earth__eye--blinking' : ''
+                  }`,
+                }) /*#__PURE__*/,
+
+                React.createElement('div', {
+                  className: `earth__eye ${
+                    spinning ? 'earth__eye--spinning' : ''
+                  } ${extending ? 'earth__eye--straining' : ''} ${
+                    !spinning && !extending ? 'earth__eye--blinking' : ''
+                  }`,
+                }) /*#__PURE__*/,
+
+                React.createElement('div', {
+                  className: `earth__mouth ${
+                    (extended && !shrinking) || spinning
+                      ? 'earth__mouth--extended'
+                      : ''
+                  } ${extending ? 'earth__mouth--straining' : ''}`,
+                })
+              )
+            );
+          });
+        }
+      }
+
+      const rootNode = document.getElementById('app');
+      render(/*#__PURE__*/ React.createElement(Earth, null), rootNode);
+    </script>
+  </body>
+</html>
+

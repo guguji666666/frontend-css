@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>需要爱的小熊</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      body {
+        background: #e6e6e6;
+        min-height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #1a1a1a;
+        }
+      }
+      .heart {
+        position: absolute;
+        height: calc(var(--size) * 1vmin);
+        width: calc(var(--size) * 1vmin);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .heart svg {
+        height: 100%;
+        width: 100%;
+      }
+      .heart path {
+        fill: hsl(var(--hue), 100%, 60%);
+      }
+      .backdrop {
+        --color-one: #868ff9;
+        --color-two: #86f9f9;
+        --color-three: #bff986;
+        --color-four: #f9e586;
+        --color-five: #f99986;
+        --cloud: rgba(255, 255, 255, 0.95);
+        height: 100vmax;
+        width: 100vmax;
+        background: radial-gradient(
+            circle at center center,
+            var(--cloud) 20%,
+            transparent 20%
+          ), repeating-conic-gradient(var(--color-one) 0, var(--color-one) 10%, var(
+                --color-two
+              ) 10%, var(--color-two) 20%, var(--color-three) 20%, var(
+                --color-three
+              ) 30%, var(--color-four) 30%, var(--color-four) 40%, var(
+                --color-five
+              ) 40%, var(--color-five) 50%);
+        position: fixed;
+        transform-origin: center;
+        border-radius: 50%;
+      }
+      svg {
+        --size: 50;
+        height: calc(var(--size) * 1vmin);
+        width: calc(var(--size) * 1vmin);
+        z-index: 2;
+      }
+      span {
+        z-index: 2;
+      }
+      .care-bear {
+        --lightness: 50;
+        cursor: pointer;
+      }
+      .care-bear__ear circle:nth-of-type(1) {
+        fill: hsl(
+          var(--hue),
+          calc(var(--saturation) * 1%),
+          calc(var(--lightness) * 1%)
+        );
+      }
+      .care-bear__ear circle:nth-of-type(2) {
+        --lightness: 90;
+        fill: hsl(
+          var(--hue),
+          calc(var(--saturation) * 1%),
+          calc(var(--lightness) * 1%)
+        );
+      }
+      .care-bear__arm rect {
+        --lightness: 45;
+        fill: hsl(
+          var(--hue),
+          calc(var(--saturation) * 1%),
+          calc(var(--lightness) * 1%)
+        );
+      }
+      .care-bear__feet {
+        --lightness: 40;
+      }
+      .care-bear__feet path {
+        fill: hsl(
+          var(--hue),
+          calc(var(--saturation) * 1%),
+          calc(var(--lightness) * 1%)
+        );
+      }
+      .care-bear__head circle {
+        fill: hsl(
+          var(--hue),
+          calc(var(--saturation) * 1%),
+          calc(var(--lightness) * 1%)
+        );
+      }
+      .care-bear__belly circle:nth-of-type(1) {
+        fill: hsl(
+          var(--hue),
+          calc(var(--saturation) * 1%),
+          calc(var(--lightness) * 1%)
+        );
+      }
+      .care-bear__belly circle:nth-of-type(2) {
+        --lightness: 90;
+        fill: hsl(
+          var(--hue),
+          calc(var(--saturation) * 1%),
+          calc(var(--lightness) * 1%)
+        );
+      }
+      .care-bear__heart {
+        --saturation: 20;
+        --hue: 0;
+        fill: hsl(
+          var(--hue),
+          calc(var(--saturation) * 1%),
+          calc(var(--lightness) * 1%)
+        );
+      }
+      .care-bear__muzzle {
+        --lightness: 90;
+      }
+      .care-bear__muzzle circle {
+        fill: hsl(
+          var(--hue),
+          calc(var(--saturation) * 1%),
+          calc(var(--lightness) * 1%)
+        );
+      }
+      /**
+  * Rain
+  */
+      .rain svg {
+        -webkit-animation-delay: calc(var(--d) * -1s);
+        animation-delay: calc(var(--d) * -1s);
+        -webkit-animation-duration: calc(var(--a) * 1s);
+        animation-duration: calc(var(--a) * 1s);
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-name: drop;
+        animation-name: drop;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear;
+        height: 3vmin;
+        left: calc(var(--x) * 1%);
+        position: absolute;
+        top: calc((var(--y) + 50) * -1px);
+        width: 3vmin;
+        z-index: -1;
+      }
+      .rain svg path {
+        fill: #a1c6cc;
+        stroke: none;
+        opacity: var(--o);
+        transform: scaleY(calc(var(--s) * 1.5));
+      }
+      @-webkit-keyframes drop {
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(75vmin);
+        }
+      }
+      @keyframes drop {
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(75vmin);
+        }
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/animated-bear-needs-love">
+</head>
+  <body>
+    <!-- partial:index.partial.html -->
+    <div class="backdrop"></div>
+    <div class="hearts"></div>
+    <span title="Hold mouse/finger down">
+      <svg
+        class="care-bear"
+        xmlns="http://www.w3.org/2000/svg"
+        viewbox="0 0 59.068209 54.91329"
+      >
+        <g transform="translate(-70.967674 -112.10752)">
+          <g
+            class="care-bear__ear care-bear__ear--right"
+            transform="translate(19.587616 -5.1859387)"
+          >
+            <circle r="5.953125" cy="124.5695" cx="89.267891"></circle>
+            <circle cx="89.267891" cy="124.5695" r="4.3193078"></circle>
+          </g>
+          <g
+            class="care-bear__ear care-bear__ear--left"
+            transform="translate(3.1834476 -5.1859387)"
+          >
+            <circle cx="89.267891" cy="124.5695" r="5.953125"></circle>
+            <circle r="4.3193078" cy="124.5695" cx="89.267891"></circle>
+          </g>
+          <g class="care-bear__arm care-bear__arm--right">
+            <rect
+              transform="matrix(.69012 .7237 .69116 -.7227 0 0)"
+              ry="2.5978234"
+              y="-19.412512"
+              x="174.93823"
+              height="19.637407"
+              width="5.1956468"
+            ></rect>
+          </g>
+          <g class="care-bear__arm care-bear__arm--left">
+            <rect
+              width="5.1956468"
+              height="19.637407"
+              x="29.517857"
+              y="-165.03149"
+              ry="2.5978234"
+              transform="matrix(-.69012 .7237 -.69116 -.7227 0 0)"
+            ></rect>
+          </g>
+          <g class="care-bear__feet">
+            <path
+              d="M94.1591085 159.39647033l1.13016505 3.97753411a5.29166634 5.29166634 0 00-.59738153-.03824023 5.29166634 5.29166634 0 00-5.02863109 3.68504783h21.7004818a5.29166634 5.29166634 0 00-5.0301842-3.68504783 5.29166634 5.29166634 0 00-.5968603.03720836l1.12964647-3.97650224z"
+            ></path>
+          </g>
+          <g class="care-bear__head">
+            <circle cx="100.51268" cy="128.75888" r="13.229167"></circle>
+          </g>
+          <g class="care-bear__belly">
+            <circle cx="100.51268" cy="149.04999" r="13.229167"></circle>
+            <circle cx="100.51268" cy="149.04999" r="8.598958"></circle>
+            <g class="care-bear__heart">
+              <path
+                d="M98.30347449 144.82645224c-.65124542 0-1.3024231.24925602-1.80144155.74827342-.99803372.99803478-.99803372 2.60484935 0 3.6028815l.4919599.49299282 3.60339796 3.6028815 3.60339744-3.6028815.32246093-.32297687c.99803744-.99803479.99803744-2.60536265 0-3.60339743-.49901474-.4990174-1.15013845-.748792-1.80144207-.748792-.65130097 0-1.30293797.2497746-1.80195536.748792l-.32246094.32297687-.49196095-.4924769c-.4990174-.49901739-1.1507126-.7482734-1.80195536-.7482734z"
+              ></path>
+            </g>
+          </g>
+          <g class="care-bear__muzzle">
+            <circle cx="100.29227" cy="132.97391" r="5.9451938"></circle>
+          </g>
+          <g class="care-bear__nose">
+            <ellipse
+              cx="100.29227"
+              cy="129.55186"
+              rx="1.5612032"
+              ry="1.1618258"
+            ></ellipse>
+          </g>
+          <g
+            class="care-bear__eye care-bear__eye--right"
+            transform="translate(17.991638)"
+          >
+            <circle cx="91.364403" cy="128.15633" r="1.3229166"></circle>
+            <g class="care-bear__pupil care-bear__pupil--right">
+              <circle
+                cx="91.89357"
+                cy="127.62716"
+                r=".26458332"
+                fill="#fff"
+              ></circle>
+            </g>
+          </g>
+          <g class="care-bear__eye care-bear__eye--left">
+            <circle r="1.3229166" cy="128.15633" cx="91.364403"></circle>
+            <g class="care-bear__pupil care-bear__pupil--left">
+              <circle
+                r=".26458332"
+                cy="127.62716"
+                cx="91.89357"
+                fill="#fff"
+              ></circle>
+            </g>
+          </g>
+          <g class="care-bear__cheek care-bear__cheek--left">
+            <circle
+              cx="91.364403"
+              cy="128.15633"
+              r="1.3229166"
+              fill="#faa"
+              transform="translate(0 3.1750001)"
+            ></circle>
+          </g>
+          <g class="care-bear__cheek care-bear__cheek--right">
+            <circle
+              r="1.3229166"
+              cy="128.15633"
+              cx="91.364403"
+              transform="translate(17.991638 3.1750001)"
+              fill="#faa"
+            ></circle>
+          </g>
+          <g class="care-bear__mouth">
+            <path
+              d="M98.069425 133.1097a2.2359423 2.2359423 0 002.221095 2.00623 2.2359423 2.2359423 0 002.22459-2.00623z"
+            ></path>
+            <path
+              d="M100.97006285 134.12669591a.76244812.72614104 0 00-.76274347.7260537.76244812.72614104 0 00.05167577.26199835 2.23594226 2.23594226 0 00.03152246.00105834 2.23594226 2.23594226 0 001.40094757-.49506187.76244812.72614104 0 00-.72140233-.4940247z"
+              fill="red"
+            ></path>
+          </g>
+        </g></svg
+    ></span>
+    <div class="rain">
+      <svg>
+        <path></path>
+      </svg>
+    </div>
+    <!-- partial -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js"></script>
+    <script>
+      const { gsap } = window;
+      const { timeline, to, set } = gsap;
+
+      const $RAIN = document.querySelector('.rain');
+      const $BACKDROP = document.querySelector('.backdrop');
+      const $HEARTS = document.querySelector('.hearts');
+      const $BEAR = document.querySelector('.care-bear');
+      const $BEAR_ARM_LEFT = document.querySelector('.care-bear__arm--left');
+      const $BEAR_ARM_RIGHT = document.querySelector('.care-bear__arm--right');
+      const $BEAR_EAR_LEFT = document.querySelector('.care-bear__ear--left');
+      const $BEAR_EAR_RIGHT = document.querySelector('.care-bear__ear--right');
+      const $BEAR_MOUTH = document.querySelector('.care-bear__mouth');
+      const $BEAR_NOSE = document.querySelector('.care-bear__nose');
+      const $BEAR_CHEEK_LEFT = document.querySelector(
+        '.care-bear__cheek--left'
+      );
+      const $BEAR_CHEEK_RIGHT = document.querySelector(
+        '.care-bear__cheek--right'
+      );
+      const $BEAR_EYE_LEFT = document.querySelector('.care-bear__eye--left');
+      const $BEAR_EYE_RIGHT = document.querySelector('.care-bear__eye--right');
+      const $BEAR_PUPIL_LEFT = document.querySelector(
+        '.care-bear__pupil--left'
+      );
+      const $BEAR_PUPIL_RIGHT = document.querySelector(
+        '.care-bear__pupil--right'
+      );
+      const $BEAR_BELLY = document.querySelector('.care-bear__belly');
+      const $BEAR_MUZZLE = document.querySelector('.care-bear__muzzle');
+      const $BEAR_HEART = document.querySelector('.care-bear__heart');
+
+      const SPEEDS = {
+        BACKDROP: {
+          SCALE: 0.25,
+          SPIN: 0.85,
+        },
+
+        BREATHING: 1.5,
+        SWITCH: 0.05,
+      };
+
+      const STATE = {
+        FIRING: false,
+        CLOSING: false,
+      };
+
+      set(document.body, { opacity: 1 });
+      // Set the backdrop scale to 0
+      set($BACKDROP, { scale: 0 });
+      // Set bear to sulking
+      set($BEAR, {
+        '--hue': Math.floor(Math.random() * 360),
+        '--saturation': 0,
+      });
+      set($BEAR_ARM_LEFT, {
+        transformOrigin: '85% 80%',
+        scale: 0.85,
+        rotate: -110,
+      });
+
+      set($BEAR_ARM_RIGHT, {
+        transformOrigin: '15% 80%',
+        scale: 0.85,
+        rotate: 110,
+      });
+
+      set($BEAR_EAR_LEFT, { transformOrigin: '70% 85%', rotate: -60 });
+      set($BEAR_EAR_RIGHT, { transformOrigin: '30% 85%', rotate: 60 });
+      set($BEAR_MOUTH, { transformOrigin: '50%, 0', scaleY: 0, y: '+=2' });
+      set($BEAR_NOSE, { transformOrigin: '50% 50%', y: '+=2' });
+      set($BEAR_BELLY, { transformOrigin: '50% 50%' });
+      set($BEAR_MUZZLE, { transformOrigin: '50% 50%' });
+      set($BEAR_HEART, { transformOrigin: '50% 50%' });
+      set([$BEAR_CHEEK_LEFT, $BEAR_CHEEK_RIGHT], {
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        y: '+=2',
+      });
+
+      set([$BEAR_EYE_LEFT, $BEAR_EYE_RIGHT], {
+        transformOrigin: '50% 50%',
+        y: '+=2',
+        clipPath: 'inset(50% 0 0 0)',
+      });
+
+      set([$BEAR_PUPIL_LEFT, $BEAR_PUPIL_RIGHT], {
+        transformOrigin: '50% 50%',
+        z: 1,
+        y: '+=1.25',
+      });
+
+      const OPEN_BACKDROP_TL = new timeline({})
+        .add(to($BACKDROP, { scale: 1.5, duration: SPEEDS.BACKDROP.SCALE }))
+        .add(
+          to($BACKDROP, {
+            rotate: 360,
+            duration: SPEEDS.BACKDROP.SPIN,
+            repeat: -1,
+            ease: 'none',
+          }),
+
+          0
+        );
+
+      OPEN_BACKDROP_TL.pause();
+
+      const CLOSE_BACKDROP_TL = new timeline({
+        onComplete: () => {
+          if (OPEN_BACKDROP_TL) {
+            STATE.CLOSING = false;
+            STATE.FIRING = false;
+            OPEN_BACKDROP_TL.pause();
+            BREATHING_TL.play();
+          }
+        },
+      }).add(to($BACKDROP, { scale: 0, duration: SPEEDS.BACKDROP.SCALE }));
+
+      const HEART_SVG = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.258088 6.7122535">
+  <path d="M2.56864 1.32292c-.31816 0-.63626.12209-.88005.36587-.48757.48758-.48757 1.27253 0 1.7601l.18035.18035 1.7601 1.7601 1.7601-1.7601.18035-.18035c.48757-.48757.48757-1.27252 0-1.7601-.24379-.24378-.56189-.36587-.88005-.36587-.31815 0-.63626.12209-.88005.36587l-.18035.18035-.18035-.18035c-.24379-.24378-.5619-.36587-.88005-.36587z" fill="red"/>
+</svg>
+`;
+      const fireHearts = () => {
+        const newHeart = document.createElement('div');
+        newHeart.className = 'heart';
+        newHeart.style.setProperty(
+          '--size',
+          Math.floor(Math.random() * 30 - 10 + 1) + 5
+        );
+
+        // newHeart.style.setProperty(
+        //   '--hue',
+        //   Math.floor(Math.random() * 150 - 10 + 1) + 10
+        // )
+        newHeart.style.setProperty('--hue', Math.floor(Math.random() * 360));
+        newHeart.innerHTML = HEART_SVG;
+        const svg = newHeart.querySelector('svg');
+        $HEARTS.appendChild(newHeart);
+        set(newHeart, { rotate: 'random(0, 360)', transformOrigin: '50% 50%' });
+        to(svg, {
+          y: '-100vmax',
+          duration: 'random(0.5, 1.5)',
+          onComplete: () => {
+            newHeart.remove();
+          },
+        });
+
+        if (STATE.FIRING && !STATE.CLOSING) {
+          requestAnimationFrame(fireHearts);
+        } else {
+          $HEARTS.innerHTML = '';
+        }
+      };
+
+      CLOSE_BACKDROP_TL.pause();
+      const RAISE_TL = new timeline()
+        .add(
+          to([$BEAR_ARM_LEFT, $BEAR_ARM_RIGHT], {
+            duration: SPEEDS.SWITCH,
+            scale: 1,
+            rotate: 0,
+          })
+        )
+        .add(
+          to([$BEAR_EAR_LEFT, $BEAR_EAR_RIGHT], {
+            duration: SPEEDS.SWITCH,
+            rotate: 0,
+          }),
+
+          0
+        )
+        .add(
+          to($BEAR_HEART, {
+            duration: SPEEDS.SWITCH,
+            scale: 1.1,
+          }),
+
+          0
+        )
+        .add(to($BEAR_NOSE, { duration: SPEEDS.SWITCH, y: 0 }), 0)
+        .add(to($BEAR_MOUTH, { duration: SPEEDS.SWITCH, y: 0, scaleY: 1 }))
+        .add(
+          to([$BEAR_CHEEK_LEFT, $BEAR_CHEEK_RIGHT], {
+            duration: SPEEDS.SWITCH,
+            opacity: 1,
+            y: 0,
+          }),
+
+          0
+        )
+        .add(
+          to([$BEAR_EYE_LEFT, $BEAR_EYE_RIGHT], {
+            duration: SPEEDS.SWITCH,
+            clipPath: 'inset(0 0 0 0)',
+            y: 0,
+          }),
+
+          0
+        )
+        .add(
+          to([$BEAR_PUPIL_LEFT, $BEAR_PUPIL_RIGHT], {
+            duration: SPEEDS.SWITCH,
+            y: 0,
+          }),
+
+          0
+        )
+        .add(
+          to($BEAR_HEART, { duration: SPEEDS.SWITCH, '--saturation': 100 }),
+          0
+        )
+        .add(to($BEAR, { duration: SPEEDS.SWITCH, '--saturation': 100 }), 0);
+      RAISE_TL.pause();
+
+      const BREATHING_TL = new timeline({ repeat: -1, yoyo: true })
+        .add(to($BEAR_BELLY, { scale: 1.025, duration: SPEEDS.BREATHING }))
+        .add(
+          to($BEAR_ARM_RIGHT, { rotate: 108, duration: SPEEDS.BREATHING }),
+          0
+        )
+        .add(
+          to($BEAR_ARM_LEFT, { rotate: -108, duration: SPEEDS.BREATHING }),
+          0
+        )
+        .add(to($BEAR_NOSE, { y: '-=0.4', duration: SPEEDS.BREATHING }), 0)
+        .add(
+          to([$BEAR_EYE_LEFT, $BEAR_EYE_RIGHT], {
+            y: '-=0.4',
+            duration: SPEEDS.BREATHING,
+          }),
+
+          0
+        )
+        .add(
+          to([$BEAR_EAR_LEFT, $BEAR_EAR_RIGHT], {
+            y: '-=0.4',
+            duration: SPEEDS.BREATHING,
+          }),
+
+          0
+        )
+        .add(to($BEAR_MUZZLE, { y: '-=0.4', duration: SPEEDS.BREATHING }), 0);
+
+      let BLINKING_TL;
+      const blink = () => {
+        const DELAY = Math.floor(Math.random() * 5 - 1 + 1) + 1;
+        BLINKING_TL = new timeline().add(
+          to([$BEAR_EYE_LEFT, $BEAR_EYE_RIGHT], {
+            delay: DELAY,
+            scaleY: 0,
+            duration: SPEEDS.SWITCH,
+            repeat: 1,
+            yoyo: true,
+            onComplete: blink,
+          })
+        );
+      };
+      blink();
+
+      const tease = () => {
+        BLINKING_TL.seek(0);
+        BLINKING_TL.pause();
+        to([$BEAR_EYE_RIGHT, $BEAR_EYE_LEFT], {
+          duration: SPEEDS.SWITCH,
+          clipPath: 'inset(0 0 0 0)',
+        });
+      };
+
+      const sadden = () => {
+        BLINKING_TL.restart();
+        to([$BEAR_EYE_RIGHT, $BEAR_EYE_LEFT], {
+          clipPath: 'inset(50% 0 0 0)',
+          duration: SPEEDS.SWITCH,
+        });
+      };
+
+      const handleKeyDown = (e) => {
+        if (e.keyCode === 32 && !STATE.FIRING && !STATE.CLOSING) start();
+      };
+
+      const handleKeyUp = (e) => {
+        if (e.keyCode === 32 && STATE.FIRING && !STATE.CLOSING) end();
+      };
+
+      const start = () => {
+        if (STATE.CLOSING) return;
+        document.body.removeEventListener('keypress', handleKeyDown);
+        STATE.FIRING = true;
+        OPEN_BACKDROP_TL.restart();
+        RAISE_TL.play();
+        BREATHING_TL.pause();
+        BLINKING_TL.pause();
+        BLINKING_TL.seek(0);
+        $RAIN.style.display = 'none';
+        fireHearts();
+      };
+
+      const end = () => {
+        if (STATE.CLOSING || !STATE.FIRING) return;
+        document.body.addEventListener('keypress', handleKeyDown);
+        STATE.CLOSING = true;
+        CLOSE_BACKDROP_TL.restart();
+        BLINKING_TL.restart();
+        RAISE_TL.reverse();
+        $RAIN.style.display = 'block';
+        sadden();
+      };
+
+      $BEAR.addEventListener('mousedown', start);
+      $BEAR.addEventListener('touchstart', start);
+      $BEAR.addEventListener('mouseup', end);
+      $BEAR.addEventListener('touchend', end);
+      $BEAR.addEventListener('mouseover', tease);
+      $BEAR.addEventListener('mouseleave', sadden);
+      document.body.addEventListener('keydown', handleKeyDown);
+      document.body.addEventListener('keyup', handleKeyUp);
+
+      /**
+       * Should it be raining?
+       */
+      const letItRain = new Date().getHours() % 2;
+      if (letItRain) {
+        // Create a random number of rain drops and animate them.
+        for (let d = 0; d < Math.floor(Math.random() * 25); d++) {
+          // Create an SVG droplet and append it to the DOM
+          const droplet = document.querySelector('svg').cloneNode();
+          droplet.setAttribute('viewBox', '0 0 5 50');
+          droplet.setAttribute(
+            'style',
+            `--x: ${Math.floor(Math.random() * 100)}; --y: ${Math.floor(
+              Math.random() * 100
+            )}; --o: ${Math.random()}; --a: ${Math.random() + 0.5}; --d: ${
+              Math.random() * 2 - 1
+            }; --s: ${Math.random()}`
+          );
+
+          droplet.innerHTML = `<path d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>`;
+          $RAIN.appendChild(droplet);
+        }
+      }
+    </script>
+  </body>
+</html>
+

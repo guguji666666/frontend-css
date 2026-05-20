@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>基于 WebGL 的着色器时钟</title>
+    <style>
+      html {
+        height: 100%;
+      }
+      body {
+        background: #333;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+      canvas {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  <meta name="source" content="https://www.fecoder.cn/code-fun/webgl-fragment-shader-clock">
+</head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <!-- VertexShader code here -->
+    <script id="vertexShader" type="x-shader/x-vertex">
+      #version 300 es
+      precision highp float;
+        in vec4 position;
+        void main() {
+          gl_Position = vec4( position );
+        }
+    </script>
+
+    <!-- FragmentShader code here -->
+    <script id="fragmentShader" type="x-shader/x-fragment">
+      #version 300 es
+      #if __VERSION__ < 130
+      #define TEXTURE2D texture2D
+      #else
+      #define TEXTURE2D texture
+      #endif
+      precision highp float;
+      out vec4 fragColor;
+      uniform vec2 u_resolution;
+      uniform vec4 u_mouse;
+      uniform float u_time;
+      uniform float u_date;
+
+      #define R u_resolution
+      #define T u_time
+      #define M u_mouse
+
+      #define PI          3.14159265359
+      #define PI2         6.28318530718
+
+      #define MIN_DIST    1e-4
+      #define MAX_DIST    50.
+
+      /**
+          License: Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+
+          Dial Clock Concept
+
+          Was kicking this around in my brain to make a clock shader.
+          The math is a little messy and there's some trick logic
+          around the hours to make the dials work.
+
+      */
+
+        // numbers from SDF Shapes
+      float box( in vec2 p, in vec2 b ){
+          vec2 d = abs(p)-b;
+          return length(max(d,0.))+min(max(d.x,d.y),0.);
+      }
+
+      float rbox( in vec2 p, in vec2 b, in vec4 r ) {
+          r.xy = (p.x>0.)?r.xy : r.zw;
+          r.x  = (p.y>0.)?r.x  : r.y;
+          vec2 q = abs(p)-b+r.x;
+          return min(max(q.x,q.y),0.)+length(max(q,0.))-r.x;
+      }
+
+      const vec4 bz = vec4(.075,.055,.035,.0);
+      const vec4 bo = vec4(.175,.15,.075,.025);
+      const vec2 oa = vec2(.15,.1);
+
+      // number
+      float get0(vec2 p) {
+          float bt = max(
+              rbox(p,vec2(.15,.175),bz.xxxx),
+              -rbox(p,vec2(.1,.125),bz.zzzz)
+          );
+          return bt;
+      }
+      float get1(vec2 p) {
+          float bt = box(p,vec2(.025,.175));
+          return bt;
+      }
+      float get2(vec2 p) {
+          float bt = max(
+              rbox(p-vec2(.0,.075),oa,bz.xxww),
+              -rbox(p-vec2(-.075,.075),vec2(.175,.05),bz.zzww)
+          );
+          bt = max(bt,-box(p-vec2(-.085,.045),vec2(.08,.08)));
+          float bb = max(
+              rbox(p+vec2(.0,.075),oa,bz.wwxx),
+              -rbox(p+vec2(-.075,.075),vec2(.175,.05),bz.wwzz)
+          );
+          bb = max(bb,-box(p+vec2(-.085,.045),vec2(.08,.08)));
+          return min(bt,bb);
+      }
+      float get3(vec2 p) {
+          vec2 of = vec2(0,.075);
+          float bt = max(
+          rbox(p-of,oa,bz.xxww),
+          -rbox(p-of+vec2(.05,0),vec2(.15,.05),bz.zzww)
+          );
+          float bb = max(
+          rbox(p+of,oa,bz.xxww),
+          -rbox(p+of+vec2(.05,0),vec2(.15,.05),bz.zzww)
+          );
+          return min(bt,bb);
+      }
+      float get4(vec2 p) {
+          float bt = min(box(vec2(p.x-.125,p.y),vec2(.025,.175)),
+              rbox(p-vec2(.0,.075),oa,bz.wwwx)
+          );
+          bt = max(
+              bt,
+              -rbox(p-vec2(0,.115),vec2(.1,.095),bz.wwwz)
+          );
+
+          return bt;
+      }
+      float get5(vec2 p) {
+          float bt = max(
+              rbox(p-vec2(.0,.075),oa,bz.wwwx),
+              -rbox(p-vec2(.075,.075),vec2(.175,.05),bz.wwwz)
+          );
+          bt = max(bt,-box(p-vec2(.085,.045),vec2(.08,.08)));
+          float bb = max(
+              rbox(p+vec2(.0,.075),oa,bz.xxww),
+              -rbox(p+vec2(.075,.075),vec2(.175,.05),bz.zzww)
+          );
+          bb = max(bb,-box(p+vec2(.085,.045),vec2(.08,.08)));
+          return min(bt,bb);
+      }
+      float get6(vec2 p) {
+          float bt = max(
+              rbox(p-vec2(.0,.075),oa,bz.wwxw),
+              -rbox(p-vec2(.075,.075),vec2(.175,.05),bz.wwzw)
+          );
+          bt = max(bt,-box(p-vec2(.085,.045),vec2(.08,.08)));
+          float bb = max(
+              rbox(p+vec2(.0,.075),oa,bz.xxwx),
+              -rbox(p+vec2(.0,.075),vec2(.1,.05),bz.zzwz)
+          );
+          return min(bt,bb);
+      }
+      float get7(vec2 p) {
+          float bt = max(
+              rbox(p+vec2(0,.0),vec2(.15,.175),bz.xwww),
+              -rbox(p+vec2(.05,.045),vec2(.15,.175),bz.zwww)
+          );
+
+          return bt;
+      }
+      float get8(vec2 p) {
+          float bt = max(
+              rbox(p-vec2(.0,.075),oa,bz.xxxx),
+              -rbox(p-vec2(.0,.075),vec2(.1,.05),bz.zzzz)
+          );
+          float bb = max(
+              rbox(p+vec2(.0,.075),oa,bz.xxxx),
+              -rbox(p+vec2(.0,.075),vec2(.1,.05),bz.zzzz)
+          );
+          return min(bt,bb);
+      }
+      float get9(vec2 p) {
+          float bt = max(
+              rbox(p-vec2(.0,.075),oa,bz.xwxx),
+              -rbox(p-vec2(.0,.075),vec2(.1,.05),bz.zwzz)
+          );
+          float bb = max(
+              rbox(p+vec2(.0,.075),oa,bz.wxxw),
+              -rbox(p+vec2(.075,-.02),vec2(.175,.15),bz.zzwz)
+          );
+          return min(bt,bb);
+      }
+
+      // the shader code below
+      float hash21(vec2 p) {return fract(sin(dot(p, vec2(27.69, 32.53)))*437.53);}
+      mat2 rot(float a){ return mat2(cos(a),sin(a),-sin(a),cos(a)); }
+
+      // timing functions
+      float lerp (float b, float e, float t) { return clamp((t - b) / (e - b), 0., 1.); }
+      float eic (float t) { return  t*t*t; }
+
+      float opx(in float d, in float z, in float h){
+          vec2 w = vec2( d, abs(z) - h );
+          return min(max(w.x, w.y), 0.) + length(max(w, 0.));
+      }
+
+      // globals
+      float h1,h2,m1,m2,s1,s2,tmod;
+      vec3 hp,hit;
+
+      vec2 map(vec3 p) {
+          vec2 res = vec2(1e5,0);
+          vec3 q = p + vec3(2,0,0);
+
+          float ofs = 2.8;
+          float mn = -.62831853071;
+          float sz = 1.3;
+
+          vec2 q1 = q.yz;
+          vec2 q2 = q.yz;
+
+          q1*=rot(ofs+(h1*mn));
+          q2*=rot(ofs+(h2*mn));
+
+          float d = opx(abs(length(q1)-sz)-.01,q.x,.25)-.025;
+          if(d<res.x)  {
+              res = vec2(d,1);
+              hit = vec3(q.x,q1.y,-q1.x);
+          }
+
+          float e = opx(abs(length(q2)-sz)-.01,q.x-.75,.25)-.025;
+          if(e<res.x)  {
+              res = vec2(e,2);
+              hit = vec3(q.x,q2.y,-q2.x);
+          }
+
+          q = p + vec3(0,0,0);
+          q1 = p.yz;
+          q2 = p.yz;
+
+          q1*=rot(ofs+(m1*mn));
+          q2*=rot(ofs+(m2*mn));
+
+          float g = opx(abs(length(q1)-sz)-.01,q.x,.25)-.025;
+          if(g<res.x)  {
+              res = vec2(g,3);
+              hit = vec3(q.x,q1.y,-q1.x);
+          }
+
+          float h = opx(abs(length(q2)-sz)-.01,q.x-.75,.25)-.025;
+          if(h<res.x)  {
+              res = vec2(h,4);
+              hit = vec3(q.x,q2.y,-q2.x);
+          }
+
+          q = p - vec3(2,0,0);
+          q1 = p.yz;
+          q2 = p.yz;
+
+          q1*=rot(ofs+(s1*mn));
+          q2*=rot(ofs+(s2*mn));
+
+          float j = opx(abs(length(q1)-sz)-.01,q.x,.25)-.025;
+          if(j<res.x)  {
+              res = vec2(j,5);
+              hit = vec3(q.x,q1.y,-q1.x);
+          }
+
+          float k = opx(abs(length(q2)-sz)-.01,q.x-.75,.25)-.025;
+          if(k<res.x)  {
+              res = vec2(k,6);
+              hit = vec3(q.x,q2.y,-q2.x);
+          }
+
+
+          float fl = length(p.zy)-.75;
+          if(fl<res.x)  {
+              res = vec2(fl,10);
+              hit = p;
+          }
+          return res;
+      }
+
+
+      vec3 normal(vec3 p, float t) {
+          t*=MIN_DIST;
+          float d = map(p).x;
+          vec2 e = vec2(t,0);
+          vec3 n = d - vec3(
+              map(p-e.xyy).x,
+              map(p-e.yxy).x,
+              map(p-e.yyx).x
+          );
+          return normalize(n);
+      }
+
+      vec2 marcher(vec3 ro, vec3 rd, inout vec3 p, int steps) {
+          float d=0.,m=0.;
+          for(int i=0;i<steps;i++){
+              vec2 t = map(p);
+              d += t.x;
+              m  = t.y;
+              p = ro + rd * d;
+              if(abs(t.x)<d*MIN_DIST||d>75.) break;
+          }
+          return vec2(d,m);
+      }
+
+      float getDigits(vec2 nv,int dec) {
+          float d = 1e5;
+
+          if(dec == 0) d = get0(nv);
+          if(dec == 1) d = get1(nv);
+          if(dec == 2) d = get2(nv);
+          if(dec == 3) d = get3(nv);
+          if(dec == 4) d = get4(nv);
+          if(dec == 5) d = get5(nv);
+          if(dec == 6) d = get6(nv);
+          if(dec == 7) d = get7(nv);
+          if(dec == 8) d = get8(nv);
+          if(dec == 9) d = get9(nv);
+
+          return d;
+      }
+
+
+      void main( )
+      {
+          vec2 F = gl_FragCoord.xy;
+          // time precal
+          float idate = u_date;//debug var//T+3598.;//
+
+          int sec = int(mod(idate,60.));
+          int minute = int(mod(idate/60.,60.));
+          int hour = int(mod(idate/3600.,12.));
+          int ampm = int(mod(idate/3600.,24.));
+          // global digits
+          float num = float(hour);if(num == 0.) num = 12.;
+          h1 = floor(mod(num / pow(10.0,1.),10.0));
+          h2 = floor(mod(num / pow(10.0,0.),10.0));
+
+          num = float(minute);
+          m1 = floor(mod(num / pow(10.0,1.),10.0));
+          m2 = floor(mod(num / pow(10.0,0.),10.0));
+
+          num = float(sec);
+          s1 = floor(mod(num / pow(10.0,1.),10.0));
+          s2 = floor(mod(num / pow(10.0,0.),10.0));
+
+          // second dials
+          float t2 = lerp(0.,1.,mod(idate,1.));
+          s2 = s2+eic(t2);
+          float t1 = lerp(9.,10.,mod(idate,10.));
+          s1 = s1+eic(t1);
+
+          // minute dials
+          float t4 = lerp(59.,60.,mod(idate,60.));
+          m2 = m2+eic(t4);
+          float t3 = lerp(599.,600.,mod(idate,600.));
+          m1 = m1+eic(t3);
+
+          // hour dials
+          float t6 = lerp(3599.,3600.,mod(idate,3600.));
+          h2 = h2+eic(t6);
+
+          float t5 = lerp(3599.,3600.,mod(idate,3600.));
+          if(hour == 0) hour = 12;
+          if(hour == 9||hour>11) {
+              h1 = h1+eic(t5);
+          }
+          //
+          // uv ro + rd
+          vec2 uv = (2.* F.xy-R.xy)/max(R.x,R.y);
+          vec3 ro = vec3(.4,0,R.y<400.?6.:4.75);
+          vec3 rd = normalize(vec3(uv, -1.0));
+
+          // mouse //
+          float x = M.xy==vec2(0) ? 0. : (M.y/R.y*.2-.1)*PI;
+          float y = M.xy==vec2(0) ? 0. : (M.x/R.x*.2-.1)*PI;
+
+          mat2 rx = rot(x+.2*cos(T*.325)), ry = rot(y+.15*sin(T*.25));
+          ro.zy*=rx, ro.xz*=ry;
+          rd.zy*=rx, rd.xz*=ry;
+
+          vec3 C = vec3(0), p = ro;
+
+          vec2 ray = marcher(ro,rd,p,100);
+          float d = ray.x, m = ray.y;
+
+          hp = hit;
+
+          if(d<MAX_DIST) {
+
+              vec3 n = normal(p,d);
+              vec3 lpos = vec3(5,11,12);
+              vec3 l = normalize(lpos-p);
+
+              float diff = clamp(dot(n,l),.1,1.);
+
+              float shdw = 1.;
+              for( float t=.01;t<12.; ) {
+                  float h = map(p + l*t).x;
+                  if( h<MIN_DIST ) { shdw = 0.; break; }
+                  shdw = min(shdw, 32.*h/t);
+                  t += h * .95;
+                  if( shdw<MIN_DIST || t>42. ) break;
+              }
+              diff = mix(diff,diff*shdw,.75);
+
+              float spec = .75 * pow(max(dot(normalize(p-ro),reflect(normalize(lpos),n)),0.),24.);
+
+              // base color change depending on time of day
+              vec3 h = ampm<12?vec3(1,.635,0):ampm>19?vec3(.337,.082,.718):vec3(.8);
+
+              if(m>0.) {
+
+                  vec2 uv = vec2(atan(hp.z,hp.y)/PI2,p.x);
+                  vec2 id = vec2(floor(uv.x*10.),1.);
+
+                  id.x = mod(abs(id.x+5.),10.);
+                  uv.x = fract(uv.x*10.)-.5;
+
+                  if(m==1.) {uv.y+=2.;id.x=mod(abs(id.x+6.),2.);}
+                  if(m==2.) uv.y+=1.25;
+
+                  if(m==3.) id.x=mod(abs(id.x+6.),6.);
+                  if(m==4.) uv.y-=.75;
+
+                  if(m==5.){uv.y-=2.;id.x=mod(abs(id.x+5.)+1.,6.);}
+                  if(m==6.) uv.y-=2.75;
+
+                  float px = 2./R.x;
+                  vec2 nv = vec2(uv.y,-uv.x)*1.25;
+
+                  float d = getDigits(nv,int(id.x));
+                  float c = length(uv)-.235;
+                  c=max(c,-d);
+
+                  // dial color change depending on time of day
+                  vec3 clr = ampm<12?vec3(1.,.35,0):ampm>19?vec3(.68,.14,.98):vec3(.1,.9,.3);
+                  vec3 clx = ampm<12?vec3(1.):ampm>19?vec3(0.6):vec3(.3);
+                  vec3 cld = ampm<12?vec3(.7,.3,.0):ampm>19?vec3(0.1):vec3(.6);
+
+                  h = mix(h,clx,smoothstep(px,-px,c));
+                  h = mix(h,clr,smoothstep(px,-px,d));
+                  c = length(vec2(abs(uv.x)-.5,uv.y))-.175;
+                  h = mix(h,cld,smoothstep(px,-px,c));
+              }
+
+              if(m==10.) {
+                  // pattern color change depending on time of day
+                  vec3 clr = ampm<12?vec3(.973,.89,.05):ampm>19?vec3(.235,.165,.75):vec3(.72,.93,.52);
+                  vec3 cld = ampm<12?vec3(.7,.3,.0):ampm>19?vec3(.001):vec3(.6);
+
+                  vec2 uv = vec2(atan(hp.z,hp.y)/PI2,p.x);
+                  uv.xy += T*vec2(-.02,1);
+
+                  vec2 sc = vec2(14.,3), id = floor(uv*sc);
+                  uv = fract(uv*sc)-.5;
+
+                  float px = 2./R.x, rnd = hash21(id);
+                  if(rnd>.5) uv.x*=-1.;
+
+                  float chk = mod(id.y + id.x,2.) * 2. - 1.;
+
+                  vec2 gx = length(uv-.5)<length(uv+.5)? vec2(uv-.5) : vec2(uv+.5);
+                  float tr = length(gx)-.5;
+                  if(ampm>19){
+                      tr= smoothstep(-px,px,abs(abs(tr)-.1)-.05);
+                  }else{
+                      tr= (chk>.5 ^^ rnd<.5) ? smoothstep(-px,px,tr) : smoothstep(px,-px,tr);
+                  }
+
+                  h = mix(clr, cld,tr);
+              }
+
+              C = h * diff;
+
+          }
+
+          // fog overlay - color change depending on time of day
+          vec3 clr = ampm<12?vec3(0.306,0.118,0.016):ampm>19?vec3(0.039,0.020,0.078):vec3(.25);
+          C = mix(C,clr, 1.-exp(-.00325*d*d*d));
+
+          // line fading
+          if((int(F.x)%6 == int(F.y)%6) && R.x>800. ) C = clr;
+
+          // static effect
+          C = mix(C,clamp(C*.8,vec3(0),vec3(1)),hash21(floor(uv.xy*30.)+uv));
+
+          C = pow(C, vec3(.4545));
+
+          fragColor = vec4(C,1);
+      }
+    </script>
+    <script src="https://fecoder-pic-1302080640.cos.ap-nanjing.myqcloud.com/twgl.min.js"></script>
+    <script>
+      function _defineProperty(obj, key, value) {
+        if (key in obj) {
+          Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true,
+          });
+        } else {
+          obj[key] = value;
+        }
+        return obj;
+      } // Mouse Class for movments and attaching to dom //
+      class Mouse {
+        constructor(element) {
+          _defineProperty(
+            this,
+            "reset",
+
+            () => {
+              this.x =
+                ~~(document.documentElement.clientWidth,
+                window.innerWidth || 0) / 2;
+              this.y =
+                ~~(document.documentElement.clientHeight,
+                window.innerHeight || 0) / 2;
+            }
+          );
+          this.element = element || window;
+          this.drag = false;
+          this.x =
+            ~~(document.documentElement.clientWidth, window.innerWidth || 0) /
+            2;
+          this.y =
+            ~~(document.documentElement.clientHeight, window.innerHeight || 0) /
+            2;
+          this.getCoordinates = this.getCoordinates.bind(this);
+          this.events = ["mouseenter", "mousemove"];
+          this.events.forEach((eventName) => {
+            this.element.addEventListener(eventName, this.getCoordinates);
+          });
+          this.element.addEventListener("mousedown", () => {
+            this.drag = true;
+          });
+          this.element.addEventListener("mouseup", () => {
+            this.drag = false;
+          });
+          window.addEventListener("resize", this.reset);
+        }
+        getCoordinates(event) {
+          event.preventDefault();
+          if (this.drag) {
+            this.x = event.pageX;
+            this.y = event.pageY;
+          }
+        }
+      }
+
+      // WEBGL BOOTSTRAP TWGL.js
+      const glcanvas = document.getElementById("canvas");
+      const gl = glcanvas.getContext("webgl2");
+
+      // Fractal code in HTML window - Fragment Shader //
+      const programInfo = twgl.createProgramInfo(gl, [
+        "vertexShader",
+        "fragmentShader",
+      ]);
+
+      const arrays = {
+        position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0],
+      };
+
+      const bufferInfo = twgl.createBufferInfoFromArrays(gl, arrays);
+      const mouse = new Mouse(glcanvas);
+      let umouse = [gl.canvas.width / 2, gl.canvas.height / 2, 0, 0];
+      let tmouse = umouse;
+      let uniforms;
+      const ct = new Date();
+      const timenow =
+        ct.getHours() * 60.0 * 60 +
+        ct.getMinutes() * 60 +
+        ct.getSeconds() +
+        ct.getMilliseconds() / 1000.0;
+
+      // RENDER LOOP
+      const render = (time) => {
+        twgl.resizeCanvasToDisplaySize(gl.canvas, 1.0);
+
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+        const factor = 0.15;
+        umouse = [mouse.x, mouse.y, 0];
+        tmouse[0] = tmouse[0] - (tmouse[0] - umouse[0]) * factor;
+        tmouse[1] = tmouse[1] - (tmouse[1] - umouse[1]) * factor;
+        tmouse[2] = mouse.drag ? 1 : -1;
+
+        const mytime = time / 1000;
+
+        uniforms = {
+          u_time: mytime,
+          u_mouse: tmouse,
+          u_date: mytime + timenow,
+          u_resolution: [gl.canvas.width, gl.canvas.height],
+        };
+
+        gl.useProgram(programInfo.program);
+        twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
+        twgl.setUniforms(programInfo, uniforms);
+        twgl.drawBufferInfo(gl, bufferInfo);
+
+        requestAnimationFrame(render);
+      };
+
+      // DOM READY
+      window.addEventListener("DOMContentLoaded", (event) => {
+        requestAnimationFrame(render);
+      });
+    </script>
+  </body>
+</html>
