@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-lang="zh" data-theme="light">
+<html lang="zh-CN" data-lang="zh" data-theme="github">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
 </head>
 <body>
   <header class="topbar">
-    <div>
+    <div class="brand">
       <p class="eyebrow" data-i18n="eyebrow">GitHub Pages Ready</p>
       <h1 data-i18n="title">前端 CSS 效果导览</h1>
     </div>
@@ -17,8 +17,25 @@
         <span data-i18n="searchLabel">搜索</span>
         <input id="searchInput" type="search" placeholder="输入名字或关键词" data-i18n-placeholder="searchPlaceholder">
       </label>
-      <div class="switchers">
-        <button class="toggle-button" type="button" data-theme-toggle aria-pressed="false" data-i18n="themeToggle">暗色</button>
+      <label class="field theme-picker">
+        <span data-i18n="themeLabel">主题</span>
+        <select id="themeSelect" aria-label="主题">
+          <option value="github">GitHub</option>
+          <option value="atom-one">Atom One Dark</option>
+          <option value="atom-one-light">Atom One Light</option>
+          <option value="catppuccin-mocha">Catppuccin Mocha</option>
+          <option value="catppuccin-latte">Catppuccin Latte</option>
+          <option value="rose-pine">Rosé Pine</option>
+          <option value="rose-pine-moon">Rosé Pine Moon</option>
+          <option value="everforest-dark">Everforest Dark</option>
+          <option value="everforest-light">Everforest Light</option>
+          <option value="kanagawa-wave">Kanagawa Wave</option>
+          <option value="night-owl">Night Owl</option>
+          <option value="tokyo-night">Tokyo Night</option>
+        </select>
+      </label>
+      <div class="field lang-picker">
+        <span data-i18n="langLabel">语言</span>
         <button class="toggle-button" type="button" data-lang-toggle aria-pressed="false" data-i18n="langToggle">EN</button>
       </div>
     </div>
